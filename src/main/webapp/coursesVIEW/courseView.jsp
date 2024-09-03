@@ -17,7 +17,7 @@
 		<div class="course-header">
 			<h2>課程管理功能</h2>
 			<span><a href="/ProFit/coursesVIEW/createCourseView.jsp"><button
-						id="createBtn">新增課程1</button></a></span>
+						id="createBtn">新增課程</button></a></span>
 		</div>
 		<div class="dashboard-header">
 			<h3 style="margin-top: 0px;">查詢課程</h3>
