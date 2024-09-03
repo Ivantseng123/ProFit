@@ -1,0 +1,142 @@
+@charset "UTF-8";
+
+#searchBtn {
+	padding: 5px 10px;
+	margin-right: 5px;
+	border: none;
+	cursor: pointer;
+	background-color: lightseagreen;
+	border-radius: 5px;
+	color: white;
+	font-size: 16px;
+}
+
+.table-container {
+	h3 { 
+	margin-top:0px;	
+	}
+}
+
+.course-header {
+	background-color: #ecf0f1;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.course-header h2 {
+	margin: 0;
+	font-size: 24px;
+}
+
+#createBtn {
+	padding: 5px 10px;
+	font-size: 16px;
+	background-color: #ffa500;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+#createBtn:hover {
+	background-color: #45a049;
+}
+
+
+
+/* 彈出視窗的整體樣式 */
+.popup {
+    display: none; /* 初始隐藏 */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* 半透明背景 */
+}
+
+/* 彈出視窗的樣式 */
+.popup-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* 關閉彈出視窗的樣式 */
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+#closePopupBtn{
+    padding: 5px 10px;
+    margin-right: 5px;
+    border: none;
+    cursor: pointer;
+    background-color: #e74c3c;
+    color: white;
+	
+}
+
+/* 表單樣式 */
+.form-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: auto;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input, 
+.form-group select, 
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form-group button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.form-group button:hover {
+    background-color: #45a049;
+}
