@@ -5,15 +5,15 @@ import java.io.Serializable;
 public class Pwd_reset_tokens implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private Integer token_id;
 	private Integer user_id;
 	private String user_email;
 	private String user_tokenHash;
 	private String expiration_time;
-	
-	
-	
+
+
+
 	public Pwd_reset_tokens(Integer token_id, Integer user_id, String user_email, String user_tokenHash,
 			String expiration_time) {
 		super();
@@ -23,7 +23,7 @@ public class Pwd_reset_tokens implements Serializable{
 		this.user_tokenHash = user_tokenHash;
 		this.expiration_time = expiration_time;
 	}
-	
+
 	public Pwd_reset_tokens(Integer token_id, Integer user_id, String user_tokenHash,
 			String expiration_time) {
 		super();
@@ -32,19 +32,19 @@ public class Pwd_reset_tokens implements Serializable{
 		this.user_tokenHash = user_tokenHash;
 		this.expiration_time = expiration_time;
 	}
-	
-	
+
+
 	public Pwd_reset_tokens(Integer user_id, String user_tokenHash
 			) {
 		super();
 		this.user_id = user_id;
 		this.user_tokenHash = user_tokenHash;
 	}
-	
+
 	public Pwd_reset_tokens() {
-		
+
 	}
-	
+
 	public Integer getToken_id() {
 		return token_id;
 	}
@@ -75,5 +75,5 @@ public class Pwd_reset_tokens implements Serializable{
 	public void setExpiration_time(String expiration_time) {
 		this.expiration_time = expiration_time;
 	}
-	
+
 }

@@ -2,7 +2,7 @@ package com.ProFit.bean;
 
 public class CourseLessonBean implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private String courseLessonId;
 	private String courseModuleId;
 	private String courseId;
@@ -11,7 +11,7 @@ public class CourseLessonBean implements java.io.Serializable {
 	private String lessonMediaUrl;
 	private String lessonMediaType;
 	private String mediaDuration;
-	
+
 	public CourseLessonBean() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -101,6 +101,6 @@ public class CourseLessonBean implements java.io.Serializable {
 				+ courseLessonSort + ", lessonMediaUrl=" + lessonMediaUrl + ", lessonMediaType=" + lessonMediaType
 				+ ", mediaDuration=" + mediaDuration + "]";
 	}
-	
-	
+
+
 }

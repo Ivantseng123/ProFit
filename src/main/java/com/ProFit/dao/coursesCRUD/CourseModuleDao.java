@@ -55,10 +55,12 @@ public class CourseModuleDao {
 			status = false;
 		} finally {
 			try {
-				if (conn != null)
+				if (conn != null) {
 					conn.close();
-				if (stmt != null)
+				}
+				if (stmt != null) {
 					stmt.close();
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -85,10 +87,12 @@ public class CourseModuleDao {
 			status = false;
 		} finally {
 			try {
-				if (stmt != null)
+				if (stmt != null) {
 					stmt.close();
-				if (conn != null)
+				}
+				if (conn != null) {
 					conn.close();
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -99,18 +103,18 @@ public class CourseModuleDao {
 	// 修改章節
 	public boolean updateCourseModuleById(CourseModuleBean newCourseModule , CourseModuleBean oldCourseModule) {
 		boolean status = true;
-		
-		
-		
-		
+
+
+
+
 		return status;
 	}
-	
-	
+
+
 
 	// 查詢全部章節By CourseId
 	public List<CourseModuleBean> searchAllCourseModule(String courseId) {
-		List<CourseModuleBean> courseModules = new ArrayList<CourseModuleBean>();
+		List<CourseModuleBean> courseModules = new ArrayList<>();
 
 		final String searchAllCourseModuleSQL = "SELECT * FROM course_module WHERE course_id=?";
 
@@ -136,12 +140,15 @@ public class CourseModuleDao {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (stmt != null)
+				if (stmt != null) {
 					stmt.close();
-				if (conn != null)
+				}
+				if (conn != null) {
 					conn.close();
-				if (rs != null)
+				}
+				if (rs != null) {
 					rs.close();
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -173,12 +180,15 @@ public class CourseModuleDao {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (stmt != null)
+				if (stmt != null) {
 					stmt.close();
-				if (conn != null)
+				}
+				if (conn != null) {
 					conn.close();
-				if (rs != null)
+				}
+				if (rs != null) {
 					rs.close();
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

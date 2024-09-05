@@ -2,13 +2,13 @@ package com.ProFit.bean;
 
 public class CourseOrderBean implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private String courseOrderId;
 	private String courseId;
 	private String studentId;
 	private String courseOrderPrice;
 	private String courseOrderCreateDate;
-	
+
 	public CourseOrderBean() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -63,7 +63,7 @@ public class CourseOrderBean implements java.io.Serializable {
 	public void setCourseOrderCreateDate(String courseOrderCreateDate) {
 		this.courseOrderCreateDate = courseOrderCreateDate;
 	}
-	
-	
-	
+
+
+
 }

@@ -12,10 +12,10 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import com.ProFit.bean.*;
+import com.ProFit.bean.CourseBean;
 
 public class CourseDao {
-	
+
 	private Connection getConnection() {
 		Connection conn = null;
 		try {
@@ -23,7 +23,7 @@ public class CourseDao {
 			context = new InitialContext();
 			DataSource ds = (DataSource)context.lookup("java:/comp/env/jdbc/ProFitDB");
 			conn = ds.getConnection();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (NamingException e) {
@@ -31,14 +31,14 @@ public class CourseDao {
 		}
 		return conn;
 	}
-	
+
 	// 新增課程
 	public boolean insertCourse(CourseBean course) {
 	    boolean status = true;
 
 	    // 先查詢當前最大值的數值部分
 	    final String GetMaxCourseIdSQL = "SELECT MAX(CAST(SUBSTRING(course_id, 2, LEN(course_id) - 1) AS INT)) FROM courses";
-	    
+
 	    // 插入新課程的SQL
 	    final String InsertCourseSQL = "INSERT INTO courses(course_id, course_name, "
 	            + "course_create_user_id, course_category, course_information, course_description, "
@@ -51,11 +51,11 @@ public class CourseDao {
 
 	    try {
 	        conn = getConnection();
-	        
+
 	        // 查詢最大值
 	        stmt = conn.prepareStatement(GetMaxCourseIdSQL);
 	        rs = stmt.executeQuery();
-	        
+
 	        int newCourseIdNumber = 100; // 默認起始值為100
 	        if (rs.next()) {
 	            int maxCourseIdNumber = rs.getInt(1);
@@ -68,10 +68,10 @@ public class CourseDao {
 	        // 格式化新的course_id
 	        String newCourseId = String.format("C%04d", newCourseIdNumber); // 生成格式如 C0101 的 ID
 	        System.out.println(newCourseId);
-	        
+
 	        // 關閉先前的PreparedStatement
 	        stmt.close();
-	        
+
 	        // 使用新的course_id來插入新資料
 	        stmt = conn.prepareStatement(InsertCourseSQL);
 	        stmt.setString(1, newCourseId);
@@ -85,58 +85,68 @@ public class CourseDao {
 	        stmt.setString(9, course.getCourseEndDate());
 	        stmt.setInt(10, Integer.parseInt(course.getCoursePrice()));
 	        stmt.setString(11, course.getCourseStatus());
-	        
+
 	        stmt.execute();
-	        
+
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	        status = false;
 	    } finally {
 	        try {
-	            if (rs != null) rs.close();
-	            if (stmt != null) stmt.close();
-	            if (conn != null) conn.close();
+	            if (rs != null) {
+					rs.close();
+				}
+	            if (stmt != null) {
+					stmt.close();
+				}
+	            if (conn != null) {
+					conn.close();
+				}
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
 	    }
 	    return status;
 	}
-	
+
 	// 刪除課程By course_id
 	public boolean deleteCourseByID(String courseId) {
 		boolean status = true;
-		
+
 		final String DeleteCourseSQL="DELETE FROM courses WHERE course_id=?";
 		Connection conn=null;
 		PreparedStatement stmt =null;
-		
+
 		try {
 			conn = getConnection();
 			stmt = conn.prepareStatement(DeleteCourseSQL);
 			stmt.setString(1, courseId);
 			stmt.execute();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			status=false;
 		}finally {
 				try {
-					if (stmt != null) stmt.close();
-					if (conn != null) conn.close();
+					if (stmt != null) {
+						stmt.close();
+					}
+					if (conn != null) {
+						conn.close();
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 		}
-		
+
 		return status;
 	}
-	
+
 	// 修改課程
 	public boolean updateCourseById(CourseBean newCourse,CourseBean oldCourse) {
 		boolean status = true;
-		
+
 		final String UpdateEmpSQL="UPDATE courses SET course_name=?,course_create_user_id=?,course_category=?,"
 				+ "course_information=?,course_description=?,course_enrollment_date=?,course_start_date=?,"
 				+ "course_end_date=?,course_price=?,course_status=? WHERE course_id=?" ;
@@ -212,15 +222,19 @@ public class CourseDao {
 			status = false;
 		} finally {
 			try {
-				if (stmt != null) stmt.close();
-				if (conn != null) conn.close();
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 		return status;
 	}
-	
+
 	// 查詢單筆By couseId
 	public CourseBean findSingleCourseById(String courseId) {
 		final String GetCourseSQL="SELECT c.*, u.user_name FROM courses c INNER JOIN users u ON c.course_create_user_id = u.user_id WHERE course_id=?";
@@ -259,10 +273,10 @@ public class CourseDao {
 		}
 		return course;
 	}
-	
+
 	// 查詢全部(未測試)
 	public List<CourseBean> searchCourses(){
-		
+
 		final String GetAllCoursesSQL="SELECT c.*, u.user_name FROM courses c INNER JOIN users u ON c.course_create_user_id = u.user_id";
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -271,7 +285,7 @@ public class CourseDao {
 			conn = getConnection();
 			stmt = conn.prepareStatement(GetAllCoursesSQL);
 			ResultSet rs = stmt.executeQuery();
-			courses =new ArrayList<CourseBean>();
+			courses =new ArrayList<>();
 			CourseBean course = null;
 			while (rs.next()) {
 				course = new CourseBean();
@@ -301,7 +315,7 @@ public class CourseDao {
 		}
 		return courses;
 	}
-	
+
 	// 查詢全部By 多條件查詢
 	public List<CourseBean> searchCourses(String courseName, String userName, String status, String userId, String category) {
 	    StringBuilder sql = new StringBuilder("SELECT c.*, u.user_name FROM courses c INNER JOIN users u ON c.course_create_user_id = u.user_id WHERE 1=1");
@@ -361,14 +375,20 @@ public class CourseDao {
 	        e.printStackTrace();
 	    } finally {
 	        try {
-	            if (stmt != null) stmt.close();
-	            if (conn != null) conn.close();
-	            if (rs !=null) rs.close();
+	            if (stmt != null) {
+					stmt.close();
+				}
+	            if (conn != null) {
+					conn.close();
+				}
+	            if (rs !=null) {
+					rs.close();
+				}
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
 	    }
 	    return courses;
 	}
-	
+
 }

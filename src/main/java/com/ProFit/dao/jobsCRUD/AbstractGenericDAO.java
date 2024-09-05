@@ -1,6 +1,10 @@
 package com.ProFit.dao.jobsCRUD;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +14,6 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import com.ProFit.bean.JobsApplication;
 import com.ProFit.util.CountProperty;
 
 //抽象類別就是為了給別人繼承存在，他實作（implements）這個介面的5個方法
@@ -131,5 +134,5 @@ public abstract class AbstractGenericDAO<T, ID> implements GenericDAO<T, ID> {
     public String getInsertPlaceholders(T entity) {
         return CountProperty.getPropertyCount(entity.getClass());//反射,getClass是取得Class類
 
-    };
+    }
 }

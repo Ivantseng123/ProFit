@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Users implements Serializable{
 private static final long serialVersionUID = 1L;
-	
+
 	private Integer user_id;
 	private String user_name;
 	private String user_email ;
@@ -13,7 +13,7 @@ private static final long serialVersionUID = 1L;
 	private String user_city;
 	private Integer user_identity ;
 	private String user_register_time;
-	
+
 	private String user_pictureURL;
 	private Integer user_balance;
 	private String freelancer_location_prefer;
@@ -21,11 +21,11 @@ private static final long serialVersionUID = 1L;
 	private String freelancer_identity;
 	private Integer freelancer_profile_status;
 	private String  freelancer_disc;
-	
-	public Users() {	
+
+	public Users() {
 	}
-	
-		
+
+
 	public Users(Integer user_id, String user_name, String user_email, String user_passwordHash,
 			String user_phoneNumber, String user_city, Integer user_identity, String user_register_time, String user_pictureURL,
 			Integer user_balance, String freelancer_location_prefer, String freelancer_exprience,
@@ -47,8 +47,8 @@ private static final long serialVersionUID = 1L;
 		this.freelancer_profile_status = freelancer_profile_status;
 		this.freelancer_disc = freelancer_disc;
 	}
-	
-	
+
+
 	public Users(Integer user_id, String user_name, String user_email, String user_passwordHash,
 			String user_phoneNumber, String user_city, Integer user_identity, String user_register_time,
 			Integer user_balance, String freelancer_location_prefer, String freelancer_exprience,
@@ -69,7 +69,7 @@ private static final long serialVersionUID = 1L;
 		this.freelancer_profile_status = freelancer_profile_status;
 		this.freelancer_disc = freelancer_disc;
 	}
-	
+
 	public Users(String user_name, String user_email, String user_passwordHash,
 			String user_phoneNumber, String user_city, Integer user_identity, String user_register_time, Integer freelancer_profile_status) {
 		super();
@@ -94,7 +94,7 @@ private static final long serialVersionUID = 1L;
 		this.user_identity = user_identity;
 		this.freelancer_profile_status = freelancer_profile_status;
 	}
-	
+
 
 	public Integer getUser_id() {
 		return user_id;
@@ -132,7 +132,7 @@ private static final long serialVersionUID = 1L;
 	public void setUser_city(String user_city) {
 		this.user_city = user_city;
 	}
-	
+
 	public String getUser_register_time() {
 		return user_register_time;
 	}
@@ -141,7 +141,7 @@ private static final long serialVersionUID = 1L;
 	public void setUser_register_time(String user_register_time) {
 		this.user_register_time = user_register_time;
 	}
-	
+
 	public Integer getUser_identity() {
 		return user_identity;
 	}
@@ -190,7 +190,7 @@ private static final long serialVersionUID = 1L;
 	public void setFreelancer_disc(String freelancer_discy) {
 		this.freelancer_disc = freelancer_discy;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Users [user_id=" + user_id + ", user_name=" + user_name + ", user_email=" + user_email
@@ -201,6 +201,6 @@ private static final long serialVersionUID = 1L;
 				+ freelancer_exprience + ", freelancer_identity=" + freelancer_identity + ", freelancer_profile_status="
 				+ freelancer_profile_status + ", freelancer_disc=" + freelancer_disc + "]";
 	}
-	
-	
+
+
 }

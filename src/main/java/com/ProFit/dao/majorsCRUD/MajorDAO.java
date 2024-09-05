@@ -1,8 +1,10 @@
 package com.ProFit.dao.majorsCRUD;
 
-import com.ProFit.bean.MajorBean;
-
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,9 +13,11 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.ProFit.bean.MajorBean;
+
 public class MajorDAO {
-	
-	
+
+
 	public MajorDAO() {
 		super();
 	}
@@ -30,8 +34,8 @@ public class MajorDAO {
 		}
 		return null;
 	}
-	
-    // 插入 Major 
+
+    // 插入 Major
     public boolean insertMajor(MajorBean major) {
         String sql = "INSERT INTO [profitDB].[dbo].[major] (major_id, major_name, major_category_id, major_description) VALUES (?, ?, ?, ?)";
         try (Connection connection =getConnection();
@@ -47,7 +51,7 @@ public class MajorDAO {
         }
     }
 
-    // 更新 Major 
+    // 更新 Major
     public boolean updateMajor(MajorBean major) {
         String sql = "UPDATE [profitDB].[dbo].[major] SET major_name = ?, major_category_id = ?, major_description = ? WHERE major_id = ?";
         try (Connection connection =getConnection();
@@ -63,7 +67,7 @@ public class MajorDAO {
         }
     }
 
-    // 删除 Major 
+    // 删除 Major
     public boolean deleteMajor(int majorId) {
         String sql = "DELETE FROM [profitDB].[dbo].[major] WHERE major_id = ?";
         try (Connection connection =getConnection();
@@ -76,7 +80,7 @@ public class MajorDAO {
         }
     }
 
-    // 查找 Major 
+    // 查找 Major
     public MajorBean findMajorById(int majorId) {
         String sql = "SELECT * FROM [profitDB].[dbo].[major] WHERE major_id = ?";
         try (Connection connection =getConnection();
@@ -98,7 +102,7 @@ public class MajorDAO {
         return null;
     }
 
-    // 查找所有 Major 
+    // 查找所有 Major
     public List<MajorBean> findAllMajors() {
         String sql = "SELECT * FROM [profitDB].[dbo].[major]";
         List<MajorBean> majorList = new ArrayList<>();
@@ -118,7 +122,7 @@ public class MajorDAO {
         }
         return majorList;
     }
-    
+
     //根據majorCategory查找
     public List<MajorBean> findMajorsByCategoryId(int majorCategoryId) {
         String sql = "SELECT * FROM [profitDB].[dbo].[major] WHERE major_category_id = ?";
@@ -141,7 +145,7 @@ public class MajorDAO {
         }
         return majorList;
     }
-    
+
     //
     public String getCategoryNameById(int categoryId) throws SQLException {
         String sql = "SELECT category_name FROM [profitDB].[dbo].[major_category] WHERE major_category_id = ?";

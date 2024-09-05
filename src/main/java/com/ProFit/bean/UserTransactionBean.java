@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class UserTransactionBean {
     private String transactionId;
     private String userId;
-    private String userName; 
+    private String userName;
     private String transactionType;
     private String amount;
     private String transactionStatus;
@@ -15,12 +15,12 @@ public class UserTransactionBean {
         super();
     }
 
-   
+
     public UserTransactionBean(String transactionId, String userId, String userName, String transactionType, String amount,
                                String transactionStatus, Timestamp createdAt) {
         this.transactionId = transactionId;
         this.userId = userId;
-        this.userName = userName; 
+        this.userName = userName;
         this.transactionType = transactionType;
         this.amount = amount;
         this.transactionStatus = transactionStatus;
@@ -32,7 +32,7 @@ public class UserTransactionBean {
         return "UserTransactionBean{" +
                 "transactionId=" + transactionId +
                 ", userId=" + userId +
-                ", userName='" + userName + '\'' + 
+                ", userName='" + userName + '\'' +
                 ", transactionType='" + transactionType + '\'' +
                 ", amount=" + amount +
                 ", transactionStatus='" + transactionStatus + '\'' +
@@ -57,11 +57,11 @@ public class UserTransactionBean {
         this.userId = userId;
     }
 
-    public String getUserName() {  
+    public String getUserName() {
         return userName;
     }
 
-    public void setUserName(String userName) {  
+    public void setUserName(String userName) {
         this.userName = userName;
     }
 

@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Employer_profile implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private Integer employer_profile_id;
 	private Integer user_id;
 	private String  user_email ;
@@ -18,8 +18,8 @@ public class Employer_profile implements Serializable{
 	private String company_captital;
 	private String company_description;
 	private String company_photoURL;
-	
-	
+
+
 	public Employer_profile(Integer employer_profile_id, Integer user_id, String company_name, String company_address,
 			String company_category, String company_phoneNumber, String company_taxID, String company_numberOfemployee,
 			String company_captital, String company_description, String company_photoURL) {
@@ -36,7 +36,7 @@ public class Employer_profile implements Serializable{
 		this.company_description = company_description;
 		this.company_photoURL = company_photoURL;
 	}
-	
+
 	public Employer_profile(Integer employer_profile_id, Integer user_id, String user_email,String company_name, String company_address,String company_category, String company_phoneNumber, String company_taxID, String company_numberOfemployee,
 			String company_captital, String company_description, String company_photoURL) {
 		super();
@@ -53,7 +53,7 @@ public class Employer_profile implements Serializable{
 		this.company_description = company_description;
 		this.company_photoURL = company_photoURL;
 	}
-	
+
 	public Employer_profile(Integer user_id, String company_name, String company_address,
 			String company_category, String company_phoneNumber, String company_taxID) {
 		super();
@@ -64,9 +64,9 @@ public class Employer_profile implements Serializable{
 		this.company_phoneNumber = company_phoneNumber;
 		this.company_taxID = company_taxID;
 	}
-	
+
 	public Employer_profile() {}
-	
+
 	public Integer getEmployer_profile_id() {
 		return employer_profile_id;
 	}

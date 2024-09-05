@@ -13,7 +13,7 @@ public class JobsApplicationProject {
 	private Byte jobsApplicationStatus = 0;
 	private String jobsProject;
 	private Integer jobsAmount;
-	
+
 	public Integer getJobsApplicationProjectId() {
 		return jobsApplicationProjectId;
 	}
@@ -44,7 +44,7 @@ public class JobsApplicationProject {
 	public void setJobsAmount(Integer jobsAmount) {
 		this.jobsAmount = jobsAmount;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "JobsApplicationProject [jobsApplicationProjectId=" + jobsApplicationProjectId + ", jobsApplicationId="

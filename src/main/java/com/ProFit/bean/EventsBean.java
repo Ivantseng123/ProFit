@@ -19,7 +19,7 @@ public class EventsBean implements Serializable {
 
 	public EventsBean() {
 	}
-	
+
 	public EventsBean(String eventId, String eventName, boolean isEventActive, LocalDateTime eventStartDate,
 			LocalDateTime eventEndDate, String eventDescription, int eventAmount, String eventLocation,
 			int eventParticipantMaximum, String eventNote) {
@@ -124,7 +124,7 @@ public class EventsBean implements Serializable {
 				+ ", eventParticipantMaximum=" + eventParticipantMaximum + ", eventNote=" + eventNote + "]";
 	}
 
-	
+
 
 
 }

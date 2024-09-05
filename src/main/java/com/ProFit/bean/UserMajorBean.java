@@ -7,7 +7,7 @@ public class UserMajorBean implements java.io.Serializable{
 	private Integer majorId;
 	private String userName;  // 新增字段
     private String majorName; // 新增字段
-	
+
 	public Integer getUserId() {
 		return userId;
 	}
@@ -32,5 +32,5 @@ public class UserMajorBean implements java.io.Serializable{
 	public void setMajorId(Integer majorId) {
 		this.majorId = majorId;
 	}
-	
+
 }

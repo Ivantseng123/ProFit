@@ -1,10 +1,8 @@
 package com.ProFit.bean;
 
-import java.util.Date;
-
 public class CourseBean implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private String courseId;
 	private String courseName;
 	private String courseCreateUserId;
@@ -17,13 +15,13 @@ public class CourseBean implements java.io.Serializable {
 	private String courseEndDate;
 	private String coursePrice;
 	private String courseStatus;
-	
+
 	public CourseBean() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+
+
 	public CourseBean(String courseId, String courseName, String courseCreateUserId, String courseCategory,
 			String courseInformation, String courseDescription, String courseEnrollmentDate, String courseStartDate,
 			String courseEndDate, String coursePrice, String courseStatus) {
@@ -106,7 +104,7 @@ public class CourseBean implements java.io.Serializable {
 	public String getCourseEnrollmentDate() {
 		return courseEnrollmentDate;
 	}
-	
+
 	public void setCourseEnrollmentDate(String courseEnrollmentDate) {
 		this.courseEnrollmentDate = courseEnrollmentDate;
 	}
@@ -134,7 +132,7 @@ public class CourseBean implements java.io.Serializable {
 	public void setCourseStatus(String courseStatus) {
 		this.courseStatus = courseStatus;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "CourseBean [courseId=" + courseId + ", courseName=" + courseName + ", courseCreateUserId="
@@ -143,5 +141,5 @@ public class CourseBean implements java.io.Serializable {
 				+ ", courseStartDate=" + courseStartDate + ", courseEndDate=" + courseEndDate + ", coursePrice="
 				+ coursePrice + ", courseStatus=" + courseStatus + "]";
 	}
-	
+
 }

@@ -8,7 +8,6 @@ import java.util.Map;
 
 import com.ProFit.bean.Jobs;
 import com.ProFit.dao.jobsCRUD.AbstractGenericDAO;
-import com.ProFit.util.CountProperty;
 
 public class JobsDAO extends AbstractGenericDAO<Jobs, Integer> {
     @Override
@@ -55,7 +54,7 @@ public class JobsDAO extends AbstractGenericDAO<Jobs, Integer> {
         stmt.setObject(10, entity.getJobsMinSalary());//原本是int
         stmt.setString(11, entity.getJobsWorktime());
         stmt.setObject(12, entity.getJobsNumberOfOpenings());//原本是int
-          
+
         //int 是 Java 中的基本數據類型。基本數據類型不能持有 null 值。int 的默認值是 0。
         //數據庫中的 INTEGER 類型通常可以接受 NULL 值（除非被明確聲明為 NOT NULL）。
         //使用 Java 的包裝類 Integer，並使用 setObject() 方法代替 setInt()。

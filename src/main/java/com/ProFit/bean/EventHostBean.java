@@ -7,7 +7,7 @@ public class EventHostBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String eventId;
 	private int eventHostId;
-	
+
 	public EventHostBean() {
 	}
 
@@ -37,7 +37,7 @@ public class EventHostBean implements Serializable {
 	public String toString() {
 		return "EventHostBean [eventId=" + eventId + ", eventHostId=" + eventHostId + "]";
 	}
-	
-	
+
+
 
 }

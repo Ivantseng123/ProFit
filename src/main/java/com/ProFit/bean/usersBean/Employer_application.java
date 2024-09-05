@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Employer_application implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private Integer employer_application_id;
 	private Integer user_id;
 	private String  user_email ;
@@ -19,7 +19,7 @@ public class Employer_application implements Serializable{
 	private String idCard_pictureURL_1;
 	private String idCard_pictureURL_2;
 	private Integer application_check;
-	
+
 	public Employer_application(Integer employer_application_id, Integer user_id,String  user_email, String company_name,
 			String company_address, String company_category, String company_phoneNumber, String company_taxID,
 			String company_taxID_docURL, String user_national_id, String idCard_pictureURL_1,
@@ -39,8 +39,8 @@ public class Employer_application implements Serializable{
 		this.idCard_pictureURL_2 = idCard_pictureURL_2;
 		this.application_check = application_check;
 	}
-	
-	
+
+
 	public Employer_application(Integer user_id, String company_name,
 			String company_address, String company_category, String company_phoneNumber, String company_taxID,
 			String company_taxID_docURL, String user_national_id, String idCard_pictureURL_1,
@@ -58,7 +58,7 @@ public class Employer_application implements Serializable{
 		this.idCard_pictureURL_2 = idCard_pictureURL_2;
 		this.application_check = application_check;
 	}
-	
+
 	public Employer_application(Integer employer_application_id, String company_name,
 			String company_address, String company_category, String company_phoneNumber, String company_taxID,
 			String company_taxID_docURL, String user_national_id, String idCard_pictureURL_1,
@@ -75,9 +75,9 @@ public class Employer_application implements Serializable{
 		this.idCard_pictureURL_1 = idCard_pictureURL_1;
 		this.idCard_pictureURL_2 = idCard_pictureURL_2;
 	}
-	
+
 	public Employer_application() {}
-	
+
 	public Integer getEmployer_application_id() {
 		return employer_application_id;
 	}

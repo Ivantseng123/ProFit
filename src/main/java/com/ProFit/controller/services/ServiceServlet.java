@@ -1,11 +1,12 @@
 package com.ProFit.controller.services;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import com.ProFit.bean.ServiceBean;
+import com.ProFit.dao.servicesCRUD.ServiceDAO;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -16,31 +17,24 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 
-import java.sql.Blob;
-import java.sql.SQLException;
-
-import com.ProFit.bean.MajorBean;
-import com.ProFit.bean.MajorCategoryBeam;
-import com.ProFit.bean.ServiceBean;
-import com.ProFit.dao.majorsCRUD.MajorCategoryDAO;
-import com.ProFit.dao.majorsCRUD.MajorDAO;
-import com.ProFit.dao.servicesCRUD.ServiceDAO;
-
 @WebServlet("/service/*")
 @MultipartConfig(maxFileSize = 16177215)
 public class ServiceServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ServiceDAO serviceDAO;
 
+	@Override
 	public void init() {
 		serviceDAO = new ServiceDAO();
 	}
 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
 	}
 
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String action = request.getPathInfo();

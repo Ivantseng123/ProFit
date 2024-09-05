@@ -6,11 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 
-import com.ProFit.bean.Jobs;
 import com.ProFit.bean.JobsApplication;
 import com.ProFit.dao.jobsCRUD.AbstractGenericDAO;
-import com.ProFit.util.CountProperty;
- 
+
 public class JobsApplicationDAO extends AbstractGenericDAO<JobsApplication, Integer> {
     @Override
     protected String getTableName() {
@@ -33,8 +31,8 @@ public class JobsApplicationDAO extends AbstractGenericDAO<JobsApplication, Inte
         jobsApplication.setJobsApplicationDate(rs.getDate("jobs_application_date"));
         jobsApplication.setJobsApplicationStatus(rs.getByte("jobs_application_status"));
         jobsApplication.setJobsApplicationContract(rs.getBlob("jobs_application_contract"));
-        
-      
+
+
         return jobsApplication;
     }
     @Override

@@ -1,9 +1,11 @@
 package com.ProFit.controller.majors;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
+
+import com.ProFit.bean.MajorBean;
+import com.ProFit.dao.majorsCRUD.MajorDAO;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -11,25 +13,24 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
-
-import com.ProFit.bean.MajorBean;
-import com.ProFit.dao.majorsCRUD.MajorDAO;
 
 @WebServlet("/major/*")
 public class MajorServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MajorDAO majorDAO;
 
+	@Override
 	public void init() {
 		majorDAO = new MajorDAO();
 	}
 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
 	}
 
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String action = request.getPathInfo();
@@ -111,9 +112,9 @@ public class MajorServlet extends HttpServlet {
         String name = request.getParameter("majorName");
         String categoryIdStr = request.getParameter("majorCategoryId");
         String description = request.getParameter("majorDescription");
-        
+
         MajorBean newMajor = new MajorBean();
-        
+
         if (idStr != null && !idStr.trim().isEmpty()) {
             try {
                 int id = Integer.parseInt(idStr);
@@ -128,9 +129,9 @@ public class MajorServlet extends HttpServlet {
             request.getRequestDispatcher("/majorsVIEW/MajorForm.jsp").forward(request, response);
             return;
         }
-        
+
         newMajor.setMajorName(name);
-        
+
         if (categoryIdStr != null && !categoryIdStr.trim().isEmpty()) {
             try {
                 int categoryId = Integer.parseInt(categoryIdStr);
@@ -145,9 +146,9 @@ public class MajorServlet extends HttpServlet {
             request.getRequestDispatcher("/majorsVIEW/MajorForm.jsp").forward(request, response);
             return;
         }
-        
+
         newMajor.setMajorDescription(description);
-        
+
         if (majorDAO.insertMajor(newMajor)) {
             response.sendRedirect("list");
         } else {
@@ -186,7 +187,7 @@ public class MajorServlet extends HttpServlet {
 		request.setAttribute("major", major);
 		dispatcher.forward(request, response);
 	}
-	
+
 	 private void listMajorsByCategory(HttpServletRequest request, HttpServletResponse response)
 	            throws SQLException, ServletException, IOException {
 	        String categoryIdStr = request.getParameter("categoryId");

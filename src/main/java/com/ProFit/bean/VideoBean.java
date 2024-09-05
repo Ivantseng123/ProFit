@@ -31,5 +31,5 @@ public class VideoBean implements java.io.Serializable{
 	public void setVideoDisc(String videoDisc) {
 		this.videoDisc = videoDisc;
 	}
-	
+
 }

@@ -1,16 +1,17 @@
 package com.ProFit.controller.transactions;
 
+import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.List;
+
 import com.ProFit.bean.JobOrderBean;
 import com.ProFit.dao.transactionCRUD.JobOrderDAO;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
-import java.io.IOException;
-import java.sql.Timestamp;
-import java.util.List;
 
 @WebServlet("/JobOrderServlet")
 public class JobOrderServlet extends HttpServlet {
@@ -160,7 +161,7 @@ public class JobOrderServlet extends HttpServlet {
             Timestamp jobOrderDate = new Timestamp(System.currentTimeMillis());
 
             JobOrderBean order = new JobOrderBean(
-                null, 
+                null,
                 jobApplicationIdParsed,
                 jobOrderDate,
                 jobOrderStatus,
@@ -189,17 +190,17 @@ public class JobOrderServlet extends HttpServlet {
             int jobApplicationIdParsed = Integer.parseInt(jobApplicationId);
             int totalAmountParsed = Integer.parseInt(totalAmountStr);
 
-            
+
             Timestamp jobOrderTimestamp = new Timestamp(System.currentTimeMillis());
 
-            
+
             JobOrderBean existingOrder = jobOrderDAO.getOrderById(jobOrdersId);
             if (existingOrder == null) {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "找不到此訂單。");
                 return;
             }
 
-           
+
             if (!"Processing".equals(existingOrder.getJobOrderStatus())) {
                 response.sendError(HttpServletResponse.SC_FORBIDDEN, "僅允許更新狀態為 'Processing' 的訂單。");
                 return;
@@ -208,7 +209,7 @@ public class JobOrderServlet extends HttpServlet {
             JobOrderBean order = new JobOrderBean(
                 jobOrdersId,
                 jobApplicationIdParsed,
-                jobOrderTimestamp,  
+                jobOrderTimestamp,
                 jobOrderStatus,
                 jobNotes,
                 totalAmountParsed

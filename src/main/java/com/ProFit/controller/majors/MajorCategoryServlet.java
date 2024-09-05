@@ -1,7 +1,13 @@
 package com.ProFit.controller.majors;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
+
+import com.ProFit.bean.MajorBean;
+import com.ProFit.bean.MajorCategoryBeam;
+import com.ProFit.dao.majorsCRUD.MajorCategoryDAO;
+import com.ProFit.dao.majorsCRUD.MajorDAO;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -9,12 +15,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
-
-import com.ProFit.bean.MajorBean;
-import com.ProFit.bean.MajorCategoryBeam;
-import com.ProFit.dao.majorsCRUD.MajorCategoryDAO;
-import com.ProFit.dao.majorsCRUD.MajorDAO;
 
 @WebServlet("/majorCategory/*")
 public class MajorCategoryServlet extends HttpServlet {
@@ -22,16 +22,19 @@ public class MajorCategoryServlet extends HttpServlet {
 	private MajorCategoryDAO majorCategoryDAO;
 	private MajorDAO majorDAO;
 
+	@Override
 	public void init() {
 		majorCategoryDAO = new MajorCategoryDAO();
 		majorDAO = new MajorDAO();
 	}
 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
 	}
 
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String action = request.getPathInfo();
@@ -143,7 +146,7 @@ public class MajorCategoryServlet extends HttpServlet {
 //		String categoryIdStr = request.getParameter("categoryId");
 ////		int id = Integer.parseInt(request.getParameter("categoryId"));
 //        String name = request.getParameter("categoryName");
-//        
+//
 //        if (categoryIdStr == null || categoryIdStr.trim().isEmpty()) {
 //            handleError(request, response, "類別 ID 不能為空。");
 //            return;
@@ -160,7 +163,7 @@ public class MajorCategoryServlet extends HttpServlet {
 //            handleError(request, response, "無效的類別 ID。");
 //            return;
 //        }
-//        
+//
 //        MajorCategoryBeam category = new MajorCategoryBeam();
 //        category.setMajorCategoryId(categoryId);
 //        category.setCategoryName(name.trim());
@@ -207,13 +210,13 @@ public class MajorCategoryServlet extends HttpServlet {
 	        dispatcher.forward(request, response);
 	    }
 	}
-	
+
 	private void handleError(HttpServletRequest request, HttpServletResponse response, String errorMessage)
 	        throws ServletException, IOException, SQLException {
 	    request.setAttribute("error", errorMessage);
 	    showEditForm(request, response);
 	}
-	
+
 	private void showEditForm(HttpServletRequest request, HttpServletResponse response)
 	        throws SQLException, ServletException, IOException {
 	    String idStr = request.getParameter("id");

@@ -13,7 +13,7 @@ public class EventOrderBean implements Serializable {
 	private int eventParticipantId;
 	private LocalDateTime eventParticipantDate;
 	private String eventParticipantData;
-	
+
 	public EventOrderBean() {
 	}
 
@@ -92,5 +92,5 @@ public class EventOrderBean implements Serializable {
 				+ eventParticipantId + ", eventParticipantDate=" + eventParticipantDate + ", eventParticipantData="
 				+ eventParticipantData + "]";
 	}
-	
+
 }

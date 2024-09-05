@@ -20,16 +20,16 @@ public class JDBCUitl {
 			connection = ds.getConnection();
 			boolean status = !connection.isClosed();
 			System.out.println("連線狀態:" + status);
-		
-						
+
+
 		} catch (SQLException | NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return connection;
-		
+
 	}
-	
+
 	public static void closeResource(Connection connection) {
 		try {
 			if(connection!=null) {

@@ -1,9 +1,13 @@
 package com.ProFit.controller.majors;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.ProFit.bean.UserMajorBean;
+import com.ProFit.dao.majorsCRUD.UserMajorDAO;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -11,28 +15,25 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
-
-import com.ProFit.bean.MajorBean;
-import com.ProFit.bean.UserMajorBean;
-import com.ProFit.dao.majorsCRUD.MajorDAO;
-import com.ProFit.dao.majorsCRUD.UserMajorDAO;
 
 @WebServlet("/userMajor/*")
 public class UserMajorServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private UserMajorDAO userMajorDAO;
 
-    public void init() {
+    @Override
+	public void init() {
         userMajorDAO = new UserMajorDAO();
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    @Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doGet(request, response);
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    @Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getPathInfo();
 
@@ -125,13 +126,13 @@ public class UserMajorServlet extends HttpServlet {
             userMajor.setMajorName(majorName);
         }
         request.setAttribute("allUserMajors", allUserMajors);
-        
+
         // 獲取所有用戶和所有專業
         Map<String, String> allUsers = userMajorDAO.getAllUsers();
         Map<String, String> allMajors = userMajorDAO.getAllMajors();
         request.setAttribute("allUsers", allUsers);
         request.setAttribute("allMajors", allMajors);
-        
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("/majorsVIEW/AllUserMajorList.jsp");
         dispatcher.forward(request, response);
     }

@@ -19,7 +19,7 @@ public class JobsApplication {
 	private Date jobsApplicationDate;
 	private Byte jobsApplicationStatus;
 	private Blob jobsApplicationContract;
-	
+
 	public Integer getJobsApplicationId() {
 		return jobsApplicationId;
 	}
@@ -56,8 +56,8 @@ public class JobsApplication {
 	public void setJobsApplicationContract(Blob jobsApplicationContract) {
 		this.jobsApplicationContract = jobsApplicationContract;
 	}
-	
-	
+
+
 	@Override
 	public String toString() {
 		return "JobsApplication [jobsApplicationId=" + jobsApplicationId + ", jobsApplicationPostingId="
@@ -65,9 +65,9 @@ public class JobsApplication {
 				+ ", jobsApplicationDate=" + jobsApplicationDate + ", jobsApplicationStatus=" + jobsApplicationStatus
 				+ ", jobsApplicationContract=" + jobsApplicationContract + "]";
 	}
-	
-	
-	
+
+
+
 
 
 

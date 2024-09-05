@@ -8,7 +8,7 @@ public class CollectionBean implements java.io.Serializable{
 	private Integer majorId;
 	private Integer collectionCoverImgId;
 	private String collectionName;
-	
+
 	public Integer getCollectionId() {
 		return collectionId;
 	}
@@ -39,5 +39,5 @@ public class CollectionBean implements java.io.Serializable{
 	public void setCollectionName(String collectionName) {
 		this.collectionName = collectionName;
 	}
-	
+
 }

@@ -14,6 +14,13 @@
 
 package com.ProFit.controller.jobs;
 
+import java.io.IOException;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.ProFit.bean.Jobs;
 import com.ProFit.jobService.JobsService;
 
@@ -22,13 +29,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
-import java.io.IOException;
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 //指定 URL 路徑為 /jobsServlet
 //會告诉 Web 容器（如 Tomcat），此 Servlet 類（class jobsServlet）应当映射到 /jobsServlet，
@@ -39,16 +39,19 @@ public class jobsServlet extends HttpServlet {
     private JobsService jobsService;
 
     // init方法在初始化時
-    public void init() {
+    @Override
+	public void init() {
         jobsService = new JobsService();
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    @Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doGet(request, response);
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    @Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");// 从request中獲得 變數"action"的参数
         //getParameter就是獲取?action=listJobs中listJobs的參數

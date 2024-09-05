@@ -17,7 +17,7 @@ public class CourseOrderDao {
 			context = new InitialContext();
 			DataSource ds = (DataSource)context.lookup("java:/comp/env/jdbc/ProFitDB");
 			conn = ds.getConnection();
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -28,11 +28,11 @@ public class CourseOrderDao {
 		return conn;
 	}
 	//新增
-	
+
 	//刪除
-	
+
 	//查詢全部
-	
+
 	//查詢單筆
 
 	//修改

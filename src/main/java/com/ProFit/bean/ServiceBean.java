@@ -1,6 +1,5 @@
 package com.ProFit.bean;
 
-import java.sql.Blob;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
@@ -21,14 +20,14 @@ public class ServiceBean implements java.io.Serializable{
     private byte[] serviceSample1; // 服務樣本1
     private byte[] serviceSample2; // 服務樣本2
     private byte[] serviceSample3; // 服務樣本3
-    
-    
-    
+
+
+
 	public ServiceBean() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public Integer getServiceId() {
 		return serviceId;
 	}
@@ -83,7 +82,7 @@ public class ServiceBean implements java.io.Serializable{
 	public void setServiceCreateDate(LocalDateTime serviceCreateDate) {
 		this.serviceCreateDate = serviceCreateDate;
 	}
-	
+
 	public Date getServiceCreateDateAsDate() {
         if (serviceCreateDate == null) {
             return null;
@@ -97,8 +96,8 @@ public class ServiceBean implements java.io.Serializable{
         }
         return Date.from(serviceUpdateDate.atZone(ZoneId.systemDefault()).toInstant());
     }
-	
-	
+
+
 	public LocalDateTime getServiceUpdateDate() {
 		return serviceUpdateDate;
 	}
@@ -123,6 +122,6 @@ public class ServiceBean implements java.io.Serializable{
 	public void setServiceSample3(byte[] serviceSample3) {
 		this.serviceSample3 = serviceSample3;
 	}
-	
+
 
 }

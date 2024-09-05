@@ -21,8 +21,8 @@ public class Jobs {
 	private Integer jobsMinSalary ;
 	private String jobsWorktime;
 	private Integer jobsNumberOfOpenings ;
-	
-	
+
+
 	public Integer getJobsId() {
 		return jobsId;
 	}
@@ -101,7 +101,7 @@ public class Jobs {
 	public void setJobsNumberOfOpenings(Integer jobsNumberOfOpenings) {
 		this.jobsNumberOfOpenings = jobsNumberOfOpenings;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Jobs [jobsId=" + jobsId + ", jobsUserId=" + jobsUserId + ", jobsRequiredSkills=" + jobsRequiredSkills
@@ -111,7 +111,7 @@ public class Jobs {
 				+ jobsMinSalary + ", jobsWorktime=" + jobsWorktime + ", jobsNumberOfOpenings=" + jobsNumberOfOpenings
 				+ "]";
 	}
-	
-	
+
+
 
 }

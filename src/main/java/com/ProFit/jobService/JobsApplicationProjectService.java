@@ -3,9 +3,7 @@ package com.ProFit.jobService;
 import java.util.List;
 import java.util.Map;
 
-
 import com.ProFit.bean.JobsApplicationProject;
-
 import com.ProFit.dao.jobsCRUD.impl.JobsApplicationProjectDAO;
 
 public class JobsApplicationProjectService {

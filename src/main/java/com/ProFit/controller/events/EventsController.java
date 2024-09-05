@@ -1,5 +1,9 @@
 package com.ProFit.controller.events;
 
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.List;
+
 import com.ProFit.bean.EventsBean;
 import com.ProFit.dao.eventsCRUD.EventsDAO;
 
@@ -8,9 +12,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.List;
 
 @WebServlet("/events")
 public class EventsController extends HttpServlet {

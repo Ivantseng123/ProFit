@@ -1,6 +1,5 @@
 package com.ProFit;
 
-import java.util.Calendar;
 import java.util.Date;
 
 public class testJava {
@@ -10,7 +9,7 @@ public class testJava {
 		Date nowDate = new Date();
 		nowDate.toString();
 		System.out.println(nowDate);
-		
+
 	}
 
 }

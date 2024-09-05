@@ -2,11 +2,11 @@ package com.ProFit.bean;
 
 public class CourseModuleBean implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private String courseModuleId;
 	private String courseId;
 	private String courseModuleName;
-	
+
 	public CourseModuleBean() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -48,7 +48,7 @@ public class CourseModuleBean implements java.io.Serializable {
 		return "CourseModule [courseModuleId=" + courseModuleId + ", courseId=" + courseId + ", courseModuleName="
 				+ courseModuleName + "]";
 	}
-	
-	
-	
+
+
+
 }

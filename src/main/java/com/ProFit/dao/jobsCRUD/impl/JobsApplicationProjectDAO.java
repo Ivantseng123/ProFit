@@ -6,10 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 
-import com.ProFit.bean.Jobs;
 import com.ProFit.bean.JobsApplicationProject;
 import com.ProFit.dao.jobsCRUD.AbstractGenericDAO;
-import com.ProFit.util.CountProperty;
 
 public class JobsApplicationProjectDAO extends AbstractGenericDAO<JobsApplicationProject, Integer> {
     @Override
@@ -32,8 +30,8 @@ public class JobsApplicationProjectDAO extends AbstractGenericDAO<JobsApplicatio
         jobsApplicationProject.setJobsApplicationStatus(rs.getByte("jobs_application_status"));
         jobsApplicationProject.setJobsProject(rs.getString("jobs_project"));
         jobsApplicationProject.setJobsAmount(rs.getInt("jobs_amount"));
-        
-      
+
+
         return jobsApplicationProject;
     }
     @Override
@@ -42,7 +40,7 @@ public class JobsApplicationProjectDAO extends AbstractGenericDAO<JobsApplicatio
         stmt.setByte(2, entity.getJobsApplicationStatus());
         stmt.setString(3, entity.getJobsProject());
         stmt.setObject(4, entity.getJobsAmount());//原本是int
-        
+
     }
     @Override
     protected void setUpdateStatementParameters(PreparedStatement stmt, Map<String, Object> updates) throws SQLException {

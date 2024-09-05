@@ -1,6 +1,10 @@
 package com.ProFit.dao.majorsCRUD;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -82,8 +86,8 @@ public class UserMajorDAO {
         return majors;
     }
 
-    
-    
+
+
     // 查找特定user的所有 Major
     public List<UserMajorBean> findMajorsByUserId(int userId) {
         String sql = "SELECT * FROM [profitDB].[dbo].[user_major] WHERE user_id = ?";
@@ -125,7 +129,7 @@ public class UserMajorDAO {
         }
         return userMajorList;
     }
-    
+
     public int getUserIdByName(String userName) throws SQLException {
         String sql = "SELECT user_id FROM [profitDB].[dbo].[users] WHERE user_name = ?";
         try (Connection connection = getConnection();
@@ -172,7 +176,7 @@ public class UserMajorDAO {
         }
         return userMajorList;
     }
-    
+
     //
     public String getUserNameById(int userId) throws SQLException {
         String sql = "SELECT user_name FROM [profitDB].[dbo].[users] WHERE user_id = ?";

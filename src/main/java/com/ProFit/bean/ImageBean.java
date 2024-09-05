@@ -8,7 +8,7 @@ public class ImageBean implements java.io.Serializable{
 	private Integer imageId;
 	private Integer collectionId;
 	private Blob imageFile;
-	
+
 	public Integer getImageId() {
 		return imageId;
 	}
@@ -27,5 +27,5 @@ public class ImageBean implements java.io.Serializable{
 	public void setImageFile(Blob imageFile) {
 		this.imageFile = imageFile;
 	}
-	
+
 }

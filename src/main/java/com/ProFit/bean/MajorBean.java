@@ -7,7 +7,7 @@ public class MajorBean implements java.io.Serializable {
     private Integer majorCategoryId; // 專業_類別ID
     private String majorDescription; // 專業描述
     private String categoryName;
-    
+
 	public String getCategoryName() {
 		return categoryName;
 	}
@@ -38,5 +38,5 @@ public class MajorBean implements java.io.Serializable {
 	public void setMajorDescription(String majorDescription) {
 		this.majorDescription = majorDescription;
 	}
-    
+
 }

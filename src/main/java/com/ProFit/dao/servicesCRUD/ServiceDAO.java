@@ -1,6 +1,11 @@
 package com.ProFit.dao.servicesCRUD;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,7 +46,7 @@ public class ServiceDAO {
 		getUserNameById:根據id取得username
 		getMajorNameById:根據id取得majorname
 	 */
-	
+
 	public boolean insertService(ServiceBean service) throws SQLException {
         String sql = "INSERT INTO [profitDB].[dbo].[service] (user_id, major_id, service_title, service_content, service_price, service_unit_name, service_duration, service_createdate, service_updatedate, service_sample1, service_sample2, service_sample3) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = getConnection();
@@ -167,7 +172,7 @@ public class ServiceDAO {
         }
         return users;
     }
-    
+
     public Map<Integer, String> getAllMajors() throws SQLException {
         Map<Integer, String> majors = new HashMap<>();
         String sql = "SELECT major_id, major_name FROM [profitDB].[dbo].[major]";
@@ -197,7 +202,7 @@ public class ServiceDAO {
         }
         return majors;
     }
-    
+
     public String getUserNameById(int userId) throws SQLException {
         String sql = "SELECT user_name FROM [profitDB].[dbo].[users] WHERE user_id = ?";
         try (Connection connection = getConnection();
