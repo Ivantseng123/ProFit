@@ -1,12 +1,38 @@
 package com.ProFit.bean.coursesBean;
 
+import com.ProFit.bean.usersBean.Users;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity @Table(name="courses")
 public class CourseBean implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
+	@Id @Column(name="course_id")
 	private String courseId;
+	
+	@Column(name="course_name")
 	private String courseName;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="course_create_user_id")
+	private Users createUsersId;
+	
+	@Column(name="course_create_user_id",insertable = false,updatable = false)
 	private String courseCreateUserId;
+	
+	//改成hibernate之後要刪掉
 	private String createUserName; //table中沒有，為了前端呈現而設定
+	
+	@Column(name="")
 	private String courseCategory;
 	private String courseInformation;
 	private String courseDescription;
