@@ -35,7 +35,7 @@ public class DemoHibernateHouseServletAction extends HttpServlet {
 		SessionFactory factory = HibernateUtil.getSessionFactory();
 		Session session = factory.getCurrentSession();
 		
-		House resultBean = session.get(House.class, 1000); 
+		House resultBean = session.get(House.class, 100); 
 		
 		if(resultBean!=null) {
 			out.write(resultBean.getHouseid() + " " + resultBean.getHousename() + "<br/>");
