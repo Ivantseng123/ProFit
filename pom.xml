@@ -4,7 +4,35 @@
   <artifactId>ProFit</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
+  
+    <dependencies>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>6.6.0.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>mssql-jdbc</artifactId>
+			<version>12.8.1.jre11</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
+			<version>8.4.0</version>
+		</dependency>
+
+	</dependencies>
+  
   <build>
+  	<resources>
+		<resource>
+			<directory>src/main/java</directory>
+		</resource>
+	</resources>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
