@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-import com.ProFit.bean.CourseBean;
+import com.ProFit.bean.coursesBean.CourseBean;
 import com.ProFit.dao.coursesCRUD.CourseDao;
 import com.google.gson.Gson;
 

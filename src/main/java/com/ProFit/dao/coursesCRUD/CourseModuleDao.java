@@ -12,7 +12,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import com.ProFit.bean.CourseModuleBean;
+import com.ProFit.bean.coursesBean.CourseModuleBean;
 
 public class CourseModuleDao {
 

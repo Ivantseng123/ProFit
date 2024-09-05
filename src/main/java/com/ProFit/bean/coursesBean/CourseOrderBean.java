@@ -1,4 +1,4 @@
-package com.ProFit.bean;
+package com.ProFit.bean.coursesBean;
 
 public class CourseOrderBean implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
