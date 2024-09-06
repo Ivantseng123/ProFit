@@ -19,13 +19,13 @@ public class OpenSessionViewFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		SessionFactory factory = HibernateUtil.getSessionFactory();
 		Session session = factory.getCurrentSession();
-		
+
 		try {
 			session.beginTransaction();
 			System.out.println("Transaction Begin");
-			
+
 			chain.doFilter(request, response);
-			
+
 			session.getTransaction().commit();
 			System.out.println("Transaction Commit");
 		}catch(Exception e) {
@@ -34,8 +34,8 @@ public class OpenSessionViewFilter implements Filter {
 			e.printStackTrace();
 		}finally {
 			System.out.println("Session Closed");
-		}		
-		
+		}
+
 	}
 
 }

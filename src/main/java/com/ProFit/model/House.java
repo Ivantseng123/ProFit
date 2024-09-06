@@ -9,11 +9,11 @@ import jakarta.persistence.Table;
 
 @Entity @Table(name = "house")
 public class House {
-	
+
 	@Id @Column(name = "HOUSEID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int houseid;
-	
+
 	@Column(name = "HOUSENAME")
 	private String housename;
 

@@ -1,46 +1,86 @@
 package com.ProFit.bean.coursesBean;
 
+import com.ProFit.bean.MajorCategoryBeam;
 import com.ProFit.bean.usersBean.Users;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
-@Entity @Table(name="courses")
+@Entity
+@Table(name="courses")
 public class CourseBean implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id @Column(name="course_id")
 	private String courseId;
-	
+
 	@Column(name="course_name")
 	private String courseName;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="course_create_user_id")
 	private Users createUsersId;
-	
+
 	@Column(name="course_create_user_id",insertable = false,updatable = false)
 	private String courseCreateUserId;
-	
+
 	//改成hibernate之後要刪掉
+	@Transient
 	private String createUserName; //table中沒有，為了前端呈現而設定
-	
-	@Column(name="")
+
+	@Column(name="course_category", insertable = false,updatable = false)
 	private String courseCategory;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="course_category")
+	private MajorCategoryBeam majorCategory;
+
+	@Column(name = "course_information")
 	private String courseInformation;
+
+	@Column(name="course_description")
 	private String courseDescription;
+
+	@Column(name="course_enrollment_date")
 	private String courseEnrollmentDate;
+
+	@Column(name="course_start_date")
 	private String courseStartDate;
+
+	@Column(name="course_end_date")
 	private String courseEndDate;
+
+	@Column(name="course_price")
 	private String coursePrice;
+
+	@Column(name="course_status")
 	private String courseStatus;
+
+	public Users getCreateUsersId() {
+		return createUsersId;
+	}
+
+
+	public void setCreateUsersId(Users createUsersId) {
+		this.createUsersId = createUsersId;
+	}
+
+
+	public MajorCategoryBeam getMajorCategory() {
+		return majorCategory;
+	}
+
+
+	public void setMajorCategory(MajorCategoryBeam majorCategory) {
+		this.majorCategory = majorCategory;
+	}
+
 
 	public CourseBean() {
 		super();
