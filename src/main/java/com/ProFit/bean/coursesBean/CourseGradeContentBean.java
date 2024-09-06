@@ -1,11 +1,36 @@
 package com.ProFit.bean.coursesBean;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="course_grade_content")
 public class CourseGradeContentBean implements java.io.Serializable  {
 	private static final long serialVersionUID = 1L;
-
+	
+	@Id @Column(name="course_grade_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String courseGradeId;
+	
+	@Column(name="course_id",insertable = false, updatable = false)
 	private String courseId;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="course_id")
+	private CourseBean course;
+	
+
+	@Column(name="student_id")
 	private String studentId;
+	
+	@Column(name="course_grade_score")
 	private String courseGradeScore;
 
 	public CourseGradeContentBean() {
@@ -21,6 +46,13 @@ public class CourseGradeContentBean implements java.io.Serializable  {
 		this.courseGradeScore = courseGradeScore;
 	}
 
+	public CourseBean getCourse() {
+		return course;
+	}
+	
+	public void setCourse(CourseBean course) {
+		this.course = course;
+	}
 	public String getCourseGradeId() {
 		return courseGradeId;
 	}

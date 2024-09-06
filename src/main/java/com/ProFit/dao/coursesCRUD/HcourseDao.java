@@ -36,7 +36,7 @@ public class HcourseDao implements IHcourseDao {
 	}
 
 	@Override
-	public CourseBean findSingleCourseById(String courseId) {
+	public CourseBean searchOneCourseById(String courseId) {
 		return session.get(CourseBean.class, courseId);
 	}
 

@@ -16,7 +16,7 @@ public interface IHcourseDao {
 	public boolean updateCourseById(CourseBean newCourse,CourseBean oldCourse);
 
 	// 查詢單筆By couseId
-	public CourseBean findSingleCourseById(String courseId);
+	public CourseBean searchOneCourseById(String courseId);
 
 	// 查詢全部(未測試)
 	public List<CourseBean> searchCourses();
