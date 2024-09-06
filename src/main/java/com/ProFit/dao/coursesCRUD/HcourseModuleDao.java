@@ -15,19 +15,19 @@ public class HcourseModuleDao implements IHcourseModuleDao {
 	}
 	
 	@Override
-	public CourseModuleBean insertCourse(CourseModuleBean courseModule) {
+	public CourseModuleBean insertCourseModule(CourseModuleBean courseModule) {
 
 		return null;
 	}
 
 	@Override
-	public boolean deleteCourseByID(String courseModuleId) {
+	public boolean deleteCourseModuleByID(String courseModuleId) {
 
 		return false;
 	}
 
 	@Override
-	public boolean updateCourseById(CourseModuleBean newCourseModule) {
+	public boolean updateCourseModuleById(CourseModuleBean newCourseModule) {
 
 		return false;
 	}

@@ -26,7 +26,6 @@ public class CourseGradeContentBean implements java.io.Serializable  {
 	@JoinColumn(name="course_id")
 	private CourseBean course;
 	
-
 	@Column(name="student_id")
 	private String studentId;
 	

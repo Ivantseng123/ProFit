@@ -8,13 +8,13 @@ import com.ProFit.bean.coursesBean.CourseModuleBean;
 public interface IHcourseModuleDao {
 	
 	// 新增課程章節
-	public CourseModuleBean insertCourse(CourseModuleBean courseModule);
+	public CourseModuleBean insertCourseModule(CourseModuleBean courseModule);
 
 	// 刪除課程章節 by id
-	public boolean deleteCourseByID(String courseModuleId);
+	public boolean deleteCourseModuleByID(String courseModuleId);
 
 	// 更新課程章節 by id
-	public boolean updateCourseById(CourseModuleBean newCourseModule);
+	public boolean updateCourseModuleById(CourseModuleBean newCourseModule);
 
 	// 查詢單筆課程章節By courseModuleId
 	public CourseModuleBean searchOneCourseGradeContentById(int courseModuleId);

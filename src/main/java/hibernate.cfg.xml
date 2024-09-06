@@ -20,6 +20,7 @@
 		<mapping class="com.ProFit.bean.MajorCategoryBeam"/>
 		<mapping class="com.ProFit.bean.coursesBean.CourseGradeContentBean"/>
 		<mapping class="com.ProFit.bean.coursesBean.CourseModuleBean"/>
+		<mapping class="com.ProFit.bean.coursesBean.CourseLessonBean"/>
 		
 		
 	</session-factory>
