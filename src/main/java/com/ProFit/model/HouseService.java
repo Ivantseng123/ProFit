@@ -5,7 +5,7 @@ import java.util.List;
 import org.hibernate.Session;
 
 public class HouseService implements IHouseService {
-	
+
 	private HouseDao hDao;
 
 	public HouseService(Session session) {

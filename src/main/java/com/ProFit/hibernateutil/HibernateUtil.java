@@ -6,7 +6,7 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 public class HibernateUtil {
-	
+
 	private static final SessionFactory facotry = createSessionFactory();
 
 	private static SessionFactory createSessionFactory() {
@@ -14,11 +14,11 @@ public class HibernateUtil {
 		SessionFactory sf = new MetadataSources(registry).buildMetadata().buildSessionFactory();
 		return sf;
 	}
-	
+
 	public static SessionFactory getSessionFactory() {
 		return facotry;
 	}
-	
+
 	public static void closeSessionFactory() {
 		if(facotry!=null) {
 			facotry.close();

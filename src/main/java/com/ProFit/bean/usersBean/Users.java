@@ -2,10 +2,23 @@ package com.ProFit.bean.usersBean;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="users")
 public class Users implements Serializable{
 private static final long serialVersionUID = 1L;
-
+	
+	@Id @Column(name="user_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer user_id;
+	
+	
 	private String user_name;
 	private String user_email ;
 	private String user_passwordHash;
