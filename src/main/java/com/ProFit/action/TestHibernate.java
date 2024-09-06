@@ -7,6 +7,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.ProFit.bean.coursesBean.CourseBean;
+import com.ProFit.bean.coursesBean.CourseGradeContentBean;
+import com.ProFit.bean.coursesBean.CourseModuleBean;
+import com.ProFit.dao.coursesCRUD.HcourseDao;
+import com.ProFit.dao.coursesCRUD.HcourseGradeContentDao;
+import com.ProFit.dao.coursesCRUD.HcourseModuleDao;
+import com.ProFit.dao.coursesCRUD.IHcourseDao;
 import com.ProFit.hibernateutil.HibernateUtil;
 
 import jakarta.servlet.ServletException;
@@ -39,9 +45,23 @@ public class TestHibernate extends HttpServlet {
 		Session session = factory.getCurrentSession();
 
 		CourseBean courseBean = session.get(CourseBean.class, "C0100");
+		
+		HcourseGradeContentDao courseGradeDAO = new HcourseGradeContentDao(session);
+		
+		CourseGradeContentBean courseGrade = courseGradeDAO.searchOneCourseGradeContentById(100);
+		CourseBean gradeCourse = courseGrade.getCourse();
+		
+		HcourseModuleDao hcourseModuleDao = new HcourseModuleDao(session);
+		
+		CourseModuleBean courseModule = hcourseModuleDao.searchOneCourseGradeContentById(1);
+		CourseBean Modulecourse = courseModule.getCourse();
+		
 
 		if(courseBean!=null) {
 			out.write(courseBean.getCourseName() + " " + courseBean.getCoursePrice() + "<br/>");
+			out.write(courseGrade.getStudentId()+" "+courseGrade.getCourseId()+" "+gradeCourse.getCourseName()+""+courseGrade.getCourseGradeScore()+"<br/>");
+			out.write(Modulecourse.getCourseName()+" "+courseModule.getCourseModuleName());
+		
 		}else {
 			out.write("no result");
 		}
