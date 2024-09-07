@@ -30,8 +30,8 @@ public class CourseModuleBean implements java.io.Serializable {
 	@Column(name="course_module_name")
 	private String courseModuleName;
 	
-	@OneToMany(fetch = FetchType.LAZY)
-	private CourseLessonBean courseLesson;
+//	@OneToMany(fetch = FetchType.LAZY)
+//	private CourseLessonBean courseLesson;
 
 
 	public CourseModuleBean() {

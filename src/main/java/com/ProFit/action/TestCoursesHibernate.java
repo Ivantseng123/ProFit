@@ -8,10 +8,14 @@ import org.hibernate.SessionFactory;
 
 import com.ProFit.bean.coursesBean.CourseBean;
 import com.ProFit.bean.coursesBean.CourseGradeContentBean;
+import com.ProFit.bean.coursesBean.CourseLessonBean;
 import com.ProFit.bean.coursesBean.CourseModuleBean;
+import com.ProFit.bean.coursesBean.CourseOrderBean;
 import com.ProFit.dao.coursesCRUD.HcourseDao;
 import com.ProFit.dao.coursesCRUD.HcourseGradeContentDao;
+import com.ProFit.dao.coursesCRUD.HcourseLessonDao;
 import com.ProFit.dao.coursesCRUD.HcourseModuleDao;
+import com.ProFit.dao.coursesCRUD.HcourseOrderDao;
 import com.ProFit.dao.coursesCRUD.IHcourseDao;
 import com.ProFit.hibernateutil.HibernateUtil;
 
@@ -21,8 +25,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/test")
-public class TestHibernate extends HttpServlet {
+@WebServlet("/testCourse")
+public class TestCoursesHibernate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -56,12 +60,22 @@ public class TestHibernate extends HttpServlet {
 		CourseModuleBean courseModule = hcourseModuleDao.searchOneCourseGradeContentById(1);
 		CourseBean Modulecourse = courseModule.getCourse();
 		
+		HcourseLessonDao hcourseLessonDao = new HcourseLessonDao(session);
+		
+		CourseLessonBean courseLesson = hcourseLessonDao.searchOneCourseLessonById(1);
+		CourseBean lessonModuleCourse = courseLesson.getCourseModule().getCourse();
+		CourseModuleBean moduleLesson = courseLesson.getCourseModule();
+		
+		HcourseOrderDao hcourseOrderDao = new HcourseOrderDao(session);
+		
+		CourseOrderBean courseOrder = hcourseOrderDao.searchOneCourseOrderById("CR100");
 
 		if(courseBean!=null) {
 			out.write(courseBean.getCourseName() + " " + courseBean.getCoursePrice() + "<br/>");
 			out.write(courseGrade.getStudentId()+" "+courseGrade.getCourseId()+" "+gradeCourse.getCourseName()+""+courseGrade.getCourseGradeScore()+"<br/>");
-			out.write(Modulecourse.getCourseName()+" "+courseModule.getCourseModuleName());
-		
+			out.write(Modulecourse.getCourseName()+" "+courseModule.getCourseModuleName()+"<br/>");
+			out.write(lessonModuleCourse.getCourseId()+" "+lessonModuleCourse.getCourseName()+" "+moduleLesson.getCourseModuleName()+" "+courseLesson.getCourseLessonName()+"<br/>");
+			out.write(courseOrder.getCourseOrderId()+" "+courseOrder.getStudentId()+" "+courseOrder.getCourse().getCourseName()+" "+courseOrder.getCourseOrderPrice());
 		}else {
 			out.write("no result");
 		}
