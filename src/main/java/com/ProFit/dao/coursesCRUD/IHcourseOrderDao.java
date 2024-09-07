@@ -8,10 +8,10 @@ import com.ProFit.bean.coursesBean.CourseOrderBean;
 public interface IHcourseOrderDao {
 
 	// 新增課程訂單
-	public CourseOrderBean insertCourseOrder(CourseOrderBean course);
+	public CourseOrderBean insertCourseOrder(CourseOrderBean courseOrder);
 
 	// 刪除課程訂單
-	public boolean deleteCourseOrderByID(String courseId);
+	public boolean deleteCourseOrderByID(String courseOrderId);
 
 	// 更新課程訂單
 	public boolean updateCourseOrderById(CourseOrderBean newCourseOrder);

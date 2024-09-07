@@ -1,14 +1,9 @@
 package com.ProFit.dao.coursesCRUD;
 
-import java.nio.channels.SeekableByteChannel;
 import java.util.List;
-
 import org.hibernate.Session;
 import org.hibernate.query.Query;
-
 import com.ProFit.bean.coursesBean.CourseModuleBean;
-
-import jakarta.persistence.Id;
 
 public class HcourseModuleDao implements IHcourseModuleDao {
 
