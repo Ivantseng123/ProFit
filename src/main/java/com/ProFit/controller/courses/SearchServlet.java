@@ -56,8 +56,6 @@ public class SearchServlet extends HttpServlet {
 		String courseCreateUserId = request.getParameter("courseCreateUserId");
 		String courseCategory = request.getParameter("courseMajor");
 
-
-
 		CourseDao courseDao = new CourseDao();
 		List<CourseBean> searchCourses = courseDao.searchCourses(courseName, courseCreateUserName, courseStatus, courseCreateUserId, courseCategory);
 

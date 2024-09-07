@@ -2,10 +2,11 @@ package com.ProFit.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
+import org.apache.catalina.core.FrameworkListener;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-
 import com.ProFit.bean.coursesBean.CourseBean;
 import com.ProFit.bean.coursesBean.CourseGradeContentBean;
 import com.ProFit.bean.coursesBean.CourseLessonBean;
@@ -16,9 +17,7 @@ import com.ProFit.dao.coursesCRUD.HcourseGradeContentDao;
 import com.ProFit.dao.coursesCRUD.HcourseLessonDao;
 import com.ProFit.dao.coursesCRUD.HcourseModuleDao;
 import com.ProFit.dao.coursesCRUD.HcourseOrderDao;
-import com.ProFit.dao.coursesCRUD.IHcourseDao;
 import com.ProFit.hibernateutil.HibernateUtil;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -50,6 +49,11 @@ public class TestCoursesHibernate extends HttpServlet {
 
 		CourseBean courseBean = session.get(CourseBean.class, "C0100");
 		
+		HcourseDao hcourseDao = new HcourseDao(session);
+		CourseBean courseBean1 = hcourseDao.searchOneCourseById("C0100");
+		List<CourseModuleBean> courseModules = courseBean1.getCourseModules();
+		System.out.println(courseModules.get(0).getCourseModuleName());
+		
 		HcourseGradeContentDao courseGradeDAO = new HcourseGradeContentDao(session);
 		
 		CourseGradeContentBean courseGrade = courseGradeDAO.searchOneCourseGradeContentById(100);
@@ -57,8 +61,10 @@ public class TestCoursesHibernate extends HttpServlet {
 		
 		HcourseModuleDao hcourseModuleDao = new HcourseModuleDao(session);
 		
-		CourseModuleBean courseModule = hcourseModuleDao.searchOneCourseGradeContentById(1);
+		CourseModuleBean courseModule = hcourseModuleDao.searchOneCourseModuleById(1);
 		CourseBean Modulecourse = courseModule.getCourse();
+		List<CourseLessonBean> moduleLessons = courseModule.getModuleLessons();
+		System.out.println(moduleLessons.get(0).getCourseLessonName());
 		
 		HcourseLessonDao hcourseLessonDao = new HcourseLessonDao(session);
 		

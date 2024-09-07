@@ -1,7 +1,6 @@
 package com.ProFit.bean.coursesBean;
 
 import com.ProFit.bean.usersBean.Users;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -40,7 +39,6 @@ public class CourseOrderBean implements java.io.Serializable {
 
 	public CourseOrderBean() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public CourseOrderBean(String courseOrderId, String courseId, String studentId, String courseOrderPrice,
