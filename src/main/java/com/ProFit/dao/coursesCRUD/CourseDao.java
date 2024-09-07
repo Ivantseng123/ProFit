@@ -155,56 +155,7 @@ public class CourseDao {
 		try {
 			conn = getConnection();
 			stmt = conn.prepareStatement(UpdateEmpSQL);
-//			if( newCourse.getCourseName() == "") {
-//				stmt.setString(1, oldCourse.getCourseName());
-//			}else {
-//				stmt.setString(1, newCourse.getCourseName());
-//			}
-//			if( newCourse.getCourseCreateUserId() == "") {
-//				stmt.setString(2, oldCourse.getCourseCreateUserId());
-//			}else {
-//				stmt.setString(2, newCourse.getCourseCreateUserId());
-//			}
-//			if( newCourse.getCourseCategory() == "") {
-//				stmt.setString(3, oldCourse.getCourseCategory());
-//			}else {
-//				stmt.setString(3, newCourse.getCourseCategory());
-//			}
-//			if( newCourse.getCourseInformation()== "") {
-//				stmt.setString(4, oldCourse.getCourseInformation());
-//			}else {
-//				stmt.setString(4, newCourse.getCourseInformation());
-//			}
-//			if( newCourse.getCourseDescription()== "") {
-//				stmt.setString(5, oldCourse.getCourseDescription());
-//			}else {
-//				stmt.setString(5, newCourse.getCourseDescription());
-//			}
-//			if(newCourse.getCourseEnrollmentDate()=="") {
-//				stmt.setString(6, oldCourse.getCourseEnrollmentDate());
-//			}else {
-//				stmt.setString(6, newCourse.getCourseEnrollmentDate());
-//			}
-//			if(newCourse.getCourseStartDate()=="") {
-//				stmt.setString(7, oldCourse.getCourseStartDate());
-//			}else {
-//				stmt.setString(7, newCourse.getCourseStartDate());
-//			}
-//			if(newCourse.getCourseEndDate()=="") {
-//				stmt.setString(8, oldCourse.getCourseEndDate());
-//			}else {
-//				stmt.setString(8, newCourse.getCourseEndDate());
-//			}
-//			if(newCourse.getCoursePrice()=="") {
-//				stmt.setString(9, oldCourse.getCoursePrice());
-//			}else {
-//				stmt.setString(9, newCourse.getCoursePrice());
-//			}
-//			if(newCourse.getCourseStatus()=="") {
-//				stmt.setString(10, oldCourse.getCourseStatus());
-//			}else {
-//				stmt.setString(10, newCourse.getCourseStatus());
-//			}
+
 	        stmt.setString(1, newCourse.getCourseName().isEmpty() ? oldCourse.getCourseName() : newCourse.getCourseName());
 	        stmt.setString(2, newCourse.getCourseCreateUserId().isEmpty() ? oldCourse.getCourseCreateUserId() : newCourse.getCourseCreateUserId());
 	        stmt.setString(3, newCourse.getCourseCategory().isEmpty() ? oldCourse.getCourseCategory() : newCourse.getCourseCategory());

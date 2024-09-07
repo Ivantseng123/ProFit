@@ -1,7 +1,6 @@
 package com.ProFit.bean.coursesBean;
 
 import com.ProFit.bean.usersBean.Users;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -37,22 +36,43 @@ public class CourseOrderBean implements java.io.Serializable {
 	
 	@Column(name="course_order_create_date")
 	private String courseOrderCreateDate;
-
+	
+	@Column(name="course_order_remark")
+	private String courseOrderRemark;
+	
+	@Column(name="course_order_status")
+	private String courseOrderStatus;
+	
 	public CourseOrderBean() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public CourseOrderBean(String courseOrderId, String courseId, String studentId, String courseOrderPrice,
-			String courseOrderCreateDate) {
+			String courseOrderCreateDate,String courseOrderRemark,String courseOrderStatus) {
 		super();
 		this.courseOrderId = courseOrderId;
 		this.courseId = courseId;
 		this.studentId = studentId;
 		this.courseOrderPrice = courseOrderPrice;
 		this.courseOrderCreateDate = courseOrderCreateDate;
+		this.courseOrderRemark = courseOrderRemark;
+		this.courseOrderStatus = courseOrderStatus;
 	}
 	
+	public String getCourseOrderStatus() {
+		return courseOrderStatus;
+	}
+	
+	public void setCourseOrderStatus(String courseOrderStatus) {
+		this.courseOrderStatus = courseOrderStatus;
+	}
+	public String getCourseOrderRemark() {
+		return courseOrderRemark;
+	}
+	
+	public void setCourseOrderRemark(String courseOrderRemark) {
+		this.courseOrderRemark = courseOrderRemark;
+	}
 	public CourseBean getCourse() {
 		return course;
 	}
@@ -108,7 +128,5 @@ public class CourseOrderBean implements java.io.Serializable {
 	public void setCourseOrderCreateDate(String courseOrderCreateDate) {
 		this.courseOrderCreateDate = courseOrderCreateDate;
 	}
-
-
 
 }

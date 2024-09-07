@@ -11,18 +11,18 @@ public interface IHcourseModuleDao {
 	public CourseModuleBean insertCourseModule(CourseModuleBean courseModule);
 
 	// 刪除課程章節 by id
-	public boolean deleteCourseModuleByID(String courseModuleId);
+	public boolean deleteCourseModuleById(String courseModuleId);
 
 	// 更新課程章節 by id
 	public boolean updateCourseModuleById(CourseModuleBean newCourseModule);
 
 	// 查詢單筆課程章節By courseModuleId
-	public CourseModuleBean searchOneCourseGradeContentById(int courseModuleId);
+	public CourseModuleBean searchOneCourseModuleById(int courseModuleId);
 
 	// 查詢全部 多形
-	public List<CourseModuleBean> searchCourseGradeContents();
+	public List<CourseModuleBean> searchCourseModules();
 
 	// 查詢全部 By 課程id
-	public List<CourseModuleBean> searchCourseGradeContents(String course_id);
+	public List<CourseModuleBean> searchCourseModules(String course_id);
 
 }
