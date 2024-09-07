@@ -25,7 +25,7 @@ public class CourseOrderBean implements java.io.Serializable {
 	@JoinColumn(name="course_id",insertable = false,updatable = false)
 	private CourseBean course;
 	
-	@Column(name="student")
+	@Column(name="student_id")
 	private String studentId;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
