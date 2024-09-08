@@ -1,46 +1,43 @@
 package com.ProFit.bean;
 
+import jakarta.persistence.*;
 import java.sql.Timestamp;
 
+@Entity
+@Table(name = "user_transactions")
 public class UserTransactionBean {
+
+    @Id
+    @Column(name = "transaction_id")
     private String transactionId;
-    private String userId;
-    private String userName;
+
+    @Column(name = "user_id") 
+    private int userId;
+
+    @Column(name = "transaction_type") 
     private String transactionType;
-    private String amount;
+
+    @Column(name = "transaction_amount") 
+    private int transactionAmount;
+
+    @Column(name = "transaction_status")
     private String transactionStatus;
+
+    @Column(name = "created_at")
     private Timestamp createdAt;
 
     public UserTransactionBean() {
-        super();
     }
 
-
-    public UserTransactionBean(String transactionId, String userId, String userName, String transactionType, String amount,
-                               String transactionStatus, Timestamp createdAt) {
+    public UserTransactionBean(String transactionId, int userId, String transactionType, int transactionAmount, String transactionStatus, Timestamp createdAt) {
         this.transactionId = transactionId;
         this.userId = userId;
-        this.userName = userName;
         this.transactionType = transactionType;
-        this.amount = amount;
+        this.transactionAmount = transactionAmount;
         this.transactionStatus = transactionStatus;
         this.createdAt = createdAt;
     }
 
-    @Override
-    public String toString() {
-        return "UserTransactionBean{" +
-                "transactionId=" + transactionId +
-                ", userId=" + userId +
-                ", userName='" + userName + '\'' +
-                ", transactionType='" + transactionType + '\'' +
-                ", amount=" + amount +
-                ", transactionStatus='" + transactionStatus + '\'' +
-                ", createdAt=" + createdAt +
-                '}';
-    }
-
-    // Getters 和 Setters
     public String getTransactionId() {
         return transactionId;
     }
@@ -49,20 +46,12 @@ public class UserTransactionBean {
         this.transactionId = transactionId;
     }
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getTransactionType() {
@@ -73,12 +62,12 @@ public class UserTransactionBean {
         this.transactionType = transactionType;
     }
 
-    public String getAmount() {
-        return amount;
+    public int getTransactionAmount() {
+        return transactionAmount;
     }
 
-    public void setAmount(String amount) {
-        this.amount = amount;
+    public void setTransactionAmount(int transactionAmount) {
+        this.transactionAmount = transactionAmount;
     }
 
     public String getTransactionStatus() {
