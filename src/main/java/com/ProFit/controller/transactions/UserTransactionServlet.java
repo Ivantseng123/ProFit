@@ -6,26 +6,30 @@ import java.util.List;
 
 import com.ProFit.bean.UserTransactionBean;
 import com.ProFit.dao.transactionCRUD.UserTransactionDAO;
-
+import com.ProFit.util.HibernateUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.hibernate.Session;
 
 @WebServlet("/UserTransactionServlet")
 public class UserTransactionServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private UserTransactionDAO userTransactionDAO;
+    private Session session;
 
     public UserTransactionServlet() {
-        this.userTransactionDAO = new UserTransactionDAO();
+        this.session = HibernateUtil.getSessionFactory().openSession();
+        this.userTransactionDAO = new UserTransactionDAO(session);
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
+
         if (action == null || "list".equals(action)) {
             listTransactions(request, response);
         } else if ("filter".equals(action)) {
@@ -72,7 +76,6 @@ public class UserTransactionServlet extends HttpServlet {
         String startDateStr = request.getParameter("start_date");
         String endDateStr = request.getParameter("end_date");
         String userId = request.getParameter("user_id");
-        String userName = request.getParameter("user_name");
         String transactionType = request.getParameter("transaction_type");
         String transactionStatus = request.getParameter("transaction_status");
 
@@ -91,7 +94,8 @@ public class UserTransactionServlet extends HttpServlet {
             return;
         }
 
-        List<UserTransactionBean> transactions = userTransactionDAO.getTransactionsByFilters(userId, userName, transactionType, transactionStatus, startDate, endDate);
+        List<UserTransactionBean> transactions = userTransactionDAO.getTransactionsByFilters(
+                userId, transactionType, transactionStatus, startDate, endDate);
 
         request.setAttribute("transactions", transactions);
         request.getRequestDispatcher("/transactionVIEW/userTransactions.jsp").forward(request, response);
@@ -101,11 +105,11 @@ public class UserTransactionServlet extends HttpServlet {
             throws ServletException, IOException {
         String userId = request.getParameter("user_id");
         String transactionType = request.getParameter("transaction_type");
-        String amount = request.getParameter("amount");
+        int amount = Integer.parseInt(request.getParameter("amount")); 
         String transactionStatus = request.getParameter("transaction_status");
         Timestamp createdAt = new Timestamp(System.currentTimeMillis());
 
-        UserTransactionBean transaction = new UserTransactionBean(null, userId, null, transactionType, amount, transactionStatus, createdAt);
+        UserTransactionBean transaction = new UserTransactionBean(null, Integer.parseInt(userId), transactionType, amount, transactionStatus, createdAt);
 
         boolean isInserted = userTransactionDAO.insertTransaction(transaction);
 
@@ -116,17 +120,16 @@ public class UserTransactionServlet extends HttpServlet {
         }
     }
 
-
     private void applyUpdateTransaction(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String transactionId = request.getParameter("transaction_id");
         String userId = request.getParameter("user_id");
         String transactionType = request.getParameter("transaction_type");
-        String amount = request.getParameter("amount");
+        int amount = Integer.parseInt(request.getParameter("amount"));
         String transactionStatus = request.getParameter("transaction_status");
         Timestamp createdAt = new Timestamp(System.currentTimeMillis());
 
-        UserTransactionBean transaction = new UserTransactionBean(transactionId, userId, null, transactionType, amount, transactionStatus, createdAt);
+        UserTransactionBean transaction = new UserTransactionBean(transactionId, Integer.parseInt(userId), transactionType, amount, transactionStatus, createdAt);
 
         boolean isUpdated = userTransactionDAO.updateTransaction(transaction);
 
@@ -161,5 +164,12 @@ public class UserTransactionServlet extends HttpServlet {
         String transactionId = request.getParameter("transaction_id");
         request.setAttribute("transaction_id", transactionId);
         request.getRequestDispatcher("/transactionVIEW/deleteTransaction.jsp").forward(request, response);
+    }
+
+    @Override
+    public void destroy() {
+        if (session != null) {
+            session.close();
+        }
     }
 }

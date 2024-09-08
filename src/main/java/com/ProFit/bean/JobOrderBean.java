@@ -1,28 +1,44 @@
 package com.ProFit.bean;
 
+import jakarta.persistence.*;
 import java.sql.Timestamp;
 
+@Entity
+@Table(name = "job_orders")
 public class JobOrderBean {
+
+    @Id
+    @Column(name = "job_orders_id")
     private String jobOrdersId;
+
+    @Column(name = "job_application_id")
     private int jobApplicationId;
+
+    @Column(name = "job_order_date")
     private Timestamp jobOrderDate;
+
+    @Column(name = "job_order_status")
     private String jobOrderStatus;
+
+    @Column(name = "job_notes")
     private String jobNotes;
-    private int totalAmount;
+
+    @Column(name = "job_amount")
+    private int jobAmount;
 
     public JobOrderBean() {
-        super();
     }
 
-    public JobOrderBean(String jobOrdersId, int jobApplicationId, Timestamp jobOrderDate, String jobOrderStatus, String jobNotes, int totalAmount) {
+    public JobOrderBean(String jobOrdersId, int jobApplicationId, Timestamp jobOrderDate, String jobOrderStatus, String jobNotes, int jobAmount) {
         this.jobOrdersId = jobOrdersId;
         this.jobApplicationId = jobApplicationId;
         this.jobOrderDate = jobOrderDate;
         this.jobOrderStatus = jobOrderStatus;
         this.jobNotes = jobNotes;
-        this.totalAmount = totalAmount;
+        this.jobAmount = jobAmount;
     }
 
+    // Getters 和 Setters
     public String getJobOrdersId() {
         return jobOrdersId;
     }
@@ -63,11 +79,11 @@ public class JobOrderBean {
         this.jobNotes = jobNotes;
     }
 
-    public int getTotalAmount() {
-        return totalAmount;
+    public int getJobAmount() {
+        return jobAmount;
     }
 
-    public void setTotalAmount(int totalAmount) {
-        this.totalAmount = totalAmount;
+    public void setJobAmount(int jobAmount) {
+        this.jobAmount = jobAmount;
     }
 }
