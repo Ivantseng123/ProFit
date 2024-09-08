@@ -13,6 +13,7 @@ public class MajorCategoryBeam implements java.io.Serializable {
 	@Id @Column(name="major_category_id")
 	private Integer majorCategoryId; // 主鍵，專業_類別ID
 	
+	@Column(name="categoy_name")
 	private String categoryName; // 類別名稱
 
 	public Integer getMajorCategoryId() {
