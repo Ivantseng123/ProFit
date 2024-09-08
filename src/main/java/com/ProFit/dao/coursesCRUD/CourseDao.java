@@ -80,9 +80,9 @@ public class CourseDao {
 	        stmt.setInt(4, Integer.parseInt(course.getCourseCategory()));
 	        stmt.setString(5, course.getCourseInformation());
 	        stmt.setString(6, course.getCourseDescription());
-	        stmt.setString(7, course.getCourseEnrollmentDate());
-	        stmt.setString(8, course.getCourseStartDate());
-	        stmt.setString(9, course.getCourseEndDate());
+	        stmt.setString(7, course.getCourseEnrollmentDate().toString());
+	        stmt.setString(8, course.getCourseStartDate().toString());
+	        stmt.setString(9, course.getCourseEndDate().toString());
 	        stmt.setInt(10, Integer.parseInt(course.getCoursePrice()));
 	        stmt.setString(11, course.getCourseStatus());
 
@@ -161,9 +161,9 @@ public class CourseDao {
 	        stmt.setString(3, newCourse.getCourseCategory().isEmpty() ? oldCourse.getCourseCategory() : newCourse.getCourseCategory());
 	        stmt.setString(4, newCourse.getCourseInformation().isEmpty() ? oldCourse.getCourseInformation() : newCourse.getCourseInformation());
 	        stmt.setString(5, newCourse.getCourseDescription().isEmpty() ? oldCourse.getCourseDescription() : newCourse.getCourseDescription());
-	        stmt.setString(6, newCourse.getCourseEnrollmentDate().isEmpty() ? oldCourse.getCourseEnrollmentDate() : newCourse.getCourseEnrollmentDate());
-	        stmt.setString(7, newCourse.getCourseStartDate().isEmpty() ? oldCourse.getCourseStartDate() : newCourse.getCourseStartDate());
-	        stmt.setString(8, newCourse.getCourseEndDate().isEmpty() ? oldCourse.getCourseEndDate() : newCourse.getCourseEndDate());
+	        stmt.setString(6, newCourse.getCourseEnrollmentDate()==null ? oldCourse.getCourseEnrollmentDate().toString() : newCourse.getCourseEnrollmentDate().toString());
+	        stmt.setString(7, newCourse.getCourseStartDate()==null ? oldCourse.getCourseStartDate().toString() : newCourse.getCourseStartDate().toString());
+	        stmt.setString(8, newCourse.getCourseEndDate()==null ? oldCourse.getCourseEndDate().toString() : newCourse.getCourseEndDate().toString());
 	        stmt.setString(9, newCourse.getCoursePrice().isEmpty() ? oldCourse.getCoursePrice() : newCourse.getCoursePrice());
 	        stmt.setString(10, newCourse.getCourseStatus().isEmpty() ? oldCourse.getCourseStatus() : newCourse.getCourseStatus());
 	        stmt.setString(11, oldCourse.getCourseId());
@@ -205,9 +205,9 @@ public class CourseDao {
 	            course.setCourseCategory(rs.getString("course_category"));
 	            course.setCourseInformation(rs.getString("course_information"));
 	            course.setCourseDescription(rs.getString("course_description"));
-	            course.setCourseEnrollmentDate(rs.getDate("course_enrollment_date").toString());
-	            course.setCourseStartDate(rs.getTimestamp("course_start_date").toString());
-	            course.setCourseEndDate(rs.getTimestamp("course_end_date").toString());
+	            course.setCourseEnrollmentDate(rs.getTimestamp("course_enrollment_date").toLocalDateTime());
+	            course.setCourseStartDate(rs.getTimestamp("course_start_date").toLocalDateTime());
+	            course.setCourseEndDate(rs.getTimestamp("course_end_date").toLocalDateTime());
 	            course.setCoursePrice(rs.getString("course_price"));
 	            course.setCreateUserName(rs.getString("user_name"));
 	            course.setCourseStatus(rs.getString("course_status"));
@@ -246,9 +246,9 @@ public class CourseDao {
 				course.setCourseCategory(rs.getString("course_category"));
 				course.setCourseInformation(rs.getString("course_information"));
 				course.setCourseDescription(rs.getString("course_description"));
-				course.setCourseEnrollmentDate(rs.getDate("course_enrollment_date").toString());
-				course.setCourseStartDate(rs.getDate("course_start_date").toString());
-				course.setCourseEndDate(rs.getDate("course_end_date").toString());
+				course.setCourseEnrollmentDate(rs.getTimestamp("course_enrollment_date").toLocalDateTime());
+				course.setCourseStartDate(rs.getTimestamp("course_start_date").toLocalDateTime());
+				course.setCourseEndDate(rs.getTimestamp("course_end_date").toLocalDateTime());
 				course.setCoursePrice(rs.getString("course_price"));
 				course.setCreateUserName(rs.getString("user_name"));
 				course.setCourseStatus(rs.getString("course_status"));
@@ -314,9 +314,9 @@ public class CourseDao {
 	            course.setCourseCategory(rs.getString("course_category"));
 	            course.setCourseInformation(rs.getString("course_information"));
 	            course.setCourseDescription(rs.getString("course_description"));
-	            course.setCourseEnrollmentDate(rs.getDate("course_enrollment_date").toString());
-	            course.setCourseStartDate(rs.getDate("course_start_date").toString());
-	            course.setCourseEndDate(rs.getDate("course_end_date").toString());
+	            course.setCourseEnrollmentDate(rs.getTimestamp("course_enrollment_date").toLocalDateTime());
+	            course.setCourseStartDate(rs.getTimestamp("course_start_date").toLocalDateTime());
+	            course.setCourseEndDate(rs.getTimestamp("course_end_date").toLocalDateTime());
 	            course.setCoursePrice(rs.getString("course_price"));
 	            course.setCreateUserName(rs.getString("user_name"));
 	            course.setCourseStatus(rs.getString("course_status"));

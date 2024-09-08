@@ -1,11 +1,8 @@
 package com.ProFit.dao.coursesCRUD;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import org.hibernate.Session;
 import org.hibernate.query.Query;
-
 import com.ProFit.bean.coursesBean.CourseBean;
 
 public class HcourseDao implements IHcourseDao {
@@ -80,15 +77,15 @@ public class HcourseDao implements IHcourseDao {
 				? oldCourse.getCourseDescription()
 				: newCourse.getCourseDescription());
 
-		oldCourse.setCourseEnrollmentDate(newCourse.getCourseEnrollmentDate() == null || newCourse.getCourseEnrollmentDate().isEmpty()
+		oldCourse.setCourseEnrollmentDate(newCourse.getCourseEnrollmentDate() == null || newCourse.getCourseEnrollmentDate().toString().isEmpty()
 				? oldCourse.getCourseEnrollmentDate()
 				: newCourse.getCourseEnrollmentDate());
 
-		oldCourse.setCourseStartDate(newCourse.getCourseStartDate() == null || newCourse.getCourseStartDate().isEmpty()
+		oldCourse.setCourseStartDate(newCourse.getCourseStartDate() == null || newCourse.getCourseStartDate().toString().isEmpty()
 				? oldCourse.getCourseStartDate()
 				: newCourse.getCourseStartDate());
 
-		oldCourse.setCourseEndDate(newCourse.getCourseEndDate() == null || newCourse.getCourseEndDate().isEmpty()
+		oldCourse.setCourseEndDate(newCourse.getCourseEndDate() == null || newCourse.getCourseEndDate().toString().isEmpty()
 				? oldCourse.getCourseEndDate()
 				: newCourse.getCourseEndDate());
 
@@ -122,8 +119,7 @@ public class HcourseDao implements IHcourseDao {
 	@Override
 	public List<CourseBean> searchCourses(String courseName, String userName, String status, String userId,
 			String category) {
-		List<CourseBean> courses = new ArrayList<>();
-		StringBuilder hql = new StringBuilder("SELECT c FROM CourseBean c INNER JOIN c.user u WHERE 1=1");
+		StringBuilder hql = new StringBuilder("SELECT c FROM CourseBean c INNER JOIN c.courseCreater u WHERE 1=1");
 
 		if (courseName != null && !courseName.trim().isEmpty()) {
 			hql.append(" AND c.courseName LIKE :courseName");
@@ -161,8 +157,7 @@ public class HcourseDao implements IHcourseDao {
 		}
 
 		// 執行查詢
-		courses = query.getResultList();
-		return courses;
+		return query.getResultList();
 	}
 
 }

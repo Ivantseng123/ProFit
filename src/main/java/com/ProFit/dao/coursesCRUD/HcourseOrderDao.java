@@ -1,12 +1,9 @@
 package com.ProFit.dao.coursesCRUD;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-
 import org.hibernate.Session;
 import org.hibernate.query.Query;
-
 import com.ProFit.bean.coursesBean.CourseOrderBean;
 
 public class HcourseOrderDao implements IHcourseOrderDao {
@@ -69,7 +66,7 @@ public class HcourseOrderDao implements IHcourseOrderDao {
 				?oldCourseOrder.getStudnt()
 				:newCourseOrder.getStudnt());
 		
-		oldCourseOrder.setCourseOrderPrice(newCourseOrder.getCourseOrderPrice()==null||newCourseOrder.getCourseOrderPrice().isEmpty()
+		oldCourseOrder.setCourseOrderPrice(newCourseOrder.getCourseOrderPrice()==null
 				?oldCourseOrder.getCourseOrderPrice()
 				:newCourseOrder.getCourseOrderPrice());
 		
@@ -98,10 +95,33 @@ public class HcourseOrderDao implements IHcourseOrderDao {
 		return query.list();
 	}
 	
-	// 搜尋課程訂單by 多條件 (未完成)
+	// 搜尋課程訂單by 多條件
 	@Override
-	public List<CourseOrderBean> searchCourseOrders(String courseId) {
-		return null;
+	public List<CourseOrderBean> searchCourseOrders(String courseId,String studentId,String status) {
+		StringBuilder hql = new StringBuilder("from CourseOrderBean CO WHERE 1=1");
+		
+		if(courseId !=null && !courseId.trim().isEmpty()) {
+			hql.append(" AND courseId LIKE :courseId");
+		}
+		if(studentId != null && !studentId.trim().isEmpty()) {
+			hql.append(" AND studentId LIKE :studentId");
+		}
+		if(status != null && !status.trim().isEmpty()) {
+			hql.append(" AND status = :status");
+		}
+		
+		Query<CourseOrderBean> query = session.createQuery(hql.toString(),CourseOrderBean.class);
+		if(courseId !=null && !courseId.trim().isEmpty()) {
+			query.setParameter("courseId", "%"+courseId+"%");
+		}
+		if(studentId != null && !studentId.trim().isEmpty()) {
+			query.setParameter("studentId", "%"+studentId+"%");
+		}
+		if(status != null && !status.trim().isEmpty()) {
+			query.setParameter("status","%"+status+"%");
+		}
+		
+		return query.getResultList();
 	}
 
 }

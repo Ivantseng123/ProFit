@@ -2,6 +2,8 @@ package com.ProFit.controller.courses;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import com.ProFit.bean.coursesBean.CourseBean;
 import com.ProFit.dao.coursesCRUD.CourseDao;
@@ -17,7 +19,9 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet("/UpdateServlet")
 public class UpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
+	private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	
 	public UpdateServlet() {
 		super();
 	}
@@ -33,9 +37,15 @@ public class UpdateServlet extends HttpServlet {
 		String courseCreateUserId = request.getParameter("courseCreateUserId");
 		String courseInformation =request.getParameter("courseInformation");
 		String courseDescription = request.getParameter("courseDescription");
-		String courseEnrollmentDate = request.getParameter("courseEnrollmentDate");
-		String courseStartDate = request.getParameter("courseStartDate");
-		String courseEndDate = request.getParameter("courseEndDate");
+		// 獲取日期時間並轉換成 LocalDateTime
+        String enrollmentDateString = request.getParameter("courseEnrollmentDate");
+        LocalDateTime courseEnrollmentDate = enrollmentDateString != null ? LocalDateTime.parse(enrollmentDateString, formatter) : null;
+
+        String startDateString = request.getParameter("courseStartDate");
+        LocalDateTime courseStartDate = startDateString != null ? LocalDateTime.parse(startDateString, formatter) : null;
+
+        String endDateString = request.getParameter("courseEndDate");
+        LocalDateTime courseEndDate = endDateString != null ? LocalDateTime.parse(endDateString, formatter) : null;
 		String coursePrice = request.getParameter("coursePrice");
 		String courseStatus = request.getParameter("courseStatus");
 

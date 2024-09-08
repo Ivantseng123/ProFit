@@ -34,7 +34,7 @@ public class CourseOrderBean implements java.io.Serializable {
 	private Users student;
 	
 	@Column(name="course_order_price")
-	private String courseOrderPrice;
+	private Integer courseOrderPrice;
 	
 	@Column(name="course_order_create_date")
 	private LocalDateTime courseOrderCreateDate;
@@ -49,7 +49,7 @@ public class CourseOrderBean implements java.io.Serializable {
 		super();
 	}
 
-	public CourseOrderBean(String courseOrderId, String courseId, String studentId, String courseOrderPrice,
+	public CourseOrderBean(String courseOrderId, String courseId, String studentId, Integer courseOrderPrice,
 			LocalDateTime courseOrderCreateDate,String courseOrderRemark,String courseOrderStatus) {
 		super();
 		this.courseOrderId = courseOrderId;
@@ -115,11 +115,11 @@ public class CourseOrderBean implements java.io.Serializable {
 		this.studentId = studentId;
 	}
 
-	public String getCourseOrderPrice() {
+	public Integer getCourseOrderPrice() {
 		return courseOrderPrice;
 	}
 
-	public void setCourseOrderPrice(String courseOrderPrice) {
+	public void setCourseOrderPrice(Integer courseOrderPrice) {
 		this.courseOrderPrice = courseOrderPrice;
 	}
 
