@@ -46,7 +46,7 @@ $('#searchBtn').click(function() {
         		                    <tr>
         	                        <td class="result-courseId" name="courseId">${searchCoursesJson.courseId}</td>
         	                        <td class="result-courseName" name="courseName">${searchCoursesJson.courseName}</td>
-									<td class="">${searchCoursesJson.createUserName}</td>
+									<td>${searchCoursesJson.createUserName}</td>
         	                        <td>${searchCoursesJson.courseDescription}</td>
         	                        <td>${searchCoursesJson.coursePrice}</td>
         	                        <td><span class="status">${searchCoursesJson.courseStatus}</span></td>
