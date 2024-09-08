@@ -23,5 +23,9 @@
 		<mapping class="com.ProFit.bean.coursesBean.CourseLessonBean"/>
 		<mapping class="com.ProFit.bean.coursesBean.CourseOrderBean"/>
 		
+		<mapping class="com.ProFit.bean.usersBean.Users"/>
+		
+		
+		
 	</session-factory>
 </hibernate-configuration> 
