@@ -1,9 +1,9 @@
 package com.ProFit.dao.coursesCRUD;
 
+import java.time.LocalDateTime;
 import java.util.List;
-
 import org.hibernate.Session;
-
+import org.hibernate.query.Query;
 import com.ProFit.bean.coursesBean.CourseOrderBean;
 
 public class HcourseOrderDao implements IHcourseOrderDao {
@@ -18,7 +18,7 @@ public class HcourseOrderDao implements IHcourseOrderDao {
 	@Override
 	public CourseOrderBean insertCourseOrder(CourseOrderBean courseOrder) {
 		//查詢當前最大值的數值部分
-		String hql = "SELECT MAX(CAST(SUBSTRING(courseOrder.courseOrderId,2) AS int)) FROM CourseOrderBean courseOrder";
+		String hql = "SELECT MAX(CAST(SUBSTRING(co.courseOrderId,3) AS int)) FROM CourseOrderBean co";
 		Integer maxCourseOrderIdNumber = (Integer)session.createQuery(hql,Integer.class).uniqueResult();
 		
 		//生成新的course_id
@@ -28,6 +28,8 @@ public class HcourseOrderDao implements IHcourseOrderDao {
 		
 		//設置生成的courseOrderId 到 courseOrderBean中
 		courseOrder.setCourseOrderId(newCourseOrderId);
+		
+		courseOrder.setCourseOrderCreateDate(LocalDateTime.now());
 		
 		//保存課程
 		session.persist(courseOrder);
@@ -56,8 +58,27 @@ public class HcourseOrderDao implements IHcourseOrderDao {
 		}
 		
 		// 對比新舊對象的屬性值
-//		oldCourseOrder.set
+		oldCourseOrder.setCourse(newCourseOrder.getCourse()==null || newCourseOrder.getCourse().getCourseId() == null || newCourseOrder.getCourse().getCourseId().isEmpty()
+				?oldCourseOrder.getCourse()
+				:newCourseOrder.getCourse());
 		
+		oldCourseOrder.setStudnt(newCourseOrder.getStudnt()==null || newCourseOrder.getStudnt().getUser_id() ==null || newCourseOrder.getStudnt().getUser_id()==0
+				?oldCourseOrder.getStudnt()
+				:newCourseOrder.getStudnt());
+		
+		oldCourseOrder.setCourseOrderPrice(newCourseOrder.getCourseOrderPrice()==null
+				?oldCourseOrder.getCourseOrderPrice()
+				:newCourseOrder.getCourseOrderPrice());
+		
+		oldCourseOrder.setCourseOrderRemark(newCourseOrder.getCourseOrderRemark()==null||newCourseOrder.getCourseOrderRemark().isEmpty()
+				?oldCourseOrder.getCourseOrderRemark()
+				:newCourseOrder.getCourseOrderRemark());
+		
+		oldCourseOrder.setCourseOrderStatus(newCourseOrder.getCourseOrderStatus()==null||newCourseOrder.getCourseOrderStatus().isEmpty()
+				?oldCourseOrder.getCourseOrderStatus()
+				:newCourseOrder.getCourseOrderStatus());
+			
+		session.merge(oldCourseOrder);
 		return true;
 	}
 
@@ -70,13 +91,37 @@ public class HcourseOrderDao implements IHcourseOrderDao {
 	// 搜尋全部課程訂單
 	@Override
 	public List<CourseOrderBean> searchCourseOrders() {
-		return null;
+		Query<CourseOrderBean> query = session.createQuery("from CourseOrderBean",CourseOrderBean.class);
+		return query.list();
 	}
 	
 	// 搜尋課程訂單by 多條件
 	@Override
-	public List<CourseOrderBean> searchCourseOrders(String courseId) {
-		return null;
+	public List<CourseOrderBean> searchCourseOrders(String courseId,String studentId,String status) {
+		StringBuilder hql = new StringBuilder("from CourseOrderBean CO WHERE 1=1");
+		
+		if(courseId !=null && !courseId.trim().isEmpty()) {
+			hql.append(" AND courseId LIKE :courseId");
+		}
+		if(studentId != null && !studentId.trim().isEmpty()) {
+			hql.append(" AND studentId LIKE :studentId");
+		}
+		if(status != null && !status.trim().isEmpty()) {
+			hql.append(" AND status = :status");
+		}
+		
+		Query<CourseOrderBean> query = session.createQuery(hql.toString(),CourseOrderBean.class);
+		if(courseId !=null && !courseId.trim().isEmpty()) {
+			query.setParameter("courseId", "%"+courseId+"%");
+		}
+		if(studentId != null && !studentId.trim().isEmpty()) {
+			query.setParameter("studentId", "%"+studentId+"%");
+		}
+		if(status != null && !status.trim().isEmpty()) {
+			query.setParameter("status","%"+status+"%");
+		}
+		
+		return query.getResultList();
 	}
 
 }

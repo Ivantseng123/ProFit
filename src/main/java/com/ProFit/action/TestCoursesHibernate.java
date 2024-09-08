@@ -3,8 +3,6 @@ package com.ProFit.action;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-
-import org.apache.catalina.core.FrameworkListener;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import com.ProFit.bean.coursesBean.CourseBean;

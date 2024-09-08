@@ -1,5 +1,6 @@
 package com.ProFit.bean.coursesBean;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.ProFit.bean.MajorCategoryBeam;
@@ -55,13 +56,13 @@ public class CourseBean implements java.io.Serializable {
 	private String courseDescription;
 
 	@Column(name="course_enrollment_date")
-	private String courseEnrollmentDate;
+	private LocalDateTime courseEnrollmentDate;
 
 	@Column(name="course_start_date")
-	private String courseStartDate;
+	private LocalDateTime courseStartDate;
 
 	@Column(name="course_end_date")
-	private String courseEndDate;
+	private LocalDateTime courseEndDate;
 
 	@Column(name="course_price")
 	private String coursePrice;
@@ -75,8 +76,8 @@ public class CourseBean implements java.io.Serializable {
 	
 	
 	public CourseBean(String courseId, String courseName, String courseCreateUserId, String courseCategory,
-			String courseInformation, String courseDescription, String courseEnrollmentDate, String courseStartDate,
-			String courseEndDate, String coursePrice, String courseStatus) {
+			String courseInformation, String courseDescription, LocalDateTime courseEnrollmentDate, LocalDateTime courseStartDate,
+			LocalDateTime courseEndDate, String coursePrice, String courseStatus) {
 		super();
 		this.courseId = courseId;
 		this.courseName = courseName;
@@ -94,7 +95,7 @@ public class CourseBean implements java.io.Serializable {
 	
 	// for create course
 	public CourseBean(String courseName, String courseCreateUserId, String courseCategory, String courseInformation,
-			String courseDescription, String courseEnrollmentDate, String courseStartDate, String courseEndDate,
+			String courseDescription, LocalDateTime courseEnrollmentDate, LocalDateTime courseStartDate, LocalDateTime courseEndDate,
 			String coursePrice, String courseStatus) {
 		super();
 		this.courseName = courseName;
@@ -190,23 +191,23 @@ public class CourseBean implements java.io.Serializable {
 	public void setCourseDescription(String courseDescription) {
 		this.courseDescription = courseDescription;
 	}
-	public String getCourseEnrollmentDate() {
+	public LocalDateTime getCourseEnrollmentDate() {
 		return courseEnrollmentDate;
 	}
 
-	public void setCourseEnrollmentDate(String courseEnrollmentDate) {
+	public void setCourseEnrollmentDate(LocalDateTime courseEnrollmentDate) {
 		this.courseEnrollmentDate = courseEnrollmentDate;
 	}
-	public String getCourseStartDate() {
+	public LocalDateTime getCourseStartDate() {
 		return courseStartDate;
 	}
-	public void setCourseStartDate(String courseStartDate) {
+	public void setCourseStartDate(LocalDateTime courseStartDate) {
 		this.courseStartDate = courseStartDate;
 	}
-	public String getCourseEndDate() {
+	public LocalDateTime getCourseEndDate() {
 		return courseEndDate;
 	}
-	public void setCourseEndDate(String courseEndDate) {
+	public void setCourseEndDate(LocalDateTime courseEndDate) {
 		this.courseEndDate = courseEndDate;
 	}
 	public String getCoursePrice() {

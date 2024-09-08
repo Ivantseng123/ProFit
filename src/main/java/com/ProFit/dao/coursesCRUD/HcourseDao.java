@@ -1,11 +1,8 @@
 package com.ProFit.dao.coursesCRUD;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import org.hibernate.Session;
 import org.hibernate.query.Query;
-
 import com.ProFit.bean.coursesBean.CourseBean;
 
 public class HcourseDao implements IHcourseDao {
@@ -60,45 +57,41 @@ public class HcourseDao implements IHcourseDao {
 		}
 
 		// 對比新舊對象的屬性值，並進行更新操作
-		oldCourse.setCourseName(
-				newCourse.getCourseName() == null || newCourse.getCourseName().isEmpty() ? oldCourse.getCourseName()
-						: newCourse.getCourseName());
+		oldCourse.setCourseName(newCourse.getCourseName() == null || newCourse.getCourseName().isEmpty() 
+				? oldCourse.getCourseName()
+				: newCourse.getCourseName());
 
-		oldCourse.setCourseCreateUserId(
-				newCourse.getCourseCreateUserId() == null || newCourse.getCourseCreateUserId().isEmpty()
-						? oldCourse.getCourseCreateUserId()
-						: newCourse.getCourseCreateUserId());
+		oldCourse.setCourseCreateUserId(newCourse.getCourseCreateUserId() == null || newCourse.getCourseCreateUserId().isEmpty()
+				? oldCourse.getCourseCreateUserId()
+				: newCourse.getCourseCreateUserId());
 
 		oldCourse.setCourseCategory(newCourse.getCourseCategory() == null || newCourse.getCourseCategory().isEmpty()
 				? oldCourse.getCourseCategory()
 				: newCourse.getCourseCategory());
 
-		oldCourse.setCourseInformation(
-				newCourse.getCourseInformation() == null || newCourse.getCourseInformation().isEmpty()
-						? oldCourse.getCourseInformation()
-						: newCourse.getCourseInformation());
+		oldCourse.setCourseInformation(newCourse.getCourseInformation() == null || newCourse.getCourseInformation().isEmpty()
+				? oldCourse.getCourseInformation()
+				: newCourse.getCourseInformation());
 
-		oldCourse.setCourseDescription(
-				newCourse.getCourseDescription() == null || newCourse.getCourseDescription().isEmpty()
-						? oldCourse.getCourseDescription()
-						: newCourse.getCourseDescription());
+		oldCourse.setCourseDescription(newCourse.getCourseDescription() == null || newCourse.getCourseDescription().isEmpty()
+				? oldCourse.getCourseDescription()
+				: newCourse.getCourseDescription());
 
-		oldCourse.setCourseEnrollmentDate(
-				newCourse.getCourseEnrollmentDate() == null || newCourse.getCourseEnrollmentDate().isEmpty()
-						? oldCourse.getCourseEnrollmentDate()
-						: newCourse.getCourseEnrollmentDate());
+		oldCourse.setCourseEnrollmentDate(newCourse.getCourseEnrollmentDate() == null || newCourse.getCourseEnrollmentDate().toString().isEmpty()
+				? oldCourse.getCourseEnrollmentDate()
+				: newCourse.getCourseEnrollmentDate());
 
-		oldCourse.setCourseStartDate(newCourse.getCourseStartDate() == null || newCourse.getCourseStartDate().isEmpty()
+		oldCourse.setCourseStartDate(newCourse.getCourseStartDate() == null || newCourse.getCourseStartDate().toString().isEmpty()
 				? oldCourse.getCourseStartDate()
 				: newCourse.getCourseStartDate());
 
-		oldCourse.setCourseEndDate(newCourse.getCourseEndDate() == null || newCourse.getCourseEndDate().isEmpty()
+		oldCourse.setCourseEndDate(newCourse.getCourseEndDate() == null || newCourse.getCourseEndDate().toString().isEmpty()
 				? oldCourse.getCourseEndDate()
 				: newCourse.getCourseEndDate());
 
-		oldCourse.setCoursePrice(
-				newCourse.getCoursePrice() == null || newCourse.getCoursePrice().isEmpty() ? oldCourse.getCoursePrice()
-						: newCourse.getCoursePrice());
+		oldCourse.setCoursePrice(newCourse.getCoursePrice() == null || newCourse.getCoursePrice().isEmpty() 
+				? oldCourse.getCoursePrice()
+				: newCourse.getCoursePrice());
 
 		oldCourse.setCourseStatus(newCourse.getCourseStatus() == null || newCourse.getCourseStatus().isEmpty()
 				? oldCourse.getCourseStatus()
@@ -118,7 +111,7 @@ public class HcourseDao implements IHcourseDao {
 	// 查詢全部
 	@Override
 	public List<CourseBean> searchCourses() {
-		Query<CourseBean> query = session.createQuery("from Courses", CourseBean.class);
+		Query<CourseBean> query = session.createQuery("from CourseBean", CourseBean.class);
 		return query.list();
 	}
 
@@ -126,8 +119,7 @@ public class HcourseDao implements IHcourseDao {
 	@Override
 	public List<CourseBean> searchCourses(String courseName, String userName, String status, String userId,
 			String category) {
-		List<CourseBean> courses = new ArrayList<>();
-		StringBuilder hql = new StringBuilder("SELECT c FROM CourseBean c INNER JOIN c.user u WHERE 1=1");
+		StringBuilder hql = new StringBuilder("SELECT c FROM CourseBean c INNER JOIN c.courseCreater u WHERE 1=1");
 
 		if (courseName != null && !courseName.trim().isEmpty()) {
 			hql.append(" AND c.courseName LIKE :courseName");
@@ -165,8 +157,7 @@ public class HcourseDao implements IHcourseDao {
 		}
 
 		// 執行查詢
-		courses = query.getResultList();
-		return courses;
+		return query.getResultList();
 	}
 
 }
