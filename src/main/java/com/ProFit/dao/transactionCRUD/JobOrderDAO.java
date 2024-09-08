@@ -1,260 +1,113 @@
 package com.ProFit.dao.transactionCRUD;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import com.ProFit.bean.JobOrderBean;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
-
-import com.ProFit.bean.JobOrderBean;
-
 public class JobOrderDAO {
-    private DataSource dataSource;
 
-    public JobOrderDAO() {
-        try {
-            Context context = new InitialContext();
-            this.dataSource = (DataSource) context.lookup("java:/comp/env/jdbc/ProFitDB");
-        } catch (NamingException e) {
-            e.printStackTrace();
-        }
-    }
+    private Session session;
 
-    private Connection getConnection() throws SQLException {
-        return dataSource.getConnection();
+    public JobOrderDAO(Session session) {
+        this.session = session;
     }
 
     public List<JobOrderBean> getAllOrders() {
-        List<JobOrderBean> orders = new ArrayList<>();
-        String sql = "SELECT * FROM job_orders ORDER BY job_order_date DESC"; // 按訂單日期降序排列
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
-
-            while (rs.next()) {
-                orders.add(new JobOrderBean(
-                        rs.getString("job_orders_id"),
-                        rs.getInt("job_application_id"),
-                        rs.getTimestamp("job_order_date"),
-                        rs.getString("job_order_status"),
-                        rs.getString("job_notes"),
-                        rs.getInt("total_amount")
-                ));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return orders;
+        Query<JobOrderBean> query = session.createQuery("from JobOrderBean order by jobOrderDate desc", JobOrderBean.class);
+        return query.list();
     }
 
     public boolean insertOrder(JobOrderBean order) {
-        String sql = "INSERT INTO job_orders (job_orders_id, job_application_id, job_order_date, job_order_status, job_notes, total_amount) VALUES (?, ?, ?, ?, ?, ?)";
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            String jobOrdersId = UUID.randomUUID().toString();
-            stmt.setString(1, jobOrdersId);
-
-            stmt.setInt(2, order.getJobApplicationId());
-            stmt.setTimestamp(3, order.getJobOrderDate());
-            stmt.setString(4, order.getJobOrderStatus());
-            stmt.setString(5, order.getJobNotes());
-            stmt.setInt(6, order.getTotalAmount());
-
-            return stmt.executeUpdate() > 0;
-        } catch (SQLException e) {
+        Transaction tx = session.beginTransaction();
+        try {
+            order.setJobOrdersId(UUID.randomUUID().toString());  // 自動生成UUID作為主鍵
+            order.setJobOrderDate(new Timestamp(System.currentTimeMillis()));  // 訂單日期
+            session.persist(order);
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
             e.printStackTrace();
+            return false;
         }
-        return false;
     }
 
     public boolean updateOrder(JobOrderBean order) {
-        String sql = "UPDATE job_orders SET job_application_id = ?, job_order_date = ?, job_order_status = ?, job_notes = ?, total_amount = ? WHERE job_orders_id = ?";
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, order.getJobApplicationId());
-            stmt.setTimestamp(2, order.getJobOrderDate());
-            stmt.setString(3, order.getJobOrderStatus());
-            stmt.setString(4, order.getJobNotes());
-            stmt.setInt(5, order.getTotalAmount());
-            stmt.setString(6, order.getJobOrdersId());
-
-            return stmt.executeUpdate() > 0;
-        } catch (SQLException e) {
+        Transaction tx = session.beginTransaction();
+        try {
+            session.update(order);
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
             e.printStackTrace();
+            return false;
         }
-        return false;
     }
 
     public boolean deleteOrder(String jobOrdersId) {
-        String sql = "DELETE FROM job_orders WHERE job_orders_id = ?";
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, jobOrdersId);
-            return stmt.executeUpdate() > 0;
-        } catch (SQLException e) {
+        Transaction tx = session.beginTransaction();
+        try {
+            JobOrderBean order = session.get(JobOrderBean.class, jobOrdersId);
+            if (order != null) {
+                session.remove(order);
+                tx.commit();
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
             e.printStackTrace();
+            return false;
         }
-        return false;
     }
 
     public JobOrderBean getOrderById(String jobOrdersId) {
-        String sql = "SELECT * FROM job_orders WHERE job_orders_id = ?";
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, jobOrdersId);
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                return new JobOrderBean(
-                        rs.getString("job_orders_id"),
-                        rs.getInt("job_application_id"),
-                        rs.getTimestamp("job_order_date"),
-                        rs.getString("job_order_status"),
-                        rs.getString("job_notes"),
-                        rs.getInt("total_amount")
-                );
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public List<JobOrderBean> searchOrdersByApplicationId(int jobApplicationId) {
-        List<JobOrderBean> orders = new ArrayList<>();
-        String sql = "SELECT * FROM job_orders WHERE job_application_id = ?";
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, jobApplicationId);
-
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                orders.add(new JobOrderBean(
-                        rs.getString("job_orders_id"),
-                        rs.getInt("job_application_id"),
-                        rs.getTimestamp("job_order_date"),
-                        rs.getString("job_order_status"),
-                        rs.getString("job_notes"),
-                        rs.getInt("total_amount")
-                ));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return orders;
-    }
-
-    public List<JobOrderBean> searchOrdersByDate(Timestamp startDate, Timestamp endDate) {
-        List<JobOrderBean> orders = new ArrayList<>();
-        String sql = "SELECT * FROM job_orders WHERE job_order_date BETWEEN ? AND ?";
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setTimestamp(1, startDate);
-            stmt.setTimestamp(2, endDate);
-
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                orders.add(new JobOrderBean(
-                        rs.getString("job_orders_id"),
-                        rs.getInt("job_application_id"),
-                        rs.getTimestamp("job_order_date"),
-                        rs.getString("job_order_status"),
-                        rs.getString("job_notes"),
-                        rs.getInt("total_amount")
-                ));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return orders;
-    }
-
-    public List<JobOrderBean> searchOrdersByStatus(String jobOrderStatus) {
-        List<JobOrderBean> orders = new ArrayList<>();
-        String sql = "SELECT * FROM job_orders WHERE job_order_status = ?";
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, jobOrderStatus);
-
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                orders.add(new JobOrderBean(
-                        rs.getString("job_orders_id"),
-                        rs.getInt("job_application_id"),
-                        rs.getTimestamp("job_order_date"),
-                        rs.getString("job_order_status"),
-                        rs.getString("job_notes"),
-                        rs.getInt("total_amount")
-                ));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return orders;
+        return session.get(JobOrderBean.class, jobOrdersId);
     }
 
     public List<JobOrderBean> searchOrdersByCriteria(Integer jobApplicationId, Timestamp startDate, Timestamp endDate, String jobOrderStatus) {
-        List<JobOrderBean> orders = new ArrayList<>();
-        StringBuilder sql = new StringBuilder("SELECT * FROM job_orders WHERE 1=1");
+        StringBuilder hql = new StringBuilder("from JobOrderBean where 1=1");
 
         if (jobApplicationId != null) {
-            sql.append(" AND job_application_id = ?");
+            hql.append(" and jobApplicationId = :jobApplicationId");
         }
         if (startDate != null) {
-            sql.append(" AND job_order_date >= ?");
+            hql.append(" and jobOrderDate >= :startDate");
         }
         if (endDate != null) {
-            sql.append(" AND job_order_date <= ?");
+            hql.append(" and jobOrderDate <= :endDate");
         }
         if (jobOrderStatus != null && !jobOrderStatus.isEmpty()) {
-            sql.append(" AND job_order_status = ?");
+            hql.append(" and jobOrderStatus = :jobOrderStatus");
         }
 
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql.toString())) {
-            int index = 1;
-            if (jobApplicationId != null) {
-                stmt.setInt(index++, jobApplicationId);
-            }
-            if (startDate != null) {
-                stmt.setTimestamp(index++, startDate);
-            }
-            if (endDate != null) {
-                stmt.setTimestamp(index++, endDate);
-            }
-            if (jobOrderStatus != null && !jobOrderStatus.isEmpty()) {
-                stmt.setString(index++, jobOrderStatus);
-            }
+        Query<JobOrderBean> query = session.createQuery(hql.toString(), JobOrderBean.class);
 
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                orders.add(new JobOrderBean(
-                        rs.getString("job_orders_id"),
-                        rs.getInt("job_application_id"),
-                        rs.getTimestamp("job_order_date"),
-                        rs.getString("job_order_status"),
-                        rs.getString("job_notes"),
-                        rs.getInt("total_amount")
-                ));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if (jobApplicationId != null) {
+            query.setParameter("jobApplicationId", jobApplicationId);
         }
-        return orders;
+        if (startDate != null) {
+            query.setParameter("startDate", startDate);
+        }
+        if (endDate != null) {
+            query.setParameter("endDate", endDate);
+        }
+        if (jobOrderStatus != null && !jobOrderStatus.isEmpty()) {
+            query.setParameter("jobOrderStatus", jobOrderStatus);
+        }
+
+        return query.list();
     }
 }
