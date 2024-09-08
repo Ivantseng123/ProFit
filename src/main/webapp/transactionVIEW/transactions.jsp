@@ -18,7 +18,9 @@
         <div class="action-buttons">
             <a href="${pageContext.request.contextPath}/transactionVIEW/jobOrders.jsp" class="btn-custom view">進入訂單管理</a>
   			<br>
-            <a href="${pageContext.request.contextPath}/transactionVIEW/userTransactions.jsp" class="btn-custom edit">進入用戶交易管理</a>     
+            <a href="${pageContext.request.contextPath}/transactionVIEW/userTransactions.jsp" class="btn-custom edit">進入用戶交易管理</a>
+            <br>
+            <a href="${pageContext.request.contextPath}/transactionVIEW/invoices.jsp" class="btn-custom edit">進入用戶交易管理</a>   
         </div>
     </main>
 
