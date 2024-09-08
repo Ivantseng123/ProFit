@@ -1,5 +1,7 @@
 package com.ProFit.bean.coursesBean;
 
+import java.time.LocalDateTime;
+
 import com.ProFit.bean.usersBean.Users;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,25 +19,25 @@ public class CourseOrderBean implements java.io.Serializable {
 	@Id @Column(name="course_order_id")
 	private String courseOrderId;
 	
-	@Column(name="course_id")
+	@Column(name="course_id",insertable = false,updatable = false)
 	private String courseId;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="course_id",insertable = false,updatable = false)
+	@JoinColumn(name="course_id")
 	private CourseBean course;
 	
-	@Column(name="student_id")
+	@Column(name="student_id",insertable = false,updatable = false)
 	private String studentId;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="student_id",insertable = false,updatable = false)
-	private Users studnt;
+	@JoinColumn(name="student_id")
+	private Users student;
 	
 	@Column(name="course_order_price")
 	private String courseOrderPrice;
 	
 	@Column(name="course_order_create_date")
-	private String courseOrderCreateDate;
+	private LocalDateTime courseOrderCreateDate;
 	
 	@Column(name="course_order_remark")
 	private String courseOrderRemark;
@@ -48,7 +50,7 @@ public class CourseOrderBean implements java.io.Serializable {
 	}
 
 	public CourseOrderBean(String courseOrderId, String courseId, String studentId, String courseOrderPrice,
-			String courseOrderCreateDate,String courseOrderRemark,String courseOrderStatus) {
+			LocalDateTime courseOrderCreateDate,String courseOrderRemark,String courseOrderStatus) {
 		super();
 		this.courseOrderId = courseOrderId;
 		this.courseId = courseId;
@@ -82,11 +84,11 @@ public class CourseOrderBean implements java.io.Serializable {
 	}
 
 	public Users getStudnt() {
-		return studnt;
+		return student;
 	}
 
-	public void setStudnt(Users studnt) {
-		this.studnt = studnt;
+	public void setStudnt(Users student) {
+		this.student = student;
 	}
 
 	public String getCourseOrderId() {
@@ -121,11 +123,11 @@ public class CourseOrderBean implements java.io.Serializable {
 		this.courseOrderPrice = courseOrderPrice;
 	}
 
-	public String getCourseOrderCreateDate() {
+	public LocalDateTime getCourseOrderCreateDate() {
 		return courseOrderCreateDate;
 	}
 
-	public void setCourseOrderCreateDate(String courseOrderCreateDate) {
+	public void setCourseOrderCreateDate(LocalDateTime courseOrderCreateDate) {
 		this.courseOrderCreateDate = courseOrderCreateDate;
 	}
 

@@ -60,33 +60,29 @@ public class HcourseDao implements IHcourseDao {
 		}
 
 		// 對比新舊對象的屬性值，並進行更新操作
-		oldCourse.setCourseName(
-				newCourse.getCourseName() == null || newCourse.getCourseName().isEmpty() ? oldCourse.getCourseName()
-						: newCourse.getCourseName());
+		oldCourse.setCourseName(newCourse.getCourseName() == null || newCourse.getCourseName().isEmpty() 
+				? oldCourse.getCourseName()
+				: newCourse.getCourseName());
 
-		oldCourse.setCourseCreateUserId(
-				newCourse.getCourseCreateUserId() == null || newCourse.getCourseCreateUserId().isEmpty()
-						? oldCourse.getCourseCreateUserId()
-						: newCourse.getCourseCreateUserId());
+		oldCourse.setCourseCreateUserId(newCourse.getCourseCreateUserId() == null || newCourse.getCourseCreateUserId().isEmpty()
+				? oldCourse.getCourseCreateUserId()
+				: newCourse.getCourseCreateUserId());
 
 		oldCourse.setCourseCategory(newCourse.getCourseCategory() == null || newCourse.getCourseCategory().isEmpty()
 				? oldCourse.getCourseCategory()
 				: newCourse.getCourseCategory());
 
-		oldCourse.setCourseInformation(
-				newCourse.getCourseInformation() == null || newCourse.getCourseInformation().isEmpty()
-						? oldCourse.getCourseInformation()
-						: newCourse.getCourseInformation());
+		oldCourse.setCourseInformation(newCourse.getCourseInformation() == null || newCourse.getCourseInformation().isEmpty()
+				? oldCourse.getCourseInformation()
+				: newCourse.getCourseInformation());
 
-		oldCourse.setCourseDescription(
-				newCourse.getCourseDescription() == null || newCourse.getCourseDescription().isEmpty()
-						? oldCourse.getCourseDescription()
-						: newCourse.getCourseDescription());
+		oldCourse.setCourseDescription(newCourse.getCourseDescription() == null || newCourse.getCourseDescription().isEmpty()
+				? oldCourse.getCourseDescription()
+				: newCourse.getCourseDescription());
 
-		oldCourse.setCourseEnrollmentDate(
-				newCourse.getCourseEnrollmentDate() == null || newCourse.getCourseEnrollmentDate().isEmpty()
-						? oldCourse.getCourseEnrollmentDate()
-						: newCourse.getCourseEnrollmentDate());
+		oldCourse.setCourseEnrollmentDate(newCourse.getCourseEnrollmentDate() == null || newCourse.getCourseEnrollmentDate().isEmpty()
+				? oldCourse.getCourseEnrollmentDate()
+				: newCourse.getCourseEnrollmentDate());
 
 		oldCourse.setCourseStartDate(newCourse.getCourseStartDate() == null || newCourse.getCourseStartDate().isEmpty()
 				? oldCourse.getCourseStartDate()
@@ -96,9 +92,9 @@ public class HcourseDao implements IHcourseDao {
 				? oldCourse.getCourseEndDate()
 				: newCourse.getCourseEndDate());
 
-		oldCourse.setCoursePrice(
-				newCourse.getCoursePrice() == null || newCourse.getCoursePrice().isEmpty() ? oldCourse.getCoursePrice()
-						: newCourse.getCoursePrice());
+		oldCourse.setCoursePrice(newCourse.getCoursePrice() == null || newCourse.getCoursePrice().isEmpty() 
+				? oldCourse.getCoursePrice()
+				: newCourse.getCoursePrice());
 
 		oldCourse.setCourseStatus(newCourse.getCourseStatus() == null || newCourse.getCourseStatus().isEmpty()
 				? oldCourse.getCourseStatus()
@@ -118,7 +114,7 @@ public class HcourseDao implements IHcourseDao {
 	// 查詢全部
 	@Override
 	public List<CourseBean> searchCourses() {
-		Query<CourseBean> query = session.createQuery("from Courses", CourseBean.class);
+		Query<CourseBean> query = session.createQuery("from CourseBean", CourseBean.class);
 		return query.list();
 	}
 
