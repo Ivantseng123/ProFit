@@ -2,7 +2,6 @@ package com.ProFit.controller.transactions;
 
 import com.ProFit.bean.JobOrderBean;
 import com.ProFit.dao.transactionCRUD.JobOrderDAO;
-import com.ProFit.util.HibernateUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -21,7 +20,7 @@ public class JobOrderServlet extends HttpServlet {
     private Session session;
 
     public JobOrderServlet() {
-        this.session = HibernateUtil.getSessionFactory().openSession();
+        this.session = com.ProFit.hibernateutil.HibernateUtil.getSessionFactory().openSession();
         this.jobOrderDAO = new JobOrderDAO(session);
     }
 

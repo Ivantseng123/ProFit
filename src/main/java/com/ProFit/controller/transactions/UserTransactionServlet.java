@@ -6,7 +6,6 @@ import java.util.List;
 
 import com.ProFit.bean.UserTransactionBean;
 import com.ProFit.dao.transactionCRUD.UserTransactionDAO;
-import com.ProFit.util.HibernateUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -21,7 +20,7 @@ public class UserTransactionServlet extends HttpServlet {
     private Session session;
 
     public UserTransactionServlet() {
-        this.session = HibernateUtil.getSessionFactory().openSession();
+        this.session = com.ProFit.hibernateutil.HibernateUtil.getSessionFactory().openSession();
         this.userTransactionDAO = new UserTransactionDAO(session);
     }
 

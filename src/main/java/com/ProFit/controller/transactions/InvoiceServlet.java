@@ -2,7 +2,6 @@ package com.ProFit.controller.transactions;
 
 import com.ProFit.bean.InvoiceBean;
 import com.ProFit.dao.transactionCRUD.InvoiceDAO;
-import com.ProFit.util.HibernateUtil;
 import org.hibernate.Session;
 
 import jakarta.servlet.ServletException;
@@ -20,7 +19,7 @@ public class InvoiceServlet extends HttpServlet {
     private Session session;
 
     public InvoiceServlet() {
-        this.session = HibernateUtil.getSessionFactory().openSession();
+        this.session = com.ProFit.hibernateutil.HibernateUtil.getSessionFactory().openSession();
         this.invoiceDAO = new InvoiceDAO(session);
     }
 
