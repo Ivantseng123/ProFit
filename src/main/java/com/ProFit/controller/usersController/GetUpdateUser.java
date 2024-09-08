@@ -2,8 +2,13 @@ package com.ProFit.controller.usersController;
 
 import java.io.IOException;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 import com.ProFit.bean.usersBean.Users;
-import com.ProFit.dao.usersDao.UserDao;
+import com.ProFit.dao.usersDao.IHUserDao;
+import com.ProFit.hibernateutil.HibernateUtil;
+import com.ProFit.dao.usersDao.HUserDao;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -27,11 +32,11 @@ public class GetUpdateUser extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		Integer user_id = Integer.valueOf(request.getParameter("user_id")) ;
-
-		//Users user = new Users();
-		System.out.println(user_id);
-
-		UserDao userDao = new UserDao();
+		
+		SessionFactory factory = HibernateUtil.getSessionFactory();
+		Session session = factory.getCurrentSession();
+		
+		IHUserDao userDao = new HUserDao(session);
 		Users getuser = userDao.getUserInfoByID(user_id);
 
 

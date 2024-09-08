@@ -23,10 +23,10 @@
 				<div class="profile-picture" style="text-align: center;">
 						<c:choose>
    							 <c:when test="${not empty user.user_pictureURL}">
-        						<img src="${pageContext.request.contextPath}/usersVIEW/userupload/${user.user_pictureURL}" alt="Profile Image"/>
+        						<img src="${user.user_pictureURL}" alt="Profile Image"/>
    							 </c:when>
     						<c:otherwise>
-        						<img src="${pageContext.request.contextPath}/usersVIEW/default_user_picture.png" 									alt="Default Profile Image"  />
+        						<img src="https://firebasestorage.googleapis.com/v0/b/profit-e686b.appspot.com/o/userUpload%2Fdefault_user_picture.png?alt=media&token=dd3a8cfa-1a00-48ac-ba30-1f7bb3d783bd" 									alt="Default Profile Image"  />
     						</c:otherwise>
 						</c:choose> 
 				</div>	
