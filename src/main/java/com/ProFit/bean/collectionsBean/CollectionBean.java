@@ -1,4 +1,4 @@
-package com.ProFit.bean;
+package com.ProFit.bean.collectionsBean;
 
 public class CollectionBean implements java.io.Serializable{
 

@@ -1,4 +1,4 @@
-package com.ProFit.bean;
+package com.ProFit.bean.servicesBean;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;

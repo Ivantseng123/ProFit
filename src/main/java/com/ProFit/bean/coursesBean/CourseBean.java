@@ -3,7 +3,7 @@ package com.ProFit.bean.coursesBean;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.ProFit.bean.MajorCategoryBeam;
+import com.ProFit.bean.majorsBean.MajorCategoryBeam;
 import com.ProFit.bean.usersBean.Users;
 
 import jakarta.persistence.CascadeType;

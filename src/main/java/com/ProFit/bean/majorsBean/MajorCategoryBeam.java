@@ -1,4 +1,4 @@
-package com.ProFit.bean;
+package com.ProFit.bean.majorsBean;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
