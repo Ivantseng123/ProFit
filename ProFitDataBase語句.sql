@@ -55,44 +55,41 @@ CREATE TABLE password_reset_tokens(
 );
 
 
--- �Ы�jobs¾�ʪ���
 CREATE TABLE jobs (
-    jobs_id INT PRIMARY KEY IDENTITY(1,1), -- ¾�ʪA��ID�APK�A�۰ʻ��W
-    jobs_users_id INT, -- ¾�ʪA�ȷ|��ID�AFK
-    jobs_title NVARCHAR(100), -- ¾�ʼ��D
-    jobs_posting_date DATETIME, -- ¾�ʵo�����
-    jobs_application_deadline DATETIME, -- ¾�ʥӽкI����
-    jobs_description NVARCHAR(MAX), -- ¾�ʴy�z
-    jobs_status TINYINT, -- ¾�ʪ��A
-    jobs_required_skills NVARCHAR(500), -- ¾�ʩһݧޯ�
-    jobs_location NVARCHAR(100), -- ¾�ʤu�@�a�I
-    jobs_max_salary INT, -- ¾�ʳ̰��~��
-    jobs_min_salary INT, -- ¾�ʳ̧C�~��
-    jobs_worktime TIME, -- ¾�ʤu��
-    jobs_number_of_openings INT, -- ¾�ʶ}��ƶq
-    FOREIGN KEY (jobs_users_id) REFERENCES users(user_id) -- �~������A�s�bmembers��
+    jobs_id INT PRIMARY KEY IDENTITY(1,1), 
+    jobs_users_id INT, 
+    jobs_title NVARCHAR(100), 
+    jobs_posting_date DATETIME, 
+    jobs_application_deadline DATETIME, 
+    jobs_description NVARCHAR(MAX), 
+    jobs_status TINYINT, 
+    jobs_required_skills NVARCHAR(500), 
+    jobs_location NVARCHAR(100), 
+    jobs_max_salary INT, 
+    jobs_min_salary INT, 
+    jobs_worktime TIME,
+    jobs_number_of_openings INT,
+    FOREIGN KEY (jobs_users_id) REFERENCES users(user_id)
 );
 
--- �Ы�jobs_application�ӽЪ���
 CREATE TABLE jobs_application (
-    jobs_application_id INT PRIMARY KEY IDENTITY(1,1), -- ¾�ʥӽ�ID�APK�A
-    jobs_application_posting_id INT, -- �ӽ�¾�ʪA��ID�AFK
-    jobs_application_member_id INT, -- �ӽз|��ID�AFK
-    jobs_application_date DATETIME, -- �ӽФ��
-    jobs_application_status TINYINT, -- �ӽЪ��A
-    jobs_application_contract VARBINARY(MAX), -- �ӽЦX��
-    FOREIGN KEY (jobs_application_posting_id) REFERENCES jobs(jobs_id), -- �~�����
-    FOREIGN KEY (jobs_application_member_id) REFERENCES users(user_id ) -- �~������A�s�bresumes��
+    jobs_application_id INT PRIMARY KEY IDENTITY(1,1),
+    jobs_application_posting_id INT,
+    jobs_application_member_id INT,
+    jobs_application_date DATETIME,
+    jobs_application_status TINYINT, 
+    jobs_application_contract VARBINARY(MAX), 
+    FOREIGN KEY (jobs_application_posting_id) REFERENCES jobs(jobs_id), 
+    FOREIGN KEY (jobs_application_member_id) REFERENCES users(user_id )
 );
 
--- �Ы�jobs_application_project¾�ʭq�����
 CREATE TABLE jobs_application_project (
-    jobs_application_project_id INT PRIMARY KEY IDENTITY(1,1), -- ¾�ʭq��ӽ�ID�APK
-    jobs_application_id INT, -- ¾��ID�AFK
-    jobs_application_status TINYINT, -- �ӽЭq�檬�A
-    jobs_project VARCHAR(50), -- �q��Ƶ�
+    jobs_application_project_id INT PRIMARY KEY IDENTITY(1,1),
+    jobs_application_id INT,
+    jobs_application_status TINYINT,
+    jobs_project VARCHAR(50),
     jobs_amount INT,
-    FOREIGN KEY (jobs_application_id) REFERENCES jobs_application(jobs_application_id) -- �~�����
+    FOREIGN KEY (jobs_application_id) REFERENCES jobs_application(jobs_application_id) 
 );
 
     -- 專業技能的分類, 一個技能只能屬於一種分類
@@ -210,59 +207,66 @@ CREATE TABLE event_order (
 
 
 -- courses table
-CREATE TABLE courses(
-    course_id NVARCHAR(50) PRIMARY KEY,
-    course_name NVARCHAR(50) NOT NULL,
-	course_create_user_id INT NOT NULL,
-    course_category INT NOT NULL,
-    course_information NVARCHAR(255),
-    course_description TEXT,
-    course_enrollment_date DATE NOT NULL,
-    course_start_date DATE,
-    course_end_date DATE,
-    course_price INT ,
-    course_status nvarchar(20) NOT NULL,
-	FOREIGN KEY(course_create_user_id) REFERENCES users(user_id),
-    FOREIGN KEY(course_category) REFERENCES major(major_id)
+CREATE TABLE [dbo].[courses] (
+    [course_id]              NVARCHAR (50)  NOT NULL,
+    [course_name]            NVARCHAR (50)  NOT NULL,
+    [course_create_user_id]  INT            NOT NULL,
+    [course_category]        INT            NOT NULL,
+    [course_information]     NVARCHAR (255) NULL,
+    [course_description]     NVARCHAR (MAX) NULL,
+    [course_enrollment_date] DATETIME2 (7)  NOT NULL,
+    [course_start_date]      DATETIME2 (7)  NULL,
+    [course_end_date]        DATETIME2 (7)  NULL,
+    [course_price]           INT            NULL,
+    [course_status]          NVARCHAR (20)  NOT NULL,
+    PRIMARY KEY CLUSTERED ([course_id] ASC),
+    FOREIGN KEY ([course_category]) REFERENCES [dbo].[major] ([major_id]),
+    FOREIGN KEY ([course_create_user_id]) REFERENCES [dbo].[users] ([user_id])
 );
 
 
-CREATE TABLE course_order(
-    course_order_id NVARCHAR(50) PRIMARY KEY,
-    course_id NVARCHAR(50) NOT NULL,
-    student_id INT NOT NULL,
-    course_order_price INT,
-    course_order_create_date DATE NOT NULL,
-    FOREIGN KEY(course_id) REFERENCES courses(course_id),
-	FOREIGN KEY(student_id) REFERENCES users(user_id)
+CREATE TABLE [dbo].[course_order] (
+    [course_order_id]          NVARCHAR (50)  NOT NULL,
+    [course_id]                NVARCHAR (50)  NOT NULL,
+    [student_id]               INT            NOT NULL,
+    [course_order_price]       INT            NULL,
+    [course_order_create_date] DATETIME2 (7)  NOT NULL,
+    [course_order_remark]      NVARCHAR (255) NULL,
+    [course_order_status]      NVARCHAR (50)  DEFAULT ('Pending') NOT NULL,
+    PRIMARY KEY CLUSTERED ([course_order_id] ASC),
+    FOREIGN KEY ([course_id]) REFERENCES [dbo].[courses] ([course_id]),
+    FOREIGN KEY ([student_id]) REFERENCES [dbo].[users] ([user_id])
 );
 
-CREATE TABLE course_grade_content(
-    course_grade_id INT PRIMARY KEY,
-    course_id NVARCHAR(50) NOT NULL,
-    student_id NVARCHAR(50) NOT NULL,
-    course_grade_scroe INT,
-    FOREIGN KEY(course_id) REFERENCES courses(course_id)
+CREATE TABLE [dbo].[course_grade_content] (
+    [course_id]          NVARCHAR (50) NOT NULL,
+    [student_id]         NVARCHAR (50) NOT NULL,
+    [course_grade_score] INT           NULL,
+    [course_grade_id]    INT           IDENTITY (100, 1) NOT NULL,
+    CONSTRAINT [PK_course_grade_content] PRIMARY KEY CLUSTERED ([course_grade_id] ASC),
+    FOREIGN KEY ([course_id]) REFERENCES [dbo].[courses] ([course_id])
 );
 
-CREATE TABLE course_module(
-    course_module_id INT PRIMARY KEY IDENTITY(1,1),
-    course_id NVARCHAR(50) NOT NULL,
-    course_module_name NVARCHAR(50) NOT NULL,
-    FOREIGN KEY(course_id) REFERENCES courses(course_id)
+CREATE TABLE [dbo].[course_module] (
+    [course_module_id]   INT           IDENTITY (1, 1) NOT NULL,
+    [course_id]          NVARCHAR (50) NOT NULL,
+    [course_module_name] NVARCHAR (50) NOT NULL,
+    PRIMARY KEY CLUSTERED ([course_module_id] ASC),
+    FOREIGN KEY ([course_id]) REFERENCES [dbo].[courses] ([course_id])
 );
 
-CREATE TABLE course_lessons(
-    course_lesson_id INT PRIMARY KEY IDENTITY(1,1),
-    course_module_id INT NOT NULL,
-    course_id NVARCHAR(50) NOT NULL,
-    course_lesson_name NVARCHAR(50) NOT NULL,
-    course_lesson_sort NVARCHAR(50),
-    lesson_media_url NVARCHAR(255),
-    lesson_media_type NVARCHAR(20),
-    lesson_media_duration INT,
-    FOREIGN KEY(course_module_id) REFERENCES course_module(course_module_id),
-    FOREIGN KEY(course_id) REFERENCES courses(course_id),
+CREATE TABLE [dbo].[course_lessons] (
+    [course_lesson_id]      INT            IDENTITY (1, 1) NOT NULL,
+    [course_module_id]      INT            NOT NULL,
+    [course_id]             NVARCHAR (50)  NOT NULL,
+    [course_lesson_name]    NVARCHAR (50)  NOT NULL,
+    [course_lesson_sort]    NVARCHAR (50)  NULL,
+    [lesson_media_url]      NVARCHAR (255) NULL,
+    [lesson_media_type]     NVARCHAR (20)  NULL,
+    [lesson_media_duration] INT            NULL,
+    PRIMARY KEY CLUSTERED ([course_lesson_id] ASC),
+    FOREIGN KEY ([course_id]) REFERENCES [dbo].[courses] ([course_id]),
+    FOREIGN KEY ([course_module_id]) REFERENCES [dbo].[course_module] ([course_module_id])
 );
 
 -- transaction table
