@@ -1,27 +1,21 @@
 package com.ProFit.controller.usersController;
 
-import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-
 import com.ProFit.bean.usersBean.Users;
-import com.ProFit.dao.usersDao.IHUserDao;
 import com.ProFit.hibernateutil.HibernateUtil;
 import com.ProFit.dao.usersDao.HUserDao;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.Part;
 
 @WebServlet("/UpdateUser")
 @MultipartConfig

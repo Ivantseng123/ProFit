@@ -2,8 +2,13 @@ package com.ProFit.controller.usersController;
 
 import java.io.IOException;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 import com.ProFit.bean.usersBean.Employer_profile;
-import com.ProFit.dao.usersDao.empProfileDao;
+import com.ProFit.dao.usersDao.HempProfileDao;
+import com.ProFit.dao.usersDao.IHempProfileDao;
+import com.ProFit.hibernateutil.HibernateUtil;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -34,9 +39,10 @@ public class InsertEmpPf extends HttpServlet {
 		String company_phoneNumber = request.getParameter("company_phoneNumber");
 		String company_taxID = request.getParameter("company_taxID");
 
+		SessionFactory factory = HibernateUtil.getSessionFactory();
+		Session session = factory.getCurrentSession();
 
-
-		empProfileDao empdao = new empProfileDao();
+		IHempProfileDao empdao = new HempProfileDao(session);
 
 
 		try {
@@ -45,6 +51,9 @@ public class InsertEmpPf extends HttpServlet {
 			emp.toString();
 
 			empdao.saveEmployerInfo(emp);
+			
+			session.flush();  // 將緩存的更改同步到數據庫
+			session.clear();  // 清空緩存，強制從數據庫重新查詢
 
 			request.getRequestDispatcher("/GetAllEmpPf").forward(request, response);
 		} catch (Exception e) {

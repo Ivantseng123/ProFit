@@ -2,8 +2,13 @@ package com.ProFit.controller.usersController;
 
 import java.io.IOException;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 import com.ProFit.bean.usersBean.Employer_profile;
-import com.ProFit.dao.usersDao.empProfileDao;
+import com.ProFit.dao.usersDao.HempProfileDao;
+import com.ProFit.dao.usersDao.IHempProfileDao;
+import com.ProFit.hibernateutil.HibernateUtil;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -27,9 +32,13 @@ public class GetUpdateEmpPf extends HttpServlet {
 		Integer employer_profile_id = Integer.valueOf(request.getParameter("employer_profile_id"));
 		System.out.println(request.getParameter("employer_profile_id"));
 
-		empProfileDao empDao = new empProfileDao();
+		SessionFactory factory = HibernateUtil.getSessionFactory();
+		Session session = factory.getCurrentSession();
+		
+		IHempProfileDao empDao = new HempProfileDao(session);
 		Employer_profile emp = empDao.getEmpPfInfoByID(employer_profile_id);
-
+		
+		
 		request.setAttribute("emp",emp);
 		request.getRequestDispatcher("/usersVIEW/UpdateEmpPf.jsp").forward(request, response);
 	}

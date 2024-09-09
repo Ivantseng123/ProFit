@@ -2,141 +2,239 @@ package com.ProFit.bean.usersBean;
 
 import java.io.Serializable;
 
+import org.hibernate.annotations.DynamicUpdate;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+@Entity
+@DynamicUpdate
+@Table(name="employer_profile")
 public class Employer_profile implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private Integer employer_profile_id;
-	private Integer user_id;
-	private String  user_email ;
-	private String  company_name ;
-	private String company_address;
-	private String company_category;
-	private String company_phoneNumber;
-	private String company_taxID ;
-	private String company_numberOfemployee;
-	private String company_captital;
-	private String company_description;
-	private String company_photoURL;
+	@Id @Column(name="employer_profile_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer employerProfileId;
+	
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="user_id",insertable = false,updatable = false)
+	private Users user;
+	
+	@Column(name="user_id")
+	private Integer userId;
+	
+	
+	@Column(name="company_name")
+	private String companyName;
+	
+	@Column(name="company_address")
+	private String companyAddress;
+	
+	@Column(name="company_category")
+	private String companyCategory;
+	
+	@Column(name="company_phoneNumber")
+	private String companyPhoneNumber;
+	
+	@Column(name="company_taxID")
+	private String companyTaxID;
+	
+	@Column(name="company_numberOfemployee")
+	private String companyNumberOfemployee;
+	
+	@Column(name="company_captital")
+	private String companyCaptital;
+	
+	@Column(name="company_description")
+	private String companyDescription;
+	
+	@Column(name="company_photoURL")
+	private String companyPhotoURL;
 
 
 	public Employer_profile(Integer employer_profile_id, Integer user_id, String company_name, String company_address,
 			String company_category, String company_phoneNumber, String company_taxID, String company_numberOfemployee,
 			String company_captital, String company_description, String company_photoURL) {
 		super();
-		this.employer_profile_id = employer_profile_id;
-		this.user_id = user_id;
-		this.company_name = company_name;
-		this.company_address = company_address;
-		this.company_category = company_category;
-		this.company_phoneNumber = company_phoneNumber;
-		this.company_taxID = company_taxID;
-		this.company_numberOfemployee = company_numberOfemployee;
-		this.company_captital = company_captital;
-		this.company_description = company_description;
-		this.company_photoURL = company_photoURL;
+		this.employerProfileId = employer_profile_id;
+		this.userId = user_id;
+		this.companyName = company_name;
+		this.companyAddress = company_address;
+		this.companyCategory = company_category;
+		this.companyPhoneNumber = company_phoneNumber;
+		this.companyTaxID = company_taxID;
+		this.companyNumberOfemployee = company_numberOfemployee;
+		this.companyCaptital = company_captital;
+		this.companyDescription = company_description;
+		this.companyPhotoURL = company_photoURL;
 	}
 
-	public Employer_profile(Integer employer_profile_id, Integer user_id, String user_email,String company_name, String company_address,String company_category, String company_phoneNumber, String company_taxID, String company_numberOfemployee,
-			String company_captital, String company_description, String company_photoURL) {
-		super();
-		this.employer_profile_id = employer_profile_id;
-		this.user_id = user_id;
-		this.user_email = user_email;
-		this.company_name = company_name;
-		this.company_address = company_address;
-		this.company_category = company_category;
-		this.company_phoneNumber = company_phoneNumber;
-		this.company_taxID = company_taxID;
-		this.company_numberOfemployee = company_numberOfemployee;
-		this.company_captital = company_captital;
-		this.company_description = company_description;
-		this.company_photoURL = company_photoURL;
-	}
+	
 
 	public Employer_profile(Integer user_id, String company_name, String company_address,
 			String company_category, String company_phoneNumber, String company_taxID) {
 		super();
-		this.user_id = user_id;
-		this.company_name = company_name;
-		this.company_address = company_address;
-		this.company_category = company_category;
-		this.company_phoneNumber = company_phoneNumber;
-		this.company_taxID = company_taxID;
+		this.userId = user_id;
+		this.companyName = company_name;
+		this.companyAddress = company_address;
+		this.companyCategory = company_category;
+		this.companyPhoneNumber = company_phoneNumber;
+		this.companyTaxID = company_taxID;
 	}
 
 	public Employer_profile() {}
 
-	public Integer getEmployer_profile_id() {
-		return employer_profile_id;
+
+
+	public Integer getEmployerProfileId() {
+		return employerProfileId;
 	}
-	public void setEmployer_profile_id(Integer employer_profile_id) {
-		this.employer_profile_id = employer_profile_id;
+
+
+
+	public void setEmployerProfileId(Integer employerProfileId) {
+		this.employerProfileId = employerProfileId;
 	}
-	public Integer getUser_id() {
-		return user_id;
+
+
+
+	public Users getUser() {
+		return user;
 	}
-	public void setUser_id(Integer user_id) {
-		this.user_id = user_id;
+
+
+
+	public void setUser(Users user) {
+		this.user = user;
 	}
-	public String getUser_email() {
-		return user_email;
+
+
+
+	public Integer getUserId() {
+		return userId;
 	}
-	public void setUser_email(String user_email) {
-		this.user_email = user_email;
+
+
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
-	public String getCompany_name() {
-		return company_name;
+
+
+
+	public String getCompanyName() {
+		return companyName;
 	}
-	public void setCompany_name(String company_name) {
-		this.company_name = company_name;
+
+
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
-	public String getCompany_address() {
-		return company_address;
+
+
+
+	public String getCompanyAddress() {
+		return companyAddress;
 	}
-	public void setCompany_address(String company_address) {
-		this.company_address = company_address;
+
+
+
+	public void setCompanyAddress(String companyAddress) {
+		this.companyAddress = companyAddress;
 	}
-	public String getCompany_category() {
-		return company_category;
+
+
+
+	public String getCompanyCategory() {
+		return companyCategory;
 	}
-	public void setCompany_category(String company_category) {
-		this.company_category = company_category;
+
+
+
+	public void setCompanyCategory(String companyCategory) {
+		this.companyCategory = companyCategory;
 	}
-	public String getCompany_phoneNumber() {
-		return company_phoneNumber;
+
+
+
+	public String getCompanyPhoneNumber() {
+		return companyPhoneNumber;
 	}
-	public void setCompany_phoneNumber(String company_phoneNumber) {
-		this.company_phoneNumber = company_phoneNumber;
+
+
+
+	public void setCompanyPhoneNumber(String companyPhoneNumber) {
+		this.companyPhoneNumber = companyPhoneNumber;
 	}
-	public String getCompany_taxID() {
-		return company_taxID;
+
+
+
+	public String getCompanyTaxID() {
+		return companyTaxID;
 	}
-	public void setCompany_taxID(String company_taxID) {
-		this.company_taxID = company_taxID;
+
+
+
+	public void setCompanyTaxID(String companyTaxID) {
+		this.companyTaxID = companyTaxID;
 	}
-	public String getCompany_numberOfemployee() {
-		return company_numberOfemployee;
+
+
+
+	public String getCompanyNumberOfemployee() {
+		return companyNumberOfemployee;
 	}
-	public void setCompany_numberOfemployee(String company_numberOfemployee) {
-		this.company_numberOfemployee = company_numberOfemployee;
+
+
+
+	public void setCompanyNumberOfemployee(String companyNumberOfemployee) {
+		this.companyNumberOfemployee = companyNumberOfemployee;
 	}
-	public String getCompany_captital() {
-		return company_captital;
+
+
+
+	public String getCompanyCaptital() {
+		return companyCaptital;
 	}
-	public void setCompany_captital(String company_captital) {
-		this.company_captital = company_captital;
+
+
+
+	public void setCompanyCaptital(String companyCaptital) {
+		this.companyCaptital = companyCaptital;
 	}
-	public String getCompany_description() {
-		return company_description;
+
+
+
+	public String getCompanyDescription() {
+		return companyDescription;
 	}
-	public void setCompany_description(String company_description) {
-		this.company_description = company_description;
+
+
+
+	public void setCompanyDescription(String companyDescription) {
+		this.companyDescription = companyDescription;
 	}
-	public String getCompany_photoURL() {
-		return company_photoURL;
+
+
+
+	public String getCompanyPhotoURL() {
+		return companyPhotoURL;
 	}
-	public void setCompany_photoURL(String company_photoURL) {
-		this.company_photoURL = company_photoURL;
+
+
+	public void setCompanyPhotoURL(String companyPhotoURL) {
+		this.companyPhotoURL = companyPhotoURL;
 	}
+
+	
 }

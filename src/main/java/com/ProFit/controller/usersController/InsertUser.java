@@ -5,15 +5,11 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-
 import com.ProFit.bean.usersBean.Users;
-import com.ProFit.dao.usersDao.IHUserDao;
 import com.ProFit.hibernateutil.HibernateUtil;
 import com.ProFit.dao.usersDao.HUserDao;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -40,6 +36,7 @@ public class InsertUser extends HttpServlet {
 		String user_phonenumber = request.getParameter("user_phonenumber");
 		String user_city = request.getParameter("user_city");
 		Integer user_identity = 1;
+		Integer user_balance = 0;
 		Integer freelancer_profile_status = 0;
 
 		SessionFactory factory = HibernateUtil.getSessionFactory();
@@ -50,7 +47,7 @@ public class InsertUser extends HttpServlet {
 		try {
 			String user_passwordHash = toHexString(getSHA(user_password));
 
-			Users user = new Users(user_name,user_email,user_passwordHash,user_phonenumber,user_city,user_identity,freelancer_profile_status);
+			Users user = new Users(user_name,user_email,user_passwordHash,user_phonenumber,user_city,user_identity,user_balance,freelancer_profile_status);
 						
 			userDao.saveUserInfo(user);
 			

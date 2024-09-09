@@ -43,7 +43,7 @@ public class HUserDao implements IHUserDao {
 		if (resultBean == null) {
 			return false;
 		}
-		resultBean.setUser_passwordHash(pwd);
+		resultBean.setUserPasswordHash(pwd);
 		session.merge(resultBean);
 		return true;
 	}
@@ -63,7 +63,7 @@ public class HUserDao implements IHUserDao {
 		if (resultBean == null) {
 			return false;
 		}
-		resultBean.setUser_identity(2);
+		resultBean.setUserIdentity(2);
 		session.merge(resultBean);
 		return true;
 	}

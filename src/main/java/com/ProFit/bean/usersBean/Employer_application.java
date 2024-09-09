@@ -2,42 +2,91 @@ package com.ProFit.bean.usersBean;
 
 import java.io.Serializable;
 
+import org.hibernate.annotations.DynamicUpdate;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+@Entity
+@DynamicUpdate
+@Table(name="employer_application")
 public class Employer_application implements Serializable{
 
+
+
 	private static final long serialVersionUID = 1L;
-
-	private Integer employer_application_id;
-	private Integer user_id;
-	private String  user_email ;
-	private String  company_name ;
-	private String company_address;
-	private String company_category;
-	private String company_phoneNumber;
-	private String company_taxID ;
-	private String company_taxID_docURL;
-	private String user_national_id;
-	private String idCard_pictureURL_1;
-	private String idCard_pictureURL_2;
-	private Integer application_check;
-
+	
+	
+	@Id @Column(name="employer_application_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer employerApplicationId;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="user_id",insertable = false,updatable = false)
+	private Users user;
+	
+	@Column(name="user_id")
+	private Integer userId;
+	
+	
+	@Column(name="company_name")
+	private String  companyName ;
+	
+	@Column(name="company_address")
+	private String companyAddress;
+	
+	@Column(name="company_category")
+	private String companyCategory;
+	
+	@Column(name="company_phoneNumber")
+	private String companyPhoneNumber;
+	
+	@Column(name="company_taxID")
+	private String companyTaxID;
+	
+	@Column(name="company_taxID_docURL")
+	private String companyTaxIdDocURL;
+	
+	@Column(name="user_national_id")
+	private String userNationalId;
+	
+	@Column(name="idCard_pictureURL_1")
+	private String idCardPictureURL1;
+	
+	@Column(name="idCard_pictureURL_2")
+	private String idCardPictureURL2;
+	
+	@Column(name="application_check")
+	private Integer applicationCheck;
+	
+	public Employer_application() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
 	public Employer_application(Integer employer_application_id, Integer user_id,String  user_email, String company_name,
 			String company_address, String company_category, String company_phoneNumber, String company_taxID,
 			String company_taxID_docURL, String user_national_id, String idCard_pictureURL_1,
 			String idCard_pictureURL_2, Integer application_check) {
 		super();
-		this.employer_application_id = employer_application_id;
-		this.user_id = user_id;
-		this.user_email = user_email;
-		this.company_name = company_name;
-		this.company_address = company_address;
-		this.company_category = company_category;
-		this.company_phoneNumber = company_phoneNumber;
-		this.company_taxID = company_taxID;
-		this.company_taxID_docURL = company_taxID_docURL;
-		this.user_national_id = user_national_id;
-		this.idCard_pictureURL_1 = idCard_pictureURL_1;
-		this.idCard_pictureURL_2 = idCard_pictureURL_2;
-		this.application_check = application_check;
+		this.employerApplicationId = employer_application_id;
+		this.userId = user_id;
+		this.companyName = company_name;
+		this.companyAddress = company_address;
+		this.companyCategory = company_category;
+		this.companyPhoneNumber = company_phoneNumber;
+		this.companyTaxID = company_taxID;
+		this.companyTaxIdDocURL = company_taxID_docURL;
+		this.userNationalId = user_national_id;
+		this.idCardPictureURL1 = idCard_pictureURL_1;
+		this.idCardPictureURL2 = idCard_pictureURL_2;
+		this.applicationCheck = application_check;
 	}
 
 
@@ -46,149 +95,178 @@ public class Employer_application implements Serializable{
 			String company_taxID_docURL, String user_national_id, String idCard_pictureURL_1,
 			String idCard_pictureURL_2, Integer application_check) {
 		super();
-		this.user_id = user_id;
-		this.company_name = company_name;
-		this.company_address = company_address;
-		this.company_category = company_category;
-		this.company_phoneNumber = company_phoneNumber;
-		this.company_taxID = company_taxID;
-		this.company_taxID_docURL = company_taxID_docURL;
-		this.user_national_id = user_national_id;
-		this.idCard_pictureURL_1 = idCard_pictureURL_1;
-		this.idCard_pictureURL_2 = idCard_pictureURL_2;
-		this.application_check = application_check;
+		this.userId = user_id;
+		this.companyName = company_name;
+		this.companyAddress = company_address;
+		this.companyCategory = company_category;
+		this.companyPhoneNumber = company_phoneNumber;
+		this.companyTaxID = company_taxID;
+		this.companyTaxIdDocURL = company_taxID_docURL;
+		this.userNationalId = user_national_id;
+		this.idCardPictureURL1 = idCard_pictureURL_1;
+		this.idCardPictureURL2 = idCard_pictureURL_2;
+		this.applicationCheck = application_check;
 	}
 
-	public Employer_application(Integer employer_application_id, String company_name,
+	public Employer_application(Integer employer_application_id,Integer user_id, String company_name,
 			String company_address, String company_category, String company_phoneNumber, String company_taxID,
 			String company_taxID_docURL, String user_national_id, String idCard_pictureURL_1,
 			String idCard_pictureURL_2) {
 		super();
-		this.employer_application_id = employer_application_id;
-		this.company_name = company_name;
-		this.company_address = company_address;
-		this.company_category = company_category;
-		this.company_phoneNumber = company_phoneNumber;
-		this.company_taxID = company_taxID;
-		this.company_taxID_docURL = company_taxID_docURL;
-		this.user_national_id = user_national_id;
-		this.idCard_pictureURL_1 = idCard_pictureURL_1;
-		this.idCard_pictureURL_2 = idCard_pictureURL_2;
+		this.employerApplicationId = employer_application_id;
+		this.userId = user_id;
+		this.companyName = company_name;
+		this.companyAddress = company_address;
+		this.companyCategory = company_category;
+		this.companyPhoneNumber = company_phoneNumber;
+		this.companyTaxID = company_taxID;
+		this.companyTaxIdDocURL = company_taxID_docURL;
+		this.userNationalId = user_national_id;
+		this.idCardPictureURL1 = idCard_pictureURL_1;
+		this.idCardPictureURL2 = idCard_pictureURL_2;
 	}
 
-	public Employer_application() {}
+	
 
-	public Integer getEmployer_application_id() {
-		return employer_application_id;
-	}
-
-	public void setEmployer_application_id(Integer employer_application_id) {
-		this.employer_application_id = employer_application_id;
+	public Integer getEmployerApplicationId() {
+		return employerApplicationId;
 	}
 
-	public Integer getUser_id() {
-		return user_id;
+
+	public void setEmployerApplicationId(Integer employerApplicationId) {
+		this.employerApplicationId = employerApplicationId;
 	}
 
-	public void setUser_id(Integer user_id) {
-		this.user_id = user_id;
+
+	public Users getUser() {
+		return user;
 	}
 
-	public String getUser_email() {
-		return user_email;
-	}
-	public void setUser_email(String user_email) {
-		this.user_email = user_email;
-	}
-	public String getCompany_name() {
-		return company_name;
+
+	public void setUser(Users user) {
+		this.user = user;
 	}
 
-	public void setCompany_name(String company_name) {
-		this.company_name = company_name;
+
+	public Integer getUserId() {
+		return userId;
 	}
 
-	public String getCompany_address() {
-		return company_address;
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
-	public void setCompany_address(String company_address) {
-		this.company_address = company_address;
+
+	public String getCompanyName() {
+		return companyName;
 	}
 
-	public String getCompany_category() {
-		return company_category;
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 
-	public void setCompany_category(String company_category) {
-		this.company_category = company_category;
+
+	public String getCompanyAddress() {
+		return companyAddress;
 	}
 
-	public String getCompany_phoneNumber() {
-		return company_phoneNumber;
+
+	public void setCompanyAddress(String companyAddress) {
+		this.companyAddress = companyAddress;
 	}
 
-	public void setCompany_phoneNumber(String company_phoneNumber) {
-		this.company_phoneNumber = company_phoneNumber;
+
+	public String getCompanyCategory() {
+		return companyCategory;
 	}
 
-	public String getCompany_taxID() {
-		return company_taxID;
+
+	public void setCompanyCategory(String companyCategory) {
+		this.companyCategory = companyCategory;
 	}
 
-	public void setCompany_taxID(String company_taxID) {
-		this.company_taxID = company_taxID;
+
+	public String getCompanyPhoneNumber() {
+		return companyPhoneNumber;
 	}
 
-	public String getCompany_taxID_docURL() {
-		return company_taxID_docURL;
+
+	public void setCompanyPhoneNumber(String companyPhoneNumber) {
+		this.companyPhoneNumber = companyPhoneNumber;
 	}
 
-	public void setCompany_taxID_docURL(String company_taxID_docURL) {
-		this.company_taxID_docURL = company_taxID_docURL;
+
+	public String getCompanyTaxID() {
+		return companyTaxID;
 	}
 
-	public String getUser_national_id() {
-		return user_national_id;
+
+	public void setCompanyTaxID(String companyTaxID) {
+		this.companyTaxID = companyTaxID;
 	}
 
-	public void setUser_national_id(String user_national_id) {
-		this.user_national_id = user_national_id;
+
+	public String getCompanyTaxIdDocURL() {
+		return companyTaxIdDocURL;
 	}
 
-	public String getIdCard_pictureURL_1() {
-		return idCard_pictureURL_1;
+
+	public void setCompanyTaxIdDocURL(String companyTaxIdDocURL) {
+		this.companyTaxIdDocURL = companyTaxIdDocURL;
 	}
 
-	public void setIdCard_pictureURL_1(String idCard_pictureURL_1) {
-		this.idCard_pictureURL_1 = idCard_pictureURL_1;
+
+	public String getUserNationalId() {
+		return userNationalId;
 	}
 
-	public String getIdCard_pictureURL_2() {
-		return idCard_pictureURL_2;
+
+	public void setUserNationalId(String userNationalId) {
+		this.userNationalId = userNationalId;
 	}
 
-	public void setIdCard_pictureURL_2(String idCard_pictureURL_2) {
-		this.idCard_pictureURL_2 = idCard_pictureURL_2;
+
+	public String getIdCardPictureURL1() {
+		return idCardPictureURL1;
 	}
 
-	public Integer getApplication_check() {
-		return application_check;
+
+	public void setIdCardPictureURL1(String idCardPictureURL1) {
+		this.idCardPictureURL1 = idCardPictureURL1;
 	}
 
-	public void setApplication_check(Integer application_check) {
-		this.application_check = application_check;
+
+	public String getIdCardPictureURL2() {
+		return idCardPictureURL2;
 	}
+
+
+	public void setIdCardPictureURL2(String idCardPictureURL2) {
+		this.idCardPictureURL2 = idCardPictureURL2;
+	}
+
+
+	public Integer getApplicationCheck() {
+		return applicationCheck;
+	}
+
+
+	public void setApplicationCheck(Integer applicationCheck) {
+		this.applicationCheck = applicationCheck;
+	}
+
 
 	@Override
 	public String toString() {
-		return "Employer_application [employer_application_id=" + employer_application_id + ", user_id=" + user_id
-				+ ", user_email=" + user_email + ", company_name=" + company_name + ", company_address="
-				+ company_address + ", company_category=" + company_category + ", company_phoneNumber="
-				+ company_phoneNumber + ", company_taxID=" + company_taxID + ", company_taxID_docURL="
-				+ company_taxID_docURL + ", user_national_id=" + user_national_id + ", idCard_pictureURL_1="
-				+ idCard_pictureURL_1 + ", idCard_pictureURL_2=" + idCard_pictureURL_2 + ", application_check="
-				+ application_check + "]";
+		return "Employer_application [employer_application_id=" + employerApplicationId + ", user_id=" + userId
+				+ ", user_email=" + ", company_name=" + companyName + ", company_address="
+				+ companyAddress + ", company_category=" + companyCategory + ", company_phoneNumber="
+				+ companyPhoneNumber + ", company_taxID=" + companyTaxID + ", company_taxID_docURL="
+				+ companyTaxIdDocURL + ", user_national_id=" + userNationalId + ", idCard_pictureURL_1="
+				+ idCardPictureURL1 + ", idCard_pictureURL_2=" + idCardPictureURL2 + ", application_check="
+				+ applicationCheck + "]";
 	}
 
 

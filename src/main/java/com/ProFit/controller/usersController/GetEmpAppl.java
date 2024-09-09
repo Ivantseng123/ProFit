@@ -2,9 +2,11 @@ package com.ProFit.controller.usersController;
 
 import java.io.IOException;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import com.ProFit.bean.usersBean.Employer_application;
-import com.ProFit.dao.usersDao.empApplDao;
-
+import com.ProFit.dao.usersDao.HempApplDao;
+import com.ProFit.hibernateutil.HibernateUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -25,8 +27,11 @@ public class GetEmpAppl extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Integer employer_application_id = Integer.valueOf(request.getParameter("employer_application_id")) ;
-
-		empApplDao emp = new empApplDao();
+		
+		SessionFactory factory = HibernateUtil.getSessionFactory();
+		Session session = factory.getCurrentSession();
+		
+		HempApplDao emp = new HempApplDao(session);
 
 		Employer_application getemp = emp.getEmpApplInfoByID(employer_application_id);
 

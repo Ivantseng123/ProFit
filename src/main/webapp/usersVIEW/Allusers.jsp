@@ -35,27 +35,27 @@
                 <tbody>
                 	<c:forEach items="${users}" var="user" varStatus="s">
                     	<tr>
-                        	<td>${user.user_id}</td>
-                        	<td>${user.user_email}</td>
-                        	<td>${user.user_name}</td>
-                        	<td>${user.user_passwordHash}</td>
+                        	<td>${user.userId}</td>
+                        	<td>${user.userEmail}</td>
+                        	<td>${user.userName}</td>
+                        	<td>${user.userPasswordHash}</td>
                         	<c:choose>
-   							 <c:when test="${user.user_identity == '1'}">
+   							 <c:when test="${user.userIdentity == '1'}">
    							 	<td>應徵者</td>
    							 </c:when>
-   							 <c:when test="${user.user_identity == '2'}">
+   							 <c:when test="${user.userIdentity == '2'}">
    							 	<td>應徵者/企業主</td>
    							 </c:when>
     						<c:otherwise>
         						<td>管理員</td>
     						</c:otherwise>
 							</c:choose>                        
-                        	<td>${user.user_register_time}</td>
+                        	<td>${user.userRegisterTime}</td>
                         	<td class="action-buttons">
-                        		<a style="text-decoration:none;" href="GetUser?user_id=${user.user_id}">
+                        		<a style="text-decoration:none;" href="GetUser?user_id=${user.userId}">
                         		<button class="view" id="viewUserBtn">查看</button>
                         		</a>
-                            	<a style="text-decoration:none;" href="GetUpdateUser?user_id=${user.user_id}">
+                            	<a style="text-decoration:none;" href="GetUpdateUser?user_id=${user.userId}">
                             	<button class="edit" id="editUserBtn">編輯</button>
                             	</a>
                             	<button class="delete" id="deleteUserBtn">刪除</button>
