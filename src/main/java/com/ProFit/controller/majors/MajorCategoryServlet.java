@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.ProFit.bean.majorsBean.MajorBean;
-import com.ProFit.bean.majorsBean.MajorCategoryBeam;
+import com.ProFit.bean.majorsBean.MajorCategoryBean;
 import com.ProFit.dao.majorsCRUD.MajorCategoryDAO;
 import com.ProFit.dao.majorsCRUD.MajorDAO;
 
@@ -70,7 +70,7 @@ public class MajorCategoryServlet extends HttpServlet {
 
 	private void listMajorCategories(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
-		List<MajorCategoryBeam> listMajorCategory = majorCategoryDAO.findAllMajorCategories();
+		List<MajorCategoryBean> listMajorCategory = majorCategoryDAO.findAllMajorCategories();
 		request.setAttribute("listMajorCategory", listMajorCategory);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/majorsVIEW/MajorCategoryList.jsp");
 		dispatcher.forward(request, response);
@@ -80,7 +80,7 @@ public class MajorCategoryServlet extends HttpServlet {
 			throws SQLException, IOException, ServletException {
 		int categoryId = Integer.parseInt(request.getParameter("categoryId"));
 		List<MajorBean> listMajor = majorDAO.findMajorsByCategoryId(categoryId);
-		MajorCategoryBeam category = majorCategoryDAO.findMajorCategoryById(categoryId);
+		MajorCategoryBean category = majorCategoryDAO.findMajorCategoryById(categoryId);
 
 		request.setAttribute("listMajor", listMajor);
 		request.setAttribute("category", category);
@@ -112,7 +112,7 @@ public class MajorCategoryServlet extends HttpServlet {
 		if (idStr != null && !idStr.trim().isEmpty() && name != null && !name.trim().isEmpty()) {
 			try {
 				int id = Integer.parseInt(idStr);
-				MajorCategoryBeam newCategory = new MajorCategoryBeam();
+				MajorCategoryBean newCategory = new MajorCategoryBean();
 				newCategory.setMajorCategoryId(id);
 				newCategory.setCategoryName(name);
 
@@ -197,7 +197,7 @@ public class MajorCategoryServlet extends HttpServlet {
 	        return;
 	    }
 
-	    MajorCategoryBeam category = new MajorCategoryBeam();
+	    MajorCategoryBean category = new MajorCategoryBean();
 	    category.setMajorCategoryId(categoryId);
 	    category.setCategoryName(categoryName.trim());
 
@@ -224,7 +224,7 @@ public class MajorCategoryServlet extends HttpServlet {
 
 	    if (idStr != null && !idStr.isEmpty()) {
 	        int id = Integer.parseInt(idStr);
-	        MajorCategoryBeam existingCategory = new MajorCategoryBeam();
+	        MajorCategoryBean existingCategory = new MajorCategoryBean();
 	        existingCategory.setMajorCategoryId(id);
 	        existingCategory.setCategoryName(name != null ? name : "");
 

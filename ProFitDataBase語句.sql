@@ -110,7 +110,7 @@ CREATE TABLE jobs_application_project (
 	
 	FOREIGN KEY (major_category_id) REFERENCES major_category(major_category_id)
 	);
-	-- user新增的技能
+	-- user新增的技能(中介table)
 	CREATE TABLE user_major (
 	user_id INT NOT NULL,
 	major_id INT NOT NULL,
