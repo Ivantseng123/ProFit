@@ -40,16 +40,16 @@ $('#searchBtn').click(function() {
 
 			$('#search-results').append(tableHtml);
 
-			response.forEach(function(searchCoursesJson) {
-				console.log("Serialized JSON: " + searchCoursesJson.CreateUserName);
+			response.forEach(function(response) {
+				console.log("Serialized JSON: " + response.courseCreaterName);
 				$('#table-body').append(` 
         		                    <tr>
-        	                        <td class="result-courseId" name="courseId">${searchCoursesJson.courseId}</td>
-        	                        <td class="result-courseName" name="courseName">${searchCoursesJson.courseName}</td>
-									<td>${searchCoursesJson.createUserName}</td>
-        	                        <td>${searchCoursesJson.courseDescription}</td>
-        	                        <td>${searchCoursesJson.coursePrice}</td>
-        	                        <td><span class="status">${searchCoursesJson.courseStatus}</span></td>
+        	                        <td class="result-courseId" name="courseId">${response.courseId}</td>
+        	                        <td class="result-courseName" name="courseName">${response.courseName}</td>
+									<td>${response.courseCreaterName}</td>
+        	                        <td>${response.courseDescription}</td>
+        	                        <td>${response.coursePrice}</td>
+        	                        <td><span class="status">${response.courseStatus}</span></td>
         	                        <td class="action-buttons">
         	                            <button class="view">查看</button>
         	                            <button class="edit">編輯</button>
