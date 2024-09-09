@@ -1,4 +1,4 @@
-package com.ProFit.bean;
+package com.ProFit.bean.collectionsBean;
 
 import java.sql.Blob;
 

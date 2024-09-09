@@ -1,11 +1,23 @@
-package com.ProFit.bean;
+package com.ProFit.bean.majorsBean;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity @Table(name = "major")
 public class MajorBean implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
+	
+	@Id @Column(name="major_id")
 	private Integer majorId; // 主鍵
+	
     private String majorName; // 專業名稱
+    
     private Integer majorCategoryId; // 專業_類別ID
+    
     private String majorDescription; // 專業描述
+    
     private String categoryName;
 
 	public String getCategoryName() {

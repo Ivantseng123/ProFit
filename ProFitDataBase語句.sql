@@ -95,13 +95,13 @@ CREATE TABLE jobs_application_project (
     FOREIGN KEY (jobs_application_id) REFERENCES jobs_application(jobs_application_id) -- �~�����
 );
 
-    -- �M�~�ޯ઺����, �@�ӧޯ�u���ݩ�@�ؤ���
+    -- 專業技能的分類, 一個技能只能屬於一種分類
 	CREATE TABLE major_category (
 	major_category_id INT primary key,
-	categoy_name NVARCHAR(24) not null,
+	category_name NVARCHAR(24) not null,
 	);
 
-	-- �@�Cmajor�N���@�ӱM�~�ޯ�
+	-- 一列major代表一個專業技能
 	CREATE TABLE major (
 	major_id INT PRIMARY KEY,
 	major_name NVARCHAR(24) not null,
@@ -110,7 +110,7 @@ CREATE TABLE jobs_application_project (
 	
 	FOREIGN KEY (major_category_id) REFERENCES major_category(major_category_id)
 	);
-	-- user�s�W���ޯ�s�b�o
+	-- user新增的技能
 	CREATE TABLE user_major (
 	user_id INT NOT NULL,
 	major_id INT NOT NULL,
@@ -121,23 +121,25 @@ CREATE TABLE jobs_application_project (
 	);
 
 
-	-- �A�ȳ����P���z
-	-- �@�ӤH�i�H�b�@�ӱM�~�U�s�W�h���A��
+	-- 服務報價與概述
+	-- 一個人可以在一個專業下新增多筆服務
 	CREATE TABLE service (
 	service_id INT PRIMARY KEY IDENTITY(1,1),
 	user_id INT NOT NULL,
 	major_id INT NOT NULL,
 	service_title NVARCHAR(50),
 	service_content NVARCHAR(1000),
-	service_price DECIMAL(10,2),
+	service_price int NOT NULL,
 	service_unit_name NVARCHAR(8),
 	service_duration DECIMAL(10,1),
 	service_createdate DATETIME2,
 	service_updatedate DATETIME2,
-	-- �إߪA�ȥi�H�s3�i�Ϥ����d��
-	service_sample1 varbinary,
-	service_sample2 varbinary,
-	service_sample3 varbinary,
+	-- 建立服務可以存3張圖片當範例
+	service_pictureURL_1 VARCHAR(200),
+	service_pictureURL_2 VARCHAR(200),
+	service_pictureURL_3 VARCHAR(200),
+	-- 服務狀態(審核是否通過、)
+	service_status int not null default 0,
 	
 	FOREIGN KEY (user_id,major_id) REFERENCES user_major(user_id,major_id)
 	);
@@ -150,14 +152,15 @@ CREATE TABLE jobs_application_project (
 	collection_cover_img_id INT, 
 	collection_name NVARCHAR(24),
 	
-	FOREIGN KEY (user_id,major_id) REFERENCES user_major(user_id,major_id)
+	FOREIGN KEY (user_id) REFERENCES users(user_id),
+	FOREIGN KEY (major_id) REFERENCES major(major_id)
 	);
 	
 	
 	CREATE TABLE image(
 	image_id INT PRIMARY KEY IDENTITY(1,1),
 	collection_id INT,
-	image_file VARBINARY
+	image_pictureURL VARCHAR(200),
 	
 	FOREIGN KEY (collection_id) REFERENCES collection(collection_id)
 	);

@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.ProFit.bean.MajorBean;
-import com.ProFit.bean.MajorCategoryBeam;
+import com.ProFit.bean.majorsBean.MajorBean;
+import com.ProFit.bean.majorsBean.MajorCategoryBeam;
 import com.ProFit.dao.majorsCRUD.MajorCategoryDAO;
 import com.ProFit.dao.majorsCRUD.MajorDAO;
 

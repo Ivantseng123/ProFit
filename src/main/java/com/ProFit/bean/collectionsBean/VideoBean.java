@@ -1,4 +1,4 @@
-package com.ProFit.bean;
+package com.ProFit.bean.collectionsBean;
 
 public class VideoBean implements java.io.Serializable{
 

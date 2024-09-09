@@ -1,4 +1,4 @@
-package com.ProFit.bean;
+package com.ProFit.bean.majorsBean;
 
 public class UserMajorBean implements java.io.Serializable{
 

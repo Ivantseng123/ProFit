@@ -13,7 +13,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import com.ProFit.bean.MajorCategoryBeam;
+import com.ProFit.bean.majorsBean.MajorCategoryBeam;
 
 public class MajorCategoryDAO {
 
