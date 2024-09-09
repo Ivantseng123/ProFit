@@ -23,8 +23,8 @@
 		<mapping class="com.ProFit.bean.collectionsBean.CollectionBean"/>
 		<mapping class="com.ProFit.bean.collectionsBean.ImageBean"/>
 		<mapping class="com.ProFit.bean.collectionsBean.VideoBean"/>
-		<mapping class="com.ProFit.bean.servicesBean.ServiceBean"/>
 		 -->
+		<mapping class="com.ProFit.bean.servicesBean.ServiceBean"/>
 		<mapping class="com.ProFit.bean.majorsBean.MajorCategoryBean"/>
 		<mapping class="com.ProFit.bean.majorsBean.MajorBean"/>
 		<mapping class="com.ProFit.bean.majorsBean.UserMajorBean"/>

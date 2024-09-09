@@ -41,7 +41,7 @@ public class MajorBean implements java.io.Serializable {
 	private Set<Users> users = new LinkedHashSet<Users>(0);
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "major_category_id")
+	@JoinColumn(name = "major_category_id", insertable = false, updatable = false)
 	private MajorCategoryBean majorCategory;
 
 	public MajorBean() {
