@@ -62,7 +62,7 @@ public class HcourseOrderDao implements IHcourseOrderDao {
 				?oldCourseOrder.getCourse()
 				:newCourseOrder.getCourse());
 		
-		oldCourseOrder.setStudnt(newCourseOrder.getStudnt()==null || newCourseOrder.getStudnt().getUser_id() ==null || newCourseOrder.getStudnt().getUser_id()==0
+		oldCourseOrder.setStudnt(newCourseOrder.getStudnt()==null || newCourseOrder.getStudnt().getUserId() ==null || newCourseOrder.getStudnt().getUserId()==0
 				?oldCourseOrder.getStudnt()
 				:newCourseOrder.getStudnt());
 		
