@@ -20,37 +20,37 @@
 		<h2 style="color: orange;">企業申請資訊</h2>
 		<div class="form-container" >
 					<h3>企業資訊ID: </h3> 					
-						<p>${emp.employer_profile_id}</p>
+						<p>${emp.employerProfileId}</p>
 					<h3>會員ID: </h3> 
-						<p>${emp.user_id}</p>
+						<p>${emp.userId}</p>
 						
 					<h3>公司名稱:</h3>
-						<p>${emp.company_name}</p> 
+						<p>${emp.companyName}</p> 
 				
 					<h3>公司地址: </h3>
-						<p>${emp.company_address}</p>  
+						<p>${emp.companyAddress}</p>  
 						
 					<h3>公司分類:</h3>
-						<p>${emp.company_category}</p> 						
+						<p>${emp.companyCategory}</p> 						
 						
 					<h3>公司電話:</h3>
-						<p>${emp.company_phoneNumber}</p>
+						<p>${emp.companyPhoneNumber}</p>
 						
 					<h3>公司統編:</h3>
-						<p>${emp.company_taxID}</p>	
+						<p>${emp.companyTaxID}</p>	
 										
 					<h3>公司員工數:</h3>
-						<p>${emp.company_numberOfemployee}</p>
+						<p>${emp.companyNumberOfemployee}</p>
 						
 					<h3>公司資本額:</h3>
-						<p>${emp.company_captital}</p>
+						<p>${emp.companyCaptital}</p>
 						
 					<h3>公司簡介:</h3>
-						<p>${emp.company_description}</p>	
+						<p>${emp.companyDescription}</p>	
 								
 					<h3>公司照片:</h3>
 					<div style="text-align: center;">
-					<img src="${pageContext.request.contextPath}/usersVIEW/userupload/${emp.company_photoURL}" 							alt="Profile Image"/> 	
+					<img src="${emp.companyPhotoURL}" alt="Profile Image"/> 	
 				 	</div>																
 		</div>
 	</main>

@@ -9,10 +9,10 @@ import org.hibernate.SessionFactory;
 
 import com.ProFit.bean.usersBean.Employer_application;
 import com.ProFit.bean.usersBean.Employer_profile;
-import com.ProFit.dao.usersDao.IHUserDao;
 import com.ProFit.dao.usersDao.HUserDao;
-import com.ProFit.dao.usersDao.empApplDao;
-import com.ProFit.dao.usersDao.empProfileDao;
+import com.ProFit.dao.usersDao.HempApplDao;
+import com.ProFit.dao.usersDao.HempProfileDao;
+import com.ProFit.dao.usersDao.IHempProfileDao;
 import com.ProFit.hibernateutil.HibernateUtil;
 import com.google.gson.Gson;
 
@@ -32,6 +32,7 @@ public class CheckEmpAppl extends HttpServlet {
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -45,20 +46,25 @@ public class CheckEmpAppl extends HttpServlet {
 
 		SessionFactory factory = HibernateUtil.getSessionFactory();
 		Session session = factory.getCurrentSession();
+		
+		
 
-		empApplDao empappldao = new empApplDao();
+		
+		HempApplDao empappldao = new HempApplDao(session);
 		HUserDao userDao = new HUserDao(session);
-		empProfileDao empProfileDao = new empProfileDao();
+		IHempProfileDao empProfileDao = new HempProfileDao(session);
 
 		Employer_application empappl = empappldao.getEmpApplInfoByID(employer_application_id);
-		String company_name = empappl.getCompany_name();
-		String company_phoneNumber = empappl.getCompany_phoneNumber();
-		String taxID = empappl.getCompany_taxID();
-		String company_address = empappl.getCompany_address();
-		String company_category = empappl.getCompany_category();
+		String company_name = empappl.getCompanyName();
+		String company_phoneNumber = empappl.getCompanyPhoneNumber();
+		String taxID = empappl.getCompanyTaxID();
+		String company_address = empappl.getCompanyAddress();
+		String company_category = empappl.getCompanyCategory();
 		try {
 
 			if (check == 1) {
+				
+			
 
 				Employer_profile emppf = new Employer_profile(user_id, company_name, company_address, company_category,
 						company_phoneNumber, taxID);

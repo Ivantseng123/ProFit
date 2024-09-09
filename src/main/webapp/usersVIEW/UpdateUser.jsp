@@ -26,11 +26,11 @@
 						<form class="form-container" method="post" action="UpdateUser?action=nopwd"
 							enctype='multipart/form-data'>
 							<input type="hidden" name="user_pictureURL" id="user_pictureURL"
-								value="${user.user_pictureURL}"> <label class="form-label" for=""> 會員頭貼: </label>
+								value="${user.userPictureURL}"> <label class="form-label" for=""> 會員頭貼: </label>
 							<div class="profile-picture" style="">
 								<c:choose>
-									<c:when test="${not empty user.user_pictureURL}">
-										<img id="profileImagePreview" src="${user.user_pictureURL}"
+									<c:when test="${not empty user.userPictureURL}">
+										<img id="profileImagePreview" src="${user.userPictureURL}"
 											alt="Profile Image" />
 									</c:when>
 									<c:otherwise>
@@ -47,26 +47,26 @@
 							<button class="insertbtn" type="button" style="margin-top: 20px; margin-bottom: 20px"
 								id="fetchButton">上傳頭貼</button>
 							<label class="form-label" for="user_name"> 會員ID: </label>
-							<input class="form-input" type="text" id="user_id" name="user_id" value="${user.user_id}"
+							<input class="form-input" type="text" id="user_id" name="user_id" value="${user.userId}"
 								readonly>
 							<label class="form-label" for="user_name"> 會員姓名:
 							</label>
 							<input class="form-input" type="text" placeholder="修改會員姓名	" id="user_name" name="user_name"
-								value="${user.user_name}" required>
+								value="${user.userName}" required>
 							<label class="form-label" for="user_email">會員信箱:
 							</label>
 							<input class="form-input" type="email" placeholder="修改會員信箱" id="user_email"
-								name="user_email" value="${user.user_email}" required>
+								name="user_email" value="${user.userEmail}" required>
 							<label class="form-label" for="user_password">
 								會員密碼:
 							</label>
 							<input class="form-input" type="password" placeholder="修改會員密碼" id="user_password"
-								name="user_passwordHash" value="${user.user_passwordHash}" readonly>
+								name="user_passwordHash" value="${user.userPasswordHash}" readonly>
 							<button class="insertbtn" type="button" style="margin-top: 20px; margin-bottom: 20px"
 								onclick="togglePopup()">修改密碼</button>
 							<label class="form-label" for="user_phonenumber">會員手機號碼:</label> <input class="form-input"
 								type="text" placeholder="修改會員手機號碼" id="user_phonenumber" name="user_phoneNumber"
-								value="${user.user_phoneNumber}" required> <label class="form-label"
+								value="${user.userPhoneNumber}" required> <label class="form-label"
 								for="user_city">會員居住城市:</label> <select class="city-option" name="user_city">
 								<option value="臺北市">臺北市</option>
 								<option value="新北市">新北市</option>
@@ -91,7 +91,7 @@
 							</select> <label class="form-label" for="user_identity">會員身份:</label>
 							<div class="input-radio">
 								<c:choose>
-									<c:when test="${user.user_identity == 1}">
+									<c:when test="${user.userIdentity == 1}">
 										<input type="radio" id="identityChoice1" name="user_identity" value="1"
 											checked />
 										<label for="identityChoice1">應徵者</label>
@@ -100,7 +100,7 @@
 										<input type="radio" id="identityChoice3" name="user_identity" value="3" />
 										<label for="identityChoice3">管理員</label>
 									</c:when>
-									<c:when test="${user.user_identity == 2}">
+									<c:when test="${user.userIdentity == 2}">
 										<input type="radio" id="identityChoice1" name="user_identity" value="1" />
 										<label for="identityChoice1">應徵者</label>
 										<input type="radio" id="identityChoice2" name="user_identity" value="2"
@@ -121,9 +121,10 @@
 								</c:choose>
 							</div>
 
-							<label class="form-label" for="user_balance">會員餘額:</label> <input class="form-input"
+							<label class="form-label" for="user_balance">會員餘額:</label> 
+							<input class="form-input"
 								type="number" placeholder="修改會員餘額" id="user_balance" name="user_balance"
-								value="${user.user_balance}"> <label class="form-label"
+								value="${user.userBalance}" required> <label class="form-label"
 								for="freelancer_location_prefer">會員工作地點偏好:</label> <select class="city-prefer-option"
 								name="freelancer_location_prefer" style="margin-bottom: 20px">
 								<option value="臺北市">臺北市</option>
@@ -163,7 +164,7 @@
 							</select> <label class="form-label" for="freelancer_identity">會員接案身份:</label>
 							<div class="input-radio">
 								<c:choose>
-									<c:when test="${user.freelancer_identity == '個人兼職'}">
+									<c:when test="${user.freelancerIdentity == '個人兼職'}">
 										<input type="radio" id="identityChoice1" name="freelancer_identity" value="個人兼職"
 											checked />
 										<label for="identityChoice1">個人兼職</label>
@@ -174,7 +175,7 @@
 											value="學生" />
 										<label for="identityChoice3">學生</label>
 									</c:when>
-									<c:when test="${user.freelancer_identity == '工作室'}">
+									<c:when test="${user.freelancerIdentity == '工作室'}">
 										<input type="radio" id="identityChoice1" name="freelancer_identity"
 											value="個人兼職" />
 										<label for="identityChoice1">個人兼職</label>
@@ -185,7 +186,7 @@
 											value="學生" />
 										<label for="identityChoice3">學生</label>
 									</c:when>
-									<c:when test="${user.freelancer_identity == '學生'}">
+									<c:when test="${user.freelancerIdentity == '學生'}">
 										<input type="radio" id="identityChoice1" name="freelancer_identity"
 											value="個人兼職" />
 										<label for="identityChoice1">個人兼職</label>
@@ -213,7 +214,7 @@
 							<label class="form-label" for="freelancer_profile_status">會員接案狀態:</label>
 							<div class="input-radio">
 								<c:choose>
-									<c:when test="${user.freelancer_profile_status == 0}">
+									<c:when test="${user.freelancerProfileStatus == 0}">
 										<input type="radio" id="statusChoice1" name="freelancer_profile_status"
 											value="0" checked />
 										<label for="statusChoice1">關閉</label>
@@ -234,17 +235,17 @@
 
 							<label class="form-label" for="freelancer_disc">會員接案描述:</label>
 							<textarea rows="10" cols="50" id="freelancer_disc"
-								name="freelancer_disc">${user.freelancer_disc}</textarea>
+								name="freelancer_disc">${user.freelancerDisc}</textarea>
 							<label class="form-label" for="user_register_time">會員註冊時間:</label> <input class="form-input"
 								type="text" id="user_register_time" name="user_register_time"
-								value="${user.user_register_time}" readonly> <input type="submit" value="確定"
+								value="${user.userRegisterTime}" readonly> <input type="submit" value="確定"
 								class="btn-submit" id="submitBtn" />
 						</form>
 						<div id="popupOverlay" class="overlay-container" style="z-index: 1002">
 							<div class="popup-box-updatepwd">
 								<h2 style="color: orange;">修改密碼</h2>
 								<form class="form-group" style="height: 200px; margin: 0;" method="post"
-									action="UpdateUser?action=updatepwd&user_id=${user.user_id}">
+									action="UpdateUser?action=updatepwd&user_id=${user.userId}">
 									<label class="form-label" for="user_password">會員密碼:</label> <input
 										class="form-input-insert" type="password" placeholder="修改會員密碼"
 										id="user_password" name="user_password" required> <label class="form-label"
@@ -308,21 +309,21 @@
 							});
 						});
 
-						let city = "${user.user_city}";
+						let city = "${user.userCity}";
 						$('.city-option option').each(function () {
 							if ($(this).val() === city) { // 使用 `$(this).val()` 獲取 `<option>` 的值
 								$(this).prop('selected', true); // 使用 `prop` 方法設置 `selected` 屬性
 							}
 						})
 
-						let freelancer_location_prefer = "${user.freelancer_location_prefer}";
+						let freelancer_location_prefer = "${user.freelancerLocationPrefer}";
 						$('.city-prefer-option option').each(function () {
 							if ($(this).val() === freelancer_location_prefer) { // 使用 `$(this).val()` 獲取 `<option>` 的值
 								$(this).prop('selected', true); // 使用 `prop` 方法設置 `selected` 屬性
 							}
 						})
 
-						let exprience = "${user.freelancer_exprience}";
+						let exprience = "${user.freelancerExprience}";
 						$('.exprience-option option').each(function () {
 							if ($(this).val() === exprience) { // 使用 `$(this).val()` 獲取 `<option>` 的值
 								$(this).prop('selected', true); // 使用 `prop` 方法設置 `selected` 屬性

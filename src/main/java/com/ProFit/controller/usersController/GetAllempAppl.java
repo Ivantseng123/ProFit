@@ -2,7 +2,11 @@ package com.ProFit.controller.usersController;
 
 import java.io.IOException;
 
-import com.ProFit.dao.usersDao.empApplDao;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+import com.ProFit.dao.usersDao.HempApplDao;
+import com.ProFit.hibernateutil.HibernateUtil;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -23,9 +27,13 @@ public class GetAllempAppl extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		empApplDao empApplDao = new empApplDao();
-		System.out.println(empApplDao.getAllEmpApplInfo());
+		
+		SessionFactory factory = HibernateUtil.getSessionFactory();
+		Session session = factory.getCurrentSession();
+		
+		
+		HempApplDao empApplDao = new HempApplDao(session);
+		//System.out.println(empApplDao.getAllEmpApplInfo());
 		request.setAttribute("emps", empApplDao.getAllEmpApplInfo());
 		request.getRequestDispatcher("/usersVIEW/AllemployerAppl.jsp").forward(request, response);
 	}

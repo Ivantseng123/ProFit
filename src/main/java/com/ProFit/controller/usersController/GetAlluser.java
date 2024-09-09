@@ -4,11 +4,8 @@ import java.io.IOException;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-
-import com.ProFit.dao.usersDao.IHUserDao;
 import com.ProFit.dao.usersDao.HUserDao;
 import com.ProFit.hibernateutil.HibernateUtil;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

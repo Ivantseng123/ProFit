@@ -4,7 +4,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.HashMap;
 
-import com.ProFit.dao.usersDao.empProfileDao;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+import com.ProFit.dao.usersDao.HempProfileDao;
+import com.ProFit.dao.usersDao.IHempProfileDao;
+import com.ProFit.hibernateutil.HibernateUtil;
 import com.google.gson.Gson;
 
 import jakarta.servlet.ServletException;
@@ -17,34 +22,36 @@ import jakarta.servlet.http.HttpServletResponse;
 public class DeleteEmpPf extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-
-    public DeleteEmpPf() {
-        super();
-    }
-
+	public DeleteEmpPf() {
+		super();
+	}
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	@SuppressWarnings("unchecked")
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		BufferedReader reader = request.getReader();
-	     Gson gson = new Gson();
-	     HashMap<String, String> json = gson.fromJson(reader, HashMap.class);
+		Gson gson = new Gson();
+		HashMap<String, String> json = gson.fromJson(reader, HashMap.class);
 
+		SessionFactory factory = HibernateUtil.getSessionFactory();
+		Session session = factory.getCurrentSession();
 
-	     System.out.println(json.get("employer_profile_id"));
-	     int employer_profile_id = Integer.valueOf(json.get("employer_profile_id"));
+		//System.out.println(json.get("employer_profile_id"));
+		int employer_profile_id = Integer.valueOf(json.get("employer_profile_id"));
 
-	     empProfileDao empdao = new empProfileDao();
+		IHempProfileDao empdao = new HempProfileDao(session);
 
-		 try {
-			 empdao.deleteEmpInfo(employer_profile_id);
+		try {
+			empdao.deleteEmpInfo(employer_profile_id);
 		} catch (Exception e) {
 
 		}
 	}
 
-
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

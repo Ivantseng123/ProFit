@@ -50,17 +50,17 @@
                 <tbody>
                 	<c:forEach items="${emps}" var="emp" varStatus="s">
                     	<tr>
-                        	<td>${emp.employer_profile_id}</td>
-                        	<td>${emp.user_id}</td>
-                        	<td>${emp.user_email}</td>
-                        	<td>${emp.company_name}</td>
-                        	<td>${emp.company_phoneNumber}</td>
-                        	<td>${emp.company_address}</td>                                  
+                    		<td>${emp.employerProfileId}</td>
+							<td>${emp.userId}</td>
+							<td>${emp.getUser().userEmail}</td>
+							<td>${emp.companyName}</td>
+							<td>${emp.companyPhoneNumber}</td>
+							<td>${emp.companyAddress}</td>                                  	                               
                         	<td class="action-buttons">
-                        		<a style="text-decoration:none;" href="GetEmpPf?employer_profile_id=${emp.employer_profile_id}">
+                        		<a style="text-decoration:none;" href="GetEmpPf?employer_profile_id=${emp.employerProfileId}">
                         		<button class="view" id="viewUserBtn">查看</button>
                         		</a>
-                            	<a style="text-decoration:none;" href="GetUpdateEmpPf?employer_profile_id=${emp.employer_profile_id}">
+                            	<a style="text-decoration:none;" href="GetUpdateEmpPf?employer_profile_id=${emp.employerProfileId}">
                             	<button class="edit" id="editUserBtn">編輯</button>
                             	</a>                                   		             
                             	<button class="delete" id="deleteUserBtn">刪除</button>

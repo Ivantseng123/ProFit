@@ -1,16 +1,17 @@
 package com.ProFit.bean.usersBean;
 
 import java.io.Serializable;
-
+import java.util.LinkedList;
+import java.util.List;
 import org.hibernate.annotations.DynamicUpdate;
-
-import jakarta.persistence.Basic;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,7 +22,7 @@ private static final long serialVersionUID = 1L;
 	
 	@Id @Column(name="user_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer user_id;
+	private Integer userId;
 	
 	@Column(name="user_name")
 	private String userName;
@@ -64,6 +65,11 @@ private static final long serialVersionUID = 1L;
 	
 	@Column(name="freelancer_disc")
 	private String freelancerDisc;
+	
+	
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "user")
+	private List<Employer_application> employerApplications = new LinkedList<Employer_application>();
+	
 
 	public Users() {
 	}
@@ -74,7 +80,7 @@ private static final long serialVersionUID = 1L;
 			Integer user_balance, String freelancer_location_prefer, String freelancer_exprience,
 			String freelancer_identity, Integer freelancer_profile_status, String freelancer_disc) {
 		super();
-		this.user_id = user_id;
+		this.userId = user_id;
 		this.userName = user_name;
 		this.userEmail = user_email;
 		this.userPasswordHash = user_passwordHash;
@@ -97,7 +103,7 @@ private static final long serialVersionUID = 1L;
 			Integer user_balance, String freelancer_location_prefer, String freelancer_exprience,
 			String freelancer_identity, Integer freelancer_profile_status, String freelancer_disc) {
 		super();
-		this.user_id = user_id;
+		this.userId = user_id;
 		this.userName = user_name;
 		this.userEmail = user_email;
 		this.userPasswordHash = user_passwordHash;
@@ -127,7 +133,7 @@ private static final long serialVersionUID = 1L;
 	}
 
 	public Users(String user_name, String user_email, String user_passwordHash,
-			String user_phoneNumber, String user_city, Integer user_identity, Integer freelancer_profile_status) {
+			String user_phoneNumber, String user_city, Integer user_identity,Integer user_balance ,Integer freelancer_profile_status) {
 		super();
 		this.userName = user_name;
 		this.userEmail = user_email;
@@ -135,108 +141,166 @@ private static final long serialVersionUID = 1L;
 		this.userPhoneNumber = user_phoneNumber;
 		this.userCity = user_city;
 		this.userIdentity = user_identity;
+		this.userBalance = user_balance;
 		this.freelancerProfileStatus = freelancer_profile_status;
 	}
 
 
-	public Integer getUser_id() {
-		return user_id;
-	}
-	public void setUser_id(Integer user_id) {
-		this.user_id = user_id;
-	}
-	public String getUser_name() {
-		return userName;
-	}
-	public void setUser_name(String user_name) {
-		this.userName = user_name;
-	}
-	public String getUser_email() {
-		return userEmail;
-	}
-	public void setUser_email(String user_email) {
-		this.userEmail = user_email;
-	}
-	public String getUser_passwordHash() {
-		return userPasswordHash;
-	}
-	public void setUser_passwordHash(String user_passwordHash) {
-		this.userPasswordHash = user_passwordHash;
-	}
-	public String getUser_phoneNumber() {
-		return userPhoneNumber;
-	}
-	public void setUser_phoneNumber(String user_phoneNumber) {
-		this.userPhoneNumber = user_phoneNumber;
-	}
-	public String getUser_city() {
-		return userCity;
-	}
-	public void setUser_city(String user_city) {
-		this.userCity = user_city;
+	
+
+	public Integer getUserId() {
+		return userId;
 	}
 
-	public String getUser_register_time() {
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+
+	public String getUserName() {
+		return userName;
+	}
+
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+
+	public String getUserEmail() {
+		return userEmail;
+	}
+
+
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
+
+
+	public String getUserPasswordHash() {
+		return userPasswordHash;
+	}
+
+
+	public void setUserPasswordHash(String userPasswordHash) {
+		this.userPasswordHash = userPasswordHash;
+	}
+
+
+	public String getUserPhoneNumber() {
+		return userPhoneNumber;
+	}
+
+
+	public void setUserPhoneNumber(String userPhoneNumber) {
+		this.userPhoneNumber = userPhoneNumber;
+	}
+
+
+	public String getUserCity() {
+		return userCity;
+	}
+
+
+	public void setUserCity(String userCity) {
+		this.userCity = userCity;
+	}
+
+
+	public Integer getUserIdentity() {
+		return userIdentity;
+	}
+
+
+	public void setUserIdentity(Integer userIdentity) {
+		this.userIdentity = userIdentity;
+	}
+
+
+	public String getUserRegisterTime() {
 		return userRegisterTime;
 	}
 
 
-	public void setUser_register_time(String user_register_time) {
-		this.userRegisterTime = user_register_time;
+	public void setUserRegisterTime(String userRegisterTime) {
+		this.userRegisterTime = userRegisterTime;
 	}
 
-	public Integer getUser_identity() {
-		return userIdentity;
-	}
-	public void setUser_identity(Integer user_identity) {
-		this.userIdentity = user_identity;
-	}
-	public String getUser_pictureURL() {
+
+	public String getUserPictureURL() {
 		return userPictureURL;
 	}
-	public void setUser_pictureURL(String user_pictureURL) {
-		this.userPictureURL = user_pictureURL;
+
+
+	public void setUserPictureURL(String userPictureURL) {
+		this.userPictureURL = userPictureURL;
 	}
-	public Integer getUser_balance() {
+
+
+	public Integer getUserBalance() {
 		return userBalance;
 	}
-	public void setUser_balance(Integer user_balance) {
-		this.userBalance = user_balance;
+
+
+	public void setUserBalance(Integer userBalance) {
+		this.userBalance = userBalance;
 	}
-	public String getFreelancer_location_prefer() {
+
+
+	public String getFreelancerLocationPrefer() {
 		return freelancerLocationPrefer;
 	}
-	public void setFreelancer_location_prefer(String freelancer_location_prefer) {
-		this.freelancerLocationPrefer = freelancer_location_prefer;
+
+
+	public void setFreelancerLocationPrefer(String freelancerLocationPrefer) {
+		this.freelancerLocationPrefer = freelancerLocationPrefer;
 	}
-	public String getFreelancer_exprience() {
+
+
+	public String getFreelancerExprience() {
 		return freelancerExprience;
 	}
-	public void setFreelancer_exprience(String freelancer_exprience) {
-		this.freelancerExprience = freelancer_exprience;
+
+
+	public void setFreelancerExprience(String freelancerExprience) {
+		this.freelancerExprience = freelancerExprience;
 	}
-	public String getFreelancer_identity() {
+
+
+	public String getFreelancerIdentity() {
 		return freelancerIdentity;
 	}
-	public void setFreelancer_identity(String freelancer_identity) {
-		this.freelancerIdentity = freelancer_identity;
+
+
+	public void setFreelancerIdentity(String freelancerIdentity) {
+		this.freelancerIdentity = freelancerIdentity;
 	}
-	public Integer getFreelancer_profile_status() {
-		return freelancerProfileStatus;	
+
+
+	public Integer getFreelancerProfileStatus() {
+		return freelancerProfileStatus;
 	}
-	public void setFreelancer_profile_status(Integer freelancer_profile_status) {
-		this.freelancerProfileStatus = freelancer_profile_status;
+
+
+	public void setFreelancerProfileStatus(Integer freelancerProfileStatus) {
+		this.freelancerProfileStatus = freelancerProfileStatus;
 	}
-	public String getFreelancer_disc() {
+
+
+	public String getFreelancerDisc() {
 		return freelancerDisc;
 	}
-	public void setFreelancer_disc(String freelancer_discy) {
-		this.freelancerDisc = freelancer_discy;
+
+
+	public void setFreelancerDisc(String freelancerDisc) {
+		this.freelancerDisc = freelancerDisc;
 	}
+
 
 	@Override
 	public String toString() {
-		return "Users [user_id=" + user_id + ", user_name=" + userName + ", user_email=" + userEmail
+		return "Users [user_id=" + userId + ", user_name=" + userName + ", user_email=" + userEmail
 				+ ", user_passwordHash=" + userPasswordHash + ", user_phoneNumber=" + userPhoneNumber + ", user_city="
 				+ userCity + ", user_identity=" + userIdentity + ", user_register_time=" + userRegisterTime
 				+ ", user_pictureURL=" + userPictureURL + ", user_balance=" + userBalance
@@ -244,6 +308,15 @@ private static final long serialVersionUID = 1L;
 				+ freelancerExprience + ", freelancer_identity=" + freelancerIdentity + ", freelancer_profile_status="
 				+ freelancerProfileStatus + ", freelancer_disc=" + freelancerDisc + "]";
 	}
+	
+	
+	public List<Employer_application> getEmployerApplications() {
+		return employerApplications;
+	}
 
+
+	public void setEmployerApplications(List<Employer_application> employerApplications) {
+		this.employerApplications = employerApplications;
+	}
 
 }
