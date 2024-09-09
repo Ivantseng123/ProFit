@@ -25,12 +25,10 @@
             <form method="get" action="${pageContext.request.contextPath}/JobOrderServlet">
                 <input type="hidden" name="action" value="combinedSearch">
                 <div class="row mb-3">
-                    <!-- 職缺申請ID -->
                     <div class="col-md-4">
                         <label for="job_application_id">職缺申請ID:</label>
                         <input type="number" id="job_application_id" name="job_application_id" class="form-control">
                     </div>
-                    <!-- 訂單日期範圍 -->
                     <div class="col-md-4">
                         <label for="start_date">訂單日期從:</label>
                         <input type="date" id="start_date" name="start_date" class="form-control">
@@ -42,7 +40,6 @@
                 </div>
 
                 <div class="row mb-3">
-                    <!-- 訂單狀態 -->
                     <div class="col-md-6">
                         <label for="job_order_status">訂單狀態:</label>
                         <select id="job_order_status" name="job_order_status" class="form-select">
@@ -60,6 +57,40 @@
                     </div>
                 </div>
             </form>
+        </div>
+
+        <!-- 新增訂單按鈕 -->
+        <div align="center" class="mb-3">
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addOrderModal">新增訂單</button>
+        </div>
+
+        <!-- 新增訂單模態框 -->
+        <div class="modal fade" id="addOrderModal" tabindex="-1" aria-labelledby="addOrderModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form method="post" action="${pageContext.request.contextPath}/JobOrderServlet" id="addOrderForm" onsubmit="return confirm('確定要新增這筆訂單嗎？');">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addOrderModalLabel">新增訂單</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" name="action" value="insert">
+                            職缺申請ID: <input type="number" id="jobApplicationId" name="job_application_id" required class="form-control"><br>
+                            訂單狀態: <select id="jobOrderStatus" name="job_order_status" required class="form-select">
+                                <option value="Processing">處理中</option>
+                                <option value="Completed">完成</option>
+                                <option value="Canceled">取消</option>
+                            </select><br>
+                            訂單備註: <input type="text" id="jobNotes" name="job_notes" class="form-control"><br>
+                            總金額: <input type="number" id="totalAmount" name="total_amount" required class="form-control"><br>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                            <button type="submit" class="btn btn-primary">新增</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
 
         <!-- 訂單表格 -->
@@ -86,8 +117,17 @@
                             <td>${order.jobNotes}</td>
                             <td>${order.jobAmount}</td>
                             <td>
+                                <!-- 只有狀態為 Processing 才顯示編輯和刪除按鈕 -->
                                 <c:if test="${order.jobOrderStatus == 'Processing'}">
-                                    <a href="updateJobOrder.jsp?job_orders_id=${order.jobOrdersId}" class="btn btn-primary">編輯</a>
+                                    <!-- 編輯按鈕觸發模態框 -->
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" 
+                                            data-bs-target="#updateOrderModal" 
+                                            onclick="populateUpdateForm('${order.jobOrdersId}', '${order.jobApplicationId}', 
+                                                    '${order.jobOrderStatus}', '${order.jobNotes}', '${order.jobAmount}')">
+                                        編輯
+                                    </button>
+
+                                    <!-- 刪除按鈕 -->
                                     <form method="post" action="${pageContext.request.contextPath}/JobOrderServlet" style="display:inline;" onsubmit="return confirm('確定要刪除這筆訂單嗎？');">
                                         <input type="hidden" name="action" value="delete">
                                         <input type="hidden" name="job_orders_id" value="${order.jobOrdersId}">
@@ -100,6 +140,50 @@
                 </tbody>
             </table>
         </div>
+
+        <!-- 更新訂單模態框 -->
+        <div class="modal fade" id="updateOrderModal" tabindex="-1" aria-labelledby="updateOrderModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form method="post" action="${pageContext.request.contextPath}/JobOrderServlet" id="updateOrderForm" onsubmit="return confirm('確定要更新這筆訂單嗎？');">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="updateOrderModalLabel">更新訂單</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" name="action" value="applyUpdate">
+                            <input type="hidden" name="job_orders_id" id="updateJobOrdersId">
+
+                            職缺申請ID: <input type="number" id="updateJobApplicationId" name="job_application_id" required class="form-control"><br>
+                            訂單狀態: <select id="updateJobOrderStatus" name="job_order_status" required class="form-select">
+                                <option value="Processing">處理中</option>
+                                <option value="Completed">完成</option>
+                                <option value="Canceled">取消</option>
+                            </select><br>
+                            訂單備註: <input type="text" id="updateJobNotes" name="job_notes" class="form-control"><br>
+                            總金額: <input type="number" id="updateTotalAmount" name="total_amount" required class="form-control"><br>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                            <button type="submit" class="btn btn-primary">更新</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // 填充更新表單的數據
+        function populateUpdateForm(jobOrdersId, jobApplicationId, jobOrderStatus, jobNotes, jobAmount) {
+            document.getElementById('updateJobOrdersId').value = jobOrdersId;
+            document.getElementById('updateJobApplicationId').value = jobApplicationId;
+            document.getElementById('updateJobOrderStatus').value = jobOrderStatus;
+            document.getElementById('updateJobNotes').value = jobNotes;
+            document.getElementById('updateTotalAmount').value = jobAmount;
+        }
+    </script>
 </body>
 </html>

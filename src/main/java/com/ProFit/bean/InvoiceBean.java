@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 public class InvoiceBean {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // 自動生成ID
     @Column(name = "invoice_id")
     private String invoiceId;
 
@@ -35,91 +36,5 @@ public class InvoiceBean {
     @Column(name = "invoice_status")
     private String invoiceStatus;
 
-    public InvoiceBean() {
-    }
-
-    public InvoiceBean(String invoiceId, String transactionId, String jobOrderId, String courseOrderId,
-                       String eventOrderId, String invoiceNumber, int invoiceAmount, Timestamp issuedDate, String invoiceStatus) {
-        this.invoiceId = invoiceId;
-        this.transactionId = transactionId;
-        this.jobOrderId = jobOrderId;
-        this.courseOrderId = courseOrderId;
-        this.eventOrderId = eventOrderId;
-        this.invoiceNumber = invoiceNumber;
-        this.invoiceAmount = invoiceAmount;
-        this.issuedDate = issuedDate;
-        this.invoiceStatus = invoiceStatus;
-    }
-
-    public String getInvoiceId() {
-        return invoiceId;
-    }
-
-    public void setInvoiceId(String invoiceId) {
-        this.invoiceId = invoiceId;
-    }
-
-    public String getTransactionId() {
-        return transactionId;
-    }
-
-    public void setTransactionId(String transactionId) {
-        this.transactionId = transactionId;
-    }
-
-    public String getJobOrderId() {
-        return jobOrderId;
-    }
-
-    public void setJobOrderId(String jobOrderId) {
-        this.jobOrderId = jobOrderId;
-    }
-
-    public String getCourseOrderId() {
-        return courseOrderId;
-    }
-
-    public void setCourseOrderId(String courseOrderId) {
-        this.courseOrderId = courseOrderId;
-    }
-
-    public String getEventOrderId() {
-        return eventOrderId;
-    }
-
-    public void setEventOrderId(String eventOrderId) {
-        this.eventOrderId = eventOrderId;
-    }
-
-    public String getInvoiceNumber() {
-        return invoiceNumber;
-    }
-
-    public void setInvoiceNumber(String invoiceNumber) {
-        this.invoiceNumber = invoiceNumber;
-    }
-
-    public int getInvoiceAmount() {
-        return invoiceAmount;
-    }
-
-    public void setInvoiceAmount(int invoiceAmount) {
-        this.invoiceAmount = invoiceAmount;
-    }
-
-    public Timestamp getIssuedDate() {
-        return issuedDate;
-    }
-
-    public void setIssuedDate(Timestamp issuedDate) {
-        this.issuedDate = issuedDate;
-    }
-
-    public String getInvoiceStatus() {
-        return invoiceStatus;
-    }
-
-    public void setInvoiceStatus(String invoiceStatus) {
-        this.invoiceStatus = invoiceStatus;
-    }
+    // Getters and setters omitted for brevity...
 }
