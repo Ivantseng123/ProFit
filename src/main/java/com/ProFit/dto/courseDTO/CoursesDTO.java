@@ -27,8 +27,8 @@ public class CoursesDTO {
 	public CoursesDTO(CourseBean courseBean) {
 		this.courseId = courseBean.getCourseId();    // 為前端表格中添加 ID
 		this.courseName = courseBean.getCourseName();
-		this.courseCreaterId = courseBean.getCourseCreater().getUser_id().toString();
-		this.courseCreaterName = courseBean.getCourseCreater().getUser_name();
+		this.courseCreaterId = courseBean.getCourseCreater().getUserId().toString();
+		this.courseCreaterName = courseBean.getCourseCreater().getUserName();
 		this.courseCategoryId = courseBean.getMajorCategory().getMajorCategoryId().toString();
 		this.courseCategoryName = courseBean.getMajorCategory().getCategoryName();
 		this.courseInformation = courseBean.getCourseInformation();
