@@ -1,36 +1,43 @@
 package com.ProFit.bean.majorsBean;
 
+import com.ProFit.bean.usersBean.Users;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "user_major")
 public class UserMajorBean implements java.io.Serializable{
 
 	private static final long serialVersionUID = 1L;
-	private Integer userId;
-	private Integer majorId;
-	private String userName;  // 新增字段
-    private String majorName; // 新增字段
+	
+	@EmbeddedId
+	private UserMajorPK id;
+	
+	// 構造函數
+    public UserMajorBean() {
+    }
 
-	public Integer getUserId() {
-		return userId;
-	}
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	public String getMajorName() {
-		return majorName;
-	}
-	public void setMajorName(String majorName) {
-		this.majorName = majorName;
-	}
-	public Integer getMajorId() {
-		return majorId;
-	}
-	public void setMajorId(Integer majorId) {
-		this.majorId = majorId;
-	}
+    public UserMajorBean(UserMajorPK id) {
+        this.id = id;
+    }
 
+    // Getter 和 Setter
+    public UserMajorPK getId() {
+        return id;
+    }
+
+    public void setId(UserMajorPK id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "UserMajorBean [id=" + id + "]";
+    }
+	
+	
 }
