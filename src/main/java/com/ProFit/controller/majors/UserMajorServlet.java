@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.ProFit.bean.UserMajorBean;
+import com.ProFit.bean.majorsBean.UserMajorBean;
 import com.ProFit.dao.majorsCRUD.UserMajorDAO;
 
 import jakarta.servlet.RequestDispatcher;

@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-import com.ProFit.bean.ServiceBean;
+import com.ProFit.bean.servicesBean.ServiceBean;
 import com.ProFit.dao.servicesCRUD.ServiceDAO;
 
 import jakarta.servlet.RequestDispatcher;

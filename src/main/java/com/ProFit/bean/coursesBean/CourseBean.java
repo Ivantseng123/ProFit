@@ -3,7 +3,7 @@ package com.ProFit.bean.coursesBean;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.ProFit.bean.MajorCategoryBeam;
+import com.ProFit.bean.majorsBean.MajorCategoryBean;
 import com.ProFit.bean.usersBean.Users;
 
 import jakarta.persistence.CascadeType;
@@ -47,7 +47,7 @@ public class CourseBean implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="course_category")
-	private MajorCategoryBeam majorCategory;
+	private MajorCategoryBean majorCategory;
 
 	@Column(name = "course_information")
 	private String courseInformation;
@@ -139,12 +139,12 @@ public class CourseBean implements java.io.Serializable {
 	}
 
 
-	public MajorCategoryBeam getMajorCategory() {
+	public MajorCategoryBean getMajorCategory() {
 		return majorCategory;
 	}
 
 
-	public void setMajorCategory(MajorCategoryBeam majorCategory) {
+	public void setMajorCategory(MajorCategoryBean majorCategory) {
 		this.majorCategory = majorCategory;
 	}
 

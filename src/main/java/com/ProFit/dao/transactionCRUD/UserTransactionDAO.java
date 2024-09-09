@@ -16,14 +16,16 @@ public class UserTransactionDAO {
         this.session = session;
     }
 
+    // 獲取所有交易記錄
     public List<UserTransactionBean> getAllTransactions() {
-        Query<UserTransactionBean> query = session.createQuery(
-                "from UserTransactionBean order by transactionId desc", UserTransactionBean.class);
+        Query<UserTransactionBean> query = session.createQuery("from UserTransactionBean order by createdAt desc", UserTransactionBean.class);
         return query.list();
     }
 
+    // 按條件篩選交易記錄
     public List<UserTransactionBean> getTransactionsByFilters(String userId, String transactionType, String transactionStatus, Timestamp startDate, Timestamp endDate) {
         StringBuilder hql = new StringBuilder("from UserTransactionBean where 1=1 ");
+
         if (userId != null && !userId.isEmpty()) {
             hql.append("and userId = :userId ");
         }
@@ -39,9 +41,10 @@ public class UserTransactionDAO {
         if (endDate != null) {
             hql.append("and createdAt <= :endDate ");
         }
-        hql.append("order by transactionId desc");
+        hql.append("order by createdAt desc");
 
         Query<UserTransactionBean> query = session.createQuery(hql.toString(), UserTransactionBean.class);
+
         if (userId != null && !userId.isEmpty()) {
             query.setParameter("userId", Integer.parseInt(userId));
         }
@@ -61,6 +64,7 @@ public class UserTransactionDAO {
         return query.list();
     }
 
+    // 插入交易
     public boolean insertTransaction(UserTransactionBean transaction) {
         Transaction tx = session.beginTransaction();
         try {
@@ -76,9 +80,14 @@ public class UserTransactionDAO {
         }
     }
 
+    // 更新交易
     public boolean updateTransaction(UserTransactionBean transaction) {
         Transaction tx = session.beginTransaction();
         try {
+            // 如果交易狀態為完成，則設置完成時間
+            if ("completed".equals(transaction.getTransactionStatus())) {
+                transaction.setCompletionAt(new Timestamp(System.currentTimeMillis()));
+            }
             session.update(transaction);
             tx.commit();
             return true;
@@ -91,6 +100,7 @@ public class UserTransactionDAO {
         }
     }
 
+    // 刪除交易
     public boolean deleteTransaction(String transactionId) {
         Transaction tx = session.beginTransaction();
         try {
@@ -110,6 +120,7 @@ public class UserTransactionDAO {
         }
     }
 
+    // 根據ID獲取交易
     public UserTransactionBean getTransactionById(String transactionId) {
         return session.get(UserTransactionBean.class, transactionId);
     }

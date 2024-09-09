@@ -94,6 +94,7 @@ public class JobOrderServlet extends HttpServlet {
         request.getRequestDispatcher("/transactionVIEW/jobOrders.jsp").forward(request, response);
     }
 
+    // 新增訂單功能
     private void insertOrder(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
