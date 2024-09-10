@@ -62,29 +62,38 @@ public class UserMajorServlet extends HttpServlet {
 
     private void listUserMajors(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-        String userName = request.getParameter("userName");
+        String userIdStr = request.getParameter("userId");
+        
+        if (userIdStr == null) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid user ID");
+            return;
+        }      
+        int userId = Integer.parseInt(userIdStr);
+        
+        
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         HUserMajorDAO userMajorDAO = new HUserMajorDAO(session);
-
-        Users user = session.createQuery("FROM Users WHERE userName = :userName", Users.class)
-                            .setParameter("userName", userName)
-                            .uniqueResult();
+       
+        Users user = session.get(Users.class, userId);
         if (user == null) {
+            session.getTransaction().rollback();
             response.sendError(HttpServletResponse.SC_NOT_FOUND, "User not found");
             return;
         }
+        
 
         List<UserMajorBean> userMajors = userMajorDAO.findMajorsByUserId(user.getUserId());
-        Map<String, String> allMajors = userMajorDAO.getAllMajors();
-        Map<String, String> availableMajors = new HashMap<>(allMajors);
+        Map<Integer, String> allMajors = userMajorDAO.getAllMajors();
+        Map<Integer, String> availableMajors = new HashMap<>(allMajors);
 
+        
         for (UserMajorBean userMajor : userMajors) {
-            availableMajors.remove(userMajor.getId().getMajor().getMajorName());
+            availableMajors.remove(userMajor.getId().getMajor().getMajorId());
         }
 
         request.setAttribute("userMajors", userMajors);
-        request.setAttribute("userId", user.getUserId());
-        request.setAttribute("userName", userName);
+        request.setAttribute("userId", userId);
+        request.setAttribute("userName", user.getUserName());
         request.setAttribute("availableMajors", availableMajors);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/majorsVIEW/UserMajorList.jsp");
         dispatcher.forward(request, response);
@@ -92,13 +101,18 @@ public class UserMajorServlet extends HttpServlet {
 
     private void listMajorUsers(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String majorName = request.getParameter("majorName");
+        String majorIdStr = request.getParameter("majorId");
+        
+        if (majorIdStr == null) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid major ID");
+            return;
+        }      
+        int majorId = Integer.parseInt(majorIdStr);
+        
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         HUserMajorDAO userMajorDAO = new HUserMajorDAO(session);
 
-        MajorBean major = session.createQuery("FROM MajorBean WHERE majorName = :majorName", MajorBean.class)
-                                 .setParameter("majorName", majorName)
-                                 .uniqueResult();
+        MajorBean major = session.get(MajorBean.class, majorId);
         if (major == null) {
             response.sendError(HttpServletResponse.SC_NOT_FOUND, "Major not found");
             return;
@@ -106,8 +120,8 @@ public class UserMajorServlet extends HttpServlet {
 
         List<UserMajorBean> majorUsers = userMajorDAO.findUsersByMajorId(major.getMajorId());
         request.setAttribute("majorUsers", majorUsers);
-        request.setAttribute("majorId", major.getMajorId());
-        request.setAttribute("majorName", majorName);
+        request.setAttribute("majorId", majorId);
+        request.setAttribute("majorName", major.getMajorName());
         RequestDispatcher dispatcher = request.getRequestDispatcher("/majorsVIEW/MajorUserList.jsp");
         dispatcher.forward(request, response);
     }
@@ -118,8 +132,8 @@ public class UserMajorServlet extends HttpServlet {
         HUserMajorDAO userMajorDAO = new HUserMajorDAO(session);
 
         List<UserMajorBean> allUserMajors = userMajorDAO.findAllUserMajors();
-        Map<String, String> allUsers = userMajorDAO.getAllUsers();
-        Map<String, String> allMajors = userMajorDAO.getAllMajors();
+        Map<Integer, String> allUsers = userMajorDAO.getAllUsers();
+        Map<Integer, String> allMajors = userMajorDAO.getAllMajors();
 
         request.setAttribute("allUserMajors", allUserMajors);
         request.setAttribute("allUsers", allUsers);
@@ -131,29 +145,28 @@ public class UserMajorServlet extends HttpServlet {
 
     private void addUserMajor(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String userName = request.getParameter("userName");
-        String majorName = request.getParameter("majorName");
+        int userId = Integer.parseInt(request.getParameter("userId"));
+        int majorId =Integer.parseInt(request.getParameter("majorId"));
+        //System.out.println(request.getParameter("majorId"));
+        
 
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         HUserMajorDAO userMajorDAO = new HUserMajorDAO(session);
 
-        Users user = session.createQuery("FROM Users WHERE userName = :userName", Users.class)
-                            .setParameter("userName", userName)
-                            .uniqueResult();
-        MajorBean major = session.createQuery("FROM MajorBean WHERE majorName = :majorName", MajorBean.class)
-                                 .setParameter("majorName", majorName)
-                                 .uniqueResult();
-
+        Users user = session.get(Users.class, userId);
+        MajorBean major = session.get(MajorBean.class, majorId);
+        
         if (user == null || major == null) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid user or major");
-            return;
-        }
-
+        	System.out.println("user or major is not exist");
+        	return;
+		}
+        
         UserMajorPK id = new UserMajorPK(user, major);
         UserMajorBean userMajor = new UserMajorBean(id);
         userMajorDAO.insertUserMajor(userMajor);
-
-        response.sendRedirect(request.getContextPath() + "/userMajor/userMajors?userName=" + userName);
+        
+        response.sendRedirect(request.getContextPath() + "/userMajor/userMajors?userId=" + userId);
+        
     }
 
     private void deleteUserMajor(HttpServletRequest request, HttpServletResponse response)
@@ -166,6 +179,6 @@ public class UserMajorServlet extends HttpServlet {
 
         userMajorDAO.deleteUserMajor(userId, majorId);
 
-        response.sendRedirect(request.getContextPath() + "/userMajor");
+        response.sendRedirect(request.getContextPath() + "/userMajor/");
     }
 }
