@@ -1,8 +1,8 @@
 package com.ProFit.dao.usersDao;
 
 import java.util.List;
-
 import com.ProFit.bean.usersBean.Employer_profile;
+
 
 public interface IHempProfileDao {
 
@@ -17,5 +17,7 @@ public interface IHempProfileDao {
 	List<Employer_profile> getAllEmpInfo();
 
 	Employer_profile getEmpPfInfoByID(int employer_profile_id);
+
+	Employer_profile getEmpPfInfoByUserId(int user_id);
 
 }

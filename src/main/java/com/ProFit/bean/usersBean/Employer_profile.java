@@ -3,7 +3,6 @@ package com.ProFit.bean.usersBean;
 import java.io.Serializable;
 
 import org.hibernate.annotations.DynamicUpdate;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -11,8 +10,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+
 @Entity
 @DynamicUpdate
 @Table(name="employer_profile")
@@ -25,7 +25,7 @@ public class Employer_profile implements Serializable{
 	private Integer employerProfileId;
 	
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="user_id",insertable = false,updatable = false)
 	private Users user;
 	

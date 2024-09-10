@@ -4,10 +4,11 @@ import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import com.ProFit.bean.usersBean.Pwd_reset_tokens;
-import com.ProFit.dao.usersDao.PwdResetTokensDao;
-
+import com.ProFit.dao.usersDao.HPwdResetTokensDao;
+import com.ProFit.hibernateutil.HibernateUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -23,15 +24,21 @@ public class InsertToken extends HttpServlet {
     }
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
+		SessionFactory factory = HibernateUtil.getSessionFactory();
+		Session session = factory.getCurrentSession();
+		
 		Integer user_id = Integer.valueOf(request.getParameter("user_id"));
-		PwdResetTokensDao pwdResetTokensDao = new PwdResetTokensDao();
+		HPwdResetTokensDao pwdResetTokensDao = new HPwdResetTokensDao(session);
 		try {
 			Pwd_reset_tokens pwd_reset_tokens = new Pwd_reset_tokens(user_id, generateToken());
 
 			pwdResetTokensDao.saveTokensInfo(pwd_reset_tokens);
+			
+			session.flush();  // 將緩存的更改同步到數據庫
+			session.clear();  // 清空緩存，強制從數據庫重新查詢
 
-
+			
 			request.getRequestDispatcher("/GetAlltoken").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();

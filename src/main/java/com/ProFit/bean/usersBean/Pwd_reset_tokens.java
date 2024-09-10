@@ -2,78 +2,102 @@ package com.ProFit.bean.usersBean;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+
+@Entity
+@Table(name="password_reset_tokens")
 public class Pwd_reset_tokens implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private Integer token_id;
-	private Integer user_id;
-	private String user_email;
-	private String user_tokenHash;
-	private String expiration_time;
+	@Id @Column(name="token_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer tokenId;
+	
+	@Column(name="user_id")
+	private Integer userId;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="user_id",insertable = false,updatable = false)
+	private Users user;
+	
+	@Column(name="user_tokenHash")
+	private String userTokenHash;
+	
+	@Column(name="expiration_time", updatable = false, insertable = false)
+	private String expirationTime;
 
 
 
-	public Pwd_reset_tokens(Integer token_id, Integer user_id, String user_email, String user_tokenHash,
+	public Pwd_reset_tokens(Integer token_id, Integer user_id,String user_tokenHash,
 			String expiration_time) {
 		super();
-		this.token_id = token_id;
-		this.user_id = user_id;
-		this.user_email = user_email;
-		this.user_tokenHash = user_tokenHash;
-		this.expiration_time = expiration_time;
+		this.tokenId = token_id;
+		this.userId = user_id;	
+		this.userTokenHash = user_tokenHash;
+		this.expirationTime = expiration_time;
 	}
-
-	public Pwd_reset_tokens(Integer token_id, Integer user_id, String user_tokenHash,
-			String expiration_time) {
-		super();
-		this.token_id = token_id;
-		this.user_id = user_id;
-		this.user_tokenHash = user_tokenHash;
-		this.expiration_time = expiration_time;
-	}
-
 
 	public Pwd_reset_tokens(Integer user_id, String user_tokenHash
 			) {
 		super();
-		this.user_id = user_id;
-		this.user_tokenHash = user_tokenHash;
+		this.userId = user_id;
+		this.userTokenHash = user_tokenHash;
 	}
 
 	public Pwd_reset_tokens() {
 
 	}
 
-	public Integer getToken_id() {
-		return token_id;
+	public Integer getTokenId() {
+		return tokenId;
 	}
-	public void setToken_id(Integer token_id) {
-		this.token_id = token_id;
+
+	public void setTokenId(Integer tokenId) {
+		this.tokenId = tokenId;
 	}
-	public Integer getUser_id() {
-		return user_id;
+
+	public Integer getUserId() {
+		return userId;
 	}
-	public void setUser_id(Integer user_id) {
-		this.user_id = user_id;
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
-	public String getUser_email() {
-		return user_email;
+
+	public Users getUser() {
+		return user;
 	}
-	public void setUser_email(String user_email) {
-		this.user_email = user_email;
+
+	public void setUser(Users user) {
+		this.user = user;
 	}
-	public String getUser_tokenHash() {
-		return user_tokenHash;
+
+	public String getUserTokenHash() {
+		return userTokenHash;
 	}
-	public void setUser_tokenHash(String user_tokenHash) {
-		this.user_tokenHash = user_tokenHash;
+
+	public void setUserTokenHash(String userTokenHash) {
+		this.userTokenHash = userTokenHash;
 	}
-	public String getExpiration_time() {
-		return expiration_time;
+
+	public String getExpirationTime() {
+		return expirationTime;
 	}
-	public void setExpiration_time(String expiration_time) {
-		this.expiration_time = expiration_time;
+
+	public void setExpirationTime(String expirationTime) {
+		this.expirationTime = expirationTime;
 	}
+
+	
 
 }
