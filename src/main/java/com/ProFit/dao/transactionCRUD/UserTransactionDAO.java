@@ -84,11 +84,10 @@ public class UserTransactionDAO {
     public boolean updateTransaction(UserTransactionBean transaction) {
         Transaction tx = session.beginTransaction();
         try {
-            // 如果交易狀態為完成，則設置完成時間
             if ("completed".equals(transaction.getTransactionStatus())) {
                 transaction.setCompletionAt(new Timestamp(System.currentTimeMillis()));
             }
-            session.update(transaction);
+            session.merge(transaction);  
             tx.commit();
             return true;
         } catch (Exception e) {
@@ -99,6 +98,9 @@ public class UserTransactionDAO {
             return false;
         }
     }
+
+
+
 
     // 刪除交易
     public boolean deleteTransaction(String transactionId) {

@@ -20,26 +20,26 @@
             <h2>職缺訂單管理</h2>
         </div>
 
-        <!-- 查詢表單 -->
+         <!-- 查詢表單 -->
         <div class="dashboard-header">
             <form method="get" action="${pageContext.request.contextPath}/JobOrderServlet">
                 <input type="hidden" name="action" value="combinedSearch">
                 <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label for="job_application_id">職缺申請ID:</label>
-                        <input type="number" id="job_application_id" name="job_application_id" class="form-control">
-                    </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <label for="start_date">訂單日期從:</label>
                         <input type="date" id="start_date" name="start_date" class="form-control">
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <label for="end_date">到:</label>
                         <input type="date" id="end_date" name="end_date" class="form-control">
                     </div>
                 </div>
 
                 <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="job_application_id">職缺申請ID:</label>
+                        <input type="number" id="job_application_id" name="job_application_id" class="form-control">
+                    </div>
                     <div class="col-md-6">
                         <label for="job_order_status">訂單狀態:</label>
                         <select id="job_order_status" name="job_order_status" class="form-select">

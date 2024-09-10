@@ -289,23 +289,23 @@ CREATE TABLE user_transactions (
     transaction_type VARCHAR(10) CHECK (transaction_type IN ('deposit', 'withdrawal', 'payment', 'refund')) NOT NULL, -- 交易類型
     transaction_amount int NOT NULL,                 -- 交易金額
     transaction_status VARCHAR(10) CHECK (transaction_status IN ('pending', 'completed', 'failed')) NOT NULL, -- 交易狀態
-    created_at DATETIME2 NOT NULL,          -- 交易時間
+    created_at DATETIME2 NOT NULL,          -- 創建時間
+	completion_at DATETIME2                 --完成時間
     FOREIGN KEY (user_id) REFERENCES users(user_id), -- 外鍵關聯到用戶表
 );
 
 -- 3. 建立 invoices 表
 CREATE TABLE invoices (
-    invoice_id NVARCHAR(50) PRIMARY KEY,	   -- 發票ID
+    invoice_number NVARCHAR(50) PRIMARY KEY,   -- 發票號碼，同時作為主鍵（PK）
     transaction_id NVARCHAR(50),               -- 交易ID，與交易一對一關聯
     job_order_id NVARCHAR(50),                 -- 職缺訂單ID，新增關聯字段
-	course_order_id NVARCHAR(50),			   -- 課程訂單ID
-	event_order_id NVARCHAR(50),			   -- 活動訂單ID
-    invoice_number VARCHAR(10) NOT NULL,       -- 發票號碼
-    invoice_amount int NOT NULL,					   -- 發票金額
+    course_order_id NVARCHAR(50),              -- 課程訂單ID
+    event_order_id NVARCHAR(50),               -- 活動訂單ID
+    invoice_amount int NOT NULL,               -- 發票金額
     issued_date DATETIME2 NOT NULL,            -- 發票開具日期
     invoice_status VARCHAR(10) CHECK (invoice_status IN ('open', 'canceled')) NOT NULL, -- 發票狀態
     FOREIGN KEY (transaction_id) REFERENCES user_transactions(transaction_id), -- 外鍵關聯到交易表
-    FOREIGN KEY (job_order_id) REFERENCES job_orders(job_orders_id), -- 外鍵關聯到職缺訂單表
-	FOREIGN KEY (course_order_id) REFERENCES course_order(course_order_id), -- 外鍵關聯到職缺訂單表
-	FOREIGN KEY (event_order_id) REFERENCES event_order(event_order_id) -- 外鍵關聯到職缺訂單表
+    FOREIGN KEY (job_order_id) REFERENCES job_orders(job_orders_id),           -- 外鍵關聯到職缺訂單表
+    FOREIGN KEY (course_order_id) REFERENCES course_order(course_order_id),    -- 外鍵關聯到課程訂單表
+    FOREIGN KEY (event_order_id) REFERENCES event_order(event_order_id)        -- 外鍵關聯到活動訂單表
 );
