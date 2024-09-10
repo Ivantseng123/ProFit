@@ -35,11 +35,11 @@
                 <tbody>
                 	<c:forEach items="${tokens}" var="token" varStatus="s">
                     	<tr>
-                        	<td>${token.token_id}</td>
-                        	<td>${token.user_id}</td>
-                        	<td>${token.user_email}</td>
-                        	<td>${token.user_tokenHash}</td>
-                        	<td>${token.expiration_time}</td>                 
+                        	<td>${token.tokenId}</td>
+                        	<td>${token.userId}</td>
+                        	<td>${token.getUser().userEmail}</td>
+                        	<td>${token.userTokenHash}</td>
+                        	<td>${token.expirationTime}</td>                 
                         	<td class="action-buttons">                                         
                             	<button class="delete" id="deleteTokenBtn">刪除</button>
                         	</td>

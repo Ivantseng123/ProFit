@@ -2,8 +2,11 @@ package com.ProFit.controller.usersController;
 
 import java.io.IOException;
 
-import com.ProFit.dao.usersDao.PwdResetTokensDao;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
+import com.ProFit.dao.usersDao.HPwdResetTokensDao;
+import com.ProFit.hibernateutil.HibernateUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -21,7 +24,11 @@ public class GetAlltoken extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PwdResetTokensDao pwdResetTokensDao = new PwdResetTokensDao();
+		
+		SessionFactory factory = HibernateUtil.getSessionFactory();
+		Session session = factory.getCurrentSession();
+		
+		HPwdResetTokensDao pwdResetTokensDao = new HPwdResetTokensDao(session);
 		request.setAttribute("tokens", pwdResetTokensDao.getAllTokensInfo());
 		request.getRequestDispatcher("/usersVIEW/AllresetTokens.jsp").forward(request, response);
 	}
