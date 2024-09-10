@@ -205,7 +205,7 @@ public class CourseDao {
 	            course.setCourseCategory(rs.getString("course_category"));
 	            course.setCourseInformation(rs.getString("course_information"));
 	            course.setCourseDescription(rs.getString("course_description"));
-	            course.setCourseEnrollmentDate(rs.getTimestamp("course_enrollment_date").toLocalDateTime());
+//	            course.setCourseEnrollmentDate(rs.getTimestamp("course_enrollment_date").toLocalDateTime());
 	            course.setCourseStartDate(rs.getTimestamp("course_start_date").toLocalDateTime());
 	            course.setCourseEndDate(rs.getTimestamp("course_end_date").toLocalDateTime());
 	            course.setCoursePrice(rs.getString("course_price"));
@@ -246,7 +246,7 @@ public class CourseDao {
 				course.setCourseCategory(rs.getString("course_category"));
 				course.setCourseInformation(rs.getString("course_information"));
 				course.setCourseDescription(rs.getString("course_description"));
-				course.setCourseEnrollmentDate(rs.getTimestamp("course_enrollment_date").toLocalDateTime());
+//				course.setCourseEnrollmentDate(rs.getTimestamp("course_enrollment_date").toLocalDateTime());
 				course.setCourseStartDate(rs.getTimestamp("course_start_date").toLocalDateTime());
 				course.setCourseEndDate(rs.getTimestamp("course_end_date").toLocalDateTime());
 				course.setCoursePrice(rs.getString("course_price"));
@@ -314,7 +314,7 @@ public class CourseDao {
 	            course.setCourseCategory(rs.getString("course_category"));
 	            course.setCourseInformation(rs.getString("course_information"));
 	            course.setCourseDescription(rs.getString("course_description"));
-	            course.setCourseEnrollmentDate(rs.getTimestamp("course_enrollment_date").toLocalDateTime());
+//	            course.setCourseEnrollmentDate(rs.getTimestamp("course_enrollment_date").toLocalDateTime());
 	            course.setCourseStartDate(rs.getTimestamp("course_start_date").toLocalDateTime());
 	            course.setCourseEndDate(rs.getTimestamp("course_end_date").toLocalDateTime());
 	            course.setCoursePrice(rs.getString("course_price"));

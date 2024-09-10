@@ -32,7 +32,7 @@ $(document).ready(function() {
                         </div>
                         <div class="form-group">
                             <label for="courseCreateUserId">課程創建者ID:</label>
-                            <input type="text" id="courseCreateUserId" name="courseCreateUserId" placeholder="${response.courseCreateUserId}" value="">
+                            <input type="text" id="courseCreateUserId" name="courseCreateUserId" placeholder="${response.courseCreaterId}" value="">
                         </div>
                         <div class="form-group">
                             <label for="courseInformation">課程資訊:</label>
@@ -90,7 +90,7 @@ $(document).ready(function() {
                 }
 
                 // 設置課程類別和狀態
-                $('#courseMajor').val(response.courseCategory);
+                $('#courseMajor').val(response.courseCategoryId);
                 $('#courseStatus').val(response.courseStatus);
             }
         });
@@ -138,9 +138,9 @@ $(document).on('click', '#editBtn', function(event) {
         dataType: 'json',
         type: 'POST',
         success: function(response) {
-            if (response.success) {
+            if (response) {
                 window.alert('課程修改成功');
-                console.log('新增的课程信息:', response.course);
+                console.log('新增的课程信息:', response);
                 window.location.href = '/ProFit/coursesVIEW/courseView.jsp?clickButton=true';
             } else {
                 window.alert('課程修改失敗');

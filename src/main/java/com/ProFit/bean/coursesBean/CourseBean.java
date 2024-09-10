@@ -1,5 +1,6 @@
 package com.ProFit.bean.coursesBean;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -42,11 +43,11 @@ public class CourseBean implements java.io.Serializable {
 	@Transient
 	private String createUserName; //table中沒有，為了前端呈現而設定
 
-	@Column(name="course_category", insertable = false,updatable = false)
+	@Column(name="course_category")
 	private String courseCategory;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="course_category")
+	@JoinColumn(name="course_category", insertable = false,updatable = false)
 	private MajorCategoryBean majorCategory;
 
 	@Column(name = "course_information")
@@ -56,7 +57,7 @@ public class CourseBean implements java.io.Serializable {
 	private String courseDescription;
 
 	@Column(name="course_enrollment_date")
-	private LocalDateTime courseEnrollmentDate;
+	private LocalDate courseEnrollmentDate;
 
 	@Column(name="course_start_date")
 	private LocalDateTime courseStartDate;
@@ -76,7 +77,7 @@ public class CourseBean implements java.io.Serializable {
 	
 	
 	public CourseBean(String courseId, String courseName, String courseCreateUserId, String courseCategory,
-			String courseInformation, String courseDescription, LocalDateTime courseEnrollmentDate, LocalDateTime courseStartDate,
+			String courseInformation, String courseDescription, LocalDate courseEnrollmentDate, LocalDateTime courseStartDate,
 			LocalDateTime courseEndDate, String coursePrice, String courseStatus) {
 		super();
 		this.courseId = courseId;
@@ -95,7 +96,7 @@ public class CourseBean implements java.io.Serializable {
 	
 	// for create course
 	public CourseBean(String courseName, String courseCreateUserId, String courseCategory, String courseInformation,
-			String courseDescription, LocalDateTime courseEnrollmentDate, LocalDateTime courseStartDate, LocalDateTime courseEndDate,
+			String courseDescription, LocalDate courseEnrollmentDate, LocalDateTime courseStartDate, LocalDateTime courseEndDate,
 			String coursePrice, String courseStatus) {
 		super();
 		this.courseName = courseName;
@@ -191,11 +192,11 @@ public class CourseBean implements java.io.Serializable {
 	public void setCourseDescription(String courseDescription) {
 		this.courseDescription = courseDescription;
 	}
-	public LocalDateTime getCourseEnrollmentDate() {
+	public LocalDate getCourseEnrollmentDate() {
 		return courseEnrollmentDate;
 	}
 
-	public void setCourseEnrollmentDate(LocalDateTime courseEnrollmentDate) {
+	public void setCourseEnrollmentDate(LocalDate courseEnrollmentDate) {
 		this.courseEnrollmentDate = courseEnrollmentDate;
 	}
 	public LocalDateTime getCourseStartDate() {

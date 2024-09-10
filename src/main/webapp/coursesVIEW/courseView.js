@@ -97,9 +97,9 @@ $(document).on('click', '.delete', function() {
 		url: '../controller/courses/delete',
 		data: { courseId: courseId },
 		success: function(response) {
-			if (response.success) {
+			if (response) {
 				window.alert('課程刪除成功');
-				console.log('新增的课程信息:', response.course);
+				console.log('新增的课程信息:', response);
 				window.location.href = '/ProFit/coursesVIEW/courseView.jsp?clickButton=true';
 			} else {
 				window.alert('課程刪除失敗');
@@ -177,7 +177,7 @@ $(document).on('click', '.view', function() {
 			    </div>
 			    <div class="form-group">
 			        <label for="courseCreateUserId">課程創建者ID:</label>
-			        <input type="text" id="courseCreateUserId" name="courseCreateUserId" value=${response.courseCreateUserId} readonly>
+			        <input type="text" id="courseCreateUserId" name="courseCreateUserId" value=${response.courseCreaterId} readonly>
 			    </div>
 			    <div class="form-group">
 			        <label for="courseInformation">課程資訊:</label>
@@ -214,11 +214,10 @@ $(document).on('click', '.view', function() {
 			    </div>
 				<button id="closePopupBtn">關閉</button>
 			</form>`)
-			$('#courseMajor').val(response.courseCategory);
+			$('#courseMajor').val(response.courseCategoryId);
 			$('#courseStatus').val(response.courseStatus);
 			$('#courseInformation').val(response.courseInformation);
 			$('#courseDescription').val(response.courseDescription);
-			// 设置表单值
 			$('#courseStartDate').val(courseStartDateTime);
 			$('#courseEndDate').val(courseEndDateTime);
 		},

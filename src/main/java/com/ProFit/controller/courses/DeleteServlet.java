@@ -3,7 +3,13 @@ package com.ProFit.controller.courses;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 import com.ProFit.dao.coursesCRUD.CourseDao;
+import com.ProFit.dao.coursesCRUD.HcourseDao;
+import com.ProFit.hibernateutil.HibernateUtil;
+import com.ProFit.hibernateutil.JsonUtil;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -25,21 +31,23 @@ public class DeleteServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
+		SessionFactory factory = HibernateUtil.getSessionFactory();
+	    Session session = factory.getCurrentSession();
+		
 		String courseId = request.getParameter("courseId");
 
-		CourseDao courseDao = new CourseDao();
-		boolean isDeleteCourse = courseDao.deleteCourseByID(courseId);
+		HcourseDao hcourseDao = new HcourseDao(session);
+		
+		boolean isDeleteCourse = hcourseDao.deleteCourseById(courseId);
 
-
-        JsonObject jsonResponse = new JsonObject();
-        jsonResponse.addProperty("success", isDeleteCourse);
+		String jsonData = JsonUtil.toJson(isDeleteCourse);
 
         //response
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
-        System.out.println("Serialized JSON: " + jsonResponse);
-        out.print(new Gson().toJson(jsonResponse));
+        System.out.println("Serialized JSON: " + jsonData);
+        out.print(jsonData);
         out.flush();
 	}
 
