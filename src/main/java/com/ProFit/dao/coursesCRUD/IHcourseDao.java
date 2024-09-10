@@ -10,10 +10,10 @@ public interface IHcourseDao {
 	public CourseBean insertCourse(CourseBean course);
 
 	// 刪除課程
-	public boolean deleteCourseByID(String courseId);
+	public boolean deleteCourseById(String courseId);
 
 	// 更新課程
-	public boolean updateCourseById(CourseBean newCourse,CourseBean oldCourse);
+	public boolean updateCourseById(CourseBean newCourse);
 
 	// 查詢單筆By couseId
 	public CourseBean searchOneCourseById(String courseId);

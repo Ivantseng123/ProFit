@@ -47,7 +47,6 @@ public class CourseLessonBean implements java.io.Serializable {
 
 	public CourseLessonBean() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public CourseLessonBean(String courseLessonId, String courseModuleId, String courseId, String courseLessonName,
@@ -64,11 +63,9 @@ public class CourseLessonBean implements java.io.Serializable {
 	}
 	
 
-	public CourseLessonBean(String courseModuleId, String courseId, String courseLessonName, String courseLessonSort,
+	public CourseLessonBean(String courseLessonName, String courseLessonSort,
 			String lessonMediaUrl, String lessonMediaType, String mediaDuration) {
 		super();
-		this.courseModuleId = courseModuleId;
-		this.courseId = courseId;
 		this.courseLessonName = courseLessonName;
 		this.courseLessonSort = courseLessonSort;
 		this.lessonMediaUrl = lessonMediaUrl;

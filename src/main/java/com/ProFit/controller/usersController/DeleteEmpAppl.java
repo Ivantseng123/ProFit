@@ -4,7 +4,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.HashMap;
 
-import com.ProFit.dao.usersDao.empApplDao;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+import com.ProFit.dao.usersDao.HempApplDao;
+import com.ProFit.hibernateutil.HibernateUtil;
 import com.google.gson.Gson;
 
 import jakarta.servlet.ServletException;
@@ -17,34 +21,37 @@ import jakarta.servlet.http.HttpServletResponse;
 public class DeleteEmpAppl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	public DeleteEmpAppl() {
+		super();
 
-    public DeleteEmpAppl() {
-        super();
-
-    }
-
+	}
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	@SuppressWarnings("unchecked")
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		BufferedReader reader = request.getReader();
-	     Gson gson = new Gson();
-	     HashMap<String, String> json = gson.fromJson(reader, HashMap.class);
+		Gson gson = new Gson();
+		HashMap<String, String> json = gson.fromJson(reader, HashMap.class);
 
-	     int employer_application_id = Integer.valueOf(json.get("employer_application_id"));
+		int employer_application_id = Integer.valueOf(json.get("employer_application_id"));
+		
+		SessionFactory factory = HibernateUtil.getSessionFactory();
+		Session session = factory.getCurrentSession();
+		
+		HempApplDao empappldao = new HempApplDao(session);
 
-	     empApplDao empappldao = new empApplDao();
-
-		 try {
-			 empappldao.deleteEmpInfo(employer_application_id);
+		try {
+			empappldao.deleteEmpInfo(employer_application_id);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 	}
 
-
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		doGet(request, response);
 	}

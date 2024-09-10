@@ -6,8 +6,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.ProFit.bean.UserMajorBean;
-import com.ProFit.dao.majorsCRUD.UserMajorDAO;
+import com.ProFit.bean.majorsBean.UserMajorBean;
+import com.ProFit.bean.majorsBean.UserMajorPK;
+import com.ProFit.bean.majorsBean.MajorBean;
+import com.ProFit.bean.usersBean.Users;
+import com.ProFit.dao.majorsCRUD.HUserMajorDAO;
+import com.ProFit.hibernateutil.HibernateUtil;
+
+import org.hibernate.Session;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -19,21 +25,15 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet("/userMajor/*")
 public class UserMajorServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private UserMajorDAO userMajorDAO;
 
     @Override
-	public void init() {
-        userMajorDAO = new UserMajorDAO();
-    }
-
-    @Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doGet(request, response);
     }
 
     @Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getPathInfo();
 
@@ -55,81 +55,87 @@ public class UserMajorServlet extends HttpServlet {
                     listAllUserMajors(request, response);
                     break;
             }
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             throw new ServletException(ex);
         }
     }
 
     private void listUserMajors(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, IOException, ServletException {
-    	 String userName1 = request.getParameter("userName");
-         int userId = userMajorDAO.getUserIdByName(userName1);
-//        int userId = Integer.parseInt(request.getParameter("userId"));
-        List<UserMajorBean> userMajors = userMajorDAO.findMajorsByUserId(userId);
-        for (UserMajorBean userMajor : userMajors) {
-            String userName = userMajorDAO.getUserNameById(userMajor.getUserId());
-            String majorName = userMajorDAO.getMajorNameById(userMajor.getMajorId());
-            userMajor.setUserName(userName);
-            userMajor.setMajorName(majorName);
+            throws ServletException, IOException, SQLException {
+        String userIdStr = request.getParameter("userId");
+        
+        if (userIdStr == null) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid user ID");
+            return;
+        }      
+        int userId = Integer.parseInt(userIdStr);
+        
+        
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        HUserMajorDAO userMajorDAO = new HUserMajorDAO(session);
+       
+        Users user = session.get(Users.class, userId);
+        if (user == null) {
+            session.getTransaction().rollback();
+            response.sendError(HttpServletResponse.SC_NOT_FOUND, "User not found");
+            return;
         }
-        Map<String, String> allMajors = userMajorDAO.getAllMajors();
-        Map<String, String> availableMajors = new HashMap<>(allMajors);
+        
+
+        List<UserMajorBean> userMajors = userMajorDAO.findMajorsByUserId(user.getUserId());
+        Map<Integer, String> allMajors = userMajorDAO.getAllMajors();
+        Map<Integer, String> availableMajors = new HashMap<>(allMajors);
+
+        
         for (UserMajorBean userMajor : userMajors) {
-            availableMajors.remove(userMajor.getMajorId());
+            availableMajors.remove(userMajor.getId().getMajor().getMajorId());
         }
+
         request.setAttribute("userMajors", userMajors);
         request.setAttribute("userId", userId);
-        request.setAttribute("userName", userName1);
+        request.setAttribute("userName", user.getUserName());
         request.setAttribute("availableMajors", availableMajors);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/majorsVIEW/UserMajorList.jsp");
         dispatcher.forward(request, response);
     }
 
     private void listMajorUsers(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, IOException, ServletException {
-    	String majorName1 = request.getParameter("majorName");
-        int majorId = userMajorDAO.getMajorIdByName(majorName1);
-//        int majorId = Integer.parseInt(request.getParameter("majorId"));
-        List<UserMajorBean> majorUsers = userMajorDAO.findUsersByMajorId(majorId);
-        for (UserMajorBean userMajor : majorUsers) {
-            String userName = userMajorDAO.getUserNameById(userMajor.getUserId());
-            String majorName = userMajorDAO.getMajorNameById(userMajor.getMajorId());
-            userMajor.setUserName(userName);
-            userMajor.setMajorName(majorName);
+            throws ServletException, IOException {
+        String majorIdStr = request.getParameter("majorId");
+        
+        if (majorIdStr == null) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid major ID");
+            return;
+        }      
+        int majorId = Integer.parseInt(majorIdStr);
+        
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        HUserMajorDAO userMajorDAO = new HUserMajorDAO(session);
+
+        MajorBean major = session.get(MajorBean.class, majorId);
+        if (major == null) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND, "Major not found");
+            return;
         }
+
+        List<UserMajorBean> majorUsers = userMajorDAO.findUsersByMajorId(major.getMajorId());
         request.setAttribute("majorUsers", majorUsers);
         request.setAttribute("majorId", majorId);
+        request.setAttribute("majorName", major.getMajorName());
         RequestDispatcher dispatcher = request.getRequestDispatcher("/majorsVIEW/MajorUserList.jsp");
         dispatcher.forward(request, response);
     }
 
-//    private void listAllUserMajors(HttpServletRequest request, HttpServletResponse response)
-//            throws SQLException, IOException, ServletException {
-//        List<UserMajorBean> allUserMajors = userMajorDAO.findAllUserMajors();
-//        for (UserMajorBean userMajor : allUserMajors) {
-//            String userName = userMajorDAO.getUserNameById(userMajor.getUserId());
-//            String majorName = userMajorDAO.getMajorNameById(userMajor.getMajorId());
-//            userMajor.setUserName(userName);
-//            userMajor.setMajorName(majorName);
-//        }
-//        request.setAttribute("allUserMajors", allUserMajors);
-//        RequestDispatcher dispatcher = request.getRequestDispatcher("/majorsVIEW/AllUserMajorList.jsp");
-//        dispatcher.forward(request, response);
-//    }
     private void listAllUserMajors(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, IOException, ServletException {
-        List<UserMajorBean> allUserMajors = userMajorDAO.findAllUserMajors();
-        for (UserMajorBean userMajor : allUserMajors) {
-            String userName = userMajorDAO.getUserNameById(userMajor.getUserId());
-            String majorName = userMajorDAO.getMajorNameById(userMajor.getMajorId());
-            userMajor.setUserName(userName);
-            userMajor.setMajorName(majorName);
-        }
-        request.setAttribute("allUserMajors", allUserMajors);
+            throws ServletException, IOException, SQLException {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        HUserMajorDAO userMajorDAO = new HUserMajorDAO(session);
 
-        // 獲取所有用戶和所有專業
-        Map<String, String> allUsers = userMajorDAO.getAllUsers();
-        Map<String, String> allMajors = userMajorDAO.getAllMajors();
+        List<UserMajorBean> allUserMajors = userMajorDAO.findAllUserMajors();
+        Map<Integer, String> allUsers = userMajorDAO.getAllUsers();
+        Map<Integer, String> allMajors = userMajorDAO.getAllMajors();
+
+        request.setAttribute("allUserMajors", allUserMajors);
         request.setAttribute("allUsers", allUsers);
         request.setAttribute("allMajors", allMajors);
 
@@ -138,35 +144,41 @@ public class UserMajorServlet extends HttpServlet {
     }
 
     private void addUserMajor(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, IOException, ServletException {
+            throws ServletException, IOException {
         int userId = Integer.parseInt(request.getParameter("userId"));
-        String majorIdOrName = request.getParameter("majorId");
-        int majorId;
-        try {
-        	majorId = Integer.parseInt(request.getParameter("majorId"));
-		} catch (Exception e) {
-			// 如果不是數字，假設它是專業名稱，嘗試根據名稱獲取 ID
-	        majorId = userMajorDAO.getMajorIdByName(majorIdOrName);
-	        if (majorId == -1) {
-	            // 處理錯誤：找不到對應的專業
-	            response.sendRedirect(request.getContextPath() + "/error.jsp?message=Invalid major");
-	            return;
-	        }
+        int majorId =Integer.parseInt(request.getParameter("majorId"));
+        //System.out.println(request.getParameter("majorId"));
+        
+
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        HUserMajorDAO userMajorDAO = new HUserMajorDAO(session);
+
+        Users user = session.get(Users.class, userId);
+        MajorBean major = session.get(MajorBean.class, majorId);
+        
+        if (user == null || major == null) {
+        	System.out.println("user or major is not exist");
+        	return;
 		}
-        UserMajorBean userMajor = new UserMajorBean();
-        userMajor.setUserId(userId);
-        userMajor.setMajorId(majorId);
+        
+        UserMajorPK id = new UserMajorPK(user, major);
+        UserMajorBean userMajor = new UserMajorBean(id);
         userMajorDAO.insertUserMajor(userMajor);
-        response.sendRedirect("userMajors/?userId="+userId);
-//        RequestDispatcher dispatcher = request.getRequestDispatcher("userMajors/?userId="+userId);
-//        dispatcher.forward(request, response);
+        
+        response.sendRedirect(request.getContextPath() + "/userMajor/userMajors?userId=" + userId);
+        
     }
 
     private void deleteUserMajor(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, IOException, ServletException {
+            throws ServletException, IOException {
         int userId = Integer.parseInt(request.getParameter("userId"));
         int majorId = Integer.parseInt(request.getParameter("majorId"));
+
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        HUserMajorDAO userMajorDAO = new HUserMajorDAO(session);
+
         userMajorDAO.deleteUserMajor(userId, majorId);
-        response.sendRedirect("userMajor");
+
+        response.sendRedirect(request.getContextPath() + "/userMajor/");
     }
 }

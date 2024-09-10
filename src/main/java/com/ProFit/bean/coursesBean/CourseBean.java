@@ -1,14 +1,19 @@
 package com.ProFit.bean.coursesBean;
 
-import com.ProFit.bean.MajorCategoryBeam;
+import java.time.LocalDateTime;
+import java.util.List;
+
+import com.ProFit.bean.majorsBean.MajorCategoryBean;
 import com.ProFit.bean.usersBean.Users;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
@@ -24,10 +29,13 @@ public class CourseBean implements java.io.Serializable {
 	private String courseName;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="course_create_user_id")
-	private Users createUsersId;
+	@JoinColumn(name="course_create_user_id",insertable = false,updatable = false)
+	private Users courseCreater;
+	
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "course",cascade = CascadeType.ALL)
+	private List<CourseModuleBean> courseModules;
 
-	@Column(name="course_create_user_id",insertable = false,updatable = false)
+	@Column(name="course_create_user_id")
 	private String courseCreateUserId;
 
 	//改成hibernate之後要刪掉
@@ -39,7 +47,7 @@ public class CourseBean implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="course_category")
-	private MajorCategoryBeam majorCategory;
+	private MajorCategoryBean majorCategory;
 
 	@Column(name = "course_information")
 	private String courseInformation;
@@ -48,13 +56,13 @@ public class CourseBean implements java.io.Serializable {
 	private String courseDescription;
 
 	@Column(name="course_enrollment_date")
-	private String courseEnrollmentDate;
+	private LocalDateTime courseEnrollmentDate;
 
 	@Column(name="course_start_date")
-	private String courseStartDate;
+	private LocalDateTime courseStartDate;
 
 	@Column(name="course_end_date")
-	private String courseEndDate;
+	private LocalDateTime courseEndDate;
 
 	@Column(name="course_price")
 	private String coursePrice;
@@ -62,35 +70,14 @@ public class CourseBean implements java.io.Serializable {
 	@Column(name="course_status")
 	private String courseStatus;
 
-	public Users getCreateUsersId() {
-		return createUsersId;
-	}
-
-
-	public void setCreateUsersId(Users createUsersId) {
-		this.createUsersId = createUsersId;
-	}
-
-
-	public MajorCategoryBeam getMajorCategory() {
-		return majorCategory;
-	}
-
-
-	public void setMajorCategory(MajorCategoryBeam majorCategory) {
-		this.majorCategory = majorCategory;
-	}
-
-
 	public CourseBean() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-
-
+	
+	
 	public CourseBean(String courseId, String courseName, String courseCreateUserId, String courseCategory,
-			String courseInformation, String courseDescription, String courseEnrollmentDate, String courseStartDate,
-			String courseEndDate, String coursePrice, String courseStatus) {
+			String courseInformation, String courseDescription, LocalDateTime courseEnrollmentDate, LocalDateTime courseStartDate,
+			LocalDateTime courseEndDate, String coursePrice, String courseStatus) {
 		super();
 		this.courseId = courseId;
 		this.courseName = courseName;
@@ -104,11 +91,11 @@ public class CourseBean implements java.io.Serializable {
 		this.coursePrice = coursePrice;
 		this.courseStatus = courseStatus;
 	}
-
-
+	
+	
 	// for create course
 	public CourseBean(String courseName, String courseCreateUserId, String courseCategory, String courseInformation,
-			String courseDescription, String courseEnrollmentDate, String courseStartDate, String courseEndDate,
+			String courseDescription, LocalDateTime courseEnrollmentDate, LocalDateTime courseStartDate, LocalDateTime courseEndDate,
 			String coursePrice, String courseStatus) {
 		super();
 		this.courseName = courseName;
@@ -122,7 +109,44 @@ public class CourseBean implements java.io.Serializable {
 		this.coursePrice = coursePrice;
 		this.courseStatus = courseStatus;
 	}
+	
+	public Users getCourseCreater() {
+		return courseCreater;
+	}
+	
+	
+	public void setCourseCreater(Users courseCreater) {
+		this.courseCreater = courseCreater;
+	}
+	
+	
+	public List<CourseModuleBean> getCourseModules() {
+		return courseModules;
+	}
+	
+	
+	public void setCourseModules(List<CourseModuleBean> courseModules) {
+		this.courseModules = courseModules;
+	}
+	
+	public Users getCreateUsersId() {
+		return courseCreater;
+	}
 
+
+	public void setCreateUsersId(Users courseCreater) {
+		this.courseCreater = courseCreater;
+	}
+
+
+	public MajorCategoryBean getMajorCategory() {
+		return majorCategory;
+	}
+
+
+	public void setMajorCategory(MajorCategoryBean majorCategory) {
+		this.majorCategory = majorCategory;
+	}
 
 	public String getCourseId() {
 		return courseId;
@@ -167,23 +191,23 @@ public class CourseBean implements java.io.Serializable {
 	public void setCourseDescription(String courseDescription) {
 		this.courseDescription = courseDescription;
 	}
-	public String getCourseEnrollmentDate() {
+	public LocalDateTime getCourseEnrollmentDate() {
 		return courseEnrollmentDate;
 	}
 
-	public void setCourseEnrollmentDate(String courseEnrollmentDate) {
+	public void setCourseEnrollmentDate(LocalDateTime courseEnrollmentDate) {
 		this.courseEnrollmentDate = courseEnrollmentDate;
 	}
-	public String getCourseStartDate() {
+	public LocalDateTime getCourseStartDate() {
 		return courseStartDate;
 	}
-	public void setCourseStartDate(String courseStartDate) {
+	public void setCourseStartDate(LocalDateTime courseStartDate) {
 		this.courseStartDate = courseStartDate;
 	}
-	public String getCourseEndDate() {
+	public LocalDateTime getCourseEndDate() {
 		return courseEndDate;
 	}
-	public void setCourseEndDate(String courseEndDate) {
+	public void setCourseEndDate(LocalDateTime courseEndDate) {
 		this.courseEndDate = courseEndDate;
 	}
 	public String getCoursePrice() {

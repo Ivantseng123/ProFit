@@ -13,7 +13,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import com.ProFit.bean.MajorCategoryBeam;
+import com.ProFit.bean.majorsBean.MajorCategoryBean;
 
 public class MajorCategoryDAO {
 
@@ -31,7 +31,7 @@ public class MajorCategoryDAO {
 	}
 
     // 插入 MajorCategory
-    public boolean insertMajorCategory(MajorCategoryBeam majorCategory) {
+    public boolean insertMajorCategory(MajorCategoryBean majorCategory) {
         String sql = "INSERT INTO [profitDB].[dbo].[major_category] (major_category_id, category_name) VALUES (?, ?)";
         try (Connection connection = getConnection();
         		PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -45,7 +45,7 @@ public class MajorCategoryDAO {
     }
 
     // 更新 MajorCategory
-    public boolean updateMajorCategory(MajorCategoryBeam majorCategory) {
+    public boolean updateMajorCategory(MajorCategoryBean majorCategory) {
         String sql = "UPDATE [profitDB].[dbo].[major_category] SET category_name = ? WHERE major_category_id = ?";
         try (Connection connection = getConnection();
         		PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -72,14 +72,14 @@ public class MajorCategoryDAO {
     }
 
     // 查找 MajorCategory
-    public MajorCategoryBeam findMajorCategoryById(int majorCategoryId) {
+    public MajorCategoryBean findMajorCategoryById(int majorCategoryId) {
         String sql = "SELECT * FROM [profitDB].[dbo].[major_category] WHERE major_category_id = ?";
         try (Connection connection = getConnection();
         		PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, majorCategoryId);
             try (ResultSet rs = ps.executeQuery()) {
 				if (rs.next()) {
-				    MajorCategoryBeam majorCategory = new MajorCategoryBeam();
+				    MajorCategoryBean majorCategory = new MajorCategoryBean();
 				    majorCategory.setMajorCategoryId(rs.getInt("major_category_id"));
 				    majorCategory.setCategoryName(rs.getString("category_name"));
 				    return majorCategory;
@@ -92,14 +92,14 @@ public class MajorCategoryDAO {
     }
 
     // 查找所有 MajorCategory
-    public List<MajorCategoryBeam> findAllMajorCategories() {
+    public List<MajorCategoryBean> findAllMajorCategories() {
         String sql = "SELECT * FROM [profitDB].[dbo].[major_category]";
-        List<MajorCategoryBeam> majorCategoryList = new ArrayList<>();
+        List<MajorCategoryBean> majorCategoryList = new ArrayList<>();
         try (Connection connection = getConnection();
         		Statement stmt = connection.createStatement();
 				ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
-            	MajorCategoryBeam majorCategory = new MajorCategoryBeam();
+            	MajorCategoryBean majorCategory = new MajorCategoryBean();
                 majorCategory.setMajorCategoryId(rs.getInt("major_category_id"));
                 majorCategory.setCategoryName(rs.getString("category_name"));
                 majorCategoryList.add(majorCategory);

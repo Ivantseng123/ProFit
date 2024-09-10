@@ -6,26 +6,29 @@ import java.util.List;
 
 import com.ProFit.bean.UserTransactionBean;
 import com.ProFit.dao.transactionCRUD.UserTransactionDAO;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.hibernate.Session;
 
 @WebServlet("/UserTransactionServlet")
 public class UserTransactionServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private UserTransactionDAO userTransactionDAO;
+    private Session session;
 
     public UserTransactionServlet() {
-        this.userTransactionDAO = new UserTransactionDAO();
+        this.session = com.ProFit.hibernateutil.HibernateUtil.getSessionFactory().openSession();
+        this.userTransactionDAO = new UserTransactionDAO(session);
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
+
         if (action == null || "list".equals(action)) {
             listTransactions(request, response);
         } else if ("filter".equals(action)) {
@@ -60,6 +63,7 @@ public class UserTransactionServlet extends HttpServlet {
         }
     }
 
+    // 列出所有交易
     private void listTransactions(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<UserTransactionBean> transactions = userTransactionDAO.getAllTransactions();
@@ -67,12 +71,12 @@ public class UserTransactionServlet extends HttpServlet {
         request.getRequestDispatcher("/transactionVIEW/userTransactions.jsp").forward(request, response);
     }
 
+    // 過濾交易
     private void filterTransactions(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String startDateStr = request.getParameter("start_date");
         String endDateStr = request.getParameter("end_date");
         String userId = request.getParameter("user_id");
-        String userName = request.getParameter("user_name");
         String transactionType = request.getParameter("transaction_type");
         String transactionStatus = request.getParameter("transaction_status");
 
@@ -91,42 +95,55 @@ public class UserTransactionServlet extends HttpServlet {
             return;
         }
 
-        List<UserTransactionBean> transactions = userTransactionDAO.getTransactionsByFilters(userId, userName, transactionType, transactionStatus, startDate, endDate);
+        List<UserTransactionBean> transactions = userTransactionDAO.getTransactionsByFilters(
+                userId, transactionType, transactionStatus, startDate, endDate);
 
         request.setAttribute("transactions", transactions);
         request.getRequestDispatcher("/transactionVIEW/userTransactions.jsp").forward(request, response);
     }
 
+    // 插入交易
     private void insertTransaction(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String userId = request.getParameter("user_id");
-        String transactionType = request.getParameter("transaction_type");
-        String amount = request.getParameter("amount");
-        String transactionStatus = request.getParameter("transaction_status");
-        Timestamp createdAt = new Timestamp(System.currentTimeMillis());
+        try {
+            String userId = request.getParameter("user_id");
+            String transactionType = request.getParameter("transaction_type");
+            int amount = Integer.parseInt(request.getParameter("amount"));
+            String transactionStatus = "pending"; // 新增交易預設為待處理狀態
+            Timestamp createdAt = new Timestamp(System.currentTimeMillis());
 
-        UserTransactionBean transaction = new UserTransactionBean(null, userId, null, transactionType, amount, transactionStatus, createdAt);
+            UserTransactionBean transaction = new UserTransactionBean(
+                    Integer.parseInt(userId), transactionType, amount, transactionStatus, createdAt);
 
-        boolean isInserted = userTransactionDAO.insertTransaction(transaction);
+            boolean isInserted = userTransactionDAO.insertTransaction(transaction);
 
-        if (isInserted) {
-            response.sendRedirect(request.getContextPath() + "/UserTransactionServlet?action=list");
-        } else {
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "新增交易失敗");
+            if (isInserted) {
+                response.sendRedirect(request.getContextPath() + "/UserTransactionServlet?action=list");
+            } else {
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "新增交易失敗");
+            }
+        } catch (Exception e) {
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "輸入格式錯誤，請檢查用戶ID和金額是否正確");
         }
     }
 
-
+    // 更新交易
     private void applyUpdateTransaction(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String transactionId = request.getParameter("transaction_id");
         String userId = request.getParameter("user_id");
         String transactionType = request.getParameter("transaction_type");
-        String amount = request.getParameter("amount");
+        int amount = Integer.parseInt(request.getParameter("amount"));
         String transactionStatus = request.getParameter("transaction_status");
         Timestamp createdAt = new Timestamp(System.currentTimeMillis());
 
-        UserTransactionBean transaction = new UserTransactionBean(transactionId, userId, null, transactionType, amount, transactionStatus, createdAt);
+        UserTransactionBean transaction = new UserTransactionBean();
+        transaction.setTransactionId(transactionId);
+        transaction.setUserId(Integer.parseInt(userId));
+        transaction.setTransactionType(transactionType);
+        transaction.setTransactionAmount(amount);
+        transaction.setTransactionStatus(transactionStatus);
+        transaction.setCreatedAt(createdAt);
 
         boolean isUpdated = userTransactionDAO.updateTransaction(transaction);
 
@@ -137,6 +154,7 @@ public class UserTransactionServlet extends HttpServlet {
         }
     }
 
+    // 刪除交易
     private void deleteTransaction(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String transactionId = request.getParameter("transaction_id");
@@ -161,5 +179,12 @@ public class UserTransactionServlet extends HttpServlet {
         String transactionId = request.getParameter("transaction_id");
         request.setAttribute("transaction_id", transactionId);
         request.getRequestDispatcher("/transactionVIEW/deleteTransaction.jsp").forward(request, response);
+    }
+
+    @Override
+    public void destroy() {
+        if (session != null) {
+            session.close();
+        }
     }
 }

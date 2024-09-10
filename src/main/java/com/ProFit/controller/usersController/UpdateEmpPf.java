@@ -1,18 +1,18 @@
 package com.ProFit.controller.usersController;
 
-import java.io.File;
 import java.io.IOException;
-
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import com.ProFit.bean.usersBean.Employer_profile;
-import com.ProFit.dao.usersDao.empProfileDao;
-
+import com.ProFit.dao.usersDao.HempProfileDao;
+import com.ProFit.dao.usersDao.IHempProfileDao;
+import com.ProFit.hibernateutil.HibernateUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.Part;
 
 @WebServlet("/UpdateEmpPf")
 @MultipartConfig
@@ -43,33 +43,18 @@ public class UpdateEmpPf extends HttpServlet {
 		String company_captital = request.getParameter("company_captital");
 		String company_description = request.getParameter("company_description");
 
-		String userFolderPath = "C:\\ProFitServlet\\workspace\\ProFit\\src\\main\\webapp\\usersVIEW\\userupload\\" + user_id;
+		
+		SessionFactory factory = HibernateUtil.getSessionFactory();
+		Session session = factory.getCurrentSession();
+		
+        IHempProfileDao empdao = new HempProfileDao(session);
 
-		File userFolder = new File(userFolderPath);
-
-		if (!userFolder.exists()) {
-            userFolder.mkdirs();
-        }
-
-        Part filePart = request.getPart("companyPhoto");
-        String uploadPathtoDB;
-
-        System.out.println(filePart.getSubmittedFileName());
-        if(filePart.getSize() > 0) {
-        	String fileName = filePart.getSubmittedFileName();
-        	String uploadPath = userFolderPath + "/" + fileName;
-        	uploadPathtoDB =  user_id + "/" + fileName;
-        	filePart.write(uploadPath);
-        }else {
-        	uploadPathtoDB = company_photoURL;
-        }
-
-
-        empProfileDao empdao = new empProfileDao();
-
-		Employer_profile emp = new Employer_profile(employer_profile_id,user_id,company_name,company_addresstoDB,company_category,company_phoneNumber,company_taxID,company_numberOfemployee,company_captital,company_description,uploadPathtoDB);
+		Employer_profile emp = new Employer_profile(employer_profile_id,user_id,company_name,company_addresstoDB,company_category,company_phoneNumber,company_taxID,company_numberOfemployee,company_captital,company_description,company_photoURL);
 
 		empdao.updateEmpInfo(emp);
+		
+		session.flush();  // 將緩存的更改同步到數據庫
+		session.clear();  // 清空緩存，強制從數據庫重新查詢
 
 		request.getRequestDispatcher("/GetAllEmpPf").forward(request, response);
 

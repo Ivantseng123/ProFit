@@ -1,5 +1,8 @@
 package com.ProFit.bean.coursesBean;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -30,9 +33,8 @@ public class CourseModuleBean implements java.io.Serializable {
 	@Column(name="course_module_name")
 	private String courseModuleName;
 	
-//	@OneToMany(fetch = FetchType.LAZY)
-//	private CourseLessonBean courseLesson;
-
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "courseModule",cascade = CascadeType.ALL)
+	private List<CourseLessonBean> moduleLessons;
 
 	public CourseModuleBean() {
 		super();
@@ -52,6 +54,13 @@ public class CourseModuleBean implements java.io.Serializable {
 		this.courseModuleName = courseModuleName;
 	}
 
+	public List<CourseLessonBean> getModuleLessons() {
+		return moduleLessons;
+	}
+	
+	public void setModuleLessons(List<CourseLessonBean> moduleLessons) {
+		this.moduleLessons = moduleLessons;
+	}
 	public CourseBean getCourse() {
 		return course;
 	}

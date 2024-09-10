@@ -41,6 +41,7 @@
 			<hr>
             <div class="action-buttons">
 			<button class="edit" onclick="location.href='${pageContext.request.contextPath}/major/new'">新增專業</button>
+			<button class="view" onclick="location.href='${pageContext.request.contextPath}/major/list'">顯示所有專業</button>
 			<button class="delete" onclick="location.href='${pageContext.request.contextPath}//majorCategory/new'">新增專業類別</button>
             <button class="view" onclick="location.href='${pageContext.request.contextPath}/majorCategory/list'">顯示所有專業類別</button>
 			
@@ -73,7 +74,7 @@
 						<td><c:out value="${major.majorId}" /></td>
 						<td><c:out value="${major.majorName}" /></td>
 						<td><c:out value="${major.majorCategoryId}" /></td>
-						<td><c:out value="${major.categoryName}" /></td>
+						<td><c:out value="${major.majorCategory.categoryName}" /></td>
 						<td><c:out value="${major.majorDescription}" /></td>
 						<td class="action-buttons">
 							<button class="edit"

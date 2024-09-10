@@ -1,46 +1,53 @@
 package com.ProFit.bean;
 
+import jakarta.persistence.*;
 import java.sql.Timestamp;
+import java.util.UUID;
 
+@Entity
+@Table(name = "user_transactions")
 public class UserTransactionBean {
+
+    @Id
+    @Column(name = "transaction_id", length = 50)
     private String transactionId;
-    private String userId;
-    private String userName;
+
+    @Column(name = "user_id", nullable = false)
+    private int userId;
+
+    @Column(name = "transaction_type", nullable = false)
     private String transactionType;
-    private String amount;
+
+    @Column(name = "transaction_amount", nullable = false)
+    private int transactionAmount;
+
+    @Column(name = "transaction_status", nullable = false)
     private String transactionStatus;
+
+    @Column(name = "created_at", nullable = false)
     private Timestamp createdAt;
 
+    @Column(name = "completion_at")  // 新增完成時間
+    private Timestamp completionAt;
+
+    // Default constructor
     public UserTransactionBean() {
-        super();
+        // Automatically generate transactionId
+        this.transactionId = UUID.randomUUID().toString();
     }
 
-
-    public UserTransactionBean(String transactionId, String userId, String userName, String transactionType, String amount,
-                               String transactionStatus, Timestamp createdAt) {
-        this.transactionId = transactionId;
+    // Constructor without transactionId (it will be generated automatically)
+    public UserTransactionBean(int userId, String transactionType, int transactionAmount, String transactionStatus, Timestamp createdAt) {
+        this.transactionId = UUID.randomUUID().toString();
         this.userId = userId;
-        this.userName = userName;
         this.transactionType = transactionType;
-        this.amount = amount;
+        this.transactionAmount = transactionAmount;
         this.transactionStatus = transactionStatus;
         this.createdAt = createdAt;
     }
 
-    @Override
-    public String toString() {
-        return "UserTransactionBean{" +
-                "transactionId=" + transactionId +
-                ", userId=" + userId +
-                ", userName='" + userName + '\'' +
-                ", transactionType='" + transactionType + '\'' +
-                ", amount=" + amount +
-                ", transactionStatus='" + transactionStatus + '\'' +
-                ", createdAt=" + createdAt +
-                '}';
-    }
+    // Getter and Setter methods
 
-    // Getters 和 Setters
     public String getTransactionId() {
         return transactionId;
     }
@@ -49,20 +56,12 @@ public class UserTransactionBean {
         this.transactionId = transactionId;
     }
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getTransactionType() {
@@ -73,12 +72,12 @@ public class UserTransactionBean {
         this.transactionType = transactionType;
     }
 
-    public String getAmount() {
-        return amount;
+    public int getTransactionAmount() {
+        return transactionAmount;
     }
 
-    public void setAmount(String amount) {
-        this.amount = amount;
+    public void setTransactionAmount(int transactionAmount) {
+        this.transactionAmount = transactionAmount;
     }
 
     public String getTransactionStatus() {
@@ -95,5 +94,13 @@ public class UserTransactionBean {
 
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Timestamp getCompletionAt() {
+        return completionAt;
+    }
+
+    public void setCompletionAt(Timestamp completionAt) {
+        this.completionAt = completionAt;
     }
 }

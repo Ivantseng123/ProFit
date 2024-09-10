@@ -45,6 +45,26 @@
 			<version>3.0.0</version>
 		</dependency>
 
+		<!-- Jackson Core and Databind -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.17.1</version> <!-- 你也可以選擇最新版本 -->
+		</dependency>
+
+		<!-- Jackson Hibernate 6 Support -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-hibernate6</artifactId>
+			<version>2.15.0</version> <!-- 你也可以選擇最新版本 -->
+		</dependency>
+		
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
+			<version>2.15.2</version> <!-- 請確認使用的版本，選擇最新穩定版本 -->
+		</dependency>
+
 	</dependencies>
 
 	<build>
