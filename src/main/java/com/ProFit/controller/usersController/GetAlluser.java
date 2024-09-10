@@ -2,8 +2,10 @@ package com.ProFit.controller.usersController;
 
 import java.io.IOException;
 
-import com.ProFit.dao.usersDao.UserDao;
-
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import com.ProFit.dao.usersDao.HUserDao;
+import com.ProFit.hibernateutil.HibernateUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -23,9 +25,15 @@ public class GetAlluser extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		SessionFactory factory = HibernateUtil.getSessionFactory();
+		Session session = factory.getCurrentSession();
+		
+		HUserDao userDao = new HUserDao(session);
 
-		UserDao userDao = new UserDao();
+		//System.out.println(userDao.getAllUserInfo().toString());
 		request.setAttribute("users", userDao.getAllUserInfo());
+		
 		request.getRequestDispatcher("/usersVIEW/Allusers.jsp").forward(request, response);
 	}
 

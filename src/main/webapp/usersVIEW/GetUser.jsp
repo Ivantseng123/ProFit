@@ -22,37 +22,37 @@
 				<h3> 會員頭貼: </h3>
 				<div class="profile-picture" style="text-align: center;">
 						<c:choose>
-   							 <c:when test="${not empty user.user_pictureURL}">
-        						<img src="${pageContext.request.contextPath}/usersVIEW/userupload/${user.user_pictureURL}" alt="Profile Image"/>
+   							 <c:when test="${not empty user.userPictureURL}">
+        						<img src="${user.userPictureURL}" alt="Profile Image"/>
    							 </c:when>
     						<c:otherwise>
-        						<img src="${pageContext.request.contextPath}/usersVIEW/default_user_picture.png" 									alt="Default Profile Image"  />
+        						<img src="https://firebasestorage.googleapis.com/v0/b/profit-e686b.appspot.com/o/userUpload%2Fdefault_user_picture.png?alt=media&token=dd3a8cfa-1a00-48ac-ba30-1f7bb3d783bd" 									alt="Default Profile Image"  />
     						</c:otherwise>
 						</c:choose> 
 				</div>	
 					<h3> 會員ID: </h3> 					
-						<p>${user.user_id}</p>
+						<p>${user.userId}</p>
 					<h3> 會員姓名: </h3> 
-						<p>${user.user_name}</p>
+						<p>${user.userName}</p>
 						
 					<h3>會員信箱:</h3>
-						<p>${user.user_email}</p> 
+						<p>${user.userEmail}</p> 
 				
 					<h3> 會員密碼: </h3>
-						<p>${user.user_passwordHash}</p>  
+						<p>${user.userPasswordHash}</p>  
 						
 					<h3>會員手機號碼:</h3>
-						<p>${user.user_phoneNumber}</p> 						
+						<p>${user.userPhoneNumber}</p> 						
 						
 					<h3>會員居住城市:</h3>
-						<p>${user.user_city}</p>
+						<p>${user.userCity}</p>
 					
 					<h3>會員身份:</h3>
 						<c:choose>
-							<c:when test="${user.user_identity == 1}">
+							<c:when test="${user.userIdentity == 1}">
 								<p>應徵者</p>
 							</c:when>
-							<c:when test="${user.user_identity == 2}">
+							<c:when test="${user.userIdentity == 2}">
 								<p>應徵者/企業主</p>
 							</c:when>
 							<c:otherwise>
@@ -60,20 +60,20 @@
     						</c:otherwise>
 						</c:choose> 
 					<h3>會員餘額:</h3>
-						<p>${user.user_balance}</p> 
+						<p>${user.userBalance}</p> 
 						
 					<h3>會員工作地點偏好:</h3>
-						<p>${user.freelancer_location_prefer}</p> 
+						<p>${user.freelancerLocationPrefer}</p> 
 						
 					<h3>會員工作經驗:</h3>
-						<p>${user.freelancer_exprience}</p> 
+						<p>${user.freelancerExprience}</p> 
 														
 					<h3>會員接案身份:</h3>
-						<p>${user.freelancer_identity}</p> 
+						<p>${user.freelancerIdentity}</p> 
 														
 					<h3>會員接案狀態:</h3>				
 						<c:choose>
-							<c:when test="${user.freelancer_profile_status == 0}">
+							<c:when test="${user.freelancerProfileStatus == 0}">
 								<p>關閉</p>
 							</c:when>
 							<c:otherwise>
@@ -82,10 +82,10 @@
 						</c:choose> 
 							
 					<h3>會員接案描述:</h3>
-						<p>${user.freelancer_disc}</p> 
+						<p>${user.freelancerDisc}</p> 
 						
 					<h3>會員註冊時間:</h3>
-						<p>${user.user_register_time}</p> 
+						<p>${user.userRegisterTime}</p> 
 																
 		</div>
 	</main>

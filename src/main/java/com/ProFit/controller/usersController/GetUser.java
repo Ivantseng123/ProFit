@@ -2,9 +2,11 @@ package com.ProFit.controller.usersController;
 
 import java.io.IOException;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import com.ProFit.bean.usersBean.Users;
-import com.ProFit.dao.usersDao.UserDao;
-
+import com.ProFit.hibernateutil.HibernateUtil;
+import com.ProFit.dao.usersDao.HUserDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -26,14 +28,12 @@ public class GetUser extends HttpServlet {
 
 		Integer user_id = Integer.valueOf(request.getParameter("user_id")) ;
 
-		//Users user = new Users();
-		//System.out.println(user_id);
+		
+		SessionFactory factory = HibernateUtil.getSessionFactory();
+		Session session = factory.getCurrentSession();
 
-		UserDao userDao = new UserDao();
+		HUserDao userDao = new HUserDao(session);
 		Users getuser = userDao.getUserInfoByID(user_id);
-
-
-		System.out.println(getuser.toString());
 
 		request.setAttribute("user", getuser);
 		request.getRequestDispatcher("/usersVIEW/GetUser.jsp").forward(request, response);

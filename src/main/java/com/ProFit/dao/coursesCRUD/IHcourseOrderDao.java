@@ -8,10 +8,10 @@ import com.ProFit.bean.coursesBean.CourseOrderBean;
 public interface IHcourseOrderDao {
 
 	// 新增課程訂單
-	public CourseOrderBean insertCourseOrder(CourseOrderBean course);
+	public CourseOrderBean insertCourseOrder(CourseOrderBean courseOrder);
 
 	// 刪除課程訂單
-	public boolean deleteCourseOrderByID(String courseId);
+	public boolean deleteCourseOrderByID(String courseOrderId);
 
 	// 更新課程訂單
 	public boolean updateCourseOrderById(CourseOrderBean newCourseOrder);
@@ -23,5 +23,5 @@ public interface IHcourseOrderDao {
 	public List<CourseOrderBean> searchCourseOrders();
 
 	// 查詢全部By courseOrderId
-	public List<CourseOrderBean> searchCourseOrders(String courseId);
+	public List<CourseOrderBean> searchCourseOrders(String courseId,String studentId,String status);
 }

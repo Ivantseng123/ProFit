@@ -58,7 +58,6 @@
 			</div>
 		</div>
 		
-		
 		<div class="table-container" id="search-results"></div>
 	</main>
 	<script src="../javaScriptAPI/jquery-3.7.1.js"></script>

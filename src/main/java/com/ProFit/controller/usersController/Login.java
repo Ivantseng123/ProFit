@@ -6,7 +6,11 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import com.ProFit.dao.usersDao.UserDao;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+import com.ProFit.dao.usersDao.HUserDao;
+import com.ProFit.hibernateutil.HibernateUtil;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -29,13 +33,18 @@ public class Login extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String user_email = request.getParameter("user_email");
 	    String user_password = request.getParameter("user_password");
-	    String user_pictureURL = UserDao.getUserPictureByEmail(user_email);
-	    System.out.println(user_pictureURL);
-
+	    
+	    SessionFactory factory = HibernateUtil.getSessionFactory();
+		Session session = factory.getCurrentSession();
+	    
+		HUserDao userDao = new HUserDao(session);
+		
+	    String user_pictureURL = userDao.getUserPictureByEmail(user_email);
+	   
 	    try {
 			String user_passwordHash = toHexString(getSHA(user_password));
 			System.out.println(user_passwordHash);
-			if(UserDao.validate(user_email , user_passwordHash)){
+			if(userDao.validate(user_email , user_passwordHash)){
 				System.out.println("登入成功");
 				request.getSession().setAttribute("user_email", user_email);
 				request.getSession().setAttribute("user_pictureURL", user_pictureURL);

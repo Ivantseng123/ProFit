@@ -1,210 +1,129 @@
 package com.ProFit.dao.transactionCRUD;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import com.ProFit.bean.UserTransactionBean;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
-
-import com.ProFit.bean.UserTransactionBean;
-
 public class UserTransactionDAO {
-    private DataSource dataSource;
 
-    public UserTransactionDAO() {
-        try {
-            Context context = new InitialContext();
-            this.dataSource = (DataSource) context.lookup("java:/comp/env/jdbc/ProFitDB");
-        } catch (NamingException e) {
-            e.printStackTrace();
-        }
+    private Session session;
+
+    public UserTransactionDAO(Session session) {
+        this.session = session;
     }
 
-    private Connection getConnection() throws SQLException {
-        return dataSource.getConnection();
-    }
-
+    // 獲取所有交易記錄
     public List<UserTransactionBean> getAllTransactions() {
-        List<UserTransactionBean> transactions = new ArrayList<>();
-        String sql = "SELECT ut.transaction_id, ut.user_id, ut.transaction_type, ut.amount, ut.transaction_status, ut.created_at, u.user_name " +
-                     "FROM user_transactions ut " +
-                     "JOIN users u ON ut.user_id = u.user_id " +
-                     "ORDER BY ut.transaction_id DESC";  // 按交易ID降序排序
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
-
-            while (rs.next()) {
-                transactions.add(new UserTransactionBean(
-                        rs.getString("transaction_id"),
-                        rs.getString("user_id"),
-                        rs.getString("user_name"),
-                        rs.getString("transaction_type"),
-                        rs.getString("amount"),
-                        rs.getString("transaction_status"),
-                        rs.getTimestamp("created_at")
-                ));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return transactions;
+        Query<UserTransactionBean> query = session.createQuery("from UserTransactionBean order by createdAt desc", UserTransactionBean.class);
+        return query.list();
     }
 
-    public List<UserTransactionBean> getTransactionsByFilters(String userId, String userName, String transactionType, String transactionStatus, Timestamp startDate, Timestamp endDate) {
-        List<UserTransactionBean> transactions = new ArrayList<>();
-        StringBuilder sql = new StringBuilder("SELECT ut.transaction_id, ut.user_id, ut.transaction_type, ut.amount, ut.transaction_status, ut.created_at, u.user_name ");
-        sql.append("FROM user_transactions ut ");
-        sql.append("JOIN users u ON ut.user_id = u.user_id ");
-        sql.append("WHERE 1=1 ");
+    // 按條件篩選交易記錄
+    public List<UserTransactionBean> getTransactionsByFilters(String userId, String transactionType, String transactionStatus, Timestamp startDate, Timestamp endDate) {
+        StringBuilder hql = new StringBuilder("from UserTransactionBean where 1=1 ");
 
         if (userId != null && !userId.isEmpty()) {
-            sql.append("AND ut.user_id = ? ");
-        }
-        if (userName != null && !userName.isEmpty()) {
-            sql.append("AND u.user_name LIKE ? ");
+            hql.append("and userId = :userId ");
         }
         if (transactionType != null && !transactionType.isEmpty()) {
-            sql.append("AND ut.transaction_type = ? ");
+            hql.append("and transactionType = :transactionType ");
         }
         if (transactionStatus != null && !transactionStatus.isEmpty()) {
-            sql.append("AND ut.transaction_status = ? ");
+            hql.append("and transactionStatus = :transactionStatus ");
         }
         if (startDate != null) {
-            sql.append("AND ut.created_at >= ? ");
+            hql.append("and createdAt >= :startDate ");
         }
         if (endDate != null) {
-            sql.append("AND ut.created_at <= ? ");
+            hql.append("and createdAt <= :endDate ");
+        }
+        hql.append("order by createdAt desc");
+
+        Query<UserTransactionBean> query = session.createQuery(hql.toString(), UserTransactionBean.class);
+
+        if (userId != null && !userId.isEmpty()) {
+            query.setParameter("userId", Integer.parseInt(userId));
+        }
+        if (transactionType != null && !transactionType.isEmpty()) {
+            query.setParameter("transactionType", transactionType);
+        }
+        if (transactionStatus != null && !transactionStatus.isEmpty()) {
+            query.setParameter("transactionStatus", transactionStatus);
+        }
+        if (startDate != null) {
+            query.setParameter("startDate", startDate);
+        }
+        if (endDate != null) {
+            query.setParameter("endDate", endDate);
         }
 
-        sql.append("ORDER BY ut.transaction_id DESC");  // 按交易ID降序排序
-
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql.toString())) {
-
-            int paramIndex = 1;
-
-            if (userId != null && !userId.isEmpty()) {
-                stmt.setString(paramIndex++, userId);
-            }
-            if (userName != null && !userName.isEmpty()) {
-                stmt.setString(paramIndex++, "%" + userName + "%");
-            }
-            if (transactionType != null && !transactionType.isEmpty()) {
-                stmt.setString(paramIndex++, transactionType);
-            }
-            if (transactionStatus != null && !transactionStatus.isEmpty()) {
-                stmt.setString(paramIndex++, transactionStatus);
-            }
-            if (startDate != null) {
-                stmt.setTimestamp(paramIndex++, startDate);
-            }
-            if (endDate != null) {
-                stmt.setTimestamp(paramIndex++, endDate);
-            }
-
-            try (ResultSet rs = stmt.executeQuery()) {
-                while (rs.next()) {
-                    transactions.add(new UserTransactionBean(
-                            rs.getString("transaction_id"),
-                            rs.getString("user_id"),
-                            rs.getString("user_name"),
-                            rs.getString("transaction_type"),
-                            rs.getString("amount"),
-                            rs.getString("transaction_status"),
-                            rs.getTimestamp("created_at")
-                    ));
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return transactions;
+        return query.list();
     }
 
+    // 插入交易
     public boolean insertTransaction(UserTransactionBean transaction) {
-        String sql = "INSERT INTO user_transactions (user_id, transaction_type, amount, transaction_status, created_at) VALUES (?, ?, ?, ?, ?)";
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            // 不要設置 transaction_id，因為它是自動生成的
-            stmt.setString(1, transaction.getUserId());
-            stmt.setString(2, transaction.getTransactionType());
-            stmt.setString(3, transaction.getAmount());
-            stmt.setString(4, transaction.getTransactionStatus());
-            stmt.setTimestamp(5, transaction.getCreatedAt());
-
-            return stmt.executeUpdate() > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    public boolean updateTransaction(UserTransactionBean transaction) {
-        String sql = "UPDATE user_transactions SET user_id = ?, transaction_type = ?, amount = ?, transaction_status = ?, created_at = ? WHERE transaction_id = ?";
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, transaction.getUserId());
-            stmt.setString(2, transaction.getTransactionType());
-            stmt.setString(3, transaction.getAmount());
-            stmt.setString(4, transaction.getTransactionStatus());
-            stmt.setTimestamp(5, transaction.getCreatedAt());
-            stmt.setString(6, transaction.getTransactionId());
-
-            return stmt.executeUpdate() > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    public boolean deleteTransaction(String transactionId) {
-        String sql = "DELETE FROM user_transactions WHERE transaction_id = ?";
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, transactionId);
-            return stmt.executeUpdate() > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    public UserTransactionBean getTransactionById(String transactionId) {
-        String sql = "SELECT ut.transaction_id, ut.user_id, ut.transaction_type, ut.amount, ut.transaction_status, ut.created_at, u.user_name " +
-                     "FROM user_transactions ut " +
-                     "JOIN users u ON ut.user_id = u.user_id " +
-                     "WHERE ut.transaction_id = ?";
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, transactionId);
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                return new UserTransactionBean(
-                        rs.getString("transaction_id"),
-                        rs.getString("user_id"),
-                        rs.getString("user_name"),
-                        rs.getString("transaction_type"),
-                        rs.getString("amount"),
-                        rs.getString("transaction_status"),
-                        rs.getTimestamp("created_at")
-                );
+        Transaction tx = session.beginTransaction();
+        try {
+            session.persist(transaction);
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
             }
-        } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
-        return null;
+    }
+
+    // 更新交易
+    public boolean updateTransaction(UserTransactionBean transaction) {
+        Transaction tx = session.beginTransaction();
+        try {
+            if ("completed".equals(transaction.getTransactionStatus())) {
+                transaction.setCompletionAt(new Timestamp(System.currentTimeMillis()));
+            }
+            session.merge(transaction);  
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+
+
+    // 刪除交易
+    public boolean deleteTransaction(String transactionId) {
+        Transaction tx = session.beginTransaction();
+        try {
+            UserTransactionBean transaction = session.get(UserTransactionBean.class, transactionId);
+            if (transaction != null) {
+                session.remove(transaction);
+                tx.commit();
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // 根據ID獲取交易
+    public UserTransactionBean getTransactionById(String transactionId) {
+        return session.get(UserTransactionBean.class, transactionId);
     }
 }
