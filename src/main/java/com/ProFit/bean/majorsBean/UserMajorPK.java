@@ -29,12 +29,12 @@ public class UserMajorPK implements Serializable {
 			return false;
 		UserMajorPK that = (UserMajorPK) o;
 		return (major.getMajorId() == that.major.getMajorId() && 
-				user.getUser_id() == that.user.getUser_id());
+				user.getUserId() == that.user.getUserId());
 	}
 
 	@Override
     public int hashCode() {
-        return Objects.hash(major.getMajorId(), user.getUser_id());
+        return Objects.hash(major.getMajorId(), user.getUserId());
     }
 	
 	public UserMajorPK() {
@@ -63,7 +63,7 @@ public class UserMajorPK implements Serializable {
 	
 	 @Override
 	    public String toString() {
-	        return "UserMajorPK [user=" + user.getUser_id() + ", major=" + major.getMajorId() + "]";
+	        return "UserMajorPK [user=" + user.getUserId() + ", major=" + major.getMajorId() + "]";
 	    }
 
 }
