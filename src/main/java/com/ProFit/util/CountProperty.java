@@ -4,7 +4,25 @@ import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+
 public class CountProperty {
+	
+//	private static final SessionFactory facotry = createSessionFactory();
+//
+//
+//	
+//	private static SessionFactory createSessionFactory() {
+//		StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
+//		SessionFactory sf = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+//		return sf;
+//	}
+
+
+	
     public static String getPropertyCount(Class<?> beanClass) {
         Method[] methods = beanClass.getMethods();
         Set<String> propertyNames = new HashSet<>();
@@ -28,5 +46,20 @@ public class CountProperty {
         }
         return stringBuilder.toString();
     }
+    
+
+
+//	public static SessionFactory getSessionFactory() {
+//		return facotry;
+//	}
+//
+//	public static void closeSessionFactory() {
+//		if(facotry!=null) {
+//			facotry.close();
+//		}
+//	}
+
+
+
 }
 

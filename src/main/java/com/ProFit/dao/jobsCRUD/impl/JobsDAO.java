@@ -1,6 +1,7 @@
 package com.ProFit.dao.jobsCRUD.impl;
 
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,23 +11,29 @@ import com.ProFit.bean.Jobs;
 import com.ProFit.dao.jobsCRUD.AbstractGenericDAO;
 
 public class JobsDAO extends AbstractGenericDAO<Jobs, Integer> {
+	
+	
     @Override
     protected String getTableName() {
         return "jobs";
     }
+    
+  
     @Override
     protected String getInsertColumns() {
-    return "jobs_users_id, jobs_title, jobs_posting_date, jobs_application_deadline, jobs_description, jobs_status, jobs_required_skills, jobs_location, jobs_max_salary, jobs_min_salary, jobs_worktime, jobs_number_of_openings";
+    return "jobs_user_id, jobs_title, jobs_posting_date, jobs_application_deadline, jobs_description, jobs_status, jobs_required_skills, jobs_location, jobs_max_salary, jobs_min_salary, jobs_worktime, jobs_number_of_openings";
     }
 //    @Override
 //    protected String getInsertPlaceholders() {
 //        return CountProperty.getPropertyCount(JobsApplicationProject.class);
 //    }
+    
+    
     @Override
     protected Jobs mapRowToObject(ResultSet rs) throws SQLException {
     	Jobs jobs = new Jobs();
         jobs.setJobsId(rs.getInt("jobs_id"));
-        jobs.setJobsUserId(rs.getInt("jobs_users_id"));
+        jobs.setJobsUserId(rs.getInt("jobs_user_id"));
         jobs.setJobsTitle(rs.getString("jobs_title"));
         jobs.setJobsPostingDate(rs.getDate("jobs_posting_date"));
         jobs.setJobsApplicationDeadline(rs.getDate("jobs_application_deadline"));
@@ -44,8 +51,8 @@ public class JobsDAO extends AbstractGenericDAO<Jobs, Integer> {
     protected void setInsertStatementParameters(PreparedStatement stmt, Jobs entity) throws SQLException {
         stmt.setInt(1, entity.getJobsUserId());
         stmt.setString(2, entity.getJobsTitle());
-        stmt.setDate(3, entity.getJobsPostingDate());
-        stmt.setDate(4, entity.getJobsApplicationDeadline());
+        stmt.setDate(3, (Date) entity.getJobsPostingDate());
+        stmt.setDate(4, (Date) entity.getJobsApplicationDeadline());
         stmt.setString(5, entity.getJobsDescription());
         stmt.setByte(6, entity.getJobsStatus());
         stmt.setString(7, entity.getJobsRequiredSkills());
@@ -66,4 +73,25 @@ public class JobsDAO extends AbstractGenericDAO<Jobs, Integer> {
             stmt.setObject(index++, entry.getValue());
         }
     }
+
+
+//	@Override
+//	public Jobs findById(int id) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//
+//	@Override
+//	public void update(int id, Map<String, Object> updates) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//
+//	@Override
+//	public void delete(int id) {
+//		// TODO Auto-generated method stub
+//		
+//	}
 }

@@ -143,7 +143,7 @@ public class jobsServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("jobsId"));
         Map<String, Object> updates = new HashMap<>();
         // Add all fields that can be updated
-        updates.put("jobs_users_id", Integer.parseInt(request.getParameter("jobsUserId")));
+        updates.put("jobs_user_id", Integer.parseInt(request.getParameter("jobsUserId")));
         updates.put("jobs_title", request.getParameter("jobsTitle"));
         updates.put("jobs_posting_date", Date.valueOf(request.getParameter("jobsPostingDate")));
         updates.put("jobs_application_deadline", Date.valueOf(request.getParameter("jobsApplicationDeadline")));

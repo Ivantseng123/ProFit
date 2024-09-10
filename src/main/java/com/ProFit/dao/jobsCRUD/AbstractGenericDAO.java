@@ -18,9 +18,7 @@ import com.ProFit.util.CountProperty;
 
 //抽象類別就是為了給別人繼承存在，他實作（implements）這個介面的5個方法
 public abstract class AbstractGenericDAO<T, ID> implements GenericDAO<T, ID> {
-//    private static final String URL = "jdbc:sqlserver://localhost:1433;databaseName=ProFitDB;encrypt=false;";
-//    private static final String USER = "sa";
-//    private static final String PASSWORD = "Pp123456";
+
 
     protected abstract String getTableName(); //因尚未確定表名稱，故使用抽象方法讓其子類返回表名稱
 
@@ -35,6 +33,17 @@ public abstract class AbstractGenericDAO<T, ID> implements GenericDAO<T, ID> {
     // Map<String, Object>中，String是要修改的欄位名，Object是要修改的值
     protected abstract void setUpdateStatementParameters(PreparedStatement stmt, Map<String, Object> updates) throws SQLException;
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //JDBC建立連線
     protected Connection getConnection() throws SQLException {
 //        return DriverManager.getConnection(URL, USER, PASSWORD);
     	Connection conn =null;
@@ -43,15 +52,28 @@ public abstract class AbstractGenericDAO<T, ID> implements GenericDAO<T, ID> {
 			context = new InitialContext();
 			DataSource ds = (DataSource)context.lookup("java:/comp/env/jdbc/ProFitDB");
 			conn=ds.getConnection();
+			
 		} catch (NamingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	return conn;
-    }//JDBC建立連線
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 
     //覆寫GenericDAO的方法
+    //
     @Override
     public int save(T entity) {
         String sql = "INSERT INTO " + getTableName() + " (" + getInsertColumns() + ") VALUES " +
@@ -71,6 +93,7 @@ public abstract class AbstractGenericDAO<T, ID> implements GenericDAO<T, ID> {
         }
         return -1;//-1代表返回失敗，-1視為一種錯誤指示符，表示無法成功地從數據庫中獲取生成的 ID。跟上面的1沒有任何關係！！別誤會
     }
+    //id查詢
     @Override
     public T findById(ID id) {
         String sql = "SELECT * FROM " + getTableName() + " WHERE jobs_id = ?";//此處id可改成其他欄位，就可實現其他欄位的查詢
@@ -87,6 +110,7 @@ public abstract class AbstractGenericDAO<T, ID> implements GenericDAO<T, ID> {
         }
         return null;
     }
+  //查詢全部
     @Override
     public List<T> findAll() {
         List<T> entities = new ArrayList<>();
@@ -102,6 +126,7 @@ public abstract class AbstractGenericDAO<T, ID> implements GenericDAO<T, ID> {
         }
         return entities;
     }
+  //更新
     @Override
     public void update(ID id, Map<String, Object> updates) {
         StringBuilder sql = new StringBuilder("UPDATE " + getTableName() + " SET ");
@@ -118,6 +143,7 @@ public abstract class AbstractGenericDAO<T, ID> implements GenericDAO<T, ID> {
             e.printStackTrace();
         }
     }
+    //刪除
     @Override
     public void delete(ID id) {
         String sql = "DELETE FROM " + getTableName() + " WHERE jobs_id  = ?";
