@@ -42,23 +42,23 @@ public class HUserMajorDAO {
 	}
 
 	// 查詢所有用戶
-	public Map<String, String> getAllUsers() {
-		Map<String, String> users = new HashMap<>();
+	public Map<Integer, String> getAllUsers() {
+		Map<Integer, String> users = new HashMap<>();
 		Query<Users> query = session.createQuery("FROM Users", Users.class);
 		List<Users> userList = query.list();
 		for (Users user : userList) {
-			users.put(user.getUserName(), user.getUserName());
+			users.put(user.getUserId(), user.getUserName());
 		}
 		return users;
 	}
 
 	// 查詢所有專業
-	public Map<String, String> getAllMajors() throws SQLException {
-		Map<String, String> majors = new HashMap<>();
+	public Map<Integer, String> getAllMajors() throws SQLException {
+		Map<Integer, String> majors = new HashMap<>();
 		Query<MajorBean> query = session.createQuery("FROM MajorBean", MajorBean.class);
 		List<MajorBean> majorList = query.list();
 		for (MajorBean major : majorList) {
-			majors.put(major.getMajorName(), major.getMajorName());
+			majors.put(major.getMajorId(), major.getMajorName());
 		}
 		return majors;
 	}
