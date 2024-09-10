@@ -46,9 +46,6 @@ public class InvoiceServlet extends HttpServlet {
             case "insert":
                 insertInvoice(request, response);
                 break;
-            case "applyUpdate":
-                applyUpdateInvoice(request, response);
-                break;
             case "delete":
                 deleteInvoice(request, response);
                 break;
@@ -72,8 +69,9 @@ public class InvoiceServlet extends HttpServlet {
         String idType = request.getParameter("id_type");
         String idValue = request.getParameter("id_value");
 
+        // 如果 id_value 是空的，但選擇了 id_type，則查詢該類型的所有發票
         if (idValue == null || idValue.isEmpty()) {
-            idValue = null; 
+            idValue = null; // 保持 id_value 為空，以便在 DAO 中處理這種情況
         }
 
         List<InvoiceBean> invoices = invoiceDAO.searchInvoices(invoiceNumber, invoiceStatus, idType, idValue);
@@ -87,56 +85,44 @@ public class InvoiceServlet extends HttpServlet {
             String invoiceNumber = request.getParameter("invoice_number");
             int invoiceAmount = Integer.parseInt(request.getParameter("invoice_amount"));
             String invoiceStatus = request.getParameter("invoice_status");
+            String orderType = request.getParameter("order_type");
+            String orderId = request.getParameter("order_id");
             Timestamp issuedDate = new Timestamp(System.currentTimeMillis());
 
-            InvoiceBean invoice = new InvoiceBean(null, null, null, null, null, invoiceNumber, invoiceAmount, issuedDate, invoiceStatus);
-            invoiceDAO.insertInvoice(invoice);
+            // 創建 InvoiceBean 物件
+            InvoiceBean invoice = new InvoiceBean();
+            invoice.setInvoiceNumber(invoiceNumber);
+            invoice.setInvoiceAmount(invoiceAmount);
+            invoice.setInvoiceStatus(invoiceStatus);
+            invoice.setIssuedDate(issuedDate);
 
-            response.sendRedirect(request.getContextPath() + "/InvoiceServlet?action=list");
+            // 根據選擇的訂單類型將訂單ID存入對應的欄位
+            if ("transaction_id".equals(orderType)) {
+                invoice.setTransactionId(orderId);
+            } else if ("job_order_id".equals(orderType)) {
+                invoice.setJobOrderId(orderId);
+            } else if ("course_order_id".equals(orderType)) {
+                invoice.setCourseOrderId(orderId);
+            } else if ("event_order_id".equals(orderType)) {
+                invoice.setEventOrderId(orderId);
+            }
+
+            boolean isInserted = invoiceDAO.insertInvoice(invoice);
+
+            if (isInserted) {
+                response.sendRedirect(request.getContextPath() + "/InvoiceServlet?action=list");
+            } else {
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "新增發票失敗");
+            }
         } catch (Exception e) {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "新增發票失敗");
         }
     }
 
-    private void applyUpdateInvoice(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        try {
-            String invoiceId = request.getParameter("invoice_id");
-            String invoiceNumber = request.getParameter("invoice_number");
-            int invoiceAmount = Integer.parseInt(request.getParameter("invoice_amount"));
-            String invoiceStatus = request.getParameter("invoice_status");
-
-            String orderType = request.getParameter("order_type");
-            String orderId = request.getParameter("order_id");
-
-            InvoiceBean invoice = invoiceDAO.getInvoiceById(invoiceId);
-            if (invoice != null) {
-                invoice.setInvoiceNumber(invoiceNumber);
-                invoice.setInvoiceAmount(invoiceAmount);
-                invoice.setInvoiceStatus(invoiceStatus);
-
-                if ("transaction_id".equals(orderType)) {
-                    invoice.setTransactionId(orderId);
-                } else if ("job_order_id".equals(orderType)) {
-                    invoice.setJobOrderId(orderId);
-                } else if ("course_order_id".equals(orderType)) {
-                    invoice.setCourseOrderId(orderId);
-                } else if ("event_order_id".equals(orderType)) {
-                    invoice.setEventOrderId(orderId);
-                }
-
-                invoiceDAO.updateInvoice(invoice);
-                response.sendRedirect(request.getContextPath() + "/InvoiceServlet?action=list");
-            }
-        } catch (Exception e) {
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "更新發票失敗");
-        }
-    }
-
     private void deleteInvoice(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String invoiceId = request.getParameter("invoice_id");
-        boolean isDeleted = invoiceDAO.deleteInvoice(invoiceId);
+        String invoiceNumber = request.getParameter("invoice_number");
+        boolean isDeleted = invoiceDAO.deleteInvoice(invoiceNumber);
         if (isDeleted) {
             response.sendRedirect(request.getContextPath() + "/InvoiceServlet?action=list");
         } else {

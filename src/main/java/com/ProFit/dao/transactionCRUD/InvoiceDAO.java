@@ -21,7 +21,7 @@ public class InvoiceDAO {
         return query.list();
     }
 
-    // 按條件篩選發票
+    // 根據查詢條件搜索發票
     public List<InvoiceBean> searchInvoices(String invoiceNumber, String invoiceStatus, String idType, String idValue) {
         StringBuilder hql = new StringBuilder("from InvoiceBean where 1=1 ");
 
@@ -32,36 +32,35 @@ public class InvoiceDAO {
             hql.append("and invoiceStatus = :invoiceStatus ");
         }
 
-        // 根據選擇的 ID 類型添加篩選條件
-        if (idType != null && idValue != null) {
+        if (idType != null) {
             switch (idType) {
                 case "transaction_id":
-                    hql.append("and transactionId = :idValue ");
+                    if (idValue != null) {
+                        hql.append("and transactionId = :idValue ");
+                    } else {
+                        hql.append("and transactionId is not null ");
+                    }
                     break;
                 case "job_order_id":
-                    hql.append("and jobOrderId = :idValue ");
+                    if (idValue != null) {
+                        hql.append("and jobOrderId = :idValue ");
+                    } else {
+                        hql.append("and jobOrderId is not null ");
+                    }
                     break;
                 case "course_order_id":
-                    hql.append("and courseOrderId = :idValue ");
+                    if (idValue != null) {
+                        hql.append("and courseOrderId = :idValue ");
+                    } else {
+                        hql.append("and courseOrderId is not null ");
+                    }
                     break;
                 case "event_order_id":
-                    hql.append("and eventOrderId = :idValue ");
-                    break;
-            }
-        } else if (idType != null) {
-            // 如果 idValue 是空的，但選擇了 ID 類型，那麼查詢該類型下的所有發票
-            switch (idType) {
-                case "transaction_id":
-                    hql.append("and transactionId is not null ");
-                    break;
-                case "job_order_id":
-                    hql.append("and jobOrderId is not null ");
-                    break;
-                case "course_order_id":
-                    hql.append("and courseOrderId is not null ");
-                    break;
-                case "event_order_id":
-                    hql.append("and eventOrderId is not null ");
+                    if (idValue != null) {
+                        hql.append("and eventOrderId = :idValue ");
+                    } else {
+                        hql.append("and eventOrderId is not null ");
+                    }
                     break;
             }
         }
@@ -97,27 +96,11 @@ public class InvoiceDAO {
         }
     }
 
-    // 更新發票
-    public boolean updateInvoice(InvoiceBean invoice) {
-        Transaction tx = session.beginTransaction();
-        try {
-            session.update(invoice);
-            tx.commit();
-            return true;
-        } catch (Exception e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-            return false;
-        }
-    }
-
     // 刪除發票
-    public boolean deleteInvoice(String invoiceId) {
+    public boolean deleteInvoice(String invoiceNumber) {
         Transaction tx = session.beginTransaction();
         try {
-            InvoiceBean invoice = session.get(InvoiceBean.class, invoiceId);
+            InvoiceBean invoice = session.get(InvoiceBean.class, invoiceNumber);
             if (invoice != null) {
                 session.remove(invoice);
                 tx.commit();
@@ -133,8 +116,8 @@ public class InvoiceDAO {
         }
     }
 
-    // 根據ID查找發票
-    public InvoiceBean getInvoiceById(String invoiceId) {
-        return session.get(InvoiceBean.class, invoiceId);
+    // 根據發票號碼查找發票（在刪除時可能需要）
+    public InvoiceBean getInvoiceById(String invoiceNumber) {
+        return session.get(InvoiceBean.class, invoiceNumber);
     }
 }

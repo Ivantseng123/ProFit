@@ -59,13 +59,13 @@
 				</tr>
 				<c:forEach var="userMajor" items="${userMajors}">
 					<tr>
-						<td><c:out value="${userMajor.userName}" /></td>
-						<td><c:out value="${userMajor.majorName}" /></td>
+						<td><c:out value="${userMajor.id.user.userName}" /></td>
+						<td><c:out value="${userMajor.id.major.majorName}" /></td>
 						<td class="action-buttons">
 							<button class="delete"
-								onclick="location.href='${pageContext.request.contextPath}/userMajor/delete?userId=${userMajor.userId}&majorId=${userMajor.majorId}'">刪除</button>
+								onclick="location.href='${pageContext.request.contextPath}/userMajor/delete?userId=${userMajor.id.user.userId}&majorId=${userMajor.id.major.majorId}'">刪除</button>
 							<button class="view"
-								onclick="location.href='${pageContext.request.contextPath}/service/search?userId=${userMajor.userId}&majorId=${userMajor.majorId}'">檢視服務</button>
+								onclick="location.href='${pageContext.request.contextPath}/service/search?userId=${userMajor.id.user.userId}&majorId=${userMajor.id.major.majorId}'">檢視服務</button>
 						</td>
 					</tr>
 				</c:forEach>

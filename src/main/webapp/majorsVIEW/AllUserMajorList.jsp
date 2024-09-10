@@ -34,8 +34,8 @@
 			<form class="form-group"
 				action="${pageContext.request.contextPath}/userMajor/userMajors"
 				method="get">
-				<label for="userName">根據用戶名稱查詢</label> <select id="userName"
-					name="userName" required>
+				<label for="userId">根據用戶名稱查詢</label> <select id="userId"
+					name="userId" required>
 					<option value="">選擇用戶</option>
 					<c:forEach var="user" items="${allUsers}">
 						<option value="${user.key}">${user.value}</option>
@@ -45,8 +45,8 @@
 			<form class="form-group"
 				action="${pageContext.request.contextPath}/userMajor/majorUsers"
 				method="get">
-				<br> <label for="majorName">根據專業名稱查詢</label> <select
-					id="majorName" name="majorName" required>
+				<br> <label for="majorId">根據專業名稱查詢</label> <select
+					id="majorId" name="majorId" required>
 					<option value="">選擇專業</option>
 					<c:forEach var="major" items="${allMajors}">
 						<option value="${major.key}">${major.value}</option>
@@ -75,15 +75,15 @@
 					</tr>
 					<c:forEach var="userMajor" items="${allUserMajors}">
 						<tr>
-							<td><c:out value="${userMajor.userId}" /></td>
-							<td><c:out value="${userMajor.userName}" /></td>
-							<td><c:out value="${userMajor.majorId}" /></td>
-							<td><c:out value="${userMajor.majorName}" /></td>
+							<td><c:out value="${userMajor.id.user.userId}" /></td>
+							<td><c:out value="${userMajor.id.user.userName}" /></td>
+							<td><c:out value="${userMajor.id.major.majorId}" /></td>
+							<td><c:out value="${userMajor.id.major.majorName}" /></td>
 							<td class="action-buttons">
 								<button class="delete"
-									onclick="location.href='${pageContext.request.contextPath}/userMajor/delete?userId=${userMajor.userId}&majorId=${userMajor.majorId}'">刪除</button>
+									onclick="location.href='${pageContext.request.contextPath}/userMajor/delete?userId=${userMajor.id.user.userId}&majorId=${userMajor.id.major.majorId}'">刪除</button>
 								<button class="view"
-									onclick="location.href='${pageContext.request.contextPath}/service/search?userId=${userMajor.userId}&majorId=${userMajor.majorId}'">檢視服務</button>
+									onclick="location.href='${pageContext.request.contextPath}/service/search?userId=${userMajor.id.user.userId}&majorId=${userMajor.id.major.majorId}'">檢視服務</button>
 							</td>
 						</tr>
 					</c:forEach>
