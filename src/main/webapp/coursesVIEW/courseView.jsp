@@ -52,8 +52,7 @@
 				<span class="close-btn">&times;</span>
 				<div class="course-header">
 					<h2>課程細節</h2>
-				</div>
-				<div class="form-container"></div>
+				</div> container"></div>
 				
 			</div>
 		</div>
