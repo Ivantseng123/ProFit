@@ -20,7 +20,7 @@
   			<br>
             <a href="${pageContext.request.contextPath}/transactionVIEW/userTransactions.jsp" class="btn-custom edit">進入用戶交易管理</a>
             <br>
-            <a href="${pageContext.request.contextPath}/transactionVIEW/invoices.jsp" class="btn-custom edit">進入發票管理</a>   
+            <a href="${pageContext.request.contextPath}/transactionVIEW/invoices.jsp" class="btn-custom delete">進入發票管理</a>   
         </div>
     </main>
 

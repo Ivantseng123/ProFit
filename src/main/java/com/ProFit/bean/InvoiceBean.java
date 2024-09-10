@@ -8,9 +8,8 @@ import java.sql.Timestamp;
 public class InvoiceBean {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // 自動生成ID
-    @Column(name = "invoice_id")
-    private String invoiceId;
+    @Column(name = "invoice_number")  // 改成對應資料庫中的主鍵
+    private String invoiceNumber;
 
     @Column(name = "transaction_id")
     private String transactionId;
@@ -24,9 +23,6 @@ public class InvoiceBean {
     @Column(name = "event_order_id")
     private String eventOrderId;
 
-    @Column(name = "invoice_number")
-    private String invoiceNumber;
-
     @Column(name = "invoice_amount")
     private int invoiceAmount;
 
@@ -35,6 +31,68 @@ public class InvoiceBean {
 
     @Column(name = "invoice_status")
     private String invoiceStatus;
+    
+    public String getInvoiceNumber() {
+        return invoiceNumber;
+    }
 
-    // Getters and setters omitted for brevity...
+    public void setInvoiceNumber(String invoiceNumber) {
+        this.invoiceNumber = invoiceNumber;
+    }
+
+    public String getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
+    }
+
+    public String getJobOrderId() {
+        return jobOrderId;
+    }
+
+    public void setJobOrderId(String jobOrderId) {
+        this.jobOrderId = jobOrderId;
+    }
+
+    public String getCourseOrderId() {
+        return courseOrderId;
+    }
+
+    public void setCourseOrderId(String courseOrderId) {
+        this.courseOrderId = courseOrderId;
+    }
+
+    public String getEventOrderId() {
+        return eventOrderId;
+    }
+
+    public void setEventOrderId(String eventOrderId) {
+        this.eventOrderId = eventOrderId;
+    }
+
+    public int getInvoiceAmount() {
+        return invoiceAmount;
+    }
+
+    public void setInvoiceAmount(int invoiceAmount) {
+        this.invoiceAmount = invoiceAmount;
+    }
+
+    public Timestamp getIssuedDate() {
+        return issuedDate;
+    }
+
+    public void setIssuedDate(Timestamp issuedDate) {
+        this.issuedDate = issuedDate;
+    }
+
+    public String getInvoiceStatus() {
+        return invoiceStatus;
+    }
+
+    public void setInvoiceStatus(String invoiceStatus) {
+        this.invoiceStatus = invoiceStatus;
+    }
 }
