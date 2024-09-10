@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Major Management - ProFit</title>
+<title>All User Majors - ProFit</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/model/model.css">
 </head>
@@ -14,74 +14,81 @@
 
 	<main>
 		<div class="dashboard-header">
-			<h2>專業管理</h2>
+			<h2>所有用戶-專業</h2>
 		</div>
-		    <div class="entry-options1">
-            <div class="entry-option1">
-                <a href="${pageContext.request.contextPath}/service/search">技能服務管理</a>
-            </div>
-            <div class="entry-option1">
-                <a href="${pageContext.request.contextPath}/userMajor/">用戶-專業</a>
-            </div>
-             <div class="entry-option1">
-                <a href="${pageContext.request.contextPath}/major/">專業管理</a>
-            </div>
-             <div class="entry-option1">
-                <a href="${pageContext.request.contextPath}/majorCategory/list">專業類別管理</a>
-            </div>
-	</div>
-		<div class="form-container">
-		
-			 <form class="form-group" action="${pageContext.request.contextPath}/major/category" method="get">
-                <label for="categoryId">根據類別ID查詢</label>
-                
-                <input type="number" id="categoryId" name="categoryId" required>
-                <button class="" type="submit">查詢</button>
-            </form>
-			<hr>
-            <div class="action-buttons">
-			<button class="edit" onclick="location.href='${pageContext.request.contextPath}/major/new'">新增專業</button>
-			<button class="delete" onclick="location.href='${pageContext.request.contextPath}//majorCategory/new'">新增專業類別</button>
-            <button class="view" onclick="location.href='${pageContext.request.contextPath}/majorCategory/list'">顯示所有專業類別</button>
-			
+		<div class="entry-options1">
+			<div class="entry-option1">
+				<a href="${pageContext.request.contextPath}/service/search">技能服務管理</a>
 			</div>
-		
+			<div class="entry-option1">
+				<a href="${pageContext.request.contextPath}/userMajor/">用戶-專業</a>
+			</div>
+			<div class="entry-option1">
+				<a href="${pageContext.request.contextPath}/major/">專業管理</a>
+			</div>
+			<div class="entry-option1">
+				<a href="${pageContext.request.contextPath}/majorCategory/list">專業類別管理</a>
+			</div>
+		</div>
+		<div class="form-container">
+			<form class="form-group"
+				action="${pageContext.request.contextPath}/userMajor/userMajors"
+				method="get">
+				<label for="userName">根據用戶名稱查詢</label> <select id="userName"
+					name="userName" required>
+					<option value="">選擇用戶</option>
+					<c:forEach var="user" items="${allUsers}">
+						<option value="${user.key}">${user.value}</option>
+					</c:forEach>
+				</select>
+				<button type="submit">查詢</button>
+			</form>
+			<form class="form-group"
+				action="${pageContext.request.contextPath}/userMajor/majorUsers"
+				method="get">
+				<br> <label for="majorName">根據專業名稱查詢</label> <select
+					id="majorName" name="majorName" required>
+					<option value="">選擇專業</option>
+					<c:forEach var="major" items="${allMajor}">
+						<option value="${major.key}">${major.value}</option>
+					</c:forEach>
+				</select>
+				<button type="submit">查詢</button>
+			</form>
+			<hr>
+			<div class="action-buttons">
+				<button class="edit"
+					onclick="location.href='${pageContext.request.contextPath}/major/new'">新增專業</button>
+				<button class="view"
+					onclick="location.href='${pageContext.request.contextPath}/major/list'">顯示所有專業</button>
+			</div>
 		</div>
 		<br>
-		
 		<div class="table-container">
 			<table>
-			<c:if test="${not empty error}">
-                <div class="error-message">
-                    <c:out value="${error}" />
-                </div>
-            </c:if>
-
-            <c:if test="${not empty categoryId}">
-                <h3>類別ID 為 ${categoryId} 的專業</h3>
-            </c:if>
 				<tr>
-					<th>專業ID</th>
+					<th>用戶 ID</th>
+					<th>用戶名稱</th>
+					<th>專業 ID</th>
 					<th>專業名稱</th>
-					<th>類別ID</th>
-					<th>類別名稱</th>
-					<th>簡介</th>
 					<th>Actions</th>
 				</tr>
-				<c:forEach var="major" items="${listMajor}">
+				<c:if test="${empty listMajor}">
 					<tr>
-						<td><c:out value="${major.majorId}" /></td>
-						<td><c:out value="${major.majorName}" /></td>
-						<td><c:out value="${major.majorCategoryId}" /></td>
-						<td><c:out value="${major.categoryName}" /></td>
-						<td><c:out value="${major.majorDescription}" /></td>
+						<td colspan="4">沒有找到任何專業</td>
+					</tr>
+				</c:if>
+				<c:forEach var="userMajor" items="${allUserMajors}">
+					<tr>
+						<td><c:out value="${userMajor.id.user.userId}" /></td>
+						<td><c:out value="${userMajor.id.user.userName}" /></td>
+						<td><c:out value="${userMajor.id.major.majorId}" /></td>
+						<td><c:out value="${userMajor.id.major.majorName}" /></td>
 						<td class="action-buttons">
-							<button class="edit"
-								onclick="location.href='${pageContext.request.contextPath}/major/edit?id=<c:out value='${major.majorId}' />'">編輯</button>
 							<button class="delete"
-								onclick="location.href='${pageContext.request.contextPath}/major/delete?id=<c:out value='${major.majorId}' />'">刪除</button>
+								onclick="location.href='${pageContext.request.contextPath}/userMajor/delete?userId=${userMajor.id.user.userId}&majorId=${userMajor.id.major.majorId}'">刪除</button>
 							<button class="view"
-								onclick="location.href='${pageContext.request.contextPath}/major/view?id=<c:out value='${major.majorId}' />'">檢視</button>
+								onclick="location.href='${pageContext.request.contextPath}/service/search?userId=${userMajor.id.user.userId}&majorId=${userMajor.id.major.majorId}'">檢視服務</button>
 						</td>
 					</tr>
 				</c:forEach>

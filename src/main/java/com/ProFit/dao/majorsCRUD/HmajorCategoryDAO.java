@@ -39,7 +39,7 @@ public class HmajorCategoryDAO implements IHmahorCategoryDAO {
 							: newMajorCategory.getCategoryName());
 
 			session.merge(oldMajorCategory);
-			return false;
+			return true;
 		}
 	}
 

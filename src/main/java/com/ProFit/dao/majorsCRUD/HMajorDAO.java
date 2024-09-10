@@ -66,7 +66,6 @@ public class HMajorDAO {
 	public List<MajorBean> findAllMajors() {
 		Query<MajorBean> query = session.createQuery("from MajorBean", MajorBean.class);
 		return query.list();
-
 	}
 
 	// 根據 majorCategoryid 查找 Majors (
