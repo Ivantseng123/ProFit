@@ -18,11 +18,12 @@ public interface IHcourseDao {
 	// 查詢單筆By couseId
 	public CourseBean searchOneCourseById(String courseId);
 
-	// 查詢全部(未測試)
+	// 查詢全部
 	public List<CourseBean> searchCourses();
 
 	// 查詢全部By 多條件查詢
-	public List<CourseBean> searchCourses(String courseName, String userName, String status, String userId, String category);
+	public List<CourseBean> searchCourses(String courseName, String userName, 
+								String status, String userId, String category);
 
 
 }
