@@ -1,4 +1,4 @@
-package com.ProFit.bean;
+package com.ProFit.bean.transactionBean;
 
 import jakarta.persistence.*;
 import java.sql.Timestamp;
@@ -9,34 +9,36 @@ import java.util.UUID;
 public class UserTransactionBean {
 
     @Id
-    @Column(name = "transaction_id", length = 50)
+    @Column(name = "transaction_id")
     private String transactionId;
 
-    @Column(name = "user_id", nullable = false)
+    @Column(name = "user_id")
     private int userId;
 
-    @Column(name = "transaction_type", nullable = false)
+    @Column(name = "transaction_type")
     private String transactionType;
 
-    @Column(name = "transaction_amount", nullable = false)
+    @Column(name = "transaction_amount")
     private int transactionAmount;
 
-    @Column(name = "transaction_status", nullable = false)
+    @Column(name = "transaction_status")
     private String transactionStatus;
 
-    @Column(name = "created_at", nullable = false)
+    @Column(name = "created_at")
     private Timestamp createdAt;
 
-    @Column(name = "completion_at")  // 新增完成時間
+    @Column(name = "completion_at")  
     private Timestamp completionAt;
+    
+    @OneToOne(mappedBy = "userTransactionBean", fetch = FetchType.LAZY, optional = true)
+    private InvoiceBean invoiceBean;
+    
+    
 
-    // Default constructor
     public UserTransactionBean() {
-        // Automatically generate transactionId
         this.transactionId = UUID.randomUUID().toString();
     }
 
-    // Constructor without transactionId (it will be generated automatically)
     public UserTransactionBean(int userId, String transactionType, int transactionAmount, String transactionStatus, Timestamp createdAt) {
         this.transactionId = UUID.randomUUID().toString();
         this.userId = userId;
@@ -45,8 +47,6 @@ public class UserTransactionBean {
         this.transactionStatus = transactionStatus;
         this.createdAt = createdAt;
     }
-
-    // Getter and Setter methods
 
     public String getTransactionId() {
         return transactionId;
@@ -102,5 +102,13 @@ public class UserTransactionBean {
 
     public void setCompletionAt(Timestamp completionAt) {
         this.completionAt = completionAt;
+    }
+    
+    public InvoiceBean getInvoiceBean() {
+        return invoiceBean;
+    }
+
+    public void setInvoiceBean(InvoiceBean invoiceBean) {
+        this.invoiceBean = invoiceBean;
     }
 }

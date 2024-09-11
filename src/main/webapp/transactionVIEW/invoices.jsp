@@ -104,7 +104,9 @@
 									<input type="hidden" name="action" value="delete"> <input
 										type="hidden" name="invoice_number"
 										value="${invoice.invoiceNumber}">
-									<button type="submit" class="btn btn-danger">刪除</button>
+									<div class="action-buttons">
+									<button type="submit" class="delete">刪除</button>
+								</div>
 								</form>
 							</td>
 						</tr>

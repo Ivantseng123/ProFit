@@ -1,9 +1,10 @@
 package com.ProFit.dao.transactionCRUD;
 
-import com.ProFit.bean.InvoiceBean;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+
+import com.ProFit.bean.transactionBean.InvoiceBean;
 
 import java.util.List;
 

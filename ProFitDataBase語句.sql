@@ -292,10 +292,11 @@ CREATE TABLE [dbo].[course_order] (
 );
 
 CREATE TABLE [dbo].[course_grade_content] (
-    [course_id]          NVARCHAR (50) NOT NULL,
-    [student_id]         NVARCHAR (50) NOT NULL,
-    [course_grade_score] INT           NULL,
-    [course_grade_id]    INT           IDENTITY (100, 1) NOT NULL,
+    [course_grade_id]      INT           IDENTITY (100, 1) NOT NULL,
+    [course_id]            NVARCHAR (50) NOT NULL,
+    [student_id]           NVARCHAR (50) NOT NULL,
+    [course_grade_score]   INT           NULL,
+    [course_grade_comment] NVARCHAR (MAX) NULL,
     CONSTRAINT [PK_course_grade_content] PRIMARY KEY CLUSTERED ([course_grade_id] ASC),
     FOREIGN KEY ([course_id]) REFERENCES [dbo].[courses] ([course_id])
 );

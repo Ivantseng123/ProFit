@@ -1,6 +1,6 @@
 package com.ProFit.controller.transactions;
 
-import com.ProFit.bean.JobOrderBean;
+import com.ProFit.bean.transactionBean.JobOrderBean;
 import com.ProFit.dao.transactionCRUD.JobOrderDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

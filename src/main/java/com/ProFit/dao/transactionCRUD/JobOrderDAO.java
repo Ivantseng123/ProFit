@@ -1,9 +1,10 @@
 package com.ProFit.dao.transactionCRUD;
 
-import com.ProFit.bean.JobOrderBean;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+
+import com.ProFit.bean.transactionBean.JobOrderBean;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -25,8 +26,8 @@ public class JobOrderDAO {
     public boolean insertOrder(JobOrderBean order) {
         Transaction tx = session.beginTransaction();
         try {
-            order.setJobOrdersId(UUID.randomUUID().toString());  // 自動生成UUID作為主鍵
-            order.setJobOrderDate(new Timestamp(System.currentTimeMillis()));  // 訂單日期
+            order.setJobOrdersId(UUID.randomUUID().toString()); 
+            order.setJobOrderDate(new Timestamp(System.currentTimeMillis())); 
             session.persist(order);
             tx.commit();
             return true;
