@@ -17,21 +17,18 @@ import jakarta.persistence.Table;
 @DynamicUpdate
 @Table(name="employer_profile")
 public class Employer_profile implements Serializable{
-
 	private static final long serialVersionUID = 1L;
 
 	@Id @Column(name="employer_profile_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer employerProfileId;
-	
-	
+		
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="user_id",insertable = false,updatable = false)
 	private Users user;
 	
 	@Column(name="user_id")
 	private Integer userId;
-	
 	
 	@Column(name="company_name")
 	private String companyName;

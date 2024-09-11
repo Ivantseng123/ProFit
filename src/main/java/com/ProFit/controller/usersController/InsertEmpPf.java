@@ -6,6 +6,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.ProFit.bean.usersBean.Employer_profile;
+import com.ProFit.bean.usersBean.Users;
+import com.ProFit.dao.usersDao.HUserDao;
 import com.ProFit.dao.usersDao.HempProfileDao;
 import com.ProFit.dao.usersDao.IHempProfileDao;
 import com.ProFit.hibernateutil.HibernateUtil;
@@ -43,17 +45,22 @@ public class InsertEmpPf extends HttpServlet {
 		Session session = factory.getCurrentSession();
 
 		IHempProfileDao empdao = new HempProfileDao(session);
-
+		HUserDao userDao = new HUserDao(session);
 
 		try {
-			Employer_profile emp = new Employer_profile(user_id,company_name,company_addresstoDB,company_category,company_phoneNumber,company_taxID);
-
-			emp.toString();
-
-			empdao.saveEmployerInfo(emp);
+			Users existuser = userDao.getUserInfoByID(user_id);
 			
-			session.flush();  // 將緩存的更改同步到數據庫
-			session.clear();  // 清空緩存，強制從數據庫重新查詢
+			if (existuser != null) {
+				
+				Employer_profile emp = new Employer_profile(user_id,company_name,company_addresstoDB,company_category,company_phoneNumber,company_taxID);
+				
+				emp.toString();
+				
+				empdao.saveEmployerInfo(emp);
+				
+				session.flush();  // 將緩存的更改同步到數據庫
+				session.clear();  // 清空緩存，強制從數據庫重新查詢
+			}
 
 			request.getRequestDispatcher("/GetAllEmpPf").forward(request, response);
 		} catch (Exception e) {

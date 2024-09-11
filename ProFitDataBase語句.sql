@@ -7,13 +7,27 @@ CREATE TABLE users(
     user_city NVARCHAR(60),
     user_identity TINYINT,
     user_pictureURL VARCHAR(200),
-    user_balance INT,
+    user_balance INT,	
     freelancer_location_prefer NVARCHAR(50),
     freelancer_exprience NVARCHAR(30),
     freelancer_identity NVARCHAR(20),
     freelancer_profile_status TINYINT NOT NULL,
-    freelancer_disc NTEXT
+    freelancer_disc NTEXT,
+    user_register_time DATETIME2(0) DEFAULT CURRENT_TIMESTAMP
 );
+
+
+INSERT [dbo].[users] ([user_id], [user_name], [user_email], [user_passwordHash], [user_phoneNumber], [user_city], [user_identity], [user_pictureURL], [user_balance], [freelancer_location_prefer], [freelancer_exprience], [freelancer_identity], [freelancer_profile_status], [freelancer_disc], [user_register_time]) VALUES (101, N'John Doe', N'john.doe@example.com', N'e99a18c428cb38d5f260853678922e03', N'0912-345-678', N'台北市', 1, N'https://example.com/john.jpg', 0, N'台北市+新北市+基隆市', N'5 years', N'個人兼職', 1, N'Experienced full-stack developer.', NULL)
+INSERT [dbo].[users] ([user_id], [user_name], [user_email], [user_passwordHash], [user_phoneNumber], [user_city], [user_identity], [user_pictureURL], [user_balance], [freelancer_location_prefer], [freelancer_exprience], [freelancer_identity], [freelancer_profile_status], [freelancer_disc], [user_register_time]) VALUES (102, N'Jane Smith', N'jane.smith@example.com', N'abcde1234567890fghijk9876543210', N'0923-456-789', N'新北市', 2, N'https://example.com/jane.jpg', 0, N'新北市+桃園市+台中市', N'3 years', N'專職SOHO', 1, N'Creative designer with a passion for UI/UX.', NULL)
+INSERT [dbo].[users] ([user_id], [user_name], [user_email], [user_passwordHash], [user_phoneNumber], [user_city], [user_identity], [user_pictureURL], [user_balance], [freelancer_location_prefer], [freelancer_exprience], [freelancer_identity], [freelancer_profile_status], [freelancer_disc], [user_register_time]) VALUES (103, N'Alice Brown', N'alice.brown@example.com', N'5d41402abc4b2a76b9719d911017c592', N'0934-567-890', N'桃園市', 1, N'https://example.com/alice.jpg', 0, N'桃園市+新竹市+新竹縣', N'4 years', N'工作室', 1, N'Professional photographer with experience in portraits.', NULL)
+INSERT [dbo].[users] ([user_id], [user_name], [user_email], [user_passwordHash], [user_phoneNumber], [user_city], [user_identity], [user_pictureURL], [user_balance], [freelancer_location_prefer], [freelancer_exprience], [freelancer_identity], [freelancer_profile_status], [freelancer_disc], [user_register_time]) VALUES (104, N'Bob Johnson', N'bob.johnson@example.com', N'098f6bcd4621d373cade4e832627b4f6', N'0945-678-901', N'新竹市', 2, N'https://example.com/bob.jpg', 0, N'新竹市+新竹縣+台北市', N'6 years', N'兼職上班族', 1, N'Expert in video production and editing.', NULL)
+INSERT [dbo].[users] ([user_id], [user_name], [user_email], [user_passwordHash], [user_phoneNumber], [user_city], [user_identity], [user_pictureURL], [user_balance], [freelancer_location_prefer], [freelancer_exprience], [freelancer_identity], [freelancer_profile_status], [freelancer_disc], [user_register_time]) VALUES (105, N'Charlie Davis', N'charlie.davis@example.com', N'c4ca4238a0b923820dcc509a6f75849b', N'0956-789-012', N'新竹縣', 1, N'https://example.com/charlie.jpg', 0, N'新竹縣+基隆市+台中市', N'2 years', N'公司', 1, N'Freelance writer specializing in tech articles.', NULL)
+INSERT [dbo].[users] ([user_id], [user_name], [user_email], [user_passwordHash], [user_phoneNumber], [user_city], [user_identity], [user_pictureURL], [user_balance], [freelancer_location_prefer], [freelancer_exprience], [freelancer_identity], [freelancer_profile_status], [freelancer_disc], [user_register_time]) VALUES (149, N'游峻翰', N'johnyu91308@gmail.com', N'15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225', N'0917-276358', N'花蓮縣', 3, N'https://firebasestorage.googleapis.com/v0/b/profit-e686b.appspot.com/o/userUpload%2F%E9%A6%AC%E9%82%A6%E5%BE%B7.jpeg?alt=media&token=b8ced6a1-0b56-404c-b99a-dfd5df3041c4', 0, N'新北市', N'7-8年工作經驗', NULL, 0, N'', CAST(N'2024-08-30T11:15:46.0000000' AS DateTime2))
+INSERT [dbo].[users] ([user_id], [user_name], [user_email], [user_passwordHash], [user_phoneNumber], [user_city], [user_identity], [user_pictureURL], [user_balance], [freelancer_location_prefer], [freelancer_exprience], [freelancer_identity], [freelancer_profile_status], [freelancer_disc], [user_register_time]) VALUES (150, N'測試', N'test@gmail.com', N'15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225', N'0917-276358', N'臺北市', 2, N'150/馬邦德.jpeg', 0, N'臺北市', N'無工作經驗', N'工作室', 0, N'hhhhhhh', CAST(N'2024-08-30T11:52:29.0000000' AS DateTime2))
+INSERT [dbo].[users] ([user_id], [user_name], [user_email], [user_passwordHash], [user_phoneNumber], [user_city], [user_identity], [user_pictureURL], [user_balance], [freelancer_location_prefer], [freelancer_exprience], [freelancer_identity], [freelancer_profile_status], [freelancer_disc], [user_register_time]) VALUES (1145, N'測試', N'aaaaa@gmail.com', N'15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225', N'0917-278888', N'花蓮縣', 1, N'https://firebasestorage.googleapis.com/v0/b/profit-e686b.appspot.com/o/userUpload%2F%E9%A6%AC%E9%82%A6%E5%BE%B7.jpeg?alt=media&token=8103fba3-03a0-4a9e-9e40-2c108cc157cc', 4, N'臺中市', N'0-1年工作經驗', N'學生', 0, N'asdasdasdasd', CAST(N'2024-09-02T10:11:12.0000000' AS DateTime2))
+INSERT [dbo].[users] ([user_id], [user_name], [user_email], [user_passwordHash], [user_phoneNumber], [user_city], [user_identity], [user_pictureURL], [user_balance], [freelancer_location_prefer], [freelancer_exprience], [freelancer_identity], [freelancer_profile_status], [freelancer_disc], [user_register_time]) VALUES (2146, N'aaaaaaa', N'aaaaaaa@gmail.com', N'4b179810791a19af3bfeafbdcf0aca274d9ac7d5f063b8e0b75189360c0cf3a3', N'0917-278888', N'基隆市', 1, N'https://firebasestorage.googleapis.com/v0/b/profit-e686b.appspot.com/o/userUpload%2F%E9%A6%AC%E9%82%A6%E5%BE%B7.jpeg?alt=media&token=f6b449df-f640-4616-8142-da53a632ec92', 0, N'花蓮縣', N'10年以上年工作經驗', N'工作室', 0, N'aaaaaaa', CAST(N'2024-09-09T15:59:50.0000000' AS DateTime2))
+INSERT [dbo].[users] ([user_id], [user_name], [user_email], [user_passwordHash], [user_phoneNumber], [user_city], [user_identity], [user_pictureURL], [user_balance], [freelancer_location_prefer], [freelancer_exprience], [freelancer_identity], [freelancer_profile_status], [freelancer_disc], [user_register_time]) VALUES (3145, N'游峻翰', N'test111@gmail.com', N'8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', N'0917-276358', N'臺北市', 3, N'https://firebasestorage.googleapis.com/v0/b/profit-e686b.appspot.com/o/userUpload%2F%E9%A6%AC%E9%82%A6%E5%BE%B7.jpeg?alt=media&token=d1d95a04-2bb6-4989-8186-c22287f77799', 0, N'臺北市', N'無工作經驗', NULL, 0, N'', CAST(N'2024-09-11T10:29:02.0000000' AS DateTime2))
+
 
 CREATE TABLE employer_application(
     employer_application_id INT IDENTITY(100, 1) NOT NULL PRIMARY KEY,
@@ -23,13 +37,18 @@ CREATE TABLE employer_application(
     company_category NVARCHAR(20),
     company_phoneNumber VARCHAR(20),
     company_taxID VARCHAR(100),
-    company_taxID_docURL VARCHAR(100),
-    user_national_id VARCHAR(20) UNIQUE,
-    idCard_pictureURL_1 VARCHAR(200),
-    idCard_pictureURL_2 VARCHAR(200),
+    company_taxID_docURL NVARCHAR(255),
+    user_national_id VARCHAR(20),
+    idCard_pictureURL_1 NVARCHAR(255),
+    idCard_pictureURL_2 NVARCHAR(255),
     application_check TINYINT,
     FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
+
+INSERT [dbo].[employer_application] ([employer_application_id], [user_id], [company_name], [company_address], [company_category], [company_phoneNumber], [company_taxID], [company_taxID_docURL], [user_national_id], [idCard_pictureURL_1], [idCard_pictureURL_2], [application_check]) VALUES (101, 101, N'ABC Corp', N'123 Taipei Road', N'IT', N'0223456789', N'A123456789', N'http://example.com/taxdoc1.jpg', N'A123456789', N'http://example.com/id1_front.jpg', N'http://example.com/id1_back.jpg', 1)
+INSERT [dbo].[employer_application] ([employer_application_id], [user_id], [company_name], [company_address], [company_category], [company_phoneNumber], [company_taxID], [company_taxID_docURL], [user_national_id], [idCard_pictureURL_1], [idCard_pictureURL_2], [application_check]) VALUES (102, 102, N'XYZ Inc', N'456 Kaohsiung Street', N'Finance', N'0223456790', N'B123456789', N'http://example.com/taxdoc2.jpg', N'B123456789', N'http://example.com/id2_front.jpg', N'http://example.com/id2_back.jpg', 1)
+INSERT [dbo].[employer_application] ([employer_application_id], [user_id], [company_name], [company_address], [company_category], [company_phoneNumber], [company_taxID], [company_taxID_docURL], [user_national_id], [idCard_pictureURL_1], [idCard_pictureURL_2], [application_check]) VALUES (2116, 1145, N'測試', N'澎湖縣測試測試', N'礦業及土石採取業', N'1111111', N'5454654646', N'', N'H123456789', N'', N'', 0)
+INSERT [dbo].[employer_application] ([employer_application_id], [user_id], [company_name], [company_address], [company_category], [company_phoneNumber], [company_taxID], [company_taxID_docURL], [user_national_id], [idCard_pictureURL_1], [idCard_pictureURL_2], [application_check]) VALUES (2118, 150, N'55555', N'嘉義縣55555', N'礦業及土石採取業', N'55555', N'55555', N'https://firebasestorage.googleapis.com/v0/b/profit-e686b.appspot.com/o/userUpload%2F%E9%A6%AC%E9%82%A6%E5%BE%B7.jpeg?alt=media&token=188ab1e6-c2b3-4578-92d1-93ae204dfc5e', N'H123456789', N'https://firebasestorage.googleapis.com/v0/b/profit-e686b.appspot.com/o/userUpload%2F%E9%A6%AC%E9%82%A6%E5%BE%B7.jpeg?alt=media&token=4e2da6ae-dc3e-4931-a4a5-61a1ac116582', N'https://firebasestorage.googleapis.com/v0/b/profit-e686b.appspot.com/o/userUpload%2F%E9%A6%AC%E9%82%A6%E5%BE%B7.jpeg?alt=media&token=188ab1e6-c2b3-4578-92d1-93ae204dfc5e', NULL)
 
 CREATE TABLE employer_profile(
     employer_profile_id INT IDENTITY(100, 1) NOT NULL PRIMARY KEY,
@@ -39,12 +58,18 @@ CREATE TABLE employer_profile(
     company_category NVARCHAR(20),
     company_phoneNumber VARCHAR(20),
     company_taxID VARCHAR(100),
-    company_numberOfemployee INT,
-    company_captital INT,
+    company_numberOfemployee NVARCHAR(30),
+    company_captital NVARCHAR(30),
     company_description NVARCHAR(200),
-    company_photoURL VARCHAR(200),
+    company_photoURL NVARCHAR(255),
     FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
+
+INSERT [dbo].[employer_profile] ([employer_profile_id], [user_id], [company_name], [company_address], [company_category], [company_phoneNumber], [company_taxID], [company_numberOfemployee], [company_captital], [company_description], [company_photoURL]) VALUES (100, 101, N'ABC Corp', N'123 Taipei Road', N'IT', N'0223456789', N'A123456789', N'200', N'10000000', N'Leading IT company in Taiwan', N'http://example.com/abccorp.jpg')
+INSERT [dbo].[employer_profile] ([employer_profile_id], [user_id], [company_name], [company_address], [company_category], [company_phoneNumber], [company_taxID], [company_numberOfemployee], [company_captital], [company_description], [company_photoURL]) VALUES (101, 102, N'XYZ Inc', N'臺北市 Kaohsiung Street', N'農、林、漁、牧業', N'0223456790', N'B123456789', N'1-10', N'8000000', N'Top finance company', N'http://example.com/xyzinc.jpg')
+INSERT [dbo].[employer_profile] ([employer_profile_id], [user_id], [company_name], [company_address], [company_category], [company_phoneNumber], [company_taxID], [company_numberOfemployee], [company_captital], [company_description], [company_photoURL]) VALUES (1112, 1145, N'資展國際', N'桃園市中壢區新生路二段421號', N'其他', N'03123456789', N'123456789', N'1-10', N'464646464464', N'', N'1145/1965770a560615a908f98b80e558752e-65960.jpg')
+INSERT [dbo].[employer_profile] ([employer_profile_id], [user_id], [company_name], [company_address], [company_category], [company_phoneNumber], [company_taxID], [company_numberOfemployee], [company_captital], [company_description], [company_photoURL]) VALUES (2113, 150, N'66666', N'花蓮縣66666', N'專業、科學及技術服務業', N'66666', N'66666', N'5000以上', N'66666', N'66666', N'https://firebasestorage.googleapis.com/v0/b/profit-e686b.appspot.com/o/userUpload%2F1965770a560615a908f98b80e558752e-65960.jpg?alt=media&token=7783bf37-e935-4cb2-bd07-ec7a05d96a06')
+
 
 CREATE TABLE password_reset_tokens(
     token_id INT IDENTITY(100, 1) NOT NULL PRIMARY KEY,
@@ -53,6 +78,9 @@ CREATE TABLE password_reset_tokens(
     expiration_stime TIMESTAMP ,
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
+
+INSERT [dbo].[password_reset_tokens] ([token_id], [user_id], [user_tokenHash], [expiration_time]) VALUES (101, 101, N'tokenhash100', CAST(N'2024-08-26T09:39:23.0000000' AS DateTime2))
+INSERT [dbo].[password_reset_tokens] ([token_id], [user_id], [user_tokenHash], [expiration_time]) VALUES (102, 102, N'tokenhash101', CAST(N'2024-08-26T09:39:23.0000000' AS DateTime2))
 
 
 CREATE TABLE jobs (

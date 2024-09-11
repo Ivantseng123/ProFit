@@ -24,7 +24,8 @@ public class HempProfileDao implements IHempProfileDao {
 	// 刪除企業資訊BY ID
 	@Override
 	public boolean deleteEmpInfo(int employer_profile_id) {
-		Employer_profile resultBean = session.get(Employer_profile.class, employer_profile_id);
+		Employer_profile resultBean = session.get(Employer_profile.class, 
+				employer_profile_id);
 		if (resultBean != null) {
 			session.remove(resultBean);
 			return true;
@@ -32,23 +33,23 @@ public class HempProfileDao implements IHempProfileDao {
 		return false;
 	}
 
+	// 更新企業資訊
 	@Override
 	public void updateEmpInfo(Employer_profile emp) {
 		session.merge(emp);
 	}
-
+	
+	//查詢全部企業資訊
 	@Override
 	public List<Employer_profile> getAllEmpInfo() {
 		List<Employer_profile> emps = new ArrayList<>();
-
 		String hql = "SELECT e FROM Employer_profile e JOIN e.user u";
-
 		Query<Employer_profile> query = session.createQuery(hql, Employer_profile.class);
 		emps = query.getResultList();
-
 		return emps;
 	}
-
+	
+	//查詢單筆企業資訊
 	@Override
 	public Employer_profile getEmpPfInfoByID(int employer_profile_id) {
 		return session.get(Employer_profile.class, employer_profile_id);

@@ -76,6 +76,9 @@ public class Users implements Serializable {
 
 	@Column(name = "freelancer_disc")
 	private String freelancerDisc;
+	
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "user")
+	private List<Pwd_reset_tokens> pwd_reset_tokens = new LinkedList<Pwd_reset_tokens>();
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "user")
 	private List<Employer_application> employerApplications = new LinkedList<Employer_application>();
