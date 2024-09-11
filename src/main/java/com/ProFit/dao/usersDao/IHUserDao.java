@@ -29,4 +29,6 @@ public interface IHUserDao {
 
 	Users getUserInfoByID(Integer user_id);
 
+	Users getUserByEmail(String user_email);
+
 }

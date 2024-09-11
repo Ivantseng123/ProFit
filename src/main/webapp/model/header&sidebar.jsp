@@ -61,23 +61,23 @@
 	</nav>
 	<script>
 	    document.addEventListener("DOMContentLoaded", function() {
-	        var userPictureImg = document.querySelector(".userPicture img");
-	        var user_pictureURL = "${sessionScope.user_pictureURL}";
+	        let userPictureImg = document.querySelector(".userPicture img");
+	        let user_pictureURL = "${sessionScope.user_pictureURL}";
 	        if (!user_pictureURL) {
-	            userPictureImg.src = "${pageContext.request.contextPath}/usersVIEW/default_user_picture.png";
+	            userPictureImg.src = "https://firebasestorage.googleapis.com/v0/b/profit-e686b.appspot.com/o/userUpload%2Fdefault_user_picture.png?alt=media&token=dd3a8cfa-1a00-48ac-ba30-1f7bb3d783bd";
 	        } else {
-	            userPictureImg.src = "${pageContext.request.contextPath}/usersVIEW/userupload/${sessionScope.user_pictureURL}";
+	            userPictureImg.src = "${sessionScope.user_pictureURL}";
 	        }
 
-	        var logoutButton = document.querySelector(".logout");
-	        var user_email = "${sessionScope.user_email}";
+	        let logoutButton = document.querySelector(".logout");
+	        let user_email = "${sessionScope.user_email}";
 	        if (!user_email) {
 	            logoutButton.textContent = "登入";
 	        } else {
 	            logoutButton.textContent = "登出";
 	        }
 
-	        var login_status = logoutButton.textContent;
+	        let login_status = logoutButton.textContent;
 	        if (login_status === "登入") {
 	            document.querySelector(".loginStatus").href = "${pageContext.request.contextPath}/usersVIEW/Login.jsp";
 	        }
