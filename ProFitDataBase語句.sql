@@ -171,20 +171,25 @@ CREATE TABLE jobs_application_project (
 	FOREIGN KEY (collection_id) REFERENCES collection(collection_id)
 	);
 
-	-- Events table
-	CREATE TABLE events (
+--建立 events 表格
+CREATE TABLE events (
     event_id NVARCHAR(255) PRIMARY KEY,
     event_name NVARCHAR(255) NOT NULL,
-    is_event_active BIT NOT NULL,
-    event_start_date DATETIME2 NOT NULL,
-    event_end_date DATETIME2 NOT NULL,
-    event_description NVARCHAR(255),
+    is_event_active INT NOT NULL,
+    event_major INT,
+    event_start_date DATETIME2,
+    event_end_date DATETIME2,
+    event_part_start_date DATETIME2,
+    event_part_end_date DATETIME2,
     event_amount INT,
     event_location NVARCHAR(255),
     event_participant_maximum INT,
-    event_note NVARCHAR(255)
-	);
+    event_description NVARCHAR(255),
+    event_note NVARCHAR(255),
+    FOREIGN KEY (event_major) REFERENCES major(major_id)
+);
 
+--建立 event_host 表格
 CREATE TABLE event_host (
     event_id NVARCHAR(255), 
     event_host_id INT, 
@@ -193,18 +198,38 @@ CREATE TABLE event_host (
     FOREIGN KEY (event_host_id) REFERENCES users(user_id)
 );
 
+--建立 event_order 表格
 CREATE TABLE event_order (
     event_order_id NVARCHAR(50) PRIMARY KEY,
     event_order_amount INT,
     is_event_order_active BIT,
     event_id NVARCHAR(255),
     event_participant_id INT,
-    event_participant_date DATETIME2 NOT NULL,
-    event_participant_data NVARCHAR(255),
+    event_participant_date DATETIME2,
+    event_participant_note NVARCHAR(255),
     FOREIGN KEY (event_id) REFERENCES events(event_id),
     FOREIGN KEY (event_participant_id) REFERENCES users(user_id)
 );
 
+
+
+-- 插入 events 表格的測試數據
+INSERT INTO events (event_id, event_name, is_event_active, event_major, event_start_date, event_end_date, event_part_start_date, event_part_end_date, event_amount, event_location, event_participant_maximum, event_description, event_note)
+VALUES
+('EV100', 'Tech Conference', 1, 100, GETDATE(), DATEADD(day, 1, GETDATE()), DATEADD(day, 2, GETDATE()), DATEADD(day, 3, GETDATE()), 500, 'Taipei', 300, 'Annual technology conference', 'Registration required'),
+('EV101', 'Finance Summit', 1, 100, GETDATE(), DATEADD(day, 1, GETDATE()), DATEADD(day, 2, GETDATE()), DATEADD(day, 3, GETDATE()), 700, 'Kaohsiung', 400, 'Leading finance summit', 'Register online');
+
+-- 插入 event_host 表格的測試數據
+INSERT INTO event_host (event_id, event_host_id)
+VALUES
+('EV100', 100),
+('EV101', 101);
+
+-- 插入 event_order 表格的測試數據
+INSERT INTO event_order (event_order_id, event_order_amount, is_event_order_active, event_id, event_participant_id, event_participant_date, event_participant_note)
+VALUES
+('EO100', 500, 1, 'EV100', 100, GETDATE(), 'Confirmed'),
+('EO101', 700, 1, 'EV101', 101, GETDATE(), 'Confirmed');
 
 -- courses table
 CREATE TABLE [dbo].[courses] (
