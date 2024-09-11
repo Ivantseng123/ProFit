@@ -133,8 +133,8 @@
 					<tr>
 						<td><c:out value="${service.serviceId}" /></td>
 						<td><c:out value="${service.serviceTitle}" /></td>
-						<td><c:out value="${users[service.userId]}" /></td>
-						<td><c:out value="${majors[service.majorId]}" /></td>
+						<td><c:out value="${service.userMajor.id.user.userName}" /></td>
+						<td><c:out value="${service.userMajor.id.major.majorName}" /></td>
 						<td><c:out value="${service.servicePrice}" /></td>
 						<td><c:out value="${service.serviceUnitName}" /></td>
 						<td><c:out value="${service.serviceDuration}" /></td>

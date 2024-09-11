@@ -117,11 +117,11 @@ public class ServiceBean implements java.io.Serializable {
 		this.serviceId = serviceId;
 	}
 
-	public UserMajorBean getUserMajorBean() {
+	public UserMajorBean getUserMajor() {
 		return userMajor;
 	}
 
-	public void setUserMajorBean(UserMajorBean userMajorBean) {
+	public void setUserMajor(UserMajorBean userMajorBean) {
 		this.userMajor = userMajorBean;
 	}
 
