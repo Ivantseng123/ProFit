@@ -2,6 +2,7 @@ package com.ProFit.controller.services;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
@@ -130,7 +131,7 @@ public class ServiceServlet extends HttpServlet {
         UserMajorBean userMajor = session.get(UserMajorBean.class, userMajorPK);
 
         ServiceBean newService = new ServiceBean();
-        newService.setUserMajorBean(userMajor);
+        newService.setUserMajor(userMajor);
         newService.setServiceTitle(title);
         newService.setServiceContent(content);
         newService.setServicePrice(price);
@@ -138,7 +139,9 @@ public class ServiceServlet extends HttpServlet {
         newService.setServiceDuration(duration);
         newService.setServiceCreateDate(LocalDateTime.now());
         newService.setServiceUpdateDate(LocalDateTime.now());
-
+        
+        //System.out.println(newService.getServiceCreateDate());
+        
         Part filePart1 = request.getPart("serviceSample1");
         if (filePart1 != null && filePart1.getSize() > 0) {
             newService.setServicePictureURL1(saveFile(filePart1));
@@ -166,7 +169,7 @@ public class ServiceServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         ServiceBean existingService = serviceDAO.findServiceById(id);
         Map<Integer, String> users = serviceDAO.getAllUsers();
-        Map<Integer, String> majors = serviceDAO.getMajorsByUserId(existingService.getUserMajorBean().getId().getUser().getUserId());
+        Map<Integer, String> majors = serviceDAO.getMajorsByUserId(existingService.getUserMajor().getId().getUser().getUserId());
 
         request.setAttribute("service", existingService);
         request.setAttribute("users", users);
@@ -195,7 +198,7 @@ public class ServiceServlet extends HttpServlet {
         UserMajorBean userMajor = session.get(UserMajorBean.class, userMajorPK);
 
         ServiceBean service = serviceDAO.findServiceById(id);
-        service.setUserMajorBean(userMajor);
+        service.setUserMajor(userMajor);
         service.setServiceTitle(title);
         service.setServiceContent(content);
         service.setServicePrice(price);
@@ -278,7 +281,14 @@ public class ServiceServlet extends HttpServlet {
 
         int id = Integer.parseInt(request.getParameter("id"));
         ServiceBean service = serviceDAO.findServiceById(id);
+        
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+        
         if (service != null) {
+        	String formattedCreateDate = service.getServiceCreateDate().format(formatter);
+        	String formattedUpdateDate = service.getServiceUpdateDate().format(formatter);
+        	request.setAttribute("formattedCreateDate", formattedCreateDate);
+        	request.setAttribute("formattedUpdateDate", formattedUpdateDate);
             request.setAttribute("service", service);
             RequestDispatcher dispatcher = request.getRequestDispatcher("/servicesVIEW/ServiceView.jsp");
             dispatcher.forward(request, response);

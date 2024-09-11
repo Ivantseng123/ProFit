@@ -1,6 +1,6 @@
 package com.ProFit.dao.servicesCRUD;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,8 +11,6 @@ import org.hibernate.query.Query;
 import com.ProFit.bean.servicesBean.ServiceBean;
 import com.ProFit.bean.usersBean.Users;
 import com.ProFit.bean.majorsBean.MajorBean;
-import com.ProFit.bean.majorsBean.UserMajorBean;
-import com.ProFit.bean.majorsBean.UserMajorPK;
 
 public class HServiceDAO {
 
@@ -24,12 +22,14 @@ public class HServiceDAO {
 
     // 新增服務
     public boolean insertService(ServiceBean service) {
+    	
         session.persist(service);
         return true;
     }
 
     // 更新現有服務
     public boolean updateService(ServiceBean service) {
+    	
         session.merge(service);
         return true;
     }
