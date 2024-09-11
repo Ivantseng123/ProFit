@@ -1,6 +1,6 @@
 package com.ProFit.controller.transactions;
 
-import com.ProFit.bean.InvoiceBean;
+import com.ProFit.bean.transactionBean.InvoiceBean;
 import com.ProFit.dao.transactionCRUD.InvoiceDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -89,14 +89,12 @@ public class InvoiceServlet extends HttpServlet {
             String orderId = request.getParameter("order_id");
             Timestamp issuedDate = new Timestamp(System.currentTimeMillis());
 
-            // 創建 InvoiceBean 物件
             InvoiceBean invoice = new InvoiceBean();
             invoice.setInvoiceNumber(invoiceNumber);
             invoice.setInvoiceAmount(invoiceAmount);
             invoice.setInvoiceStatus(invoiceStatus);
             invoice.setIssuedDate(issuedDate);
 
-            // 根據選擇的訂單類型將訂單ID存入對應的欄位
             if ("transaction_id".equals(orderType)) {
                 invoice.setTransactionId(orderId);
             } else if ("job_order_id".equals(orderType)) {
