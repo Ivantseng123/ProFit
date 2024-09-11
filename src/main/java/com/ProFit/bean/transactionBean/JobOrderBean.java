@@ -1,4 +1,4 @@
-package com.ProFit.bean;
+package com.ProFit.bean.transactionBean;
 
 import jakarta.persistence.*;
 import java.sql.Timestamp;
@@ -25,6 +25,9 @@ public class JobOrderBean {
 
     @Column(name = "job_amount")
     private int jobAmount;
+    
+    @OneToOne(mappedBy = "jobOrderBean", fetch = FetchType.LAZY)
+    private InvoiceBean invoiceBean;
 
     public JobOrderBean() {
     }
@@ -38,7 +41,6 @@ public class JobOrderBean {
         this.jobAmount = jobAmount;
     }
 
-    // Getters 和 Setters
     public String getJobOrdersId() {
         return jobOrdersId;
     }
@@ -86,4 +88,13 @@ public class JobOrderBean {
     public void setJobAmount(int jobAmount) {
         this.jobAmount = jobAmount;
     }
+    
+    public InvoiceBean getInvoiceBean() {
+        return invoiceBean;
+    }
+
+    public void setInvoiceBean(InvoiceBean invoiceBean) {
+        this.invoiceBean = invoiceBean;
+    }
+   
 }

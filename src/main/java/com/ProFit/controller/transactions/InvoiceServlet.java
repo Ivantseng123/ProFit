@@ -1,6 +1,6 @@
 package com.ProFit.controller.transactions;
 
-import com.ProFit.bean.InvoiceBean;
+import com.ProFit.bean.transactionBean.InvoiceBean;
 import com.ProFit.dao.transactionCRUD.InvoiceDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
