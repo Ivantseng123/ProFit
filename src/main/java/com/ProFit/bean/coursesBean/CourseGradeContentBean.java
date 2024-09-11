@@ -17,32 +17,36 @@ public class CourseGradeContentBean implements java.io.Serializable  {
 	
 	@Id @Column(name="course_grade_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String courseGradeId;
+	private Integer courseGradeId;
 	
-	@Column(name="course_id",insertable = false, updatable = false)
+	@Column(name="course_id")
 	private String courseId;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="course_id")
+	@JoinColumn(name="course_id",insertable = false, updatable = false)
 	private CourseBean course;
 	
 	@Column(name="student_id")
 	private String studentId;
 	
 	@Column(name="course_grade_score")
-	private String courseGradeScore;
+	private Integer courseGradeScore;
+
+	@Column(name="course_grade_comment")
+	private String courseGradeComment;
 
 	public CourseGradeContentBean() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public CourseGradeContentBean(String courseGradeId, String courseId, String studentId, String courseGradeScore) {
+	public CourseGradeContentBean(Integer courseGradeId, String courseId, String studentId, Integer courseGradeScore,String courseGradeComment) {
 		super();
 		this.courseGradeId = courseGradeId;
 		this.courseId = courseId;
 		this.studentId = studentId;
 		this.courseGradeScore = courseGradeScore;
+		this.courseGradeComment=courseGradeComment;
 	}
 
 	public CourseBean getCourse() {
@@ -52,11 +56,11 @@ public class CourseGradeContentBean implements java.io.Serializable  {
 	public void setCourse(CourseBean course) {
 		this.course = course;
 	}
-	public String getCourseGradeId() {
+	public Integer getCourseGradeId() {
 		return courseGradeId;
 	}
 
-	public void setCourseGradeId(String courseGradeId) {
+	public void setCourseGradeId(Integer courseGradeId) {
 		this.courseGradeId = courseGradeId;
 	}
 
@@ -76,14 +80,22 @@ public class CourseGradeContentBean implements java.io.Serializable  {
 		this.studentId = studentId;
 	}
 
-	public String getCourseGradeScore() {
+	public Integer getCourseGradeScore() {
 		return courseGradeScore;
 	}
 
-	public void setCourseGradeScore(String courseGradeScore) {
+	public void setCourseGradeScore(Integer courseGradeScore) {
 		this.courseGradeScore = courseGradeScore;
 	}
+	
+	public String getCourseGradeComment() {
+		return courseGradeComment;
+	}
 
+	public void setCourseGradeComment(String courseGradeComment) {
+		this.courseGradeComment = courseGradeComment;
+	}
+	
 	@Override
 	public String toString() {
 		return "CourseGradeContentBean [courseGradeId=" + courseGradeId + ", courseId=" + courseId + ", studentId="
