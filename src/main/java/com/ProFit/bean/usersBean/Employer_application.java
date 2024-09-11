@@ -17,11 +17,7 @@ import jakarta.persistence.Table;
 @DynamicUpdate
 @Table(name="employer_application")
 public class Employer_application implements Serializable{
-
-
-
 	private static final long serialVersionUID = 1L;
-	
 	
 	@Id @Column(name="employer_application_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

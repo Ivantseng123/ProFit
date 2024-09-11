@@ -13,13 +13,15 @@ public class HPwdResetTokensDao implements IHPwdResetTokensDao {
 	public HPwdResetTokensDao(Session session) {
 		this.session = session;
 	}
-
+	
+	//新增token
 	@Override
 	public Pwd_reset_tokens saveTokensInfo(Pwd_reset_tokens token) {
 		session.persist(token);
 		return token;
 	}
-
+	
+	// 刪除token By ID
 	@Override
 	public boolean deleteTokensInfo(int token_id) {
 		Pwd_reset_tokens resultBean = session.get(Pwd_reset_tokens.class, token_id);
@@ -30,15 +32,13 @@ public class HPwdResetTokensDao implements IHPwdResetTokensDao {
 		return false;
 	}
 
+	//查詢全部tokens
 	@Override
 	public List<Pwd_reset_tokens> getAllTokensInfo() {
 		List<Pwd_reset_tokens> tokens = new ArrayList<>();
-
 		String hql = "SELECT t FROM Pwd_reset_tokens t JOIN t.user u";
-
 		Query<Pwd_reset_tokens> query = session.createQuery(hql, Pwd_reset_tokens.class);
 		tokens = query.getResultList();
-
 		return tokens;
 	}
 

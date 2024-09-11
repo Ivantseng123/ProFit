@@ -5,6 +5,8 @@ import java.io.IOException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import com.ProFit.bean.usersBean.Employer_application;
+import com.ProFit.bean.usersBean.Users;
+import com.ProFit.dao.usersDao.HUserDao;
 import com.ProFit.dao.usersDao.HempApplDao;
 import com.ProFit.hibernateutil.HibernateUtil;
 import jakarta.servlet.ServletException;
@@ -46,18 +48,23 @@ public class InsertEmpAppl extends HttpServlet {
 		Session session = factory.getCurrentSession();
 
 		HempApplDao empappl = new HempApplDao(session);
-
+		HUserDao userDao = new HUserDao(session);
 		try {
-			Employer_application emp = new Employer_application(user_id, company_name, company_addresstoDB,
-					company_category, company_phoneNumber, company_taxID, company_taxID_docURL, user_national_id,
-					idCard_pictureURL_1, idCard_pictureURL_2, 0);
-
-			System.out.println(emp.toString());
-
-			empappl.saveEmpApplInfo(emp);
+			Users existuser = userDao.getUserInfoByID(user_id);
 			
-			session.flush();  // 將緩存的更改同步到數據庫
-			session.clear();  // 清空緩存，強制從數據庫重新查詢
+			if (existuser != null) {
+				
+				Employer_application emp = new Employer_application(user_id, company_name, company_addresstoDB,
+						company_category, company_phoneNumber, company_taxID, company_taxID_docURL, user_national_id,
+						idCard_pictureURL_1, idCard_pictureURL_2, 0);
+				
+				System.out.println(emp.toString());
+				
+				empappl.saveEmpApplInfo(emp);
+				
+				session.flush();  // 將緩存的更改同步到數據庫
+				session.clear();  // 清空緩存，強制從數據庫重新查詢
+			}
 			
 			request.getRequestDispatcher("/GetAllempAppl").forward(request, response);
 		} catch (Exception e) {

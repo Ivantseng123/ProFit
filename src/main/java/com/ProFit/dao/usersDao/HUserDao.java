@@ -78,7 +78,8 @@ public class HUserDao implements IHUserDao {
 	@Override
 	public boolean validate(String userEmail, String userPasswordHash) {
 		boolean status = false;
-		String hql = "FROM Users u WHERE u.userEmail = :email AND u.userPasswordHash = :password AND u.userIdentity = :identity";
+		String hql = "FROM Users u WHERE u.userEmail = :email AND u.userPasswordHash = "
+				+ ":password AND u.userIdentity = :identity";
 		Query<Users> query = session.createQuery(hql, Users.class);
 		query.setParameter("email", userEmail);
 		query.setParameter("password", userPasswordHash);
@@ -103,11 +104,25 @@ public class HUserDao implements IHUserDao {
 
 		return pictureURL;
 	}
-
+	
+	//查詢全單筆user
 	@Override
 	public Users getUserInfoByID(Integer user_id) {
 
 		return session.get(Users.class, user_id);
+	}
+
+	@Override
+	public Users getUserByEmail(String user_email) {
+		
+		String hql = "SELECT u FROM Users u WHERE u.userEmail LIKE :email";
+		Query<Users> query = session.createQuery(hql, Users.class);
+		query.setParameter("email", "%" + user_email + "%");
+
+		// 獲取查詢結果
+		Users existuser = query.uniqueResult();
+
+		return existuser;
 	}
 
 }
