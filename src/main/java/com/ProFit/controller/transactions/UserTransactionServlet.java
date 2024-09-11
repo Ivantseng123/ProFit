@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.List;
 
-import com.ProFit.bean.UserTransactionBean;
+import com.ProFit.bean.transactionBean.UserTransactionBean;
 import com.ProFit.dao.transactionCRUD.UserTransactionDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

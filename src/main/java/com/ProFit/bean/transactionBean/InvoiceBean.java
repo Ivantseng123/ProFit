@@ -1,14 +1,16 @@
-package com.ProFit.bean;
+package com.ProFit.bean.transactionBean;
 
 import jakarta.persistence.*;
 import java.sql.Timestamp;
+
+import com.ProFit.bean.coursesBean.CourseOrderBean;
 
 @Entity
 @Table(name = "invoices")
 public class InvoiceBean {
 
     @Id
-    @Column(name = "invoice_number")  // 改成對應資料庫中的主鍵
+    @Column(name = "invoice_number")  
     private String invoiceNumber;
 
     @Column(name = "transaction_id")
@@ -31,6 +33,22 @@ public class InvoiceBean {
 
     @Column(name = "invoice_status")
     private String invoiceStatus;
+    
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="course_order_id",insertable = false,updatable = false)
+    private CourseOrderBean courseOrderBean;
+    
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="transaction_id",insertable = false,updatable = false)
+    private UserTransactionBean userTransactionBean;
+    
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="job_order_id",insertable = false,updatable = false)
+    private JobOrderBean jobOrderBean;
+    
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name="event_order_id",insertable = false,updatable = false)
+//    private EventOrderBean eventOrderBean;
     
     public String getInvoiceNumber() {
         return invoiceNumber;
@@ -95,4 +113,36 @@ public class InvoiceBean {
     public void setInvoiceStatus(String invoiceStatus) {
         this.invoiceStatus = invoiceStatus;
     }
+    
+    public CourseOrderBean getcourse_order_id() {
+		return courseOrderBean;
+	}
+
+	public void setcourse_order_id(CourseOrderBean courseOrderBean ) {
+		this.courseOrderBean = courseOrderBean;
+	}
+	
+	 public UserTransactionBean transaction_id() {
+			return userTransactionBean;
+		}
+
+		public void settransaction_id(UserTransactionBean userTransactionBean ) {
+			this.userTransactionBean = userTransactionBean;
+		}
+		
+		 public JobOrderBean job_order_id() {
+				return jobOrderBean;
+			}
+
+			public void setjob_order_id(JobOrderBean jobOrderBean ) {
+				this.jobOrderBean = jobOrderBean;
+			}
+			
+//			 public EventOrderBean event_order_id() {
+//					return eventOrderBean;
+//				}
+//
+//				public void setevent_order_id(EventOrderBean eventOrderBean ) {
+//					this.eventOrderBean = eventOrderBean;
+//				}
 }

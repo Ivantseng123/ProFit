@@ -1,9 +1,10 @@
 package com.ProFit.dao.transactionCRUD;
 
-import com.ProFit.bean.UserTransactionBean;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+
+import com.ProFit.bean.transactionBean.UserTransactionBean;
 
 import java.sql.Timestamp;
 import java.util.List;
