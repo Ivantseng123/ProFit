@@ -74,7 +74,7 @@ public class Users implements Serializable {
 	@Column(name = "freelancer_profile_status")
 	private Integer freelancerProfileStatus;
 
-	@Column(name = "freelancer_disc")
+	@Column(name = "freelancer_description")
 	private String freelancerDisc;
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "user")

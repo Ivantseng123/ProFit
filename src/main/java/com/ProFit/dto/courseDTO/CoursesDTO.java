@@ -29,8 +29,8 @@ public class CoursesDTO {
 		this.courseName = courseBean.getCourseName();
 		this.courseCreaterId = courseBean.getCourseCreater().getUserId().toString();
 		this.courseCreaterName = courseBean.getCourseCreater().getUserName();
-		this.courseCategoryId = courseBean.getMajorCategory().getMajorCategoryId().toString();
-		this.courseCategoryName = courseBean.getMajorCategory().getCategoryName();
+		this.courseCategoryId = courseBean.getMajor().getMajorId().toString();
+		this.courseCategoryName = courseBean.getMajor().getMajorName();
 		this.courseInformation = courseBean.getCourseInformation();
 		this.courseDescription = courseBean.getCourseDescription();
 		this.courseEnrollmentDate = courseBean.getCourseEnrollmentDate().toString();
