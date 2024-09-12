@@ -12,11 +12,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
-
 import java.util.Date;
-
-import org.apache.catalina.User;
-
 import com.ProFit.bean.usersBean.Users;
 
 

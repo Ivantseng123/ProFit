@@ -8,7 +8,7 @@ import org.hibernate.SessionFactory;
 import com.ProFit.bean.usersBean.Employer_profile;
 import com.ProFit.dao.usersDao.HempProfileDao;
 import com.ProFit.dao.usersDao.IHempProfileDao;
-import com.ProFit.hibernateutil.HibernateUtil;
+import com.ProFit.util.hibernateutil.HibernateUtil;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

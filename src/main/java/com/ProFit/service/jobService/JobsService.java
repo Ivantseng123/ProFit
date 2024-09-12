@@ -1,4 +1,4 @@
-package com.ProFit.jobService;
+package com.ProFit.service.jobService;
 
 import java.util.List;
 import java.util.Map;

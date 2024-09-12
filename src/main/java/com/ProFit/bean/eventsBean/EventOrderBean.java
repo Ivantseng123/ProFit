@@ -70,7 +70,7 @@ public class EventOrderBean implements Serializable {
 	}
 
 	public int getEventParticipantId() {
-		return participant.getUser_id();
+		return participant.getUserId();
 	}
 
 	public LocalDateTime getEventParticipantDate() {

@@ -28,8 +28,8 @@ import com.ProFit.bean.Jobs;
 import com.ProFit.bean.usersBean.Users;
 import com.ProFit.dao.usersDao.HUserDao;
 import com.ProFit.dao.usersDao.IHUserDao;
-import com.ProFit.hibernateutil.HibernateUtil;
-import com.ProFit.jobService.JobsService;
+import com.ProFit.util.hibernateutil.HibernateUtil;
+import com.ProFit.service.jobService.JobsService;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

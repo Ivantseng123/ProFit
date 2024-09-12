@@ -1,4 +1,4 @@
-package com.ProFit.hibernateutil;
+package com.ProFit.util.hibernateutil;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;

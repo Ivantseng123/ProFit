@@ -7,7 +7,7 @@ import com.ProFit.bean.majorsBean.MajorBean;
 import com.ProFit.bean.majorsBean.MajorCategoryBean;
 import com.ProFit.dao.majorsCRUD.HmajorCategoryDAO;
 import com.ProFit.dao.majorsCRUD.HMajorDAO;
-import com.ProFit.hibernateutil.HibernateUtil;
+import com.ProFit.util.hibernateutil.HibernateUtil;
 
 import org.hibernate.Session;
 

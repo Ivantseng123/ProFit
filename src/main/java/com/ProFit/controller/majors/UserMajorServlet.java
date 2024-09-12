@@ -11,7 +11,7 @@ import com.ProFit.bean.majorsBean.UserMajorPK;
 import com.ProFit.bean.majorsBean.MajorBean;
 import com.ProFit.bean.usersBean.Users;
 import com.ProFit.dao.majorsCRUD.HUserMajorDAO;
-import com.ProFit.hibernateutil.HibernateUtil;
+import com.ProFit.util.hibernateutil.HibernateUtil;
 
 import org.hibernate.Session;
 

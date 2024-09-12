@@ -1,4 +1,4 @@
-package com.ProFit.hibernateutil;
+package com.ProFit.util.hibernateutil;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

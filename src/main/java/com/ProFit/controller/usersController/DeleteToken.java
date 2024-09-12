@@ -7,7 +7,7 @@ import java.util.HashMap;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import com.ProFit.dao.usersDao.HPwdResetTokensDao;
-import com.ProFit.hibernateutil.HibernateUtil;
+import com.ProFit.util.hibernateutil.HibernateUtil;
 import com.google.gson.Gson;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
