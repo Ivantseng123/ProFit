@@ -11,7 +11,6 @@ import com.ProFit.bean.majorsBean.UserMajorBean;
 import com.ProFit.bean.majorsBean.UserMajorPK;
 import com.ProFit.bean.usersBean.Users;
 import com.ProFit.bean.majorsBean.MajorBean;
-import com.ProFit.dao.majorsCRUD.HUserMajorDAO;
 import com.ProFit.dao.servicesCRUD.HServiceDAO;
 import com.ProFit.util.hibernateutil.HibernateUtil;
 
@@ -24,7 +23,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.Part;
 
 @WebServlet("/service/*")
 @MultipartConfig(maxFileSize = 16177215)
@@ -77,6 +75,7 @@ public class ServiceServlet extends HttpServlet {
         }
     }
 
+    // 顯示所有服務
     private void listServices(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -99,6 +98,7 @@ public class ServiceServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
+    // 顯示新增服務表單
     private void showNewForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -113,6 +113,7 @@ public class ServiceServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
+    // 插入新服務
     private void insertService(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -155,6 +156,7 @@ public class ServiceServlet extends HttpServlet {
         response.sendRedirect("search");
     }
 
+    // 顯示編輯服務表單
     private void showEditForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -173,6 +175,7 @@ public class ServiceServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
+    // 更新服務
     private void updateService(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -214,6 +217,7 @@ public class ServiceServlet extends HttpServlet {
         response.sendRedirect(request.getContextPath() + "/service/view?id=" + id);
     }
 
+    // 刪除服務
     private void deleteService(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -224,6 +228,7 @@ public class ServiceServlet extends HttpServlet {
         response.sendRedirect("search");
     }
 
+    // 搜尋服務
     private void searchServices(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -263,6 +268,7 @@ public class ServiceServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
+    // 查看服務詳情
     private void viewService(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -286,6 +292,7 @@ public class ServiceServlet extends HttpServlet {
         }
     }
 
+    // 選擇用戶(新增服務前)
     private void selectUser(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
