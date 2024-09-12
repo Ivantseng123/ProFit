@@ -10,7 +10,7 @@ import com.ProFit.bean.usersBean.Pwd_reset_tokens;
 import com.ProFit.bean.usersBean.Users;
 import com.ProFit.dao.usersDao.HPwdResetTokensDao;
 import com.ProFit.dao.usersDao.HUserDao;
-import com.ProFit.hibernateutil.HibernateUtil;
+import com.ProFit.util.hibernateutil.HibernateUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

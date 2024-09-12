@@ -12,7 +12,7 @@ import com.ProFit.bean.majorsBean.UserMajorPK;
 import com.ProFit.bean.usersBean.Users;
 import com.ProFit.bean.majorsBean.MajorBean;
 import com.ProFit.dao.servicesCRUD.HServiceDAO;
-import com.ProFit.hibernateutil.HibernateUtil;
+import com.ProFit.util.hibernateutil.HibernateUtil;
 
 import org.hibernate.Session;
 

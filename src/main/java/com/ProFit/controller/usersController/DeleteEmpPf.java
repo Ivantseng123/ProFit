@@ -9,7 +9,7 @@ import org.hibernate.SessionFactory;
 
 import com.ProFit.dao.usersDao.HempProfileDao;
 import com.ProFit.dao.usersDao.IHempProfileDao;
-import com.ProFit.hibernateutil.HibernateUtil;
+import com.ProFit.util.hibernateutil.HibernateUtil;
 import com.google.gson.Gson;
 
 import jakarta.servlet.ServletException;

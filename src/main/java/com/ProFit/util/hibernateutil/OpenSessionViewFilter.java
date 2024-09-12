@@ -1,4 +1,4 @@
-package com.ProFit.hibernateutil;
+package com.ProFit.util.hibernateutil;
 
 import java.io.IOException;
 

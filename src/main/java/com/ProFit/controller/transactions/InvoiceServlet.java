@@ -20,7 +20,7 @@ public class InvoiceServlet extends HttpServlet {
     private Session session;
 
     public InvoiceServlet() {
-        this.session = com.ProFit.hibernateutil.HibernateUtil.getSessionFactory().openSession();
+        this.session = com.ProFit.util.hibernateutil.HibernateUtil.getSessionFactory().openSession();
         this.invoiceDAO = new InvoiceDAO(session);
     }
 

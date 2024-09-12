@@ -21,8 +21,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 import com.ProFit.bean.Jobs;
-import com.ProFit.jobService.JobsService;
+import com.ProFit.bean.usersBean.Users;
+import com.ProFit.dao.usersDao.HUserDao;
+import com.ProFit.dao.usersDao.IHUserDao;
+import com.ProFit.util.hibernateutil.HibernateUtil;
+import com.ProFit.service.jobService.JobsService;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -36,13 +43,21 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet("/jobsServlet")
 public class jobsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    
+    
     private JobsService jobsService;
-
+    private IHUserDao userDao;
+    private Session session;
+    
+    
     // init方法在初始化時
     @Override
 	public void init() {
-        jobsService = new JobsService();
+    	session = HibernateUtil.getSessionFactory().openSession();
+        jobsService = new JobsService(session);
+        userDao = new HUserDao(session); //Users表
     }
+    
 
     @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -50,7 +65,7 @@ public class jobsServlet extends HttpServlet {
         doGet(request, response);
     }
 
-    @Override
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");// 从request中獲得 變數"action"的参数
@@ -116,7 +131,9 @@ public class jobsServlet extends HttpServlet {
     private void addJob(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Jobs newJob = new Jobs();
         // Set job properties from request parameters
-        newJob.setJobsUserId(Integer.parseInt(request.getParameter("jobsUserId")));
+//        newJob.setJobsUserId(Integer.parseInt(request.getParameter("jobsUserId")));
+        Users users = userDao.getUserInfoByID(Integer.parseInt(request.getParameter("jobsUserId")));
+        newJob.setUsers(users);
         newJob.setJobsTitle(request.getParameter("jobsTitle"));
         newJob.setJobsPostingDate(Date.valueOf(request.getParameter("jobsPostingDate")));
         newJob.setJobsApplicationDeadline(Date.valueOf(request.getParameter("jobsApplicationDeadline")));
@@ -128,8 +145,9 @@ public class jobsServlet extends HttpServlet {
         newJob.setJobsMinSalary(Integer.parseInt(request.getParameter("jobsMinSalary")));
         newJob.setJobsWorktime(request.getParameter("jobsWorktime"));
         newJob.setJobsNumberOfOpenings(Integer.parseInt(request.getParameter("jobsNumberOfOpenings")));
+        System.out.println("newJob====" + newJob.getJobsTitle());
         System.out.println(newJob);
-        int id = jobsService.save(newJob);
+        jobsService.save(newJob);
 
         // request.setAttribute("newJobId", id);
         // request.getRequestDispatcher("/jobsVIEW/jobsSuccess.jsp").forward(request,
@@ -141,21 +159,37 @@ public class jobsServlet extends HttpServlet {
     private void updateJob(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("jobsId"));
-        Map<String, Object> updates = new HashMap<>();
-        // Add all fields that can be updated
-        updates.put("jobs_users_id", Integer.parseInt(request.getParameter("jobsUserId")));
-        updates.put("jobs_title", request.getParameter("jobsTitle"));
-        updates.put("jobs_posting_date", Date.valueOf(request.getParameter("jobsPostingDate")));
-        updates.put("jobs_application_deadline", Date.valueOf(request.getParameter("jobsApplicationDeadline")));
-        updates.put("jobs_description", request.getParameter("jobsDescription"));
-        updates.put("jobs_status", Byte.parseByte(request.getParameter("jobsStatus")));
-        updates.put("jobs_required_skills", request.getParameter("jobsRequiredSkills"));
-        updates.put("jobs_location", request.getParameter("jobsLocation"));
-        updates.put("jobs_max_salary", Integer.parseInt(request.getParameter("jobsMaxSalary")));
-        updates.put("jobs_min_salary", Integer.parseInt(request.getParameter("jobsMinSalary")));
-        updates.put("jobs_worktime", request.getParameter("jobsWorktime"));
-        updates.put("jobs_number_of_openings", Integer.parseInt(request.getParameter("jobsNumberOfOpenings")));
-        jobsService.update(id, updates);
+        Jobs jobs = jobsService.findById(id);
+        Users users = userDao.getUserInfoByID(Integer.parseInt(request.getParameter("jobsUserId")));
+        jobs.setUsers(users);//USER表
+//      jobs.setJobsUserId(Integer.parseInt(request.getParameter("jobsUserId")));
+        jobs.setJobsTitle(request.getParameter("jobsTitle"));
+        jobs.setJobsPostingDate(Date.valueOf(request.getParameter("jobsPostingDate")));
+        jobs.setJobsApplicationDeadline(Date.valueOf(request.getParameter("jobsApplicationDeadline")));
+        jobs.setJobsDescription(request.getParameter("jobsDescription"));
+        jobs.setJobsStatus(Byte.parseByte(request.getParameter("jobsStatus")));
+        jobs.setJobsRequiredSkills(request.getParameter("jobsRequiredSkills"));
+        jobs.setJobsLocation(request.getParameter("jobsLocation"));
+        jobs.setJobsMaxSalary(Integer.parseInt(request.getParameter("jobsMaxSalary")));
+        jobs.setJobsMinSalary(Integer.parseInt(request.getParameter("jobsMinSalary")));
+        jobs.setJobsWorktime(request.getParameter("jobsWorktime"));
+        jobs.setJobsNumberOfOpenings(Integer.parseInt(request.getParameter("jobsNumberOfOpenings")));
+
+//        Map<String, Object> updates = new HashMap<>();
+       
+//        updates.put("jobs_user_id", Integer.parseInt(request.getParameter("jobsUserId")));
+//        updates.put("jobs_title", request.getParameter("jobsTitle"));
+//        updates.put("jobs_posting_date", Date.valueOf(request.getParameter("jobsPostingDate")));
+//        updates.put("jobs_application_deadline", Date.valueOf(request.getParameter("jobsApplicationDeadline")));
+//        updates.put("jobs_description", request.getParameter("jobsDescription"));
+//        updates.put("jobs_status", Byte.parseByte(request.getParameter("jobsStatus")));
+//        updates.put("jobs_required_skills", request.getParameter("jobsRequiredSkills"));
+//        updates.put("jobs_location", request.getParameter("jobsLocation"));
+//        updates.put("jobs_max_salary", Integer.parseInt(request.getParameter("jobsMaxSalary")));
+//        updates.put("jobs_min_salary", Integer.parseInt(request.getParameter("jobsMinSalary")));
+//        updates.put("jobs_worktime", request.getParameter("jobsWorktime"));
+//        updates.put("jobs_number_of_openings", Integer.parseInt(request.getParameter("jobsNumberOfOpenings")));
+        jobsService.update(jobs);
         response.sendRedirect("jobsServlet?action=list");// sendRedirect什麼東西都不帶
     }
 

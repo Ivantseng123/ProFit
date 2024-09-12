@@ -98,7 +98,7 @@
 						<!-- ${jobsList} 等於標籤jobsList-->
 						<tr>
 							<td>${job.jobsId}</td>
-							<td>${job.jobsUserId}</td>
+							<td>${job.users.userId}</td>
 							<td>${job.jobsTitle}</td>
 							<td><fmt:formatDate value="${job.jobsPostingDate}"
 									pattern="yyyy-MM-dd" /></td>

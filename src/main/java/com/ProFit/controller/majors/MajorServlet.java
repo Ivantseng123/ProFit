@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.ProFit.bean.majorsBean.MajorBean;
 import com.ProFit.dao.majorsCRUD.HMajorDAO;
-import com.ProFit.hibernateutil.HibernateUtil;
+import com.ProFit.util.hibernateutil.HibernateUtil;
 
 import org.hibernate.Session;
 

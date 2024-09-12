@@ -20,7 +20,7 @@ public class JobOrderServlet extends HttpServlet {
     private Session session;
 
     public JobOrderServlet() {
-        this.session = com.ProFit.hibernateutil.HibernateUtil.getSessionFactory().openSession();
+        this.session = com.ProFit.util.hibernateutil.HibernateUtil.getSessionFactory().openSession();
         this.jobOrderDAO = new JobOrderDAO(session);
     }
 
