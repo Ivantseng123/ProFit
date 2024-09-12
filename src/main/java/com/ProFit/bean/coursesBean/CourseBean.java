@@ -32,17 +32,13 @@ public class CourseBean implements java.io.Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="course_create_user_id",insertable = false,updatable = false)
 	private Users courseCreater;
-	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "course",cascade = CascadeType.ALL)
-	private List<CourseModuleBean> courseModules;
 
 	@Column(name="course_create_user_id")
 	private String courseCreateUserId;
 
-	//改成hibernate之後要刪掉
-	@Transient
-	private String createUserName; //table中沒有，為了前端呈現而設定
-
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "course",cascade = CascadeType.ALL)
+	private List<CourseModuleBean> courseModules;
+	
 	@Column(name="course_category")
 	private String courseCategory;
 
@@ -166,13 +162,6 @@ public class CourseBean implements java.io.Serializable {
 	}
 	public void setCourseCreateUserId(String courseCreateUserId) {
 		this.courseCreateUserId = courseCreateUserId;
-	}
-	public String getCreateUserName() {
-		return createUserName;
-	}
-
-	public void setCreateUserName(String createUserName) {
-		this.createUserName = createUserName;
 	}
 	public String getCourseCategory() {
 		return courseCategory;

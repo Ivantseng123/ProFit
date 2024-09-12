@@ -10,6 +10,14 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/model/model.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+.image-preview {
+	max-width: 200px;
+	max-height: 200px;
+	margin-top: 10px;
+}
+</style>
+
 <script>
 	$(document)
 			.ready(
@@ -103,19 +111,16 @@
 				<tr>
 					<th>範例:</th>
 					<td><c:if test="${not empty service.servicePictureURL1}">
-							<a
-								href="${pageContext.request.contextPath}/service/download?id=${service.serviceId}&sample=1"
-								target="_blank">範例 1</a>
+							<img id="imagePreview1" class="image-preview" src="${service.servicePictureURL1}"
+								alt="Image1"/>
 							<br>
 						</c:if> <c:if test="${not empty service.servicePictureURL2}">
-							<a
-								href="${pageContext.request.contextPath}/service/download?id=${service.serviceId}&sample=2"
-								target="_blank">範例 2</a>
+							<img id="imagePreview2" class="image-preview" src="${service.servicePictureURL2}"
+								alt="Image2"/>
 							<br>
 						</c:if> <c:if test="${not empty service.servicePictureURL3}">
-							<a
-								href="${pageContext.request.contextPath}/service/download?id=${service.serviceId}&sample=3"
-								target="_blank">範例 3</a>
+							<img id="imagePreview2" class="image-preview" src="${service.servicePictureURL3}"
+								alt="Image3"/>
 						</c:if></td>
 				</tr>
 			</table>

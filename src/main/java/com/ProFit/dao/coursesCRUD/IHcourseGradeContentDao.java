@@ -10,18 +10,18 @@ public interface IHcourseGradeContentDao {
 	public CourseGradeContentBean insertCourse(CourseGradeContentBean courseGradeContent);
 
 	// 刪除課程評價 by id
-	public boolean deleteCourseByID(String courseGradeId);
+	public boolean deleteCourseByID(Integer courseGradeId);
 
 	// 更新課程評價 by id
 	public boolean updateCourseById(CourseGradeContentBean newCourseGrade);
 
 	// 查詢單筆評價By courseGradeId
-	public CourseGradeContentBean searchOneCourseGradeContentById(int courseGradeId);
+	public CourseGradeContentBean searchOneCourseGradeContentById(Integer courseGradeId);
 
 	// 查詢全部 多形
 	public List<CourseGradeContentBean> searchCourseGradeContents();
 
-	// 查詢全部 By 課程評價分數
-	public List<CourseGradeContentBean> searchCourseGradeContents(String scope,int courseGradeScore);
+	// 查詢全部 By 課程id
+	public List<CourseGradeContentBean> searchCourseGradeContents(String coruseId);
 
 }

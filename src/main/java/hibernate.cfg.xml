@@ -40,6 +40,9 @@
 		<mapping class="com.ProFit.bean.transactionBean.InvoiceBean"/>
 		<mapping class="com.ProFit.bean.transactionBean.JobOrderBean"/>
 		<mapping class="com.ProFit.bean.transactionBean.UserTransactionBean"/>
+
+		
+
 		
 		<mapping class="com.ProFit.bean.Jobs"/>
 		

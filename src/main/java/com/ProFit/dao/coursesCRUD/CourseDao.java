@@ -209,7 +209,6 @@ public class CourseDao {
 	            course.setCourseStartDate(rs.getTimestamp("course_start_date").toLocalDateTime());
 	            course.setCourseEndDate(rs.getTimestamp("course_end_date").toLocalDateTime());
 	            course.setCoursePrice(rs.getString("course_price"));
-	            course.setCreateUserName(rs.getString("user_name"));
 	            course.setCourseStatus(rs.getString("course_status"));
 			}
 		} catch (SQLException e) {
@@ -250,7 +249,6 @@ public class CourseDao {
 				course.setCourseStartDate(rs.getTimestamp("course_start_date").toLocalDateTime());
 				course.setCourseEndDate(rs.getTimestamp("course_end_date").toLocalDateTime());
 				course.setCoursePrice(rs.getString("course_price"));
-				course.setCreateUserName(rs.getString("user_name"));
 				course.setCourseStatus(rs.getString("course_status"));
 				courses.add(course);
 			}
@@ -318,7 +316,6 @@ public class CourseDao {
 	            course.setCourseStartDate(rs.getTimestamp("course_start_date").toLocalDateTime());
 	            course.setCourseEndDate(rs.getTimestamp("course_end_date").toLocalDateTime());
 	            course.setCoursePrice(rs.getString("course_price"));
-	            course.setCreateUserName(rs.getString("user_name"));
 	            course.setCourseStatus(rs.getString("course_status"));
 	            courses.add(course);
 	        }
