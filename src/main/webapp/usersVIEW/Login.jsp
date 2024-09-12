@@ -1,14 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>ProFit</title>
-	<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css?family=Cool+Goggles" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css?family=Cool+Goggles"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style>
 body {
 	font-family: 'Cool Goggles', sans-serif;
@@ -43,7 +45,7 @@ body {
 	font-size: 14px;
 }
 
-.btn{
+.btn {
 	background-color: #2c3e50;
 	border-color: #2c3e50;
 }
@@ -55,28 +57,32 @@ body {
 	}
 }
 </style>
-    <title>User Login</title>
+<title>User Login</title>
 </head>
 <body>
-	 <div class="container">
+	<div class="container">
 
-        <div class="login-form">
+		<div class="login-form">
 
-            <h1>ProFit</h1>
-            <h3>後台系統</h3>
+			<h1>ProFit</h1>
+			<h3>後台系統</h3>
 
-            <form id="loginForm" method="post" action="${pageContext.request.contextPath}/Login">
+			<form id="loginForm" method="post"
+				action="${pageContext.request.contextPath}/Login">
 
-                <div class="form-group">
-                    <input type="text" id="username" class="form-control" placeholder="帳號" name="user_email" required>
-                </div>
-                <div class="form-group">
-                    <input type="password" id="password" class="form-control" placeholder="密碼" name="user_password" required>
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">登入</button>
-            </form>
-        </div>
-    </div>
-	
+				<div class="form-group">
+					<input type="text" id="username" class="form-control"
+						placeholder="帳號" name="user_email" required>
+				</div>
+				<div class="form-group">
+					<input type="password" id="password" class="form-control"
+						placeholder="密碼" name="user_password" required>
+				</div>
+				<button type="submit" class="btn btn-primary btn-block">登入</button>
+			</form>
+		</div>
+	</div>
+
+
 </body>
 </html>
