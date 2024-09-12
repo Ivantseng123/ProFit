@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC
 		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-		"https://hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+		 "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+		
+		
 <hibernate-configuration>
 	<session-factory>
 	    
@@ -13,34 +15,19 @@
 		<property name="hibernate.show_sql">true</property>
 		<property name="hibernate.format_sql">true</property>
 		
+		<mapping class="com.ProFit.model.House"/>
+		
 		<mapping class="com.ProFit.bean.coursesBean.CourseBean"/>
 		<mapping class="com.ProFit.bean.usersBean.Users"/>
-		 
-		<mapping class="com.ProFit.bean.collectionsBean.CollectionBean"/>
-		<mapping class="com.ProFit.bean.collectionsBean.ImageBean"/>
-		<mapping class="com.ProFit.bean.collectionsBean.VideoBean"/>
-		 
-		<mapping class="com.ProFit.bean.servicesBean.ServiceBean"/>
-		<mapping class="com.ProFit.bean.majorsBean.MajorCategoryBean"/>
-		<mapping class="com.ProFit.bean.majorsBean.MajorBean"/>
-		<mapping class="com.ProFit.bean.majorsBean.UserMajorBean"/>
-		
-		
+		<mapping class="com.ProFit.bean.majorsBean.MajorCategoryBeam"/>
 		<mapping class="com.ProFit.bean.coursesBean.CourseGradeContentBean"/>
 		<mapping class="com.ProFit.bean.coursesBean.CourseModuleBean"/>
 		<mapping class="com.ProFit.bean.coursesBean.CourseLessonBean"/>
 		<mapping class="com.ProFit.bean.coursesBean.CourseOrderBean"/>
 		
 		<mapping class="com.ProFit.bean.usersBean.Users"/>
-		<mapping class="com.ProFit.bean.usersBean.Employer_application"/>
-		<mapping class="com.ProFit.bean.usersBean.Employer_profile"/>
-		<mapping class="com.ProFit.bean.usersBean.Pwd_reset_tokens"/>
 		
-		
-		<mapping class="com.ProFit.bean.transactionBean.InvoiceBean"/>
-		<mapping class="com.ProFit.bean.transactionBean.JobOrderBean"/>
-		<mapping class="com.ProFit.bean.transactionBean.UserTransactionBean"/>
-		
+		<mapping class="com.ProFit.bean.eventsBean.EventsBean"/>
 		
 		
 	</session-factory>

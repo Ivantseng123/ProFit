@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.ProFit.bean.EventsBean;
+import com.ProFit.bean.eventsBean.EventsBean;
 import com.ProFit.dao.eventsCRUD.EventsDAO;
 
 import jakarta.servlet.ServletException;
@@ -55,17 +55,19 @@ public class EventsController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String eventId = request.getParameter("eventId");
         String eventName = request.getParameter("eventName");
-        boolean isEventActive = Boolean.parseBoolean(request.getParameter("isEventActive"));
+        int isEventActive = Integer.parseInt(request.getParameter("isEventActive"));
+        Integer eventMajor = Integer.parseInt(request.getParameter("eventMajor"));
         LocalDateTime eventStartDate = LocalDateTime.parse(request.getParameter("eventStartDate"));
         LocalDateTime eventEndDate = LocalDateTime.parse(request.getParameter("eventEndDate"));
-        String eventDescription = request.getParameter("eventDescription");
+        LocalDateTime eventPartStartDate = LocalDateTime.parse(request.getParameter("eventPartStartDate"));
+        LocalDateTime eventPartEndDate = LocalDateTime.parse(request.getParameter("eventPartEndDate"));
         int eventAmount = Integer.parseInt(request.getParameter("eventAmount"));
         String eventLocation = request.getParameter("eventLocation");
         int eventParticipantMaximum = Integer.parseInt(request.getParameter("eventParticipantMaximum"));
+        String eventDescription = request.getParameter("eventDescription");
         String eventNote = request.getParameter("eventNote");
 
-        EventsBean event = new EventsBean(eventId, eventName, isEventActive, eventStartDate, eventEndDate, eventDescription, eventAmount, eventLocation, eventParticipantMaximum, eventNote);
-        if (eventsDAO.selectEventById(eventId) == null) {
+        EventsBean event = new EventsBean(eventId, eventName, isEventActive, eventMajor, eventStartDate, eventEndDate, eventPartStartDate, eventPartEndDate, eventAmount, eventLocation, eventParticipantMaximum, eventDescription, eventNote);        if (eventsDAO.selectEventById(eventId) == null) {
             eventsDAO.insertEvent(event);
         } else {
             eventsDAO.updateEvent(event);
