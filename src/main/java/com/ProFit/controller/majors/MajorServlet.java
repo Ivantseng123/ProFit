@@ -63,6 +63,7 @@ public class MajorServlet extends HttpServlet {
         }
     }
 
+    // 列出所有專業
     private void listMajor(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -74,12 +75,14 @@ public class MajorServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
+    // 顯示新增專業表單
     private void showNewForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/majorsVIEW/MajorForm.jsp");
         dispatcher.forward(request, response);
     }
 
+    // 插入新專業
     private void insertMajor(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String idStr = request.getParameter("majorId");
@@ -129,6 +132,7 @@ public class MajorServlet extends HttpServlet {
         response.sendRedirect("list");
     }
 
+    // 顯示編輯專業表單
     private void showEditForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
@@ -141,6 +145,7 @@ public class MajorServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
+    // 更新專業
     private void updateMajor(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("majorId"));
@@ -156,6 +161,7 @@ public class MajorServlet extends HttpServlet {
         response.sendRedirect("list");
     }
 
+    // 刪除專業
     private void deleteMajor(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
@@ -165,6 +171,7 @@ public class MajorServlet extends HttpServlet {
         response.sendRedirect("list");
     }
 
+    // 查看專業詳情
     private void viewMajor(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
@@ -177,6 +184,7 @@ public class MajorServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
+    // 列出特定類別下的所有專業
     private void listMajorsByCategory(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String categoryIdStr = request.getParameter("categoryId");

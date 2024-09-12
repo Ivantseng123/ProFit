@@ -22,12 +22,14 @@ import jakarta.servlet.http.HttpServletResponse;
 public class MajorCategoryServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doGet(request, response);
     }
 
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -62,6 +64,7 @@ public class MajorCategoryServlet extends HttpServlet {
         }
     }
 
+    // 列出所有專業類別
     private void listMajorCategories(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -72,6 +75,7 @@ public class MajorCategoryServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
+    // 列出特定類別下的所有專業	
     private void listMajorsByCategory(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int categoryId = Integer.parseInt(request.getParameter("categoryId"));
@@ -87,12 +91,14 @@ public class MajorCategoryServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
+    // 顯示新增專業類別表單
     private void showNewForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/majorsVIEW/MajorCategoryForm.jsp");
         dispatcher.forward(request, response);
     }
-
+    
+    // 插入新的專業類別
     private void insertMajorCategory(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String idStr = request.getParameter("categoryId");
@@ -120,6 +126,7 @@ public class MajorCategoryServlet extends HttpServlet {
         }
     }
 
+    // 刪除專業類別
     private void deleteMajorCategory(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         int id = Integer.parseInt(request.getParameter("id"));
@@ -128,7 +135,8 @@ public class MajorCategoryServlet extends HttpServlet {
         majorCategoryDAO.deleteMajorCategory(id);
         response.sendRedirect("list");
     }
-
+ 
+    // 更新專業類別
     private void updateMajorCategory(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String categoryIdStr = request.getParameter("categoryId");
@@ -165,12 +173,14 @@ public class MajorCategoryServlet extends HttpServlet {
         }
     }
 
+    // 處理錯誤信息
     private void handleError(HttpServletRequest request, HttpServletResponse response, String errorMessage)
             throws ServletException, IOException {
         request.setAttribute("error", errorMessage);
         showEditForm(request, response);
     }
 
+    // 顯示編輯專業類別表單
     private void showEditForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String idStr = request.getParameter("id");
