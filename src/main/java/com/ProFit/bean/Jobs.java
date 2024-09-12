@@ -30,7 +30,7 @@ public class Jobs {
     
 
     @ManyToOne(fetch = FetchType.LAZY)//FK，對User表，一個公司（user）可以有po很多職缺
-    @JoinColumn(name="jobs_user_id")
+    @JoinColumn(name="jobs_users_id")
     private Users users;//請跟我有關聯的表格組員修改他們的關係語句
     
         
