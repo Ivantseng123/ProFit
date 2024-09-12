@@ -23,7 +23,7 @@
 						});
 
 						// 使用jQuery處理編輯、刪除和檢視按鈕的點擊事件
-						$('#edit-btn')
+						$('.b .edit')
 								.click(
 										function(e) {
 											e.preventDefault();
@@ -138,7 +138,7 @@
 						<td><c:out value="${service.servicePrice}" /></td>
 						<td><c:out value="${service.serviceUnitName}" /></td>
 						<td><c:out value="${service.serviceDuration}" /></td>
-						<td class="action-buttons">
+						<td class="action-buttons b">
 							<button class="edit" id="edit-btn" data-id="${service.serviceId}">編輯</button>
 							<button class="delete" data-id="${service.serviceId}">刪除</button>
 							<button class="view" data-id="${service.serviceId}">檢視</button>

@@ -160,9 +160,9 @@ CREATE TABLE jobs_application_project (
 	service_createdate DATETIME2,
 	service_updatedate DATETIME2,
 	-- 建立服務可以存3張圖片當範例
-	service_pictureURL_1 VARCHAR(200),
-	service_pictureURL_2 VARCHAR(200),
-	service_pictureURL_3 VARCHAR(200),
+	service_pictureURL_1 VARCHAR(300),
+	service_pictureURL_2 VARCHAR(300),
+	service_pictureURL_3 VARCHAR(300),
 	-- 服務狀態(審核是否通過、)
 	service_status int not null default 0,
 	
@@ -185,7 +185,7 @@ CREATE TABLE jobs_application_project (
 	CREATE TABLE image(
 	image_id INT PRIMARY KEY IDENTITY(1,1),
 	collection_id INT,
-	image_pictureURL VARCHAR(200),
+	image_pictureURL VARCHAR(300),
 	
 	FOREIGN KEY (collection_id) REFERENCES collection(collection_id)
 	);

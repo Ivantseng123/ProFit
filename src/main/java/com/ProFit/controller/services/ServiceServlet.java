@@ -11,6 +11,7 @@ import com.ProFit.bean.majorsBean.UserMajorBean;
 import com.ProFit.bean.majorsBean.UserMajorPK;
 import com.ProFit.bean.usersBean.Users;
 import com.ProFit.bean.majorsBean.MajorBean;
+import com.ProFit.dao.majorsCRUD.HUserMajorDAO;
 import com.ProFit.dao.servicesCRUD.HServiceDAO;
 import com.ProFit.hibernateutil.HibernateUtil;
 
@@ -102,7 +103,7 @@ public class ServiceServlet extends HttpServlet {
             throws ServletException, IOException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         HServiceDAO serviceDAO = new HServiceDAO(session);
-
+        
         Map<Integer, String> users = serviceDAO.getAllUsers();
         Map<Integer, String> majors = serviceDAO.getAllMajors();
         request.setAttribute("users", users);
@@ -124,6 +125,10 @@ public class ServiceServlet extends HttpServlet {
         double duration = Double.parseDouble(request.getParameter("serviceDuration"));
         int userId = Integer.parseInt(request.getParameter("userId"));
         int majorId = Integer.parseInt(request.getParameter("majorId"));
+        String servicePictureURL1 = request.getParameter("serviceSample1Url");
+        String servicePictureURL2 = request.getParameter("serviceSample2Url");
+        String servicePictureURL3 = request.getParameter("serviceSample3Url");
+        
 
         Users user = session.get(Users.class, userId);
         MajorBean major = session.get(MajorBean.class, majorId);
@@ -139,23 +144,12 @@ public class ServiceServlet extends HttpServlet {
         newService.setServiceDuration(duration);
         newService.setServiceCreateDate(LocalDateTime.now());
         newService.setServiceUpdateDate(LocalDateTime.now());
+        newService.setServicePictureURL1(servicePictureURL1);
+        newService.setServicePictureURL2(servicePictureURL2);
+        newService.setServicePictureURL3(servicePictureURL3);
         
         //System.out.println(newService.getServiceCreateDate());
-        
-        Part filePart1 = request.getPart("serviceSample1");
-        if (filePart1 != null && filePart1.getSize() > 0) {
-            newService.setServicePictureURL1(saveFile(filePart1));
-        }
-
-        Part filePart2 = request.getPart("serviceSample2");
-        if (filePart2 != null && filePart2.getSize() > 0) {
-            newService.setServicePictureURL2(saveFile(filePart2));
-        }
-
-        Part filePart3 = request.getPart("serviceSample3");
-        if (filePart3 != null && filePart3.getSize() > 0) {
-            newService.setServicePictureURL3(saveFile(filePart3));
-        }
+                
 
         serviceDAO.insertService(newService);
         response.sendRedirect("search");
@@ -165,11 +159,12 @@ public class ServiceServlet extends HttpServlet {
             throws ServletException, IOException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         HServiceDAO serviceDAO = new HServiceDAO(session);
+        //HUserMajorDAO userMajorDAO = new HUserMajorDAO(session);
 
         int id = Integer.parseInt(request.getParameter("id"));
         ServiceBean existingService = serviceDAO.findServiceById(id);
         Map<Integer, String> users = serviceDAO.getAllUsers();
-        Map<Integer, String> majors = serviceDAO.getMajorsByUserId(existingService.getUserMajor().getId().getUser().getUserId());
+        Map<Integer, String> majors = serviceDAO.getAllMajors();
 
         request.setAttribute("service", existingService);
         request.setAttribute("users", users);
@@ -189,40 +184,34 @@ public class ServiceServlet extends HttpServlet {
         int price = Integer.parseInt(request.getParameter("servicePrice"));
         String unitName = request.getParameter("serviceUnitName");
         double duration = Double.parseDouble(request.getParameter("serviceDuration"));
-        int userId = Integer.parseInt(request.getParameter("userId"));
-        int majorId = Integer.parseInt(request.getParameter("majorId"));
-
-        Users user = session.get(Users.class, userId);
-        MajorBean major = session.get(MajorBean.class, majorId);
-        UserMajorPK userMajorPK = new UserMajorPK(user, major);
-        UserMajorBean userMajor = session.get(UserMajorBean.class, userMajorPK);
-
+        String servicePictureURL1 = request.getParameter("serviceSample1Url");
+        System.out.println(request.getParameter("serviceSample2Url"));
+        String servicePictureURL2 = request.getParameter("serviceSample2Url");
+        String servicePictureURL3 = request.getParameter("serviceSample3Url");
+      
+   
         ServiceBean service = serviceDAO.findServiceById(id);
-        service.setUserMajor(userMajor);
         service.setServiceTitle(title);
         service.setServiceContent(content);
         service.setServicePrice(price);
         service.setServiceUnitName(unitName);
         service.setServiceDuration(duration);
         service.setServiceUpdateDate(LocalDateTime.now());
-
-        Part filePart1 = request.getPart("serviceSample1");
-        if (filePart1 != null && filePart1.getSize() > 0) {
-            service.setServicePictureURL1(saveFile(filePart1));
+        
+        if (servicePictureURL1 != null && !servicePictureURL1.isEmpty()) {
+            service.setServicePictureURL1(servicePictureURL1);
         }
-
-        Part filePart2 = request.getPart("serviceSample2");
-        if (filePart2 != null && filePart2.getSize() > 0) {
-            service.setServicePictureURL2(saveFile(filePart2));
+        if (servicePictureURL2 != null && !servicePictureURL2.isEmpty()) {
+            service.setServicePictureURL2(servicePictureURL2);
         }
-
-        Part filePart3 = request.getPart("serviceSample3");
-        if (filePart3 != null && filePart3.getSize() > 0) {
-            service.setServicePictureURL3(saveFile(filePart3));
+        if (servicePictureURL3 != null && !servicePictureURL3.isEmpty()) {
+            service.setServicePictureURL3(servicePictureURL3);
         }
-
+        
+        request.setAttribute("id", id);
+        
         serviceDAO.updateService(service);
-        response.sendRedirect("search");
+        response.sendRedirect(request.getContextPath() + "/service/view?id=" + id);
     }
 
     private void deleteService(HttpServletRequest request, HttpServletResponse response)
@@ -319,9 +308,4 @@ public class ServiceServlet extends HttpServlet {
         }
     }
 
-    private String saveFile(Part filePart) {
-        // 實現文件保存邏輯，返回文件URL
-        // 這裡需要根據您的具體需求來實現
-        return "file_url_placeholder";
-    }
 }
