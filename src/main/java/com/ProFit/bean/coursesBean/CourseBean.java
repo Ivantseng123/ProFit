@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.ProFit.bean.majorsBean.MajorBean;
 import com.ProFit.bean.majorsBean.MajorCategoryBean;
 import com.ProFit.bean.usersBean.Users;
 
@@ -44,7 +45,7 @@ public class CourseBean implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="course_category", insertable = false,updatable = false)
-	private MajorCategoryBean majorCategory;
+	private MajorBean major;
 
 	@Column(name = "course_information")
 	private String courseInformation;
@@ -136,13 +137,13 @@ public class CourseBean implements java.io.Serializable {
 	}
 
 
-	public MajorCategoryBean getMajorCategory() {
-		return majorCategory;
+	public MajorBean getMajor() {
+		return major;
 	}
 
 
-	public void setMajorCategory(MajorCategoryBean majorCategory) {
-		this.majorCategory = majorCategory;
+	public void setMajor(MajorBean major) {
+		this.major = major;
 	}
 
 	public String getCourseId() {

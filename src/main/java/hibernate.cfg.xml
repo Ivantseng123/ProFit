@@ -44,6 +44,6 @@
 
 		<mapping class="com.ProFit.bean.eventsBean.EventsBean"/>
 		
-		
+		<mapping class="com.ProFit.bean.Jobs"/>
 	</session-factory>
 </hibernate-configuration> 

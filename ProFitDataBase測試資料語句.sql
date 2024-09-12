@@ -116,10 +116,10 @@ VALUES
 INSERT INTO courses (course_id, course_name, course_create_user_id, course_category, course_information, course_description, course_enrollment_date, course_start_date, course_end_date, course_price, course_status)
 VALUES
 ('C0100', N'Java 進階開發', 101, 100, N'適合有基礎Java經驗的開發者', N'學習Java高級特性和設計模式', GETDATE(), DATEADD(month, 1, GETDATE()), DATEADD(month, 3, GETDATE()), 15000, 'Active'),
-('C0101', N'UI/UX設計原理', 102, 200, N'零基礎入門UI/UX設計', N'學習設計思維和工具使用', DATEADD(day, -10, GETDATE()), DATEADD(day, 20, GETDATE()), DATEADD(month, 2, GETDATE()), 12000, 'Active'),
-('C0102', N'Python數據分析', 103, 300, N'適合有基礎Python經驗的學習者', N'使用Python進行數據處理和視覺化', DATEADD(day, -20, GETDATE()), DATEADD(day, 10, GETDATE()), DATEADD(month, 2, GETDATE()), 18000, 'Active'),
-('C0103', N'數位行銷策略', 104, 400, N'適合行銷新手和有經驗者', N'學習現代數位行銷技巧和策略', DATEADD(day, -5, GETDATE()), DATEADD(month, 1, GETDATE()), DATEADD(month, 3, GETDATE()), 10000, 'Active'),
-('C0104', N'敏捷Scrum實務', 105, 500, N'適合專案經理和團隊領導', N'學習Scrum框架和實施技巧', GETDATE(), DATEADD(month, 2, GETDATE()), DATEADD(month, 4, GETDATE()), 20000, 'Active');
+('C0101', N'UI/UX設計原理', 102, 101, N'零基礎入門UI/UX設計', N'學習設計思維和工具使用', DATEADD(day, -10, GETDATE()), DATEADD(day, 20, GETDATE()), DATEADD(month, 2, GETDATE()), 12000, 'Active'),
+('C0102', N'Python數據分析', 103, 102, N'適合有基礎Python經驗的學習者', N'使用Python進行數據處理和視覺化', DATEADD(day, -20, GETDATE()), DATEADD(day, 10, GETDATE()), DATEADD(month, 2, GETDATE()), 18000, 'Active'),
+('C0103', N'數位行銷策略', 104, 103, N'適合行銷新手和有經驗者', N'學習現代數位行銷技巧和策略', DATEADD(day, -5, GETDATE()), DATEADD(month, 1, GETDATE()), DATEADD(month, 3, GETDATE()), 10000, 'Active'),
+('C0104', N'敏捷Scrum實務', 105, 104, N'適合專案經理和團隊領導', N'學習Scrum框架和實施技巧', GETDATE(), DATEADD(month, 2, GETDATE()), DATEADD(month, 4, GETDATE()), 20000, 'Active');
 
 -- 12. course_order 表
 INSERT INTO course_order (course_order_id, course_id, student_id, course_order_price, course_order_create_date, course_order_remark, course_order_status)

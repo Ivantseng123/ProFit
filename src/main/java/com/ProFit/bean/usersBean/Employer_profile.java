@@ -48,7 +48,7 @@ public class Employer_profile implements Serializable{
 	@Column(name="company_numberOfemployee")
 	private String companyNumberOfemployee;
 	
-	@Column(name="company_captital")
+	@Column(name="company_capital")
 	private String companyCaptital;
 	
 	@Column(name="company_description")
