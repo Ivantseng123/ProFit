@@ -1,5 +1,5 @@
 <%@ page import="java.util.List" %>
-<%@ page import="com.ProFit.bean.EventsBean" %>
+<%@ page import="com.ProFit.bean.eventsBean.EventsBean" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -36,12 +36,15 @@
                     <th>ID</th>
                     <th>活動名稱</th>
                     <th>狀態</th>
+                    <th>專業類別</th>
                     <th>開始日期</th>
                     <th>結束日期</th>
-                    <th>描述</th>
+                    <th>報名開始日期</th>
+                    <th>報名結束日期</th>
                     <th>金額</th>
                     <th>地點</th>
                     <th>人數上限</th>
+                    <th>描述</th>
                     <th>備註</th>
                     <th>操作</th>
                 </tr>
@@ -57,13 +60,22 @@
                                 <%= event.getEventName() %>
                             </td>
                             <td>
-                                <%= event.isEventActive() %>
+                                <%= event.getIsEventActive() %>
+                            </td>
+                            <td>
+                                <%= event.getEventMajor() %>
                             </td>
                             <td>
                                 <%= event.getEventStartDate() %>
                             </td>
                             <td>
                                 <%= event.getEventEndDate() %>
+                            </td>
+                            <td>
+                                <%= event.getEventPartStartDate() %>
+                            </td>
+                            <td>
+                                <%= event.getEventPartEndDate() %>
                             </td>
                             <td>
                                 <%= event.getEventDescription() %>

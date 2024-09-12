@@ -35,7 +35,10 @@
             <label for="eventName">活動名稱</label><input type="text" id="eventName" name="eventName" value="${event.eventName}">
             <hr>
             <label for="isEventActive">狀態</label>
-            <span>活動是否開始: </span><input style="width:20px;" type="checkbox" id="isEventActive" name="isEventActive" value="true" ${event.eventActive ? 'checked' : '' }>
+            <span>活動是否開始: </span><input style="width:20px;" type="checkbox" id="isEventActive" name="isEventActive" value="1" ${event.isEventActive==1 ? 'checked' : '' }>
+            <hr>
+            <label for="eventMajor">專業類別</label>
+            <input type="number" id="eventMajor" name="eventMajor" value="${event.eventMajor}">
             <hr>
             <label for="eventStartDate">開始日期</label>
             <input type="datetime-local" id="eventStartDate" name="eventStartDate" value="${event.eventStartDate}">
@@ -43,8 +46,12 @@
             <label for="eventEndDate">結束日期</label>
             <input type="datetime-local" id="eventEndDate" name="eventEndDate" value="${event.eventEndDate}">
             <hr>
-            <label for="eventDescription">描述</label>
-            <textarea id="eventDescription" name="eventDescription">${event.eventDescription}</textarea>
+            
+            <label for="eventPartStartDate">報名開始日期</label>
+            <input type="datetime-local" id="eventPartStartDate" name="eventPartStartDate" value="${event.eventPartStartDate}">
+            <hr>
+            <label for="eventPartEndDate">報名結束日期</label>
+            <input type="datetime-local" id="eventPartEndDate" name="eventPartEndDate" value="${event.eventPartEndDate}">
             <hr>
             <label for="eventAmount">金額</label>
             <input type="number" id="eventAmount" name="eventAmount" value="${event.eventAmount}">
@@ -54,7 +61,10 @@
             <hr>
             <label for="eventParticipantMaximum">參加人數上限</label>
             <input type="number" id="eventParticipantMaximum" name="eventParticipantMaximum"
-                value="${event.eventParticipantMaximum}">
+            value="${event.eventParticipantMaximum}">
+            <hr>
+            <label for="eventDescription">描述</label>
+            <textarea id="eventDescription" name="eventDescription">${event.eventDescription}</textarea>
             <hr>
             <label for="eventNote">備註</label>
             <textarea id="eventNote" name="eventNote">${event.eventNote}</textarea>
