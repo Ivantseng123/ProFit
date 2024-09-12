@@ -25,7 +25,7 @@
                 </c:if>
 
                 <label for="jobsUserId">會員ID：</label>
-                <input type="number" id="jobsUserId" name="jobsUserId" value="${job.jobsUserId}" required><br>
+                <input type="number" id="jobsUserId" name="jobsUserId" value="${job.users.userId}" required><br> 
 
                 <label for="jobsTitle">標題：</label>
                 <input type="text" id="jobsTitle" name="jobsTitle" value="${job.jobsTitle}" required><br>

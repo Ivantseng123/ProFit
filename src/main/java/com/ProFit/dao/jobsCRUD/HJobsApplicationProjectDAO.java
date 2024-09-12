@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ProFit.bean.JobsApplicationProject;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 public class HJobsApplicationProjectDAO implements IHJobsApplicationProjectDAO {
@@ -18,20 +19,47 @@ public class HJobsApplicationProjectDAO implements IHJobsApplicationProjectDAO {
     // 新增
     @Override
     public JobsApplicationProject save(JobsApplicationProject jobsApplicationProject) {
-        session.persist(jobsApplicationProject);
-        return jobsApplicationProject;
+//        session.persist(jobsApplicationProject);
+//        return jobsApplicationProject;
+    	Transaction t = session.beginTransaction();
+        try {
+            session.persist(jobsApplicationProject);
+            t.commit();
+            return jobsApplicationProject;
+        } catch (Exception e) {
+            if (t != null) {
+                t.rollback();
+            }
+            e.printStackTrace();
+            return null;
+        }
     }
 
+    
+    
+    
     // 刪除
     @Override
     public boolean delete(Integer jobsApplicationProjectId) {
         JobsApplicationProject jobsApplicationProject = session.get(JobsApplicationProject.class, jobsApplicationProjectId);
         if (jobsApplicationProject != null) {
-            session.remove(jobsApplicationProject);
-            return true;
-        }
-        return false;
+			Transaction t = session.beginTransaction();
+	        try {
+	        	session.remove(jobsApplicationProject);
+	            return true;
+	        } catch (Exception e) {
+	            if (t != null) {
+	                t.rollback();
+	            }
+	            e.printStackTrace();
+	            return false;
+	        }
+		}
+		return false;
     }
+    
+    
+    
 
     // 修改
     @Override
@@ -60,8 +88,18 @@ public class HJobsApplicationProjectDAO implements IHJobsApplicationProjectDAO {
                 ? oldJobsApplicationProject.getJobsAmount()
                 : jobsApplicationProject.getJobsAmount());
 
-        session.merge(oldJobsApplicationProject);
-        return true;
+        Transaction t = session.beginTransaction();
+        try {
+    		session.merge(oldJobsApplicationProject);
+            t.commit();
+            return true;
+        } catch (Exception e) {
+            if (t != null) {
+                t.rollback();
+            }
+            e.printStackTrace();
+            return false;
+        }
     }
 
     // id查詢

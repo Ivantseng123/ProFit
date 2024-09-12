@@ -4,9 +4,10 @@ import java.util.List;
 
 import com.ProFit.bean.JobsApplication;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-public class HJobsApplicationDAO implements IHJobsApplicationDAO {
+public class HJobsApplicationDAO implements IHJobsApplicationDAO { 
 
     // session設置
     private Session session;
@@ -18,21 +19,48 @@ public class HJobsApplicationDAO implements IHJobsApplicationDAO {
     // 新增
     @Override
     public JobsApplication save(JobsApplication jobsApplication) {
-        session.persist(jobsApplication);
-        return jobsApplication;
+//        session.persist(jobsApplication);
+//        return jobsApplication;
+    	Transaction t = session.beginTransaction();
+        try {
+            session.persist(jobsApplication);
+            t.commit();
+            return jobsApplication;
+        } catch (Exception e) {
+            if (t != null) {
+                t.rollback();
+            }
+            e.printStackTrace();
+            return null;
+        }
     }
+    
+    
+    
 
     // 刪除
     @Override
     public boolean delete(Integer jobsApplicationId) {
         JobsApplication jobsApplication = session.get(JobsApplication.class, jobsApplicationId);
         if (jobsApplication != null) {
-            session.remove(jobsApplication);
-            return true;
-        }
-        return false;
+			Transaction t = session.beginTransaction();
+	        try {
+	        	session.remove(jobsApplication);
+	            return true;
+	        } catch (Exception e) {
+	            if (t != null) {
+	                t.rollback();
+	            }
+	            e.printStackTrace();
+	            return false;
+	        }
+		}
+		return false;
     }
 
+    
+    
+    
     // 修改
     @Override
     public boolean update(JobsApplication jobsApplication) {
@@ -64,8 +92,18 @@ public class HJobsApplicationDAO implements IHJobsApplicationDAO {
                 ? oldJobsApplication.getJobsApplicationContract()
                 : jobsApplication.getJobsApplicationContract());
 
-        session.merge(oldJobsApplication);
-        return true;
+        Transaction t = session.beginTransaction();
+        try {
+    		session.merge(oldJobsApplication);
+            t.commit();
+            return true;
+        } catch (Exception e) {
+            if (t != null) {
+                t.rollback();
+            }
+            e.printStackTrace();
+            return false;
+        }
     }
 
     // id查詢
