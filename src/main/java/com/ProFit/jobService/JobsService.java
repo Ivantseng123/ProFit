@@ -8,7 +8,7 @@ import org.hibernate.Session;
 import com.ProFit.bean.Jobs;
 import com.ProFit.dao.jobsCRUD.HJobsDAO;
 import com.ProFit.dao.jobsCRUD.IHJobsDAO;
-
+//@Service
 public class JobsService {
 	
 	private Session session;

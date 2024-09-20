@@ -4,7 +4,7 @@ package com.ProFit.dao.jobsCRUD;
 import com.ProFit.bean.Jobs;
 
 import java.util.List;
-
+//@Repository
 public interface IHJobsDAO {
 
     // 新增
