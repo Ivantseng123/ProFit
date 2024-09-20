@@ -12,11 +12,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
-
 import java.util.Date;
-
-import org.apache.catalina.User;
-
 import com.ProFit.bean.usersBean.Users;
 
 
@@ -34,7 +30,7 @@ public class Jobs {
     
 
     @ManyToOne(fetch = FetchType.LAZY)//FK，對User表，一個公司（user）可以有po很多職缺
-    @JoinColumn(name="jobs_user_id")
+    @JoinColumn(name="jobs_users_id")
     private Users users;//請跟我有關聯的表格組員修改他們的關係語句
     
         

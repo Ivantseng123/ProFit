@@ -20,7 +20,7 @@ public class UserTransactionServlet extends HttpServlet {
     private Session session;
 
     public UserTransactionServlet() {
-        this.session = com.ProFit.hibernateutil.HibernateUtil.getSessionFactory().openSession();
+        this.session = com.ProFit.util.hibernateutil.HibernateUtil.getSessionFactory().openSession();
         this.userTransactionDAO = new UserTransactionDAO(session);
     }
 

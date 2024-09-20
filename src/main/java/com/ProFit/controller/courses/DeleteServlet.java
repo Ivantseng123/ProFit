@@ -8,8 +8,8 @@ import org.hibernate.SessionFactory;
 
 import com.ProFit.dao.coursesCRUD.CourseDao;
 import com.ProFit.dao.coursesCRUD.HcourseDao;
-import com.ProFit.hibernateutil.HibernateUtil;
-import com.ProFit.hibernateutil.JsonUtil;
+import com.ProFit.util.hibernateutil.HibernateUtil;
+import com.ProFit.util.hibernateutil.JsonUtil;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 

@@ -1,0 +1,225 @@
+/* 通用樣式設定 */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* 頂列樣式 */
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0; /* 使header從頁面左邊開始 */
+    right: 0; /* 使header覆蓋到頁面右邊 */
+    height: 60px;
+    z-index: 1001;
+    box-sizing: border-box;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+header .user-info {
+    display: flex;
+    align-items: center;
+}
+
+header .user-info p {
+    margin: 0;
+    margin-right: 15px;
+    font-size: 14px;
+}
+
+header .user-info button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+header .user-info button.logout {
+    background-color: #f44336;
+}
+
+/* 左側邊欄樣式 */
+.modelbar {
+    width: 200px;
+    background-color: #2c3e50;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 60px; /* 確保內容不被header遮擋 */
+    z-index: 1000;
+}
+
+.modelbar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.modelbar ul li {
+    padding: 10px 20px;
+    text-align: left;
+}
+
+.modelbar ul li a {
+    text-decoration: none;
+    color: white;
+    display: block;
+    font-size: 16px;
+}
+
+.modelbar ul li a:hover {
+    background-color: #34495e;
+}
+
+/* 主要內容區域樣式 */
+main {
+    margin-left: 220px; /* 與側邊欄寬度一致 */
+    padding: 80px 20px 20px 20px; /* 確保內容不被header遮擋 */
+}
+
+.dashboard-header {
+    background-color: #ecf0f1;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.dashboard-header h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.table-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+table th {
+    background-color: #f2f2f2;
+}
+
+.status {
+    color: green;
+    font-weight: bold;
+}
+
+.action-buttons button {
+    padding: 5px 10px;
+    margin-right: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.action-buttons .edit {
+    background-color: #3498db;
+    color: white;
+}
+
+.action-buttons .delete {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.action-buttons .view {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.form-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: auto;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input, 
+.form-group select, 
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form-group button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.form-group button:hover {
+    background-color: #45a049;
+}
+
+/* 我額外再加入的css樣式 ... */
+.entry-options1 {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: start;
+	padding: 0px 0 20px 0;
+}
+
+.entry-option1 {
+	background-color: #f0f0f0;
+	border-radius: 5px;
+	padding: 10px;
+	margin: 0 10px 0 0;
+	width: 100px;
+	text-align: center;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	transition: all 0.3s ease;
+}
+
+.entry-option1:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.entry-option1 a {
+	text-decoration: none;
+	color: #333;
+	font-weight: bold;
+}

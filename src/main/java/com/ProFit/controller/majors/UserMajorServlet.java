@@ -11,7 +11,7 @@ import com.ProFit.bean.majorsBean.UserMajorPK;
 import com.ProFit.bean.majorsBean.MajorBean;
 import com.ProFit.bean.usersBean.Users;
 import com.ProFit.dao.majorsCRUD.HUserMajorDAO;
-import com.ProFit.hibernateutil.HibernateUtil;
+import com.ProFit.util.hibernateutil.HibernateUtil;
 
 import org.hibernate.Session;
 
@@ -60,6 +60,7 @@ public class UserMajorServlet extends HttpServlet {
         }
     }
 
+    // 列出特定用戶的所有專業
     private void listUserMajors(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         String userIdStr = request.getParameter("userId");
@@ -99,6 +100,7 @@ public class UserMajorServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
+    // 列出特定專業的所有用戶
     private void listMajorUsers(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String majorIdStr = request.getParameter("majorId");
@@ -126,6 +128,7 @@ public class UserMajorServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
+    // 列出所有用戶-專業關聯
     private void listAllUserMajors(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -143,6 +146,7 @@ public class UserMajorServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
+    // 為用戶添加新專業
     private void addUserMajor(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int userId = Integer.parseInt(request.getParameter("userId"));
@@ -169,6 +173,7 @@ public class UserMajorServlet extends HttpServlet {
         
     }
 
+    // 刪除用戶-專業關聯
     private void deleteUserMajor(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int userId = Integer.parseInt(request.getParameter("userId"));

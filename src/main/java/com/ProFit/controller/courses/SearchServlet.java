@@ -9,8 +9,8 @@ import org.hibernate.SessionFactory;
 import com.ProFit.bean.coursesBean.CourseBean;
 import com.ProFit.dao.coursesCRUD.HcourseDao;
 import com.ProFit.dto.courseDTO.CoursesDTO;
-import com.ProFit.hibernateutil.HibernateUtil;
-import com.ProFit.hibernateutil.JsonUtil;
+import com.ProFit.util.hibernateutil.HibernateUtil;
+import com.ProFit.util.hibernateutil.JsonUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -62,9 +62,15 @@ public class SearchServlet extends HttpServlet {
 		String courseCreateUserId = request.getParameter("courseCreateUserId");
 		String courseCategory = request.getParameter("courseMajor");
 		
+		
 		HcourseDao hcourseDao = new HcourseDao(session);
 		List<CourseBean> searchCourses = hcourseDao.searchCourses(courseName, courseCreateUserName, courseStatus, courseCreateUserId, courseCategory);
+		
+		for(int i=0;i<searchCourses.size();i++) {
+			System.out.println(searchCourses.get(i));
+		}
 
+		
 		// 將 CourseBean 轉換為 CoursesDTO
 		List<CoursesDTO> searchCoursesDTO = searchCourses.stream()
 			.map(CoursesDTO::new) // 使用 DTO 的構造函數

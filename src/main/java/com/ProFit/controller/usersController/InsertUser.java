@@ -8,7 +8,7 @@ import java.security.NoSuchAlgorithmException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import com.ProFit.bean.usersBean.Users;
-import com.ProFit.hibernateutil.HibernateUtil;
+import com.ProFit.util.hibernateutil.HibernateUtil;
 import com.ProFit.dao.usersDao.HUserDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/InsertUser")
+//@WebServlet("/InsertUser")
 public class InsertUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -57,7 +57,6 @@ public class InsertUser extends HttpServlet {
 				userDao.saveUserInfo(user);
 
 				session.flush(); // 將緩存的更改同步到數據庫
-				session.clear(); // 清空緩存，強制從數據庫重新查詢
 			}
 
 			request.getRequestDispatcher("/GetAlluser").forward(request, response);

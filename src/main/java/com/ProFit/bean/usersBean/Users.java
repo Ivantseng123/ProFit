@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.stereotype.Component;
 
 import com.ProFit.bean.majorsBean.MajorBean;
 
@@ -27,6 +28,7 @@ import jakarta.persistence.Table;
 @Entity
 @DynamicUpdate
 @Table(name = "users")
+@Component
 public class Users implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -74,7 +76,7 @@ public class Users implements Serializable {
 	@Column(name = "freelancer_profile_status")
 	private Integer freelancerProfileStatus;
 
-	@Column(name = "freelancer_disc")
+	@Column(name = "freelancer_description")
 	private String freelancerDisc;
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "user")
@@ -86,7 +88,7 @@ public class Users implements Serializable {
 	@OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE,mappedBy = "user")
 	private Employer_profile employer_profile;
 
-	// 多對多關係，中介表user_major
+	 //多對多關係，中介表user_major
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_major", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = {
 	@JoinColumn(name = "major_id") })
