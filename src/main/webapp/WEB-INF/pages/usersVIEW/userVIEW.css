@@ -1,0 +1,354 @@
+main {
+    margin-left: 220px;
+    padding: 20px;
+}
+
+.dashboard-header {
+    background-color: #ecf0f1;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.dashboard-header h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+
+.action-buttons button {
+    padding: 5px 10px;
+    margin-right: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.action-buttons .edit{
+    background-color: #3498db;
+    color: white;
+}
+
+.action-buttons .delete, .reject{
+    background-color: #e74c3c;
+    color: white;
+}
+
+.action-buttons .view, .pass {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.insertBTN{
+	text-align: center;
+}
+
+.insertbtn{
+	padding: 12px 24px;
+	font-size: 18px;
+	background-color: orange;
+	color: #fff;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.tohref{
+	padding: 12px 24px;
+	font-size: 16px;
+	background-color: gray;
+	color: #fff;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+} 
+
+.overlay-container {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.6);
+	justify-content: center;
+	align-items: center;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+	z-index: 1002;
+}
+
+.popup-box {
+	background: #fff;
+	padding: 24px;
+	border-radius: 12px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+	width: 90%;
+	height: 100%;
+	text-align: center;
+	opacity: 0;
+	transform: scale(0.8);
+	animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.popup-box-empAppl{
+	background: #fff;
+	padding: 24px;
+	border-radius: 12px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+	width: 800px;
+	height: 800px;
+	text-align: center;
+	opacity: 0;
+	transform: scale(0.8);
+	animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.popup-box-empPf{
+	background: #fff;
+	padding: 24px;
+	border-radius: 12px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+	width: 800px;
+	height: 500px;
+	text-align: center;
+	opacity: 0;
+	transform: scale(0.8);
+	animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.popup-box-insertuser{
+	background: #fff;
+	padding: 24px;
+	border-radius: 12px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+	width: 500px;
+	height: 650px;
+	text-align: center;
+	opacity: 0;
+	transform: scale(0.8);
+	animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.popup-box-inserttoken{
+	background: #fff;
+	padding: 24px;
+	border-radius: 12px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+	width: 300px;
+	height: 350px;
+	text-align: center;
+	opacity: 0;
+	transform: scale(0.8);
+	animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.popup-box-insertEmpPf{
+	background: #fff;
+	padding: 24px;
+	border-radius: 12px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+	width: 600px;
+	height: 700px;
+	text-align: center;
+	opacity: 0;
+	transform: scale(0.8);
+	animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.popup-box-updatepwd{
+	background: #fff;
+	padding: 24px;
+	border-radius: 12px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+	width: 300px;
+	height: 350px;
+	text-align: center;
+	opacity: 0;
+	transform: scale(0.8);
+	animation: fadeInUp 0.5s ease-out forwards;
+}
+
+
+.form-label {
+	margin-bottom: 10px;
+	font-size: 16px;
+	color: #444;
+	text-align: left;
+	display: block;
+    margin-bottom: 30px; 
+    font-weight: bold; 
+    width: 50%;
+}
+
+.form-input {
+	padding: 10px;
+	margin-bottom: 20px;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	font-size: 16px;
+	width: 100%;
+	box-sizing: border-box;
+	display: block;
+}
+
+.form-input-insert {
+	padding: 5px;
+	margin-bottom: 15px;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	font-size: 16px;
+	width: 30%;
+	height: 40px;
+	box-sizing: border-box;
+}
+
+.btn-submit, .btn-close-popup {
+	padding: 12px 24px;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-submit {
+	background-color: green;
+	color: #fff;
+	width: 100%;
+}
+
+.btn-close-popup {
+	margin-top: 12px;
+	background-color: #e74c3c;
+	color: #fff;
+}
+
+.btn-submit:hover{
+	background-color: #4caf50;
+}
+
+.btn-close-popup:hover{
+	background-color: rgb(255, 79, 79);
+}
+
+/* Keyframes for fadeInUp animation */
+
+@keyframes fadeInUp {from { opacity:0;
+	transform: translateY(20px);
+}
+
+to {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+}
+
+/* Animation for popup */
+.overlay-container.show {
+	display: flex;
+	opacity: 1;
+}
+
+.profile-picture .taxID-picture .national_id-picture {
+  opacity: 0.75;
+  height: 250px;
+  width: 250px;
+  position: relative;
+  overflow: hidden;
+
+  background-color: orange;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: 0 8px 6px -6px black;
+}
+
+
+
+.file-uploader .file-uploader_nationalID .file-uploader_taxID {
+  cursor: pointer;
+  margin: 30px 0;
+ 
+}
+.taxID-img{
+	height: 300px;
+	width: 300px;
+}
+
+.nationalID-img{
+	height: 300px;
+	width: 450px;
+}
+
+img{
+	height: 25%;
+	width: 25%;
+}
+
+.city-option{
+	margin-bottom: 30px;
+}
+.input-radio{
+	margin-bottom: 30px;
+}
+
+.input-row{
+    width: 100%;
+    display: flex; 
+    align-items: center; 
+    gap: 10px;
+}
+.input-row-picture{
+    width: 100%;
+    height : 30%;
+    display: flex; 
+    align-items: center; 
+    gap: 10px;
+}
+
+.form-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: auto;
+    overflow: auto;
+}
+
+.form-container p {
+  	text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input, 
+.form-group select, 
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form-group button {
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+
