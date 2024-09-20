@@ -41,6 +41,7 @@ import jakarta.servlet.http.HttpServletResponse;
 //會告诉 Web 容器（如 Tomcat），此 Servlet 類（class jobsServlet）应当映射到 /jobsServlet，
 //使得訪問URL 路徑时，Web 容器创建 jobsServlet的實例来處理request
 @WebServlet("/jobsServlet")
+//@Controller
 public class jobsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     
