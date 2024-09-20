@@ -1,5 +1,6 @@
 package com.ProFit.dao.usersDao;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import com.ProFit.bean.usersBean.Users;
@@ -30,5 +31,9 @@ public interface IHUserDao {
 	Users getUserInfoByID(Integer user_id);
 
 	Users getUserByEmail(String user_email);
+
+	byte[] getSHA(String pwd) throws NoSuchAlgorithmException;
+
+	String toHexString(byte[] hash);
 
 }

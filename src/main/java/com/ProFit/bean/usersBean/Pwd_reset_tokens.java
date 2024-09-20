@@ -2,6 +2,8 @@ package com.ProFit.bean.usersBean;
 
 import java.io.Serializable;
 
+import org.springframework.stereotype.Component;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -15,6 +17,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="password_reset_tokens")
+@Component
 public class Pwd_reset_tokens implements Serializable{
 
 	private static final long serialVersionUID = 1L;

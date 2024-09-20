@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 import jakarta.persistence.*;
 
-@Entity
-@Table(name = "event_host")
+//@Entity
+//@Table(name = "event_host")
 public class EventHostBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;

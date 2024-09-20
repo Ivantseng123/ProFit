@@ -4,7 +4,7 @@ import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
 
-@WebListener
+//@WebListener
 public class SessionFactoryListener implements ServletContextListener {
 
 	@Override
