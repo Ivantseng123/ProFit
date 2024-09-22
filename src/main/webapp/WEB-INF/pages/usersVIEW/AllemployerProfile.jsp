@@ -57,10 +57,10 @@
 							<td>${emp.companyPhoneNumber}</td>
 							<td>${emp.companyAddress}</td>                                  	                               
                         	<td class="action-buttons">
-                        		<a style="text-decoration:none;" href="GetEmpPf?employer_profile_id=${emp.employerProfileId}">
+                        		<a style="text-decoration:none;" href="getemppf?employer_profile_id=${emp.employerProfileId}&action=search">
                         		<button class="view" id="viewUserBtn">查看</button>
                         		</a>
-                            	<a style="text-decoration:none;" href="GetUpdateEmpPf?employer_profile_id=${emp.employerProfileId}">
+                            	<a style="text-decoration:none;" href="getemppf?employer_profile_id=${emp.employerProfileId}&action=edit">
                             	<button class="edit" id="editUserBtn">編輯</button>
                             	</a>                                   		             
                             	<button class="delete" id="deleteUserBtn">刪除</button>
@@ -85,17 +85,17 @@
         	<button class="insertbtn" onclick="togglePopup()">新增</button>
         </diV>
           <div class="navgation" style="text-align: center; margin-Top: 25px;" >
-        	<a href="GetAlluser" class="resetTokens" id="resetTokensBtn">
+        	<a href="alluser" class="resetTokens" id="resetTokensBtn">
         	<button class="tohref">全部會員資訊</button></a>
-            <a href="GetAllempAppl" class="employerAppl" id="employerApplBtn">
+            <a href="allempappl" class="employerAppl" id="employerApplBtn">
             <button class="tohref">企業申請資訊</button></a>
-            <a href="GetAlltoken" class="employerProfile" id="employerProfileBtn">
+            <a href="alltoken" class="employerProfile" id="employerProfileBtn">
             <button class="tohref" >重設密碼資訊</button></a>
         </diV>
         <div id="popupOverlay" class="overlay-container" style="z-index: 1002">
         	<div class="popup-box-insertEmpPf">
 				<h2 style="color: orange;">新增企業資訊</h2>
-				<form class="form-group" style="margin:0; overflow: auto" method="post" action="InsertEmpPf">
+				<form class="form-group" style="margin:0; overflow: auto" method="post" action="insertemppf">
 					
 						<label class="form-label" for="user_id">會員ID:</label> 
 							<input
@@ -211,7 +211,7 @@
 				 
 				 const deletedata = { 'employer_profile_id': employer_profile_id };
 				 
-				 fetch('DeleteEmpPf', {
+				 fetch('deleteemppf', {
 				        method: 'POST',
 				        headers: {
 				            'Content-Type': 'application/json'

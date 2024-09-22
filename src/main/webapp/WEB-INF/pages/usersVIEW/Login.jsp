@@ -67,8 +67,7 @@ body {
 			<h1>ProFit</h1>
 			<h3>後台系統</h3>
 
-			<form id="loginForm" method="post"
-				action="${pageContext.request.contextPath}/Login">
+			<form id="loginForm" method="post" action="login">
 
 				<div class="form-group">
 					<input type="text" id="username" class="form-control"

@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.context.annotation.Scope;
+import org.springframework.format.annotation.NumberFormat;
 import org.springframework.stereotype.Component;
 
 import com.ProFit.bean.majorsBean.MajorBean;
@@ -29,6 +31,7 @@ import jakarta.persistence.Table;
 @DynamicUpdate
 @Table(name = "users")
 @Component
+@Scope("prototype")
 public class Users implements Serializable {
 	private static final long serialVersionUID = 1L;
 
