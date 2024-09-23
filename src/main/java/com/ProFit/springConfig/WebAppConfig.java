@@ -11,7 +11,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 //相當於mvc-servlet.xml的Java程式組態
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"com.ProFit"})
+@ComponentScan(basePackages = {"com.ProFit.controller"})
 public class WebAppConfig implements WebMvcConfigurer {
 	
 	@Bean

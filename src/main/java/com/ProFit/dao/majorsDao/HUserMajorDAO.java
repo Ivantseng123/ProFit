@@ -1,4 +1,4 @@
-package com.ProFit.dao.majorsCRUD;
+package com.ProFit.dao.majorsDao;
 
 import java.sql.SQLException;
 

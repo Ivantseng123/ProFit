@@ -1,4 +1,4 @@
-package com.ProFit.dao.majorsCRUD;
+package com.ProFit.dao.majorsDao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,26 +9,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ProFit.bean.majorsBean.MajorBean;
 
-public class HMajorDAO {
+@Repository
+@Transactional
+public class HMajorDAO implements IHMajorDAO {
 
-	private Session session;
-
-	public HMajorDAO(Session session) {
-		this.session = session;
-	}
+	@Autowired
+	private SessionFactory factory;
 
 	// 新增 Major
+	@Override
 	public MajorBean insertMajor(MajorBean major) {
+		Session session = factory.getCurrentSession();
 		session.persist(major);
 		return major;
 	}
 
 	// 更新 Major
+	@Override
 	public boolean updateMajor(MajorBean major) {
+		Session session = factory.getCurrentSession();
 		MajorBean oldMajor = session.get(MajorBean.class, major.getMajorId());
 		if (oldMajor == null) {
 			System.out.println("major with id:" + major.getMajorId() + "does not exist.");
@@ -48,7 +55,9 @@ public class HMajorDAO {
 	}
 
 	// 删除 Major(by majorid)
+	@Override
 	public boolean deleteMajor(int majorId) {
+		Session session = factory.getCurrentSession();
 		MajorBean resultBean = session.get(MajorBean.class, majorId);
 		if (resultBean != null) {
 			session.remove(resultBean);
@@ -58,18 +67,24 @@ public class HMajorDAO {
 	}
 
 	// 查找 Major(by majorid)
+	@Override
 	public MajorBean findMajorById(int majorId) {
+		Session session = factory.getCurrentSession();
 		return session.get(MajorBean.class, majorId);
 	}
 
 	// 查找所有 Major
+	@Override
 	public List<MajorBean> findAllMajors() {
+		Session session = factory.getCurrentSession();
 		Query<MajorBean> query = session.createQuery("from MajorBean", MajorBean.class);
 		return query.list();
 	}
 
 	// 根據 majorCategoryid 查找 Majors (
+	@Override
 	public List<MajorBean> findMajorsByCategoryId(int majorCategoryId) {
+		Session session = factory.getCurrentSession();
 		String hql = "from MajorBean m WHERE m.majorCategoryId = :categoryId";
 		Query<MajorBean> query = session.createQuery(hql, MajorBean.class);
 		query.setParameter("categoryId", majorCategoryId);

@@ -1,70 +1,51 @@
-//package com.ProFit.controller.majors;
-//
-//import java.io.IOException;
-//import java.util.List;
-//
-//import com.ProFit.bean.majorsBean.MajorBean;
-//import com.ProFit.dao.majorsDao.HMajorDAO;
-//import com.ProFit.dao.majorsDao.IHMajorDAO;
-//import com.ProFit.util.hibernateutil.HibernateUtil;
-//
-//import org.hibernate.Session;
-//
-//import jakarta.servlet.RequestDispatcher;
-//import jakarta.servlet.ServletException;
-//import jakarta.servlet.annotation.WebServlet;
-//import jakarta.servlet.http.HttpServlet;
-//import jakarta.servlet.http.HttpServletRequest;
-//import jakarta.servlet.http.HttpServletResponse;
-//
-//@WebServlet("/major/*")
-//public class MajorServlet extends HttpServlet {
-//    private static final long serialVersionUID = 1L;
-//
-//    @Override
-//    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        doGet(request, response);
-//    }
-//
-//    @Override
-//    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        String action = request.getPathInfo();
-//
-//        try {
-//            switch (action) {
-//                case "/new":
-//                    showNewForm(request, response);
-//                    break;
-//                case "/insert":
-//                    insertMajor(request, response);
-//                    break;
-//                case "/delete":
-//                    deleteMajor(request, response);
-//                    break;
-//                case "/edit":
-//                    showEditForm(request, response);
-//                    break;
-//                case "/update":
-//                    updateMajor(request, response);
-//                    break;
-//                case "/view":
-//                    viewMajor(request, response);
-//                    break;
-//                case "/category":
-//                    listMajorsByCategory(request, response);
-//                    break;
-//                default:
-//                    listMajor(request, response);
-//                    break;
-//            }
-//        } catch (Exception ex) {
-//            throw new ServletException(ex);
-//        }
-//    }
-//
-//    // 列出所有專業
+package com.ProFit.controller.majors;
+
+import java.io.IOException;
+import java.util.List;
+
+import com.ProFit.bean.majorsBean.MajorBean;
+import com.ProFit.dao.majorsDao.HMajorDAO;
+import com.ProFit.dao.majorsDao.IHMajorDAO;
+import com.ProFit.service.majorService.IMajorCategoryService;
+import com.ProFit.service.majorService.IMajorService;
+import com.ProFit.util.hibernateutil.HibernateUtil;
+
+import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@Controller
+@RequestMapping("/major")
+public class MajorController {
+
+	@Autowired
+    private IMajorService majorService;
+	
+	@Autowired
+	private IMajorCategoryService majorCategoryService;
+
+    // 列出所有專業
+	@GetMapping("/")
+	public String listMajor(Model model) {
+		List<MajorBean> listMajor = majorService.findAllMajors();
+		
+		System.out.println(listMajor);
+		model.addAttribute("listMajor" ,listMajor);
+		return "majorsVIEW/MajorList";
+	}
+	
+	
 //    private void listMajor(HttpServletRequest request, HttpServletResponse response)
 //            throws ServletException, IOException {
 //        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -211,4 +192,4 @@
 //            dispatcher.forward(request, response);
 //        }
 //    }
-//}
+}

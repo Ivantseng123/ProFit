@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Major Categories - ProFit</title>
+    <title>Majors in ${category.categoryName} - ProFit</title>
     <link rel="stylesheet"
         href="${pageContext.request.contextPath}/model/model.css">
 </head>
@@ -14,7 +14,7 @@
 
     <main>
         <div class="dashboard-header">
-            <h2>專業類別</h2>
+            <h2>${category.categoryName}中的專業</h2>
         </div>
             <div class="entry-options1">
             <div class="entry-option1">
@@ -30,24 +30,30 @@
                 <a href="${pageContext.request.contextPath}/majorCategory/list">專業類別管理</a>
             </div>
 	</div>
-        <div class="action-buttons">
-        <button class="edit" onclick="location.href='${pageContext.request.contextPath}/majorCategory/new'">新增專業類別</button>
+	
+	<div class="action-buttons">
+        <button class="delete" onclick="location.href='${pageContext.request.contextPath}/majorCategory/list'">返回所有類別</button>
         </div>
         <div class="table-container">
             <table>
                 <tr>
-                    <th>類別ID</th>
-                    <th>類別名稱</th>
+                    <th>專業ID</th>
+                    <th>專業名稱</th>
+                    <th>描述</th>
                     <th>Actions</th>
                 </tr>
-                <c:forEach var="category" items="${listMajorCategory}">
+                <c:forEach var="major" items="${listMajor}">
                     <tr>
-                        <td><c:out value="${category.majorCategoryId}" /></td>
-                        <td><c:out value="${category.categoryName}" /></td>
+                        <td><c:out value="${major.majorId}" /></td>
+                        <td><c:out value="${major.majorName}" /></td>
+                        <td><c:out value="${major.majorDescription}" /></td>
                         <td class="action-buttons">
-                        <button class="edit" onclick="location.href='${pageContext.request.contextPath}/majorCategory/edit?id=<c:out value='${category.majorCategoryId}'/>&&name=<c:out value='${category.categoryName}'/>'">更改類別名稱</button>
-                        <button class="delete" onclick="if(confirm('確定刪除此項分類?')) location.href='${pageContext.request.contextPath}/majorCategory/delete?id=<c:out value='${category.majorCategoryId}' />'">刪除</button>
-                        <button class="view" onclick="location.href='${pageContext.request.contextPath}/majorCategory/majors?categoryId=<c:out value='${category.majorCategoryId}' />'">檢視該類別的專業</button>
+                            <button class="edit"
+								onclick="location.href='${pageContext.request.contextPath}/major/edit?id=<c:out value='${major.majorId}' />'">編輯</button>
+							<button class="delete"
+								onclick="location.href='${pageContext.request.contextPath}/major/delete?id=<c:out value='${major.majorId}' />'">刪除</button>
+							<button class="view"
+								onclick="location.href='${pageContext.request.contextPath}/major/view?id=<c:out value='${major.majorId}' />'">檢視</button>
                         </td>
                     </tr>
                 </c:forEach>

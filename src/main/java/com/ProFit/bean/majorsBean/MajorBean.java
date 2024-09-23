@@ -116,8 +116,11 @@ public class MajorBean implements java.io.Serializable {
 	@Override
 	public String toString() {
 		return "MajorBean [majorId=" + majorId + ", majorName=" + majorName + ", majorCategoryId=" + majorCategoryId
-				+ ", majorDescription=" + majorDescription + "]";
+				+ ", majorDescription=" + majorDescription + ", majorCategory=" + majorCategory
+				+ "]";
 	}
+
+
 	
 
 	
