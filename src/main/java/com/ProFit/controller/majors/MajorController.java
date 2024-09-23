@@ -16,6 +16,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jakarta.servlet.RequestDispatcher;
@@ -30,22 +33,20 @@ import jakarta.servlet.http.HttpServletResponse;
 public class MajorController {
 
 	@Autowired
-    private IMajorService majorService;
-	
+	private IMajorService majorService;
+
 	@Autowired
 	private IMajorCategoryService majorCategoryService;
 
-    // 列出所有專業
+	// 列出所有專業
 	@GetMapping("/")
 	public String listMajor(Model model) {
 		List<MajorBean> listMajor = majorService.findAllMajors();
-		
-		System.out.println(listMajor);
-		model.addAttribute("listMajor" ,listMajor);
+
+		//System.out.println(listMajor);
+		model.addAttribute("listMajor", listMajor);
 		return "majorsVIEW/MajorList";
 	}
-	
-	
 //    private void listMajor(HttpServletRequest request, HttpServletResponse response)
 //            throws ServletException, IOException {
 //        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -56,14 +57,30 @@ public class MajorController {
 //        RequestDispatcher dispatcher = request.getRequestDispatcher("/majorsVIEW/MajorList.jsp");
 //        dispatcher.forward(request, response);
 //    }
-//
+
+	
+	// 顯示新增專業表單
+	@GetMapping("/new")
+	public String showNewForm() {
+		return "majorsVIEW/MajorForm";
+	}
 //    // 顯示新增專業表單
 //    private void showNewForm(HttpServletRequest request, HttpServletResponse response)
 //            throws ServletException, IOException {
 //        RequestDispatcher dispatcher = request.getRequestDispatcher("/majorsVIEW/MajorForm.jsp");
 //        dispatcher.forward(request, response);
 //    }
-//
+	
+	
+	// 插入新專業
+	@PostMapping("/insert")
+	public String insertMajor(@ModelAttribute MajorBean major, Model model) {
+		
+		majorService.insertMajor(major);
+		
+		return "redirect:/major/";
+	}
+	
 //    // 插入新專業
 //    private void insertMajor(HttpServletRequest request, HttpServletResponse response)
 //            throws ServletException, IOException {
