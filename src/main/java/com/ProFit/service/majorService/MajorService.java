@@ -7,14 +7,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ProFit.bean.majorsBean.MajorBean;
-import com.ProFit.dao.majorsDao.IHMajorDAO;
+import com.ProFit.dao.majorsDao.IHmajorDAO;
 
 @Service
 @Transactional
 public class MajorService implements IMajorService {
 
 	@Autowired
-	private IHMajorDAO majorDAO;
+	private IHmajorDAO majorDAO;
 
 	// 新增 Major
 	@Override

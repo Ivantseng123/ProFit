@@ -12,7 +12,7 @@ import com.ProFit.bean.majorsBean.MajorCategoryBean;
 
 @Repository
 @Transactional
-public class HmajorCategoryDAO implements IHmahorCategoryDAO {
+public class HmajorCategoryDAO implements IHmajorCategoryDAO {
 
 	@Autowired
 	private SessionFactory factory;

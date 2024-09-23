@@ -6,14 +6,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ProFit.bean.majorsBean.MajorCategoryBean;
-import com.ProFit.dao.majorsDao.IHmahorCategoryDAO;
+import com.ProFit.dao.majorsDao.IHmajorCategoryDAO;
 
 @Service
 @Transactional
 public class MajorCategoryService implements IMajorCategoryService {
 
 	@Autowired
-	private IHmahorCategoryDAO majorCategoryDAO;
+	private IHmajorCategoryDAO majorCategoryDAO;
 
 	// 新增專業類別
 	@Override

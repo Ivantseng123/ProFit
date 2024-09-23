@@ -58,7 +58,7 @@
 				<button class="edit"
 					onclick="location.href='${pageContext.request.contextPath}/major/new'">新增專業</button>
 				<button class="view"
-					onclick="location.href='${pageContext.request.contextPath}/major/list'">顯示所有專業</button>
+					onclick="location.href='${pageContext.request.contextPath}/major/'">顯示所有專業</button>
 			</div>
 
 		</div>

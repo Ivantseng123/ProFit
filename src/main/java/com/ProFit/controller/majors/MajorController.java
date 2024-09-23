@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.ProFit.bean.majorsBean.MajorBean;
 import com.ProFit.dao.majorsDao.HMajorDAO;
-import com.ProFit.dao.majorsDao.IHMajorDAO;
+import com.ProFit.dao.majorsDao.IHmajorDAO;
 import com.ProFit.service.majorService.IMajorCategoryService;
 import com.ProFit.service.majorService.IMajorService;
 import com.ProFit.util.hibernateutil.HibernateUtil;

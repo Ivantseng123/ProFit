@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.ProFit.bean.majorsBean.MajorBean;
 
-public interface IHMajorDAO {
+public interface IHmajorDAO {
 
 	// 新增 Major
 	MajorBean insertMajor(MajorBean major);

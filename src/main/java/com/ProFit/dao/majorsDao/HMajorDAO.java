@@ -1,11 +1,5 @@
 package com.ProFit.dao.majorsDao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -19,7 +13,7 @@ import com.ProFit.bean.majorsBean.MajorBean;
 
 @Repository
 @Transactional
-public class HMajorDAO implements IHMajorDAO {
+public class HMajorDAO implements IHmajorDAO {
 
 	@Autowired
 	private SessionFactory factory;
