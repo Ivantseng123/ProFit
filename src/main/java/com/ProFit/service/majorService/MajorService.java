@@ -55,6 +55,12 @@ public class MajorService implements IMajorService {
 	// 根據 majorCategoryid 查找 Majors (
 	@Override
 	public List<MajorBean> findMajorsByCategoryId(int majorCategoryId) {
+		List<MajorBean> listMajor = majorDAO.findAllMajors();
+		// 強制初始化延遲加載的屬性
+		for (MajorBean major : listMajor) {
+			// 訪問屬性，觸發加載
+			major.getMajorCategory().getCategoryName();
+        }
 		return majorDAO.findMajorsByCategoryId(majorCategoryId);
 	}
 

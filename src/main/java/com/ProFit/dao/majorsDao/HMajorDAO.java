@@ -46,9 +46,7 @@ public class HMajorDAO implements IHMajorDAO {
 							: major.getMajorName());
 			oldMajor.setMajorCategoryId(
 					major.getMajorCategoryId() == null ? oldMajor.getMajorCategoryId() : major.getMajorCategoryId());
-			oldMajor.setMajorDescription(major.getMajorDescription() == null || major.getMajorDescription().isEmpty()
-					? oldMajor.getMajorDescription()
-					: major.getMajorDescription());
+			oldMajor.setMajorDescription(major.getMajorDescription());
 			return true;
 		}
 

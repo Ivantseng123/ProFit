@@ -51,10 +51,10 @@
 				<tr>
 					<th>專業ID:</th>
 					<td><c:if test="${major != null}">
-							<input type="text" name="majorId"
+							<input type="number" name="majorId"
 								value="<c:out value='${major.majorId}' />" readonly="readonly" />
 						</c:if> <c:if test="${major == null}">
-							<input type="text" name="majorId" required="required" />
+							<input type="number" name="majorId" required="required" />
 						</c:if></td>
 				</tr>
 				<tr>
@@ -64,8 +64,16 @@
 				</tr>
 				<tr>
 					<th>專業類別ID:</th>
-					<td><input type="text" name="majorCategoryId" size="45"
-						value="<c:out value='${major.majorCategoryId}' />" /></td>
+					<td>
+					
+						<c:if test="${major != null}">
+							<input type="number" name="majorCategoryId"
+								value="<c:out value='${major.majorCategoryId}' />" readonly="readonly" />
+						</c:if> 
+						<c:if test="${major == null}">
+							<input type="number" name="majorCategoryId" required="required" />
+						</c:if>
+					</td>
 				</tr>
 				<tr>
 					<th>專業簡述:</th>
@@ -75,8 +83,8 @@
 				<tr class="action-buttons">
 					<td colspan="2" align="center"><button type="submit">送出</button>
 						<button class="delete"
-							onclick="location.href='${pageContext.request.contextPath}/major/list'">取消</button></td>
-
+							onclick="location.href='${pageContext.request.contextPath}/major/'">取消</button>
+					</td>
 				</tr>
 			</table>
 			</form>

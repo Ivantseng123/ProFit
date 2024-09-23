@@ -33,7 +33,7 @@
 
 		<div class="action-buttons">
 			<button class="delete"
-					onclick="location.href='${pageContext.request.contextPath}/major/list'">返回專業管理</button>			
+					onclick="location.href='${pageContext.request.contextPath}/major/'">返回專業管理</button>			
 		</div>
 		<div class="table-container">
 			<table>
