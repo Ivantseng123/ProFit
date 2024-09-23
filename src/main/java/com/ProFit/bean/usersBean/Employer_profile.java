@@ -3,6 +3,7 @@ package com.ProFit.bean.usersBean;
 import java.io.Serializable;
 
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import jakarta.persistence.Column;
@@ -19,6 +20,7 @@ import jakarta.persistence.Table;
 @DynamicUpdate
 @Table(name="employer_profile")
 @Component
+@Scope("prototype")
 public class Employer_profile implements Serializable{
 	private static final long serialVersionUID = 1L;
 
@@ -26,7 +28,7 @@ public class Employer_profile implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer employerProfileId;
 		
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="user_id",insertable = false,updatable = false)
 	private Users user;
 	

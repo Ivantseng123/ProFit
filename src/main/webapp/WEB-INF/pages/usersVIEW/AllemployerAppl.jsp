@@ -74,11 +74,11 @@
 											<button class="pass" id="passEmpApplBtn">通過</button>
 											<button class="reject" id="rejectEmpApplBtn">否決</button>
 											<a style="text-decoration:none;"
-												href="GetEmpAppl?employer_application_id=${emp.employerApplicationId}">
+												href="getempappl?employer_application_id=${emp.employerApplicationId}&action=search">
 												<button class="view" id="viewUserBtn">查看</button>
 											</a>
 											<a style="text-decoration:none;"
-												href="GetUpdateEmpAppl?employer_application_id=${emp.employerApplicationId}">
+												href="getempappl?employer_application_id=${emp.employerApplicationId}&action=edit">
 												<button class="edit" id="editUserBtn">編輯</button>
 											</a>
 											<button class="delete" id="deleteUserBtn">刪除</button>
@@ -104,18 +104,18 @@
 						<button class="insertbtn" onclick="togglePopup()">新增</button>
 					</diV>
 					<div class="navgation" style="text-align: center; margin-Top: 25px;">
-						<a href="GetAlluser" class="resetTokens" id="resetTokensBtn">
+						<a href="alluser" class="resetTokens" id="resetTokensBtn">
 							<button class="tohref">全部會員資訊</button></a>
-						<a href="GetAlltoken" class="employerAppl" id="employerApplBtn">
+						<a href="alltoken" class="employerAppl" id="employerApplBtn">
 							<button class="tohref">重設密碼資訊</button></a>
-						<a href="GetAllEmpPf" class="employerProfile" id="employerProfileBtn">
+						<a href="allemppf" class="employerProfile" id="employerProfileBtn">
 							<button class="tohref">企業資訊</button></a>
 					</diV>
 					<div id="popupOverlay" class="overlay-container" style="z-index: 1002">
 						<div class="popup-box-empAppl">
 							<h2 style="color: orange;">新增企業申請</h2>
 							<form class="form-group" style="height:700px;margin:0; overflow: auto" method="post"
-								action="InsertEmpAppl" enctype='multipart/form-data'>
+								action="insertempappl">
 								<input type="hidden" name="company_taxID_docURL" id="company_taxID_docURL" value="">
 								<input type="hidden" name="idCard_pictureURL_1" id="idCard_pictureURL_1" value="">
 								<input type="hidden" name="idCard_pictureURL_2" id="idCard_pictureURL_2" value="">
@@ -325,7 +325,7 @@
 
 							const deletedata = { 'employer_application_id': employer_application_id };
 
-							fetch('DeleteEmpAppl', {
+							fetch('deleteempappl', {
 								method: 'POST',
 								headers: {
 									'Content-Type': 'application/json'
@@ -356,7 +356,7 @@
 								'check': check
 							};
 
-							fetch('CheckEmpAppl', {
+							fetch('checkempappl', {
 								method: 'POST',
 								headers: {
 									'Content-Type': 'application/json'
@@ -384,7 +384,7 @@
 								'check': check
 							};
 
-							fetch('CheckEmpAppl', {
+							fetch('checkempappl', {
 								method: 'POST',
 								headers: {
 									'Content-Type': 'application/json'

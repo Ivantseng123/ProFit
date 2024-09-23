@@ -20,7 +20,7 @@ public class HUserDao implements IHUserDao {
 
 	@Autowired
 	private SessionFactory factory;
-	// private Session session;
+	
 
 	// 新增user
 	@Override

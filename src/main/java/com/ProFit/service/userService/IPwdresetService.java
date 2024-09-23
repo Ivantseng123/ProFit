@@ -1,11 +1,11 @@
-package com.ProFit.dao.usersDao;
+package com.ProFit.service.userService;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import com.ProFit.bean.usersBean.Pwd_reset_tokens;
 
-public interface IHPwdResetTokensDao {
+public interface IPwdresetService {
 
 	Pwd_reset_tokens saveTokensInfo(Pwd_reset_tokens token);
 
