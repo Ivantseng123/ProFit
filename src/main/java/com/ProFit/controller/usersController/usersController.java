@@ -20,9 +20,6 @@ public class usersController {
 	@Autowired
 	private IUserService userService;
 
-	@Autowired
-	private Users user;
-
 	// 全部會員
 	@GetMapping(path = "/alluser")
 	public String GetAlluser(Model model) {
@@ -40,7 +37,7 @@ public class usersController {
 			Model model) throws NoSuchAlgorithmException {
 
 		String user_passwordHash = userService.toHexString(userService.getSHA(user_password));
-
+		Users user = new Users();
 		user.setUserName(user_name);
 		user.setUserEmail(user_email);
 		user.setUserPasswordHash(user_passwordHash);
@@ -107,6 +104,7 @@ public class usersController {
 		Integer userBalance = Integer.valueOf(user_balance);
 		Integer freelancerProfileStatus = Integer.valueOf(freelancer_profile_status);
 		
+		Users user = new Users();
 		user.setUserId(userId);
 		user.setUserName(user_name);
 		user.setUserEmail(user_email);

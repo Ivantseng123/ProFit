@@ -22,12 +22,6 @@ public class empPfController {
 	@Autowired
 	private IUserService userService;
 
-	@Autowired
-	private Employer_profile emp;
-
-	@Autowired
-	private Users user;
-
 	@GetMapping("allemppf")
 	public String GetAllEmpPf(Model model) {
 
@@ -47,7 +41,8 @@ public class empPfController {
 		Integer userId = Integer.valueOf(user_id);
 
 		String companyAddress = company_address + company_address1;
-
+		Employer_profile emp = new Employer_profile();
+		Users user = new Users();
 		emp.setUserId(userId);
 		emp.setCompanyName(company_name);
 		emp.setCompanyAddress(companyAddress);
@@ -92,6 +87,8 @@ public class empPfController {
 		Integer employerProfileId = Integer.valueOf(employer_profile_id);
 		Integer userId = Integer.valueOf(user_id);
 		String address = company_address + company_address1;
+		
+		Employer_profile emp = new Employer_profile();
 
 		emp.setEmployerProfileId(employerProfileId);
 		emp.setUserId(userId);
