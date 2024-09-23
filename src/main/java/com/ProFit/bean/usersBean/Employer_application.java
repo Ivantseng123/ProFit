@@ -2,8 +2,6 @@ package com.ProFit.bean.usersBean;
 
 import java.io.Serializable;
 import org.hibernate.annotations.DynamicUpdate;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -17,8 +15,6 @@ import jakarta.persistence.Table;
 @Entity
 @DynamicUpdate
 @Table(name="employer_application")
-@Component
-@Scope("prototype")
 public class Employer_application implements Serializable{
 	private static final long serialVersionUID = 1L;
 	

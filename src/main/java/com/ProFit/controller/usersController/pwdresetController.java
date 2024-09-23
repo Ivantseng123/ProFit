@@ -25,9 +25,6 @@ public class pwdresetController {
 	@Autowired
 	private IUserService userService;
 	
-	@Autowired
-	private Pwd_reset_tokens tokens;
-	
 	@GetMapping("/alltoken")
 	public String getAlltoken(Model model) {
 		
@@ -42,7 +39,7 @@ public class pwdresetController {
 	public String insertToken(@RequestParam("user_id") String user_id) throws NoSuchAlgorithmException {
 		
 		Integer userId = Integer.valueOf(user_id);
-		
+		Pwd_reset_tokens tokens = new Pwd_reset_tokens();
 		tokens.setUserId(userId);
 		tokens.setUserTokenHash(pwdresetService.generateToken());
 		

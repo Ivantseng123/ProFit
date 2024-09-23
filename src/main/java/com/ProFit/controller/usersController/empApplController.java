@@ -24,12 +24,6 @@ public class empApplController {
 	@Autowired
 	private IEmpPfService empPfService;
 
-	@Autowired
-	private Employer_application emp;
-	
-	@Autowired
-	private Employer_profile employer_profile;
-
 	@GetMapping("/allempappl")
 	public String GetAllEmpAppl(Model model) {
 
@@ -54,7 +48,8 @@ public class empApplController {
 		Integer userId = Integer.valueOf(user_id);
 
 		String address = company_address + company_address1;
-
+		
+		Employer_application emp = new Employer_application();
 		emp.setUserId(userId);
 		emp.setCompanyName(company_name);
 		emp.setCompanyPhoneNumber(company_phoneNumber);
@@ -98,7 +93,8 @@ public class empApplController {
 		int employerApplicationId = Integer.valueOf(employer_application_id);
 		int userId = Integer.valueOf(user_id);
 		String address = company_address + company_address1;
-
+		
+		Employer_application emp = new Employer_application();
 		emp.setEmployerApplicationId(employerApplicationId);
 		emp.setUserId(userId);
 		emp.setCompanyName(company_name);
@@ -154,6 +150,7 @@ public class empApplController {
 
 		String company_category = empappl.getCompanyCategory();
 		
+		Employer_profile employer_profile = new Employer_profile();
 		employer_profile.setUserId(user_id);
 		employer_profile.setCompanyName(company_name);
 		employer_profile.setCompanyAddress(company_address);
