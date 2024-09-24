@@ -1,4 +1,4 @@
-package com.ProFit.dao.majorsCRUD;
+package com.ProFit.dao.majorsDao;
 
 import java.sql.SQLException;
 
@@ -7,29 +7,40 @@ import java.util.List;
 import java.util.Map;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ProFit.bean.majorsBean.MajorBean;
 import com.ProFit.bean.majorsBean.UserMajorBean;
 import com.ProFit.bean.majorsBean.UserMajorPK;
 import com.ProFit.bean.usersBean.Users;
 
-public class HUserMajorDAO {
+@Repository
+@Transactional
+public class HUserMajorDAO implements IHuserMajorDAO {
 
-	private Session session;
-
-	public HUserMajorDAO(Session session) {
-		this.session = session;
-	}
+	@Autowired
+	private SessionFactory factory;
 
 	// 插入 UserMajor
-	public boolean insertUserMajor(UserMajorBean userMajor) {
-		session.persist(userMajor);
-		return true;
+	@Override
+	public UserMajorBean insertUserMajor(UserMajorBean userMajor) {
+		try {
+			Session session = factory.getCurrentSession();
+			session.persist(userMajor);
+			return userMajor;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	// 删除 UserMajor(by userId & majorId)
+	@Override
 	public boolean deleteUserMajor(int userId, int majorId) {
+		Session session = factory.getCurrentSession();
 		UserMajorPK id = new UserMajorPK();
 		id.setUser(session.get(Users.class, userId));
 		id.setMajor(session.get(MajorBean.class, majorId));
@@ -42,7 +53,9 @@ public class HUserMajorDAO {
 	}
 
 	// 查詢所有用戶
+	@Override
 	public Map<Integer, String> getAllUsers() {
+		Session session = factory.getCurrentSession();
 		Map<Integer, String> users = new HashMap<>();
 		Query<Users> query = session.createQuery("FROM Users", Users.class);
 		List<Users> userList = query.list();
@@ -53,7 +66,9 @@ public class HUserMajorDAO {
 	}
 
 	// 查詢所有專業
+	@Override
 	public Map<Integer, String> getAllMajors() throws SQLException {
+		Session session = factory.getCurrentSession();
 		Map<Integer, String> majors = new HashMap<>();
 		Query<MajorBean> query = session.createQuery("FROM MajorBean", MajorBean.class);
 		List<MajorBean> majorList = query.list();
@@ -64,7 +79,9 @@ public class HUserMajorDAO {
 	}
 
 	// 查找特定user的所有 Major
+	@Override
 	public List<UserMajorBean> findMajorsByUserId(int userId) {
+		Session session = factory.getCurrentSession();
 		Query<UserMajorBean> query = session.createQuery("FROM UserMajorBean um WHERE um.id.user.userId = :userId",
 				UserMajorBean.class);
 		query.setParameter("userId", userId);
@@ -72,7 +89,9 @@ public class HUserMajorDAO {
 	}
 
 	// 查找特定 Major 的所有 User
+	@Override
 	public List<UserMajorBean> findUsersByMajorId(int majorId) {
+		Session session = factory.getCurrentSession();
 		Query<UserMajorBean> query = session.createQuery("FROM UserMajorBean um WHERE um.id.major.majorId = :majorId",
 				UserMajorBean.class);
 		query.setParameter("majorId", majorId);
@@ -80,39 +99,23 @@ public class HUserMajorDAO {
 	}
 
 	// 查找所有 UserMajor
+	@Override
 	public List<UserMajorBean> findAllUserMajors() {
+		Session session = factory.getCurrentSession();
 		return session.createQuery("FROM UserMajorBean", UserMajorBean.class).list();
 	}
 
-	// 不需要
-	/*
-	 * public int getUserIdByName(String userName) throws SQLException {
-	 * Query<Users> query =
-	 * session.createQuery("FROM Users WHERE userName = :userName", Users.class);
-	 * query.setParameter("userName", userName); Users user = query.uniqueResult();
-	 * return user != null ? user.getUserId() : -1; }
-	 */
+	// 根據user、Major查找單一 UserMajor
+	@Override
+	public UserMajorBean findUserMajorByUserIdMajorId(UserMajorPK userMajorPK) {
+		Session session = factory.getCurrentSession();
 
-	// 不需要
-	/*
-	 * public int getMajorIdByName(String majorName) throws SQLException {
-	 * Query<MajorBean> query =
-	 * session.createQuery("FROM MajorBean WHERE majorName = :majorName",
-	 * MajorBean.class); query.setParameter("majorName", majorName); MajorBean major
-	 * = query.uniqueResult(); return major != null ? major.getMajorId() : -1; }
-	 */
+		Query<UserMajorBean> query = session.createQuery(
+				"FROM UserMajorBean um WHERE um.id.major.majorId = :majorId and um.id.user.userId = :userId",
+				UserMajorBean.class);
+		query.setParameter("userId", userMajorPK.getUser().getUserId());
+		query.setParameter("majorId", userMajorPK.getMajor().getMajorId());
+		return query.uniqueResult();
+	}
 
-	// 不需要
-	/*
-	 * public String getUserNameById(int userId) throws SQLException { Users user =
-	 * session.get(Users.class, userId); return user != null ? user.getUserName() :
-	 * "Unknown User"; }
-	 */
-	
-	// 不需要
-	/*
-	 * public String getMajorNameById(int majorId) throws SQLException { MajorBean
-	 * major = session.get(MajorBean.class, majorId); return major != null ?
-	 * major.getMajorName() : "Unknown Major"; }
-	 */
 }

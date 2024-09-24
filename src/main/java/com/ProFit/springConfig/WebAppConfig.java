@@ -19,6 +19,7 @@ import com.ProFit.controller.interceptor.LoginInterceptor;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = { "com.ProFit.controller" })
+
 public class WebAppConfig implements WebMvcConfigurer {
 
 	@Bean

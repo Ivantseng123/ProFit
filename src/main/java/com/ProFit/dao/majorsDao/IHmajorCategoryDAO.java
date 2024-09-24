@@ -1,10 +1,10 @@
-package com.ProFit.dao.majorsCRUD;
+package com.ProFit.dao.majorsDao;
 
 import java.util.List;
 
 import com.ProFit.bean.majorsBean.MajorCategoryBean;
 
-public interface IHmahorCategoryDAO {
+public interface IHmajorCategoryDAO {
 
 	// 新增 MajorCategory
 	MajorCategoryBean insertMajorCategory(MajorCategoryBean majorCategory);
