@@ -87,15 +87,15 @@
 							name="userId">
 								<option value="">選擇用戶</option>
 								<c:forEach var="user" items="${users}">
-									<option value="${user.key}"
-										${user.key == selectedUserId ? 'selected' : ''}>${user.value}</option>
+									<option value="${user.userId}"
+										${user.userId == selectedUserId ? 'selected' : ''}>${user.userName}</option>
 								</c:forEach>
 						</select></td>
 						<td><label for="majorId">根據專業篩選:</label> <select id="majorId"
 							name="majorId">
 								<option value="">選擇專業</option>
 								<c:forEach var="major" items="${majors}">
-									<option value="${major.key}">${major.value}</option>
+									<option value="${major.majorId}">${major.majorName}</option>
 								</c:forEach>
 						</select></td>
 					</tr>
