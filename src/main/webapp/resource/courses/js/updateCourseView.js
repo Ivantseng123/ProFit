@@ -1,17 +1,13 @@
-//新增課程後回傳帶參數的url，確認參數是否存在
+// 新增課程後回傳帶參數的 URL，確認參數是否存在
 $(document).ready(function() {
     // 獲取URL中的參數
     let params = new URLSearchParams(window.location.search);
     let oldCourseId = params.get('courseId');
 
-    // 如果courseId存在且不為空字串，則觸發按鈕點擊事件
+    // 如果 courseId 存在且不為空字串，則發送 AJAX 請求獲取課程信息
     if (oldCourseId) {
         $.ajax({
-            url: '../controller/courses/search',
-            data: {
-                courseId: oldCourseId,
-                searchLogic: 'searchOne'
-            },
+            url: contextPath + '/courses/search/' + oldCourseId, // 使用 contextPath 和路徑變數
             dataType: 'json',
             type: 'GET',
             success: function(response) {
@@ -20,7 +16,7 @@ $(document).ready(function() {
                     <form>
                         <div class="form-group">
                             <label for="courseName">課程名稱:</label>
-                            <input type="text" id="courseName" name="courseName" placeholder="${response.courseName}" value="">
+                            <input type="text" id="courseName" name="courseName" value="${response.courseName}" readonly>
                         </div>
                         <div class="form-group">
                             <label for="courseMajor">課程類別:</label>
@@ -32,15 +28,15 @@ $(document).ready(function() {
                         </div>
                         <div class="form-group">
                             <label for="courseCreateUserId">課程創建者ID:</label>
-                            <input type="text" id="courseCreateUserId" name="courseCreateUserId" placeholder="${response.courseCreaterId}" value="">
+                            <input type="text" id="courseCreateUserId" name="courseCreateUserId" value="${response.courseCreaterId}" readonly>
                         </div>
                         <div class="form-group">
                             <label for="courseInformation">課程資訊:</label>
-                            <textarea id="courseInformation" name="courseInformation" rows="4" cols="50" placeholder="${response.courseInformation}"></textarea>
+                            <textarea id="courseInformation" name="courseInformation" rows="4" cols="50" readonly>${response.courseInformation}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="courseDescription">課程描述:</label>
-                            <textarea id="courseDescription" name="courseDescription" rows="6" cols="50" placeholder="${response.courseDescription}"></textarea>
+                            <textarea id="courseDescription" name="courseDescription" rows="6" cols="50" readonly>${response.courseDescription}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="courseEnrollmentDate">修改日期: (自動帶入)</label>
@@ -56,7 +52,7 @@ $(document).ready(function() {
                         </div>
                         <div class="form-group">
                             <label for="coursePrice">課程價格:</label>
-                            <input type="number" id="coursePrice" name="coursePrice" placeholder="${response.coursePrice}" value="">
+                            <input type="number" id="coursePrice" name="coursePrice" value="${response.coursePrice}" readonly>
                         </div>
                         <div class="form-group">
                             <label for="courseStatus">課程狀態:</label>
@@ -68,18 +64,18 @@ $(document).ready(function() {
                             </select>
                         </div>
                         <div class="form-group">
-							<a href="/ProFit/coursesVIEW/courseView.jsp"><button id='cancelBtn' type="button" style="margin-right:380px;" >取消修改</button></a>
+                            <a href="${contextPath}/coursesVIEW/courseView.jsp"><button id='cancelBtn' type="button" style="margin-right:380px;">取消修改</button></a>
                             <button id="editBtn" name="editBtn" type="submit">修改課程</button>
                         </div>
                     </form>
                 `);
 
-                // 設置日期
+                // 設置修改日期為當前日期
                 let enrollmentDateInput = document.getElementById("courseEnrollmentDate");
                 if (enrollmentDateInput) {
                     let now = new Date();
                     let year = now.getFullYear();
-                    let month = String(now.getMonth() + 1).padStart(2, '0'); // 月份从0开始，所以要+1
+                    let month = String(now.getMonth() + 1).padStart(2, '0'); // 月份從0開始，所以要+1
                     let day = String(now.getDate()).padStart(2, '0');
                     let formattedDate = `${year}-${month}-${day}`;
                     enrollmentDateInput.value = formattedDate;
@@ -92,32 +88,40 @@ $(document).ready(function() {
                 // 設置課程類別和狀態
                 $('#courseMajor').val(response.courseCategoryId);
                 $('#courseStatus').val(response.courseStatus);
+            },
+            error: function(error) {
+                console.error('Error fetching course for editing:', error);
             }
         });
     }
 });
 
-// 日期轉換函数
+// 日期轉換函數
 function convertToSQLDateTimeFormat(datetimeLocal) {
-	// 將 "T" 替換成 " "，將 "YYYY-MM-DDTHH:MM" 轉換為 "YYYY-MM-DD HH:MM"
-	return datetimeLocal.replace("T", " ") + ":00"; // 加上秒部分，確保格式 "YYYY-MM-DD HH:MM:SS"
+    // 將 "T" 替換成 " "，將 "YYYY-MM-DDTHH:MM" 轉換為 "YYYY-MM-DD HH:MM"
+    return datetimeLocal.replace("T", " ") + ":00"; // 加上秒部分，確保格式 "YYYY-MM-DD HH:MM:SS"
 };
 
-//執行修改課程
+// 執行修改課程
 $(document).on('click', '#editBtn', function(event) {
-	// 獲取URL中的參數
-	let params = new URLSearchParams(window.location.search);
-	let oldCourseId = params.get('courseId');
-	event.preventDefault();
-	
-	let courseStartDate = $('#courseStartDate').val();
-	let courseEndDate = $('#courseEndDate').val();
+    event.preventDefault(); // 防止表單默認提交行為
+    
+    // 獲取 URL 中的 courseId 參數
+    let params = new URLSearchParams(window.location.search);
+    let oldCourseId = params.get('courseId');
+    
+    if (!oldCourseId) {
+        alert('無法獲取課程 ID');
+        return;
+    }
+    
+    let courseStartDate = $('#courseStartDate').val();
+    let courseEndDate = $('#courseEndDate').val();
 
-	courseStartDate = convertToSQLDateTimeFormat(courseStartDate);
-	courseEndDate = convertToSQLDateTimeFormat(courseEndDate);
-	
+    courseStartDate = convertToSQLDateTimeFormat(courseStartDate);
+    courseEndDate = convertToSQLDateTimeFormat(courseEndDate);
+    
     let data = {
-		courseId:oldCourseId,
         courseName: $('#courseName').val(),
         courseCategory: $('#courseMajor').val(),
         courseCreateUserId: $('#courseCreateUserId').val(),
@@ -133,21 +137,22 @@ $(document).on('click', '#editBtn', function(event) {
     console.log(data);
 
     $.ajax({
-        url: '../controller/courses/update',
+        url: contextPath + '/courses/update/' + oldCourseId, // 使用 contextPath 變數和路徑變數
         data: data,
         dataType: 'json',
-        type: 'POST',
+        type: 'POST', // 使用 POST 方法
         success: function(response) {
             if (response) {
                 window.alert('課程修改成功');
-                console.log('新增的课程信息:', response);
-                window.location.href = '/ProFit/coursesVIEW/courseView.jsp?clickButton=true';
+                console.log('更新成功:', response);
+                window.location.href = contextPath + '/coursesVIEW/courseView.jsp?clickButton=true';
             } else {
                 window.alert('課程修改失敗');
             }
         },
         error: function(xhr, status, error) {
             console.error('發生錯誤:', error);
+            alert('課程修改失敗，請重試。');
         }
     });
 });

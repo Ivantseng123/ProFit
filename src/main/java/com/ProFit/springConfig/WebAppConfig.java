@@ -10,7 +10,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-
 import com.ProFit.controller.interceptor.LoginInterceptor;
 
 
@@ -42,5 +41,4 @@ public class WebAppConfig implements WebMvcConfigurer {
 //		registry.addInterceptor(loginInterceptor).addPathPatterns("/**") // 過濾所有請求
 //				.excludePathPatterns("/loginpage","/login"); // 排除登入頁面
 //	}
-
 }

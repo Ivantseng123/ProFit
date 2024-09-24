@@ -37,7 +37,7 @@ div#users-contain table td, div#users-contain table th {
     text-align: center;
 }
 </style>
-<script src="../javaScriptAPI/jquery-3.7.1.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script src="../model/jquery-ui-1.14.0.custom/jquery-ui.js"></script>
 <script src="../model/tabs.js"></script>
 <script src="../model/dialog.js"></script>

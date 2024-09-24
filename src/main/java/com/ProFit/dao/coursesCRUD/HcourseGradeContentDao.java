@@ -3,21 +3,24 @@ package com.ProFit.dao.coursesCRUD;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
 import com.ProFit.bean.coursesBean.CourseGradeContentBean;
 
 public class HcourseGradeContentDao implements IHcourseGradeContentDao {
 
-	private Session session;
-	
-	public HcourseGradeContentDao(Session session) {
-		this.session = session;
-	}
+	private SessionFactory factory;
+//	private Session session;
+//	
+//	public HcourseGradeContentDao(Session session) {
+//		this.session = session;
+//	}
 	
 	// 新增課程評價
 	@Override
 	public CourseGradeContentBean insertCourse(CourseGradeContentBean courseGradeContent) {
+		Session session = factory.openSession();
 		if(courseGradeContent!=null) {
 			session.persist(courseGradeContent);
 		}
@@ -27,6 +30,7 @@ public class HcourseGradeContentDao implements IHcourseGradeContentDao {
 	// 刪除課程評價 by id
 	@Override
 	public boolean deleteCourseByID(Integer courseGradeId) {
+		Session session = factory.openSession();
 		if( courseGradeId!=null) {
 			session.remove(courseGradeId);
 			return true;
@@ -37,6 +41,7 @@ public class HcourseGradeContentDao implements IHcourseGradeContentDao {
 	// 更新課程評價 by id
 	@Override
 	public boolean updateCourseById(CourseGradeContentBean newCourseGrade) {
+		Session session = factory.openSession();
 		//查詢原始資料，確認存在
 		CourseGradeContentBean oldGrade = session.get(CourseGradeContentBean.class, newCourseGrade);
 		
@@ -61,12 +66,14 @@ public class HcourseGradeContentDao implements IHcourseGradeContentDao {
 	// 查詢單筆評價By courseGradeId
 	@Override
 	public CourseGradeContentBean searchOneCourseGradeContentById(Integer courseGradeId) {
+		Session session = factory.openSession();
 		return session.get(CourseGradeContentBean.class,courseGradeId);
 	}
 	
 	// 查詢全部 多形
 	@Override
 	public List<CourseGradeContentBean> searchCourseGradeContents() {
+		Session session = factory.openSession();
 		Query<CourseGradeContentBean> query = session.createQuery("from CourseGradeContentBean",CourseGradeContentBean.class);
 		return query.list();
 	}
@@ -74,6 +81,7 @@ public class HcourseGradeContentDao implements IHcourseGradeContentDao {
 	// 查詢全部 By 課程評價分數
 	@Override
 	public List<CourseGradeContentBean> searchCourseGradeContents(String courseId) {
+		Session session = factory.openSession();
 		StringBuilder hql = new StringBuilder("FROM CourseGradeContentBean cg WHERE 1=1");
 		
 		if(courseId!=null && !courseId.trim().isEmpty()) {

@@ -2,20 +2,30 @@ package com.ProFit.dao.coursesCRUD;
 
 import java.util.List;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.ProFit.bean.coursesBean.CourseBean;
 
+@Repository
+@Transactional
 public class HcourseDao implements IHcourseDao {
 
-	private Session session;
+	@Autowired
+	private SessionFactory factory;
+//	private Session session;
 
-	public HcourseDao(Session session) {
-		this.session = session;
-	}
+//	public HcourseDao(Session session) {
+//		this.session = session;
+//	}
 
 	// 新增課程
 	@Override
 	public CourseBean insertCourse(CourseBean course) {
+		Session session = factory.openSession();
 		// 查詢當前最大值的數值部分
 		String hql = "SELECT MAX(CAST(SUBSTRING(course.courseId, 2) AS int)) FROM CourseBean course";
 		Integer maxCourseIdNumber = (Integer) session.createQuery(hql, Integer.class).uniqueResult();
@@ -36,6 +46,7 @@ public class HcourseDao implements IHcourseDao {
 	// 刪除課程By course_id
 	@Override
 	public boolean deleteCourseById(String courseId) {
+		Session session = factory.openSession();
 		CourseBean resultBean = session.get(CourseBean.class, courseId);
 		if (resultBean != null) {
 			session.remove(resultBean);
@@ -47,6 +58,7 @@ public class HcourseDao implements IHcourseDao {
 	// 修改課程
 	@Override
 	public boolean updateCourseById(CourseBean newCourse) {
+		Session session = factory.openSession();
 		// 查詢原始的課程資料
 		CourseBean oldCourse = session.get(CourseBean.class, newCourse.getCourseId());
 
@@ -105,12 +117,14 @@ public class HcourseDao implements IHcourseDao {
 	// 查詢單筆By couseId
 	@Override
 	public CourseBean searchOneCourseById(String courseId) {
+		Session session = factory.openSession();
 		return session.get(CourseBean.class, courseId);
 	}
 
 	// 查詢全部
 	@Override
 	public List<CourseBean> searchCourses() {
+		Session session = factory.openSession();
 		Query<CourseBean> query = session.createQuery("from CourseBean", CourseBean.class);
 		return query.list();
 	}
@@ -119,6 +133,7 @@ public class HcourseDao implements IHcourseDao {
 	@Override
 	public List<CourseBean> searchCourses(String courseName, String userName, String status, String userId,
 			String category) {
+		Session session = factory.openSession();
 		StringBuilder hql = new StringBuilder("SELECT c FROM CourseBean c INNER JOIN c.courseCreater u WHERE 1=1");
 
 		if (courseName != null && !courseName.trim().isEmpty()) {

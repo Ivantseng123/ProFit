@@ -3,20 +3,30 @@ package com.ProFit.dao.coursesCRUD;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.ProFit.bean.coursesBean.CourseOrderBean;
 
+@Repository
+@Transactional
 public class HcourseOrderDao implements IHcourseOrderDao {
+
+	@Autowired
+	private SessionFactory factory;
+//	private Session session;
 	
-	private Session session;
-	
-	public HcourseOrderDao(Session session) {
-		this.session = session;
-	}
+//	public HcourseOrderDao(Session session) {
+//		this.session = session;
+//	}
 
 	// 新增課程訂單
 	@Override
 	public CourseOrderBean insertCourseOrder(CourseOrderBean courseOrder) {
+		Session session = factory.openSession();
 		//查詢當前最大值的數值部分
 		String hql = "SELECT MAX(CAST(SUBSTRING(co.courseOrderId,3) AS int)) FROM CourseOrderBean co";
 		Integer maxCourseOrderIdNumber = (Integer)session.createQuery(hql,Integer.class).uniqueResult();
@@ -39,6 +49,7 @@ public class HcourseOrderDao implements IHcourseOrderDao {
 	// 刪除課程訂單
 	@Override
 	public boolean deleteCourseOrderByID(String courseOrderId) {
+		Session session = factory.openSession();
 		CourseOrderBean resultBean = session.get(CourseOrderBean.class, courseOrderId);
 		if(resultBean!=null) {
 			session.remove(resultBean);
@@ -50,6 +61,7 @@ public class HcourseOrderDao implements IHcourseOrderDao {
 	// 更新課程訂單 by id
 	@Override
 	public boolean updateCourseOrderById(CourseOrderBean newCourseOrder) {
+		Session session = factory.openSession();
 		CourseOrderBean oldCourseOrder = session.get(CourseOrderBean.class, newCourseOrder.getCourseOrderId());
 		
 		if(oldCourseOrder==null) {
@@ -85,12 +97,14 @@ public class HcourseOrderDao implements IHcourseOrderDao {
 	// 搜尋單筆課程訂單 by id
 	@Override
 	public CourseOrderBean searchOneCourseOrderById(String courseOrderId) {
+		Session session = factory.openSession();
 		return session.get(CourseOrderBean.class, courseOrderId);
 	}
 
 	// 搜尋全部課程訂單
 	@Override
 	public List<CourseOrderBean> searchCourseOrders() {
+		Session session = factory.openSession();
 		Query<CourseOrderBean> query = session.createQuery("from CourseOrderBean",CourseOrderBean.class);
 		return query.list();
 	}
@@ -98,6 +112,7 @@ public class HcourseOrderDao implements IHcourseOrderDao {
 	// 搜尋課程訂單by 多條件
 	@Override
 	public List<CourseOrderBean> searchCourseOrders(String courseId,String studentId,String status) {
+		Session session = factory.openSession();
 		StringBuilder hql = new StringBuilder("from CourseOrderBean CO WHERE 1=1");
 		
 		if(courseId !=null && !courseId.trim().isEmpty()) {
