@@ -20,9 +20,6 @@ public class usersController {
 	@Autowired
 	private IUserService userService;
 
-	@Autowired
-	private Users user;
-
 	// 全部會員
 	@GetMapping(path = "/alluser")
 	public String GetAlluser(Model model) {
@@ -40,7 +37,7 @@ public class usersController {
 			Model model) throws NoSuchAlgorithmException {
 
 		String user_passwordHash = userService.toHexString(userService.getSHA(user_password));
-
+		Users user = new Users();
 		user.setUserName(user_name);
 		user.setUserEmail(user_email);
 		user.setUserPasswordHash(user_passwordHash);
@@ -72,24 +69,77 @@ public class usersController {
 
 	// 查看單筆會員
 	@GetMapping(path = "/getuser")
-	public String GetUser(@RequestParam("user_id") String user_id, Model model) {
+	public String GetUser(@RequestParam("user_id") String user_id, @RequestParam("action") String action, Model model) {
 
 		Integer userId = Integer.valueOf(user_id);
 
 		model.addAttribute("user", userService.getUserInfoByID(userId));
 
-		return "usersVIEW/GetUser";
+		if (action.equals("edit")) {
+			return "usersVIEW/UpdateUser";
+		} else {
+			return "usersVIEW/GetUser";
+		}
+
 	}
 
-	// 取得欲編輯會員
-	@GetMapping(path = "/getupdateuser")
-	public String GetUpdateUser(@RequestParam("user_id") String user_id, Model model) {
+
+	// 編輯會員
+	@PostMapping(path = "/updateuser")
+	public String UpdateUser(@RequestParam("user_id") String user_id,
+			@RequestParam("user_pictureURL") String user_pictureURL, @RequestParam("user_name") String user_name,
+			@RequestParam("user_email") String user_email, @RequestParam("user_passwordHash") String user_passwordHash,
+			@RequestParam("user_phoneNumber") String user_phoneNumber, @RequestParam("user_city") String user_city,
+			@RequestParam("user_identity") String user_identity, @RequestParam("user_balance") String user_balance,
+			@RequestParam("freelancer_location_prefer") String freelancer_location_prefer,
+			@RequestParam("freelancer_exprience") String freelancer_exprience,
+			@RequestParam(value = "freelancer_identity", required = false) String freelancer_identity,
+			@RequestParam("freelancer_profile_status") String freelancer_profile_status,
+			@RequestParam("freelancer_disc") String freelancer_disc,
+			@RequestParam("user_register_time") String user_register_time, Model model)
+			throws NoSuchAlgorithmException {
 
 		Integer userId = Integer.valueOf(user_id);
+		Integer userIdentity = Integer.valueOf(user_identity);
+		Integer userBalance = Integer.valueOf(user_balance);
+		Integer freelancerProfileStatus = Integer.valueOf(freelancer_profile_status);
+		
+		Users user = new Users();
+		user.setUserId(userId);
+		user.setUserName(user_name);
+		user.setUserEmail(user_email);
+		user.setUserPasswordHash(user_passwordHash);
+		user.setUserPhoneNumber(user_phoneNumber);
+		user.setUserCity(user_city);
+		user.setUserPictureURL(user_pictureURL);
+		user.setFreelancerLocationPrefer(freelancer_location_prefer);
+		user.setFreelancerExprience(freelancer_exprience);
+		user.setFreelancerDisc(freelancer_disc);
+		user.setFreelancerIdentity(freelancer_identity);
+		user.setUserIdentity(userIdentity);
+		user.setUserBalance(userBalance);
+		user.setFreelancerProfileStatus(freelancerProfileStatus);
 
-		model.addAttribute("user", userService.getUserInfoByID(userId));
+		userService.updateUserInfo(user);
 
-		return "usersVIEW/UpdateUser";
+		return "redirect:/alluser";
+	}
+
+	// 編輯會員
+	@PostMapping(path = "/updateuserpwd")
+	public String UpdateUserPwd(@RequestParam("user_id") String user_id,
+			@RequestParam("user_password") String user_password, Model model) throws NoSuchAlgorithmException {
+
+		Integer userId = Integer.valueOf(user_id);
+		String user_passwordHash = userService.toHexString(userService.getSHA(user_password));
+
+		Users existuser = userService.getUserInfoByID(userId);
+		if (existuser != null) {
+
+			userService.updateUserPwd(user_passwordHash, userId);
+		}
+
+		return "redirect:/getupdateuser?user_id=" + userId;
 	}
 
 }

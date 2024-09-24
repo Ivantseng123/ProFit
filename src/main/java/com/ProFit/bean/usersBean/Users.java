@@ -5,12 +5,8 @@ import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-
 import org.hibernate.annotations.DynamicUpdate;
-import org.springframework.stereotype.Component;
-
 import com.ProFit.bean.majorsBean.MajorBean;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,7 +24,6 @@ import jakarta.persistence.Table;
 @Entity
 @DynamicUpdate
 @Table(name = "users")
-@Component
 public class Users implements Serializable {
 	private static final long serialVersionUID = 1L;
 
