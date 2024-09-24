@@ -5,9 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>ProFit</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/model/model.css">
-<link rel="stylesheet" href="coursesView.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resource/courses/css/coursesView.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/model/model.css">
 </head>
 <body>
 	<jsp:include page="../model/header&sidebar.jsp"></jsp:include>
@@ -16,7 +15,7 @@
 	<main>
 		<div class="course-header">
 			<h2>課程管理功能</h2>
-			<span><a href="/ProFit/coursesVIEW/createCourseView.jsp"><button
+			<span><a href="${pageContext.request.contextPath}/courses/addCourse"><button
 						id="createBtn">新增課程</button></a></span>
 		</div>
 		<div class="dashboard-header">
@@ -60,8 +59,11 @@
 		
 		<div class="table-container" id="search-results"></div>
 	</main>
-	<script src="../javaScriptAPI/jquery-3.7.1.js"></script>
-	<script src="courseView.js"></script>
-	<script src="../model/popup.js"></script>
+	<script>
+        var contextPath = '${pageContext.request.contextPath}';
+    </script>
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script src="${pageContext.request.contextPath}/resource/courses/js/courseView.js"></script>
+	<script src="${pageContext.request.contextPath}/model/popup.js"></script>
 </body>
 </html>

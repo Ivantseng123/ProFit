@@ -6,12 +6,11 @@ $('#searchBtn').click(function() {
 		courseStatus: $('#id-courseStatus').val(),
 		courseCreateUserId: $('#id-courseCreateUserId').val(),
 		courseCreateUserName: $('#id-courseCreateUserName').val(),
-		searchLogic: 'searchAll' // 添加 searchLogic key
 	};
 
 	// 發送 AJAX 請求
 	$.ajax({
-		url: '../controller/courses/search',
+		url: contextPath+ '/courses/search',
 		data: data,
 		dataType: 'json',
 		type: 'GET',
@@ -111,31 +110,16 @@ $(document).on('click', '.delete', function() {
 	});
 });
 
-//按下編輯按鈕，抓取欄位的值傳給server
+// 編輯課程流程
 $(document).on('click', '.edit', function() {
-	var courseId = $(this).closest('tr').find('.result-courseId').text();
-
-	console.log("Selected Course ID for Deletion: " + courseId);
-
-	$.ajax({
-		url: '../controller/courses/search',
-		data: {
-			courseId: courseId,
-			searchLogic: 'searchOne'
-		},
-		success: function(response) {
-			if (response) {
-				console.log('編輯的课程信息:', response.courseId);
-				window.location.href = `/ProFit/coursesVIEW/updateCourseView.jsp?courseId=${response.courseId}`;
-			} else {
-				window.alert('課程編輯失敗');
-			}
-		},
-		error: function(error) {
-			console.error('Error deleting course:', error);
-		}
-	});
+    var courseId = $(this).closest('tr').find('.result-courseId').text();
+    
+    console.log("Selected Course ID for Editing: " + courseId);
+    
+    // 不需要發送 AJAX 請求來獲取課程信息，直接轉發到控制器方法
+    window.location.href = contextPath + '/courses/viewUpdate?courseId=' + courseId;
 });
+
 
 //按下查看按鈕，抓取欄位的值傳給server
 $(document).on('click', '.view', function() {
@@ -144,9 +128,8 @@ $(document).on('click', '.view', function() {
 	console.log("Selected Course ID for Deletion: " + courseId);
 
 	$.ajax({
-		url: '../controller/courses/search',
+		url: contextPath+ '/courses/search/'+courseId,
 		data: {
-			searchLogic: 'searchOne',
 			courseId: courseId
 		},
 		success: function(response) {

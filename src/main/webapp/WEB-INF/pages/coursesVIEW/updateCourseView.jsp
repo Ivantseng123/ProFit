@@ -7,7 +7,7 @@
 <title>新增課程 - ProFit</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/model/model.css">
-<link rel="stylesheet" href="updateCourseView.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resource/courses/css/updateCourseView.css">
 <style>
     #enrollmentDate[readonly] {
         color: black !important;
@@ -27,7 +27,10 @@
 		<div class="form-container">
 		</div>
 	</main>
-	<script src="../javaScriptAPI/jquery-3.7.1.js"></script>
-	<script src="updateCourseView.js"></script>
+	<script>
+        var contextPath = '${pageContext.request.contextPath}';
+    </script>
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script src="${pageContext.request.contextPath}/resource/courses/js/updateCourseView.js"></script>
 </body>
 </html>
