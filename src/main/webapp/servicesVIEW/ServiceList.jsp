@@ -32,7 +32,7 @@
 													+ serviceId;
 										});
 
-						$('.delete')
+						$('.b .delete')
 								.click(
 										function(e) {
 											e.preventDefault();
@@ -43,7 +43,7 @@
 											}
 										});
 
-						$('.view')
+						$('.b .view')
 								.click(
 										function(e) {
 											e.preventDefault();
@@ -113,6 +113,8 @@
 			<div class="action-buttons">
 				<button class="edit"
 					onclick="location.href='${pageContext.request.contextPath}/service/new'">新增服務</button>
+				<button class="view"
+					onclick="location.href='${pageContext.request.contextPath}/service/'">顯示所有服務</button>
 			</div>
 		</section>
 		<br>

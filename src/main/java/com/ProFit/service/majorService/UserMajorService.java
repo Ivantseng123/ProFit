@@ -5,25 +5,28 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ProFit.bean.majorsBean.UserMajorBean;
+import com.ProFit.bean.majorsBean.UserMajorPK;
 import com.ProFit.dao.majorsDao.IHuserMajorDAO;
 
-@Repository
+@Service
 @Transactional
-public class UserMajorService implements IHuserMajorDAO, IUserMajorService {
+public class UserMajorService implements IUserMajorService {
 
 	@Autowired
 	private IHuserMajorDAO userMajorDAO;
-	
+
 	// 插入 UserMajor
 	@Override
 	public UserMajorBean insertUserMajor(UserMajorBean userMajor) {
-       return userMajorDAO.insertUserMajor(userMajor);
-    }
+		return userMajorDAO.insertUserMajor(userMajor);
+	}
 
 	// 删除 UserMajor(by userId & majorId)
 	@Override
@@ -61,4 +64,9 @@ public class UserMajorService implements IHuserMajorDAO, IUserMajorService {
 		return userMajorDAO.findAllUserMajors();
 	}
 
+	// 根據user、Major查找單一 UserMajor
+	@Override
+	public UserMajorBean findUserMajorByUserIdMajorId(UserMajorPK userMajorPK) {
+		return userMajorDAO.findUserMajorByUserIdMajorId(userMajorPK);
+	}
 }

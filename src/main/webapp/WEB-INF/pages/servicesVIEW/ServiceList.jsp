@@ -32,7 +32,7 @@
 													+ serviceId;
 										});
 
-						$('.delete')
+						$('.b .delete')
 								.click(
 										function(e) {
 											e.preventDefault();
@@ -43,7 +43,7 @@
 											}
 										});
 
-						$('.view')
+						$('.b .view')
 								.click(
 										function(e) {
 											e.preventDefault();
@@ -87,15 +87,15 @@
 							name="userId">
 								<option value="">選擇用戶</option>
 								<c:forEach var="user" items="${users}">
-									<option value="${user.userId}"
-										${user.userId == selectedUserId ? 'selected' : ''}>${user.userName}</option>
+									<option value="${user.key}"
+										${user.key == selectedUserId ? 'selected' : ''}>${user.value}</option>
 								</c:forEach>
 						</select></td>
 						<td><label for="majorId">根據專業篩選:</label> <select id="majorId"
 							name="majorId">
 								<option value="">選擇專業</option>
 								<c:forEach var="major" items="${majors}">
-									<option value="${major.majorId}">${major.majorName}</option>
+									<option value="${major.key}">${major.value}</option>
 								</c:forEach>
 						</select></td>
 					</tr>
@@ -113,6 +113,8 @@
 			<div class="action-buttons">
 				<button class="edit"
 					onclick="location.href='${pageContext.request.contextPath}/service/new'">新增服務</button>
+				<button class="view"
+					onclick="location.href='${pageContext.request.contextPath}/service/'">顯示所有服務</button>
 			</div>
 		</section>
 		<br>

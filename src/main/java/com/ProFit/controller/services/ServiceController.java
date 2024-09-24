@@ -39,17 +39,14 @@ public class ServiceController {
 
 	// 顯示所有服務
 	@GetMapping("/")
-	public String listServices(@RequestParam(name = "userId", required = false) Integer userId, Model model) {
+	public String listServices(Model model) {
 		List<ServiceBean> listService = serviceService.findAllServices();
-		List<Users> users = userService.getAllUserInfo();
+		Map<Integer, String> users = serviceService.getAllUsersMap();
 		model.addAttribute("listService", listService);
 		model.addAttribute("users", users);
 
-		if (userId != null) {
-			List<UserMajorBean> majors = userMajorService.findMajorsByUserId(userId);
-			model.addAttribute("majors", majors);
-			model.addAttribute("selectedUserId", userId);
-		}
+		Map<Integer, String> majors = serviceService.getAllMajorsMap();
+		model.addAttribute("majors", majors);
 
 		return "servicesVIEW/ServiceList";
 	}
@@ -57,105 +54,116 @@ public class ServiceController {
 	// 顯示新增服務表單
 	@GetMapping("/new")
 	public String showNewForm(Model model) {
-		List<Users> users = userService.getAllUserInfo();
-		List<MajorBean> majors = majorService.findAllMajors();
+		Map<Integer, String> users = serviceService.getAllUsersMap();
+		Map<Integer, String> majors = serviceService.getAllMajorsMap();
 		model.addAttribute("users", users);
 		model.addAttribute("majors", majors);
 		return "servicesVIEW/ServiceForm";
 	}
 
-//	// 插入新服務
-//	@PostMapping("/insert")
-//	public String insertService(@ModelAttribute ServiceBean newService, @RequestParam int userId,
-//			@RequestParam int majorId) {
-//		Users user = userService.getUserInfoByID(userId);
-//		MajorBean major = majorService.findMajorById(majorId);
-//		UserMajorPK userMajorPK = new UserMajorPK(user, major);
-//		UserMajorBean userMajor = userMajorService.getUserMajorByPK(userMajorPK);
-//
-//		newService.setUserMajor(userMajor);
-//		newService.setServiceCreateDate(LocalDateTime.now());
-//		newService.setServiceUpdateDate(LocalDateTime.now());
-//
-//		serviceService.insertService(newService);
-//		return "redirect:/service/search";
-//	}
-//
-//	 // 顯示編輯服務表單
-//	@GetMapping("/edit")
-//	public String showEditForm(@RequestParam int id, Model model) {
-//		ServiceBean existingService = serviceService.findServiceById(id);
-//		Map<Integer, String> users = userService.getAllUserInfo();
-//		Map<Integer, String> majors = majorService.getAllMajors();
-//
-//		model.addAttribute("service", existingService);
-//		model.addAttribute("users", users);
-//		model.addAttribute("majors", majors);
-//		return "servicesVIEW/ServiceEditForm";
-//	}
-//
-//	// 更新服務
-//	@PostMapping("/update")
-//	public String updateService(@ModelAttribute ServiceBean service, RedirectAttributes redirectAttributes) {
-//		service.setServiceUpdateDate(LocalDateTime.now());
-//		serviceService.updateService(service);
-//		redirectAttributes.addAttribute("id", service.getServiceId());
-//		return "redirect:/service/view";
-//	}
-//
-//	// 刪除服務
-//	@GetMapping("/delete")
-//	public String deleteService(@RequestParam int id) {
-//		serviceService.deleteService(id);
-//		return "redirect:/service/search";
-//	}
-//
-//	// 搜尋服務
-//	@GetMapping("/search")
-//	public String searchServices(@RequestParam(required = false) String titleKeyword,
-//			@RequestParam(required = false) String contentKeyword, @RequestParam(required = false) Integer userId,
-//			@RequestParam(required = false) Integer majorId, Model model) {
-//		List<ServiceBean> searchResult = serviceService.searchServices(titleKeyword, contentKeyword, majorId, userId);
-//		Map<Integer, String> users = userService.getAllUserInfo();
-//		model.addAttribute("listService", searchResult);
-//		model.addAttribute("users", users);
-//
-//		if (userId != null) {
-//			Map<Integer, String> majors = userMajorService.findMajorsByUserId(userId);
-//			model.addAttribute("majors", majors);
-//			model.addAttribute("selectedUserId", userId);
-//		} else {
-//			Map<Integer, String> majors = majorService.getAllMajors();
-//			model.addAttribute("majors", majors);
-//		}
-//
-//		return "servicesVIEW/ServiceList";
-//	}
-//
-//	// 查看服務詳情
-//	@GetMapping("/view")
-//	public String viewService(@RequestParam int id, Model model) {
-//		ServiceBean service = serviceService.findServiceById(id);
-//
-//		if (service != null) {
-//			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
-//			String formattedCreateDate = service.getServiceCreateDate().format(formatter);
-//			String formattedUpdateDate = service.getServiceUpdateDate().format(formatter);
-//			model.addAttribute("formattedCreateDate", formattedCreateDate);
-//			model.addAttribute("formattedUpdateDate", formattedUpdateDate);
-//			model.addAttribute("service", service);
-//			return "servicesVIEW/ServiceView";
-//		} else {
-//			return "redirect:/service/";
-//		}
-//	}
-//
-	// 選擇用戶(新增服務前)
+	// 插入新服務
+	@PostMapping("/insert")
+	public String insertService(@ModelAttribute ServiceBean newService, @RequestParam(name = "userId") int userId,
+			@RequestParam(name = "majorId") int majorId) {
+		Users user = userService.getUserInfoByID(userId);
+		MajorBean major = majorService.findMajorById(majorId);
+		UserMajorPK userMajorPK = new UserMajorPK(user, major);
+		UserMajorBean userMajor = userMajorService.findUserMajorByUserIdMajorId(userMajorPK);
+
+		newService.setUserMajor(userMajor);
+		newService.setServiceCreateDate(LocalDateTime.now());
+		newService.setServiceUpdateDate(LocalDateTime.now());
+
+		System.out.println(newService);
+
+		serviceService.insertService(newService);
+		return "redirect:/service/search";
+	}
+
+	// 顯示編輯服務表單
+	@GetMapping("/edit")
+	public String showEditForm(@RequestParam(name = "id") int id, Model model) {
+		ServiceBean existingService = serviceService.findServiceById(id);
+		Map<Integer, String> users = serviceService.getAllUsersMap();
+		Map<Integer, String> majors = serviceService.getMajorsMapByUserId(null);
+
+		model.addAttribute("service", existingService);
+		model.addAttribute("users", users);
+		model.addAttribute("majors", majors);
+		return "servicesVIEW/ServiceEditForm";
+	}
+
+	// 更新服務
+	@PostMapping("/update")
+	public String updateService(@ModelAttribute ServiceBean service, RedirectAttributes redirectAttributes) {
+		UserMajorBean oldUserMajor = serviceService.findServiceById(service.getServiceId()).getUserMajor();
+		LocalDateTime oldServiceCreateDate = serviceService.findServiceById(service.getServiceId())
+				.getServiceCreateDate();
+		service.setUserMajor(oldUserMajor);
+		service.setServiceCreateDate(oldServiceCreateDate);
+		service.setServiceUpdateDate(LocalDateTime.now());
+
+		System.out.println(service);
+		serviceService.updateService(service);
+		redirectAttributes.addAttribute("id", service.getServiceId());
+		return "redirect:/service/view";
+	}
+
+	// 刪除服務
+	@GetMapping("/delete")
+	public String deleteService(@RequestParam(name = "id") int id) {
+		serviceService.deleteService(id);
+		return "redirect:/service/search";
+	}
+
+	// 搜尋服務
+	@GetMapping("/search")
+	public String searchServices(@RequestParam(name = "titleKeyword", required = false) String titleKeyword,
+			@RequestParam(name = "contentKeyword", required = false) String contentKeyword,
+			@RequestParam(name = "userId", required = false) Integer userId,
+			@RequestParam(name = "majorId", required = false) Integer majorId, Model model) {
+		List<ServiceBean> searchResult = serviceService.searchServices(titleKeyword, contentKeyword, majorId, userId);
+		Map<Integer, String> users = serviceService.getAllUsersMap();
+		model.addAttribute("listService", searchResult);
+		model.addAttribute("users", users);
+
+		if (userId != null) {
+			Map<Integer, String> majors = serviceService.getMajorsMapByUserId(userId);
+			// System.out.println(majors);
+			model.addAttribute("majors", majors);
+			model.addAttribute("selectedUserId", userId);
+		} else {
+			Map<Integer, String> majors = serviceService.getAllMajorsMap();
+			model.addAttribute("majors", majors);
+		}
+
+		return "servicesVIEW/ServiceList";
+	}
+
+	// 查看服務詳情
+	@GetMapping("/view")
+	public String viewService(@RequestParam(name = "id") int id, Model model) {
+		ServiceBean service = serviceService.findServiceById(id);
+
+		if (service != null) {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+			String formattedCreateDate = service.getServiceCreateDate().format(formatter);
+			String formattedUpdateDate = service.getServiceUpdateDate().format(formatter);
+			model.addAttribute("formattedCreateDate", formattedCreateDate);
+			model.addAttribute("formattedUpdateDate", formattedUpdateDate);
+			model.addAttribute("service", service);
+			return "servicesVIEW/ServiceView";
+		} else {
+			return "redirect:/service/";
+		}
+	}
+
+	// 選擇用戶(新增服務前先選用戶)
 	@GetMapping("/selectUser")
 	public String selectUser(@RequestParam(name = "userId", required = false) Integer userId, Model model) {
 		if (userId != null) {
-			List<UserMajorBean> majors = userMajorService.findMajorsByUserId(userId);
-			List<Users> users = userService.getAllUserInfo();
+			Map<Integer, String> majors = serviceService.getMajorsMapByUserId(userId);
+			Map<Integer, String> users = serviceService.getAllUsersMap();
 			System.out.println(majors);
 			model.addAttribute("selectedUserId", userId);
 			model.addAttribute("majors", majors);

@@ -1,34 +1,21 @@
 package com.ProFit.controller.majors;
 
-import java.io.IOException;
 import java.util.List;
 
 import com.ProFit.bean.majorsBean.MajorBean;
-import com.ProFit.dao.majorsDao.HMajorDAO;
-import com.ProFit.dao.majorsDao.IHmajorDAO;
 import com.ProFit.service.majorService.IMajorCategoryService;
 import com.ProFit.service.majorService.IMajorService;
-import com.ProFit.util.hibernateutil.HibernateUtil;
 
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("/major")

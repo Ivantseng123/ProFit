@@ -96,7 +96,7 @@ public class HServiceDAO implements IHServiceDAO {
 		return query.list();
 	}
 
-	/** 以下為棄用的方法 **/
+	/** 以下為棄用的方法，改到service層處理 **/
 //	// 取得所有用戶
 //	public Map<Integer, String> getAllUsers() {
 //		Session session = factory.getCurrentSession();

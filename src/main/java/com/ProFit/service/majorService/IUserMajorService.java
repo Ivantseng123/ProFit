@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.ProFit.bean.majorsBean.UserMajorBean;
+import com.ProFit.bean.majorsBean.UserMajorPK;
 
 public interface IUserMajorService {
 
@@ -28,5 +29,8 @@ public interface IUserMajorService {
 
 	// 查找所有 UserMajor
 	List<UserMajorBean> findAllUserMajors();
+
+	// 根據user、Major查找單一 UserMajors
+	UserMajorBean findUserMajorByUserIdMajorId(UserMajorPK userMajorPK);
 
 }

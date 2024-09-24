@@ -44,7 +44,7 @@
                             <select name="userId" id="userId" onchange="this.form.submit()">
                                 <option value="">選擇用戶</option>
                                 <c:forEach var="user" items="${users}">
-                                    <option value="${user.userId}" ${selectedUserId == user.userId ? 'selected' : ''}>${user.userName}</option>
+                                    <option value="${user.key}" ${selectedUserId == user.key ? 'selected' : ''}>${user.value}</option>
                                 </c:forEach>
                             </select>
                         </td>
@@ -66,7 +66,7 @@
                                 <select name="majorId" id="majorId">
                                     <option value="">選擇專業</option>
                                     <c:forEach var="major" items="${majors}">
-                                        <option value="${major.majorId}" ${service.majorId == major.majorId ? 'selected' : ''}>${major.majorName}</option>
+                                        <option value="${major.key}" ${service.majorId == major.key ? 'selected' : ''}>${major.value}</option>
                                     </c:forEach>
                                 </select>
                                 

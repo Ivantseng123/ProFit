@@ -28,14 +28,14 @@ public class HUserMajorDAO implements IHuserMajorDAO {
 	// 插入 UserMajor
 	@Override
 	public UserMajorBean insertUserMajor(UserMajorBean userMajor) {
-        try {
-        	Session session = factory.getCurrentSession();
-        	session.persist(userMajor);
-            return userMajor;
-        } catch (Exception e) {
-            return null;
-        }
-    }
+		try {
+			Session session = factory.getCurrentSession();
+			session.persist(userMajor);
+			return userMajor;
+		} catch (Exception e) {
+			return null;
+		}
+	}
 
 	// 删除 UserMajor(by userId & majorId)
 	@Override
@@ -103,6 +103,19 @@ public class HUserMajorDAO implements IHuserMajorDAO {
 	public List<UserMajorBean> findAllUserMajors() {
 		Session session = factory.getCurrentSession();
 		return session.createQuery("FROM UserMajorBean", UserMajorBean.class).list();
+	}
+
+	// 根據user、Major查找單一 UserMajor
+	@Override
+	public UserMajorBean findUserMajorByUserIdMajorId(UserMajorPK userMajorPK) {
+		Session session = factory.getCurrentSession();
+
+		Query<UserMajorBean> query = session.createQuery(
+				"FROM UserMajorBean um WHERE um.id.major.majorId = :majorId and um.id.user.userId = :userId",
+				UserMajorBean.class);
+		query.setParameter("userId", userMajorPK.getUser().getUserId());
+		query.setParameter("majorId", userMajorPK.getMajor().getMajorId());
+		return query.uniqueResult();
 	}
 
 }
