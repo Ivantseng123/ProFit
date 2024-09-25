@@ -1,5 +1,6 @@
 package com.ProFit.dao.usersDao;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import com.ProFit.bean.usersBean.Pwd_reset_tokens;
@@ -11,5 +12,7 @@ public interface IHPwdResetTokensDao {
 	boolean deleteTokensInfo(int token_id);
 
 	List<Pwd_reset_tokens> getAllTokensInfo();
+
+	String generateToken() throws NoSuchAlgorithmException;
 
 }

@@ -21,8 +21,7 @@
 						</div>
 						<div>
 							<h2 style="color: orange;">更新企業申請</h2>
-							<form class="form-container" method="post" action="UpdateEmpAppl"
-								enctype='multipart/form-data'>
+							<form class="form-container" method="post" action="updateempappl">
 								<input type="hidden" id="idCard_pictureURL_1" name="idCard_pictureURL_1" value="${emp.idCardPictureURL1}">
 								<input type="hidden" id="idCard_pictureURL_2" name="idCard_pictureURL_2" value="${emp.idCardPictureURL2}">
 								<input type="hidden" id="company_taxID_docURL" name="company_taxID_docURL" value="${emp.companyTaxIdDocURL}">

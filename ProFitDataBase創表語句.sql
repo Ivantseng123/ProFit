@@ -57,7 +57,7 @@ CREATE TABLE password_reset_tokens(
     token_id INT IDENTITY(100, 1) NOT NULL PRIMARY KEY,
     user_id INT NOT NULL,
     user_tokenHash VARCHAR(150) UNIQUE,
-    expiration_time TIMESTAMP ,
+    expiration_time DATETIME2(0) DEFAULT DATEADD(MINUTE, 30, CURRENT_TIMESTAMP),
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 

@@ -52,10 +52,10 @@
 							</c:choose>                        
                         	<td>${user.userRegisterTime}</td>
                         	<td class="action-buttons">
-                        		<a style="text-decoration:none;" href="getuser?user_id=${user.userId}">
+                        		<a style="text-decoration:none;" href="getuser?user_id=${user.userId}&action=search">
                         		<button class="view" id="viewUserBtn">查看</button>
                         		</a>
-                            	<a style="text-decoration:none;" href="getupdateuser?user_id=${user.userId}">
+                            	<a style="text-decoration:none;" href="getuser?user_id=${user.userId}&action=edit">
                             	<button class="edit" id="editUserBtn">編輯</button>
                             	</a>
                             	<button class="delete" id="deleteUserBtn">刪除</button>
@@ -80,11 +80,11 @@
         	<button class="insertbtn" onclick="togglePopup()">新增</button>
         </diV>
          <diV class="navgation" style="text-align: center; margin-top: 50px" >
-        	<a href="GetAlltoken" class="resetTokens" id="resetTokensBtn">
+        	<a href="alltoken" class="resetTokens" id="resetTokensBtn">
         	<button class="tohref">重設密碼資訊</button></a>
-            <a href="GetAllempAppl" class="employerAppl" id="employerApplBtn">
+            <a href="allempappl" class="employerAppl" id="employerApplBtn">
             <button class="tohref">企業申請資訊</button></a>
-            <a href="GetAllEmpPf" class="employerProfile" id="employerProfileBtn">
+            <a href="allemppf" class="employerProfile" id="employerProfileBtn">
             <button class="tohref" >企業資訊</button></a>
         </diV>
         <div id="popupOverlay" class="overlay-container" style="z-index: 1002">

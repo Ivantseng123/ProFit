@@ -30,7 +30,7 @@
             </div>
 	</div>
 	<div class="action-buttons">
-        <button class="delete" onclick="location.href='${pageContext.request.contextPath}//majorCategory/list'">返回類別列表</button>
+        <button class="delete" onclick="location.href='${pageContext.request.contextPath}/majorCategory/list'">返回類別列表</button>
         </div>
         <div class="form-container">
             <form class="form-group" class="action-buttons" action="${pageContext.request.contextPath}/majorCategory/${category != null ? 'edit' : 'insert'}" method="post">

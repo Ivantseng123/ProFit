@@ -1,33 +1,35 @@
 package com.ProFit.dao.transactionCRUD;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.query.Query;
-
 import com.ProFit.bean.transactionBean.UserTransactionBean;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Timestamp;
 import java.util.List;
 
+@Repository  
 public class UserTransactionDAO {
 
-    private Session session;
+    @Autowired
+    private SessionFactory sessionFactory;
 
-    public UserTransactionDAO(Session session) {
-        this.session = session;
+    private Session getCurrentSession() {
+        return sessionFactory.getCurrentSession();
     }
 
     // 獲取所有交易記錄
     public List<UserTransactionBean> getAllTransactions() {
-        Query<UserTransactionBean> query = session.createQuery("from UserTransactionBean order by createdAt desc", UserTransactionBean.class);
-        return query.list();
+        return getCurrentSession().createQuery("from UserTransactionBean order by createdAt desc", UserTransactionBean.class).list();
     }
 
     // 按條件篩選交易記錄
-    public List<UserTransactionBean> getTransactionsByFilters(String userId, String transactionType, String transactionStatus, Timestamp startDate, Timestamp endDate) {
+    public List<UserTransactionBean> getTransactionsByFilters(Integer userId, String transactionType, String transactionStatus, Timestamp startDate, Timestamp endDate) {
         StringBuilder hql = new StringBuilder("from UserTransactionBean where 1=1 ");
 
-        if (userId != null && !userId.isEmpty()) {
+        if (userId != null) {
             hql.append("and userId = :userId ");
         }
         if (transactionType != null && !transactionType.isEmpty()) {
@@ -44,10 +46,10 @@ public class UserTransactionDAO {
         }
         hql.append("order by createdAt desc");
 
-        Query<UserTransactionBean> query = session.createQuery(hql.toString(), UserTransactionBean.class);
+        var query = getCurrentSession().createQuery(hql.toString(), UserTransactionBean.class);
 
-        if (userId != null && !userId.isEmpty()) {
-            query.setParameter("userId", Integer.parseInt(userId));
+        if (userId != null) {
+            query.setParameter("userId", userId);
         }
         if (transactionType != null && !transactionType.isEmpty()) {
             query.setParameter("transactionType", transactionType);
@@ -67,9 +69,9 @@ public class UserTransactionDAO {
 
     // 插入交易
     public boolean insertTransaction(UserTransactionBean transaction) {
-        Transaction tx = session.beginTransaction();
+        Transaction tx = getCurrentSession().beginTransaction();
         try {
-            session.persist(transaction);
+            getCurrentSession().save(transaction);
             tx.commit();
             return true;
         } catch (Exception e) {
@@ -83,12 +85,12 @@ public class UserTransactionDAO {
 
     // 更新交易
     public boolean updateTransaction(UserTransactionBean transaction) {
-        Transaction tx = session.beginTransaction();
+        Transaction tx = getCurrentSession().beginTransaction();
         try {
             if ("completed".equals(transaction.getTransactionStatus())) {
                 transaction.setCompletionAt(new Timestamp(System.currentTimeMillis()));
             }
-            session.merge(transaction);  
+            getCurrentSession().update(transaction);  // 使用 update 而不是 merge
             tx.commit();
             return true;
         } catch (Exception e) {
@@ -100,16 +102,13 @@ public class UserTransactionDAO {
         }
     }
 
-
-
-
     // 刪除交易
     public boolean deleteTransaction(String transactionId) {
-        Transaction tx = session.beginTransaction();
+        Transaction tx = getCurrentSession().beginTransaction();
         try {
-            UserTransactionBean transaction = session.get(UserTransactionBean.class, transactionId);
+            UserTransactionBean transaction = getCurrentSession().get(UserTransactionBean.class, transactionId);
             if (transaction != null) {
-                session.remove(transaction);
+                getCurrentSession().delete(transaction);
                 tx.commit();
                 return true;
             }
@@ -125,6 +124,6 @@ public class UserTransactionDAO {
 
     // 根據ID獲取交易
     public UserTransactionBean getTransactionById(String transactionId) {
-        return session.get(UserTransactionBean.class, transactionId);
+        return getCurrentSession().get(UserTransactionBean.class, transactionId);
     }
 }

@@ -53,17 +53,17 @@
         	<button class="insertbtn" onclick="togglePopup()">新增</button>
         </diV>
          <div class="navgation" style="text-align: center; margin-Top: 25px;" >
-        	<a href="GetAlluser" class="resetTokens" id="resetTokensBtn">
+        	<a href="alluser" class="resetTokens" id="resetTokensBtn">
         	<button class="tohref">全部會員資訊</button></a>
-            <a href="GetAllempAppl" class="employerAppl" id="employerApplBtn">
+            <a href="allempappl" class="employerAppl" id="employerApplBtn">
             <button class="tohref">企業申請資訊</button></a>
-            <a href="GetAllEmpPf" class="employerProfile" id="employerProfileBtn">
+            <a href="allemppf" class="employerProfile" id="employerProfileBtn">
             <button class="tohref" >企業資訊</button></a>
         </diV>
         <div id="popupOverlay" class="overlay-container" style="z-index: 1002">
         	<div class="popup-box-inserttoken">
 				<h2 style="color: orange;">新增Token</h2>
-				<form class="form-container" method="post" action="InsertToken">
+				<form class="form-container" method="post" action="insertToken">
 					<label class="form-label" for="user_name"> 會員ID: </label> 
 						<input
 						class="form-input" type="text" placeholder="輸入會員ID"
@@ -102,7 +102,7 @@
 				 
 				 const deletedata = { 'token_id': token_id };
 				 
-				 fetch('DeleteToken', {
+				 fetch('deletetoken', {
 				        method: 'POST',
 				        headers: {
 				            'Content-Type': 'application/json'

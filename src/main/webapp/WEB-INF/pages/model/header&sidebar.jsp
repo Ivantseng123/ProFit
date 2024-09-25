@@ -34,7 +34,7 @@
 			<p>${sessionScope.user_email}</p>
 			<p>歡迎使用 ProFit！</p>
 			<a style="text-decoration: none;" class="loginStatus"
-				href="${pageContext.request.contextPath}/Logout">
+				href="logout">
 				<button class="logout">登出</button>
 			</a>
 		</div>
@@ -54,7 +54,7 @@
 			<li><a href="/ProFit/alluser">會員管理</a></li>
 			<li><a href="/ProFit/jobsVIEW/jobsList.jsp">職缺管理</a></li>
 			<li><a href="/ProFit/servicesVIEW/Entry.jsp">技能服務管理</a></li>
-			<li><a href="/ProFit/coursesVIEW/courseView.jsp">課程管理</a></li>
+			<li><a href="${pageContext.request.contextPath}/courses">課程管理</a></li>
 			<li><a href="${pageContext.request.contextPath}/events">活動管理</a></li>
 			<li><a href="/ProFit/transactionVIEW/transactions.jsp">交易管理</a></li>
 		</ul>
@@ -79,7 +79,7 @@
 
 	        let login_status = logoutButton.textContent;
 	        if (login_status === "登入") {
-	            document.querySelector(".loginStatus").href = "${pageContext.request.contextPath}/usersVIEW/Login.jsp";
+	            document.querySelector(".loginStatus").href = "/login";
 	        }
 	    });
 

@@ -5,16 +5,9 @@
 		type="javax.sql.DataSource" auth="Container" username="ProFit"
 		password="ProFit"
 		driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-		url="jdbc:sqlserver://localhost:1433;databaseName=IvanPower;encrypt=true;trustServerCertificate=true" />
+		url="jdbc:sqlserver://localhost:1433;databaseName=ProFitDB;encrypt=true;trustServerCertificate=true" />
 
 	<Resource name="connectMySQLConn/OrderSystem"
 		type="javax.sql.DataSource" auth="Container" username="ProFit"
 		password="ProFit" driverClassName="com.mysql.cj.jdbc.Driver"
-		url="jdbc:mysql://localhost:3306/IvanPower?serverTimezone=UTC" />
-
-	<Resource name="jdbc/ProFitDB" auth="Container"
-		type="javax.sql.DataSource"
-		driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-		url="jdbc:sqlserver://localhost:1433;DatabaseName=ProFitDB;encrypt=false"
-		username="ProFit" password="ProFit" maxTotal="8" maxIdle="5"
-		initialSize="5" maxWaitMillis="-1" validationQuery="SELECT 1" />
+		url="jdbc:mysql://localhost:3306/ProFitDB?serverTimezone=UTC" />
