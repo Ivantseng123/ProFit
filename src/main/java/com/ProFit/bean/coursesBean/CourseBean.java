@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.ProFit.bean.majorsBean.MajorBean;
 import com.ProFit.bean.majorsBean.MajorCategoryBean;
 import com.ProFit.bean.usersBean.Users;
@@ -57,9 +59,11 @@ public class CourseBean implements java.io.Serializable {
 	private LocalDate courseEnrollmentDate;
 
 	@Column(name="course_start_date")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime courseStartDate;
 
 	@Column(name="course_end_date")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime courseEndDate;
 
 	@Column(name="course_price")

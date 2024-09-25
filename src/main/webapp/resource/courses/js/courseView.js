@@ -93,13 +93,14 @@ $(document).on('click', '.delete', function() {
 	console.log("Selected Course ID for Deletion: " + courseId);
 
 	$.ajax({
-		url: '../controller/courses/delete',
+		url: contextPath+ '/courses/delete/'+courseId,
 		data: { courseId: courseId },
+		type: 'get',
 		success: function(response) {
 			if (response) {
 				window.alert('課程刪除成功');
 				console.log('新增的课程信息:', response);
-				window.location.href = '/ProFit/coursesVIEW/courseView.jsp?clickButton=true';
+				window.location.href = contextPath + '/courses?clickButton=true';
 			} else {
 				window.alert('課程刪除失敗');
 			}

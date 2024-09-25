@@ -8,7 +8,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/model/model.css">
 <link rel="stylesheet" href="../model/jquery-ui-1.14.0.custom/jquery-ui.css">
-<link rel="stylesheet" href="createCourseView.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resource/courses/css/createCourseView.css">
 <style>
 label, input {
     display: block;
@@ -145,7 +145,10 @@ div#users-contain table td, div#users-contain table th {
 			</div>
 		</div>
 	</main>
-	<script src="createCourseView.js"></script>
+	<script>
+        var contextPath = '${pageContext.request.contextPath}';
+    </script>
+	<script src="${pageContext.request.contextPath}/resource/courses/js/createCourseView.js"></script>
 	<script>
 		$(document).ready(function() {
 			$("#tabs").tabs();
