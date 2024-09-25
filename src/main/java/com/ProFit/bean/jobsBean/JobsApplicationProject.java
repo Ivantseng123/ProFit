@@ -1,4 +1,4 @@
-package com.ProFit.bean;
+package com.ProFit.bean.jobsBean;
 
 
 import jakarta.persistence.CascadeType;

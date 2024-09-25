@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 
 import com.ProFit.util.CountProperty;
 
-//抽象類別就是為了給別人繼承存在，他實作（implements）這個介面的5個方法
+//抽象類別就是為了給別人繼承存在，他實作（implements）這個介面的5個方法,就是逼你實作5個方法放進空殼裡，這樣的設計更精緻
 public abstract class AbstractGenericDAO<T, ID> implements GenericDAO<T, ID> {
 
 

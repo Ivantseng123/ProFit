@@ -1,37 +1,37 @@
-INSERT [dbo].[users] ( [user_name], [user_email], [user_passwordHash], [user_phoneNumber], [user_city], [user_identity], [user_pictureURL], [user_balance], [freelancer_location_prefer], [freelancer_exprience], [freelancer_identity], [freelancer_profile_status], [freelancer_description], [user_register_time]) VALUES ( N'John Doe', N'john.doe@example.com', N'e99a18c428cb38d5f260853678922e03', N'0912-345-678', N'¥x¥_¥«', 1, N'https://example.com/john.jpg', 0, N'¥x¥_¥«+·s¥_¥«+°ò¶©¥«', N'5 years', N'­Ó¤H­ÝÂ¾', 1, N'Experienced full-stack developer.', NULL)
-INSERT [dbo].[users] ([user_name], [user_email], [user_passwordHash], [user_phoneNumber], [user_city], [user_identity], [user_pictureURL], [user_balance], [freelancer_location_prefer], [freelancer_exprience], [freelancer_identity], [freelancer_profile_status], [freelancer_description], [user_register_time]) VALUES ( N'Jane Smith', N'jane.smith@example.com', N'abcde1234567890fghijk9876543210', N'0923-456-789', N'·s¥_¥«', 2, N'https://example.com/jane.jpg', 0, N'·s¥_¥«+®ç¶é¥«+¥x¤¤¥«', N'3 years', N'±MÂ¾SOHO', 1, N'Creative designer with a passion for UI/UX.', NULL)
-INSERT [dbo].[users] ( [user_name], [user_email], [user_passwordHash], [user_phoneNumber], [user_city], [user_identity], [user_pictureURL], [user_balance], [freelancer_location_prefer], [freelancer_exprience], [freelancer_identity], [freelancer_profile_status], [freelancer_description], [user_register_time]) VALUES ( N'Alice Brown', N'alice.brown@example.com', N'5d41402abc4b2a76b9719d911017c592', N'0934-567-890', N'®ç¶é¥«', 1, N'https://example.com/alice.jpg', 0, N'®ç¶é¥«+·s¦Ë¥«+·s¦Ë¿¤', N'4 years', N'¤u§@«Ç', 1, N'Professional photographer with experience in portraits.', NULL)
-INSERT [dbo].[users] ( [user_name], [user_email], [user_passwordHash], [user_phoneNumber], [user_city], [user_identity], [user_pictureURL], [user_balance], [freelancer_location_prefer], [freelancer_exprience], [freelancer_identity], [freelancer_profile_status], [freelancer_description], [user_register_time]) VALUES ( N'Bob Johnson', N'bob.johnson@example.com', N'098f6bcd4621d373cade4e832627b4f6', N'0945-678-901', N'·s¦Ë¥«', 2, N'https://example.com/bob.jpg', 0, N'·s¦Ë¥«+·s¦Ë¿¤+¥x¥_¥«', N'6 years', N'­ÝÂ¾¤W¯Z±Ú', 1, N'Expert in video production and editing.', NULL)
-INSERT [dbo].[users] ( [user_name], [user_email], [user_passwordHash], [user_phoneNumber], [user_city], [user_identity], [user_pictureURL], [user_balance], [freelancer_location_prefer], [freelancer_exprience], [freelancer_identity], [freelancer_profile_status], [freelancer_description], [user_register_time]) VALUES ( N'Charlie Davis', N'charlie.davis@example.com', N'c4ca4238a0b923820dcc509a6f75849b', N'0956-789-012', N'·s¦Ë¿¤', 1, N'https://example.com/charlie.jpg', 0, N'·s¦Ë¿¤+°ò¶©¥«+¥x¤¤¥«', N'2 years', N'¤½¥q', 1, N'Freelance writer specializing in tech articles.', NULL)
-INSERT [dbo].[users] ( [user_name], [user_email], [user_passwordHash], [user_phoneNumber], [user_city], [user_identity], [user_pictureURL], [user_balance], [freelancer_location_prefer], [freelancer_exprience], [freelancer_identity], [freelancer_profile_status], [freelancer_description], [user_register_time]) VALUES ( N'´å®m¿«', N'johnyu91308@gmail.com', N'15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225', N'0917-276358', N'ªá½¬¿¤', 3, N'https://firebasestorage.googleapis.com/v0/b/profit-e686b.appspot.com/o/userUpload%2F%E9%A6%AC%E9%82%A6%E5%BE%B7.jpeg?alt=media&token=b8ced6a1-0b56-404c-b99a-dfd5df3041c4', 0, N'·s¥_¥«', N'7-8¦~¤u§@¸gÅç', NULL, 0, N'', CAST(N'2024-08-30T11:15:46.0000000' AS DateTime2))
-INSERT [dbo].[users] ([user_name], [user_email], [user_passwordHash], [user_phoneNumber], [user_city], [user_identity], [user_pictureURL], [user_balance], [freelancer_location_prefer], [freelancer_exprience], [freelancer_identity], [freelancer_profile_status], [freelancer_description], [user_register_time]) VALUES ( N'´ú¸Õ', N'test@gmail.com', N'15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225', N'0917-276358', N'»O¥_¥«', 2, N'150/°¨¨¹¼w.jpeg', 0, N'»O¥_¥«', N'µL¤u§@¸gÅç', N'¤u§@«Ç', 0, N'hhhhhhh', CAST(N'2024-08-30T11:52:29.0000000' AS DateTime2))
-INSERT [dbo].[users] ( [user_name], [user_email], [user_passwordHash], [user_phoneNumber], [user_city], [user_identity], [user_pictureURL], [user_balance], [freelancer_location_prefer], [freelancer_exprience], [freelancer_identity], [freelancer_profile_status], [freelancer_description], [user_register_time]) VALUES ( N'´ú¸Õ', N'aaaaa@gmail.com', N'15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225', N'0917-278888', N'ªá½¬¿¤', 1, N'https://firebasestorage.googleapis.com/v0/b/profit-e686b.appspot.com/o/userUpload%2F%E9%A6%AC%E9%82%A6%E5%BE%B7.jpeg?alt=media&token=8103fba3-03a0-4a9e-9e40-2c108cc157cc', 4, N'»O¤¤¥«', N'0-1¦~¤u§@¸gÅç', N'¾Ç¥Í', 0, N'asdasdasdasd', CAST(N'2024-09-02T10:11:12.0000000' AS DateTime2))
-INSERT [dbo].[users] ( [user_name], [user_email], [user_passwordHash], [user_phoneNumber], [user_city], [user_identity], [user_pictureURL], [user_balance], [freelancer_location_prefer], [freelancer_exprience], [freelancer_identity], [freelancer_profile_status], [freelancer_description], [user_register_time]) VALUES ( N'aaaaaaa', N'aaaaaaa@gmail.com', N'4b179810791a19af3bfeafbdcf0aca274d9ac7d5f063b8e0b75189360c0cf3a3', N'0917-278888', N'°ò¶©¥«', 1, N'https://firebasestorage.googleapis.com/v0/b/profit-e686b.appspot.com/o/userUpload%2F%E9%A6%AC%E9%82%A6%E5%BE%B7.jpeg?alt=media&token=f6b449df-f640-4616-8142-da53a632ec92', 0, N'ªá½¬¿¤', N'10¦~¥H¤W¦~¤u§@¸gÅç', N'¤u§@«Ç', 0, N'aaaaaaa', CAST(N'2024-09-09T15:59:50.0000000' AS DateTime2))
-INSERT [dbo].[users] ( [user_name], [user_email], [user_passwordHash], [user_phoneNumber], [user_city], [user_identity], [user_pictureURL], [user_balance], [freelancer_location_prefer], [freelancer_exprience], [freelancer_identity], [freelancer_profile_status], [freelancer_description], [user_register_time]) VALUES ( N'´å®m¿«', N'test111@gmail.com', N'8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', N'0917-276358', N'»O¥_¥«', 3, N'https://firebasestorage.googleapis.com/v0/b/profit-e686b.appspot.com/o/userUpload%2F%E9%A6%AC%E9%82%A6%E5%BE%B7.jpeg?alt=media&token=d1d95a04-2bb6-4989-8186-c22287f77799', 0, N'»O¥_¥«', N'µL¤u§@¸gÅç', NULL, 0, N'', CAST(N'2024-09-11T10:29:02.0000000' AS DateTime2))
+INSERT [dbo].[users] ( [user_name], [user_email], [user_passwordHash], [user_phoneNumber], [user_city], [user_identity], [user_pictureURL], [user_balance], [freelancer_location_prefer], [freelancer_exprience], [freelancer_identity], [freelancer_profile_status], [freelancer_description], [user_register_time]) VALUES ( N'John Doe', N'john.doe@example.com', N'e99a18c428cb38d5f260853678922e03', N'0912-345-678', N'ï¿½xï¿½_ï¿½ï¿½', 1, N'https://example.com/john.jpg', 0, N'ï¿½xï¿½_ï¿½ï¿½+ï¿½sï¿½_ï¿½ï¿½+ï¿½ò¶©¥ï¿½', N'5 years', N'ï¿½Ó¤Hï¿½ï¿½Â¾', 1, N'Experienced full-stack developer.', NULL)
+INSERT [dbo].[users] ([user_name], [user_email], [user_passwordHash], [user_phoneNumber], [user_city], [user_identity], [user_pictureURL], [user_balance], [freelancer_location_prefer], [freelancer_exprience], [freelancer_identity], [freelancer_profile_status], [freelancer_description], [user_register_time]) VALUES ( N'Jane Smith', N'jane.smith@example.com', N'abcde1234567890fghijk9876543210', N'0923-456-789', N'ï¿½sï¿½_ï¿½ï¿½', 2, N'https://example.com/jane.jpg', 0, N'ï¿½sï¿½_ï¿½ï¿½+ï¿½ï¿½é¥«+ï¿½xï¿½ï¿½ï¿½ï¿½', N'3 years', N'ï¿½MÂ¾SOHO', 1, N'Creative designer with a passion for UI/UX.', NULL)
+INSERT [dbo].[users] ( [user_name], [user_email], [user_passwordHash], [user_phoneNumber], [user_city], [user_identity], [user_pictureURL], [user_balance], [freelancer_location_prefer], [freelancer_exprience], [freelancer_identity], [freelancer_profile_status], [freelancer_description], [user_register_time]) VALUES ( N'Alice Brown', N'alice.brown@example.com', N'5d41402abc4b2a76b9719d911017c592', N'0934-567-890', N'ï¿½ï¿½é¥«', 1, N'https://example.com/alice.jpg', 0, N'ï¿½ï¿½é¥«+ï¿½sï¿½Ë¥ï¿½+ï¿½sï¿½Ë¿ï¿½', N'4 years', N'ï¿½uï¿½@ï¿½ï¿½', 1, N'Professional photographer with experience in portraits.', NULL)
+INSERT [dbo].[users] ( [user_name], [user_email], [user_passwordHash], [user_phoneNumber], [user_city], [user_identity], [user_pictureURL], [user_balance], [freelancer_location_prefer], [freelancer_exprience], [freelancer_identity], [freelancer_profile_status], [freelancer_description], [user_register_time]) VALUES ( N'Bob Johnson', N'bob.johnson@example.com', N'098f6bcd4621d373cade4e832627b4f6', N'0945-678-901', N'ï¿½sï¿½Ë¥ï¿½', 2, N'https://example.com/bob.jpg', 0, N'ï¿½sï¿½Ë¥ï¿½+ï¿½sï¿½Ë¿ï¿½+ï¿½xï¿½_ï¿½ï¿½', N'6 years', N'ï¿½ï¿½Â¾ï¿½Wï¿½Zï¿½ï¿½', 1, N'Expert in video production and editing.', NULL)
+INSERT [dbo].[users] ( [user_name], [user_email], [user_passwordHash], [user_phoneNumber], [user_city], [user_identity], [user_pictureURL], [user_balance], [freelancer_location_prefer], [freelancer_exprience], [freelancer_identity], [freelancer_profile_status], [freelancer_description], [user_register_time]) VALUES ( N'Charlie Davis', N'charlie.davis@example.com', N'c4ca4238a0b923820dcc509a6f75849b', N'0956-789-012', N'ï¿½sï¿½Ë¿ï¿½', 1, N'https://example.com/charlie.jpg', 0, N'ï¿½sï¿½Ë¿ï¿½+ï¿½ò¶©¥ï¿½+ï¿½xï¿½ï¿½ï¿½ï¿½', N'2 years', N'ï¿½ï¿½ï¿½q', 1, N'Freelance writer specializing in tech articles.', NULL)
+INSERT [dbo].[users] ( [user_name], [user_email], [user_passwordHash], [user_phoneNumber], [user_city], [user_identity], [user_pictureURL], [user_balance], [freelancer_location_prefer], [freelancer_exprience], [freelancer_identity], [freelancer_profile_status], [freelancer_description], [user_register_time]) VALUES ( N'ï¿½ï¿½mï¿½ï¿½', N'johnyu91308@gmail.com', N'15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225', N'0917-276358', N'ï¿½á½¬ï¿½ï¿½', 3, N'https://firebasestorage.googleapis.com/v0/b/profit-e686b.appspot.com/o/userUpload%2F%E9%A6%AC%E9%82%A6%E5%BE%B7.jpeg?alt=media&token=b8ced6a1-0b56-404c-b99a-dfd5df3041c4', 0, N'ï¿½sï¿½_ï¿½ï¿½', N'7-8ï¿½~ï¿½uï¿½@ï¿½gï¿½ï¿½', NULL, 0, N'', CAST(N'2024-08-30T11:15:46.0000000' AS DateTime2))
+INSERT [dbo].[users] ([user_name], [user_email], [user_passwordHash], [user_phoneNumber], [user_city], [user_identity], [user_pictureURL], [user_balance], [freelancer_location_prefer], [freelancer_exprience], [freelancer_identity], [freelancer_profile_status], [freelancer_description], [user_register_time]) VALUES ( N'ï¿½ï¿½ï¿½ï¿½', N'test@gmail.com', N'15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225', N'0917-276358', N'ï¿½Oï¿½_ï¿½ï¿½', 2, N'150/ï¿½ï¿½ï¿½ï¿½ï¿½w.jpeg', 0, N'ï¿½Oï¿½_ï¿½ï¿½', N'ï¿½Lï¿½uï¿½@ï¿½gï¿½ï¿½', N'ï¿½uï¿½@ï¿½ï¿½', 0, N'hhhhhhh', CAST(N'2024-08-30T11:52:29.0000000' AS DateTime2))
+INSERT [dbo].[users] ( [user_name], [user_email], [user_passwordHash], [user_phoneNumber], [user_city], [user_identity], [user_pictureURL], [user_balance], [freelancer_location_prefer], [freelancer_exprience], [freelancer_identity], [freelancer_profile_status], [freelancer_description], [user_register_time]) VALUES ( N'ï¿½ï¿½ï¿½ï¿½', N'aaaaa@gmail.com', N'15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225', N'0917-278888', N'ï¿½á½¬ï¿½ï¿½', 1, N'https://firebasestorage.googleapis.com/v0/b/profit-e686b.appspot.com/o/userUpload%2F%E9%A6%AC%E9%82%A6%E5%BE%B7.jpeg?alt=media&token=8103fba3-03a0-4a9e-9e40-2c108cc157cc', 4, N'ï¿½Oï¿½ï¿½ï¿½ï¿½', N'0-1ï¿½~ï¿½uï¿½@ï¿½gï¿½ï¿½', N'ï¿½Ç¥ï¿½', 0, N'asdasdasdasd', CAST(N'2024-09-02T10:11:12.0000000' AS DateTime2))
+INSERT [dbo].[users] ( [user_name], [user_email], [user_passwordHash], [user_phoneNumber], [user_city], [user_identity], [user_pictureURL], [user_balance], [freelancer_location_prefer], [freelancer_exprience], [freelancer_identity], [freelancer_profile_status], [freelancer_description], [user_register_time]) VALUES ( N'aaaaaaa', N'aaaaaaa@gmail.com', N'4b179810791a19af3bfeafbdcf0aca274d9ac7d5f063b8e0b75189360c0cf3a3', N'0917-278888', N'ï¿½ò¶©¥ï¿½', 1, N'https://firebasestorage.googleapis.com/v0/b/profit-e686b.appspot.com/o/userUpload%2F%E9%A6%AC%E9%82%A6%E5%BE%B7.jpeg?alt=media&token=f6b449df-f640-4616-8142-da53a632ec92', 0, N'ï¿½á½¬ï¿½ï¿½', N'10ï¿½~ï¿½Hï¿½Wï¿½~ï¿½uï¿½@ï¿½gï¿½ï¿½', N'ï¿½uï¿½@ï¿½ï¿½', 0, N'aaaaaaa', CAST(N'2024-09-09T15:59:50.0000000' AS DateTime2))
+INSERT [dbo].[users] ( [user_name], [user_email], [user_passwordHash], [user_phoneNumber], [user_city], [user_identity], [user_pictureURL], [user_balance], [freelancer_location_prefer], [freelancer_exprience], [freelancer_identity], [freelancer_profile_status], [freelancer_description], [user_register_time]) VALUES ( N'ï¿½ï¿½mï¿½ï¿½', N'test111@gmail.com', N'8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', N'0917-276358', N'ï¿½Oï¿½_ï¿½ï¿½', 3, N'https://firebasestorage.googleapis.com/v0/b/profit-e686b.appspot.com/o/userUpload%2F%E9%A6%AC%E9%82%A6%E5%BE%B7.jpeg?alt=media&token=d1d95a04-2bb6-4989-8186-c22287f77799', 0, N'ï¿½Oï¿½_ï¿½ï¿½', N'ï¿½Lï¿½uï¿½@ï¿½gï¿½ï¿½', NULL, 0, N'', CAST(N'2024-09-11T10:29:02.0000000' AS DateTime2))
 
 INSERT [dbo].[employer_application] ( [user_id], [company_name], [company_address], [company_category], [company_phoneNumber], [company_taxID], [company_taxID_docURL], [user_national_id], [idCard_pictureURL_1], [idCard_pictureURL_2], [application_check]) VALUES ( 101, N'ABC Corp', N'123 Taipei Road', N'IT', N'0223456789', N'A123456789', N'http://example.com/taxdoc1.jpg', N'A123456789', N'http://example.com/id1_front.jpg', N'http://example.com/id1_back.jpg', 1)
 INSERT [dbo].[employer_application] ( [user_id], [company_name], [company_address], [company_category], [company_phoneNumber], [company_taxID], [company_taxID_docURL], [user_national_id], [idCard_pictureURL_1], [idCard_pictureURL_2], [application_check]) VALUES ( 102, N'XYZ Inc', N'456 Kaohsiung Street', N'Finance', N'0223456790', N'B123456789', N'http://example.com/taxdoc2.jpg', N'B123456789', N'http://example.com/id2_front.jpg', N'http://example.com/id2_back.jpg', 1)
-INSERT [dbo].[employer_application] ( [user_id], [company_name], [company_address], [company_category], [company_phoneNumber], [company_taxID], [company_taxID_docURL], [user_national_id], [idCard_pictureURL_1], [idCard_pictureURL_2], [application_check]) VALUES ( 103, N'´ú¸Õ', N'¼ê´ò¿¤´ú¸Õ´ú¸Õ', N'Äq·~¤Î¤g¥Û±Ä¨ú·~', N'1111111', N'5454654646', N'', N'H123456789', N'', N'', 0)
-INSERT [dbo].[employer_application] ( [user_id], [company_name], [company_address], [company_category], [company_phoneNumber], [company_taxID], [company_taxID_docURL], [user_national_id], [idCard_pictureURL_1], [idCard_pictureURL_2], [application_check]) VALUES ( 104, N'55555', N'¹Å¸q¿¤55555', N'Äq·~¤Î¤g¥Û±Ä¨ú·~', N'55555', N'55555', N'https://firebasestorage.googleapis.com/v0/b/profit-e686b.appspot.com/o/userUpload%2F%E9%A6%AC%E9%82%A6%E5%BE%B7.jpeg?alt=media&token=188ab1e6-c2b3-4578-92d1-93ae204dfc5e', N'H123456789', N'https://firebasestorage.googleapis.com/v0/b/profit-e686b.appspot.com/o/userUpload%2F%E9%A6%AC%E9%82%A6%E5%BE%B7.jpeg?alt=media&token=4e2da6ae-dc3e-4931-a4a5-61a1ac116582', N'https://firebasestorage.googleapis.com/v0/b/profit-e686b.appspot.com/o/userUpload%2F%E9%A6%AC%E9%82%A6%E5%BE%B7.jpeg?alt=media&token=188ab1e6-c2b3-4578-92d1-93ae204dfc5e', NULL)
+INSERT [dbo].[employer_application] ( [user_id], [company_name], [company_address], [company_category], [company_phoneNumber], [company_taxID], [company_taxID_docURL], [user_national_id], [idCard_pictureURL_1], [idCard_pictureURL_2], [application_check]) VALUES ( 103, N'ï¿½ï¿½ï¿½ï¿½', N'ï¿½ï¿½ò¿¤´ï¿½ï¿½Õ´ï¿½ï¿½ï¿½', N'ï¿½qï¿½~ï¿½Î¤gï¿½Û±Ä¨ï¿½ï¿½~', N'1111111', N'5454654646', N'', N'H123456789', N'', N'', 0)
+INSERT [dbo].[employer_application] ( [user_id], [company_name], [company_address], [company_category], [company_phoneNumber], [company_taxID], [company_taxID_docURL], [user_national_id], [idCard_pictureURL_1], [idCard_pictureURL_2], [application_check]) VALUES ( 104, N'55555', N'ï¿½Å¸qï¿½ï¿½55555', N'ï¿½qï¿½~ï¿½Î¤gï¿½Û±Ä¨ï¿½ï¿½~', N'55555', N'55555', N'https://firebasestorage.googleapis.com/v0/b/profit-e686b.appspot.com/o/userUpload%2F%E9%A6%AC%E9%82%A6%E5%BE%B7.jpeg?alt=media&token=188ab1e6-c2b3-4578-92d1-93ae204dfc5e', N'H123456789', N'https://firebasestorage.googleapis.com/v0/b/profit-e686b.appspot.com/o/userUpload%2F%E9%A6%AC%E9%82%A6%E5%BE%B7.jpeg?alt=media&token=4e2da6ae-dc3e-4931-a4a5-61a1ac116582', N'https://firebasestorage.googleapis.com/v0/b/profit-e686b.appspot.com/o/userUpload%2F%E9%A6%AC%E9%82%A6%E5%BE%B7.jpeg?alt=media&token=188ab1e6-c2b3-4578-92d1-93ae204dfc5e', NULL)
 
 INSERT [dbo].[employer_profile] ( [user_id], [company_name], [company_address], [company_category], [company_phoneNumber], [company_taxID], [company_numberOfemployee], [company_capital], [company_description], [company_photoURL]) VALUES ( 101, N'ABC Corp', N'123 Taipei Road', N'IT', N'0223456789', N'A123456789', N'200', N'10000000', N'Leading IT company in Taiwan', N'http://example.com/abccorp.jpg')
-INSERT [dbo].[employer_profile] ( [user_id], [company_name], [company_address], [company_category], [company_phoneNumber], [company_taxID], [company_numberOfemployee], [company_capital], [company_description], [company_photoURL]) VALUES ( 102, N'XYZ Inc', N'»O¥_¥« Kaohsiung Street', N'¹A¡BªL¡Bº®¡Bªª·~', N'0223456790', N'B123456789', N'1-10', N'8000000', N'Top finance company', N'http://example.com/xyzinc.jpg')
-INSERT [dbo].[employer_profile] ( [user_id], [company_name], [company_address], [company_category], [company_phoneNumber], [company_taxID], [company_numberOfemployee], [company_capital], [company_description], [company_photoURL]) VALUES ( 103, N'¸ê®i°ê»Ú', N'®ç¶é¥«¤¤Ãc°Ï·s¥Í¸ô¤G¬q421¸¹', N'¨ä¥L', N'03123456789', N'123456789', N'1-10', N'464646464464', N'', N'1145/1965770a560615a908f98b80e558752e-65960.jpg')
-INSERT [dbo].[employer_profile] ( [user_id], [company_name], [company_address], [company_category], [company_phoneNumber], [company_taxID], [company_numberOfemployee], [company_capital], [company_description], [company_photoURL]) VALUES ( 104, N'66666', N'ªá½¬¿¤66666', N'±M·~¡B¬ì¾Ç¤Î§Þ³NªA°È·~', N'66666', N'66666', N'5000¥H¤W', N'66666', N'66666', N'https://firebasestorage.googleapis.com/v0/b/profit-e686b.appspot.com/o/userUpload%2F1965770a560615a908f98b80e558752e-65960.jpg?alt=media&token=7783bf37-e935-4cb2-bd07-ec7a05d96a06')
+INSERT [dbo].[employer_profile] ( [user_id], [company_name], [company_address], [company_category], [company_phoneNumber], [company_taxID], [company_numberOfemployee], [company_capital], [company_description], [company_photoURL]) VALUES ( 102, N'XYZ Inc', N'ï¿½Oï¿½_ï¿½ï¿½ Kaohsiung Street', N'ï¿½Aï¿½Bï¿½Lï¿½Bï¿½ï¿½ï¿½Bï¿½ï¿½ï¿½~', N'0223456790', N'B123456789', N'1-10', N'8000000', N'Top finance company', N'http://example.com/xyzinc.jpg')
+INSERT [dbo].[employer_profile] ( [user_id], [company_name], [company_address], [company_category], [company_phoneNumber], [company_taxID], [company_numberOfemployee], [company_capital], [company_description], [company_photoURL]) VALUES ( 103, N'ï¿½ï¿½iï¿½ï¿½ï¿½', N'ï¿½ï¿½é¥«ï¿½ï¿½ï¿½cï¿½Ï·sï¿½Í¸ï¿½ï¿½Gï¿½q421ï¿½ï¿½', N'ï¿½ï¿½L', N'03123456789', N'123456789', N'1-10', N'464646464464', N'', N'1145/1965770a560615a908f98b80e558752e-65960.jpg')
+INSERT [dbo].[employer_profile] ( [user_id], [company_name], [company_address], [company_category], [company_phoneNumber], [company_taxID], [company_numberOfemployee], [company_capital], [company_description], [company_photoURL]) VALUES ( 104, N'66666', N'ï¿½á½¬ï¿½ï¿½66666', N'ï¿½Mï¿½~ï¿½Bï¿½ï¿½Ç¤Î§Þ³Nï¿½Aï¿½È·~', N'66666', N'66666', N'5000ï¿½Hï¿½W', N'66666', N'66666', N'https://firebasestorage.googleapis.com/v0/b/profit-e686b.appspot.com/o/userUpload%2F1965770a560615a908f98b80e558752e-65960.jpg?alt=media&token=7783bf37-e935-4cb2-bd07-ec7a05d96a06')
 
 INSERT [dbo].[password_reset_tokens] ( [user_id], [user_tokenHash], [expiration_time]) VALUES ( 101, N'tokenhash100',default);
 INSERT [dbo].[password_reset_tokens] ( [user_id], [user_tokenHash], [expiration_time]) VALUES ( 102, N'tokenhash101',default);
 
--- 1. jobs ªí
-INSERT INTO jobs (jobs_users_id, jobs_title, jobs_posting_date, jobs_application_deadline, jobs_description, jobs_status, jobs_required_skills, jobs_location, jobs_max_salary, jobs_min_salary, jobs_worktime, jobs_number_of_openings)
+-- 1. jobs ï¿½ï¿½
+INSERT INTO jobs (jobs_user_id, jobs_title, jobs_posting_date, jobs_application_deadline, jobs_description, jobs_status, jobs_required_skills, jobs_location, jobs_max_salary, jobs_min_salary, jobs_worktime, jobs_number_of_openings)
 VALUES
-(101, N'¸ê²`³nÅé¤uµ{®v', GETDATE(), DATEADD(month, 1, GETDATE()), N'´M§ä¦³¸gÅçªº³nÅé¤uµ{®v¥[¤J§Ú­Ìªº¹Î¶¤', 1, N'Java, Spring Boot, MySQL', N'¥x¥_¥«', 150000, 100000, '09:00:00', 2),
-(102, N'UI/UX ³]­p®v', DATEADD(day, -5, GETDATE()), DATEADD(month, 2, GETDATE()), N'³Ð·NUI/UX³]­p®v¡A­t³d²£«~¬É­±³]­p', 1, N'Figma, Adobe XD, Sketch', N'·s¥_¥«', 120000, 80000, '09:30:00', 1),
-(103, N'¼Æ¾Ú¤ÀªR®v', DATEADD(day, -10, GETDATE()), DATEADD(month, 1, GETDATE()), N'­t³d¤½¥q¼Æ¾Ú¤ÀªR©M³ø§i', 1, N'Python, R, SQL, Tableau', N'¥x¤¤¥«', 130000, 90000, '09:00:00', 3),
-(104, N'¦æ¾P¸g²z', DATEADD(day, -3, GETDATE()), DATEADD(month, 3, GETDATE()), N'­t³d¤½¥q¾ãÅé¦æ¾Pµ¦²¤', 1, N'¼Æ¦ì¦æ¾P, SEO, ªÀ¸s´CÅéºÞ²z', N'°ª¶¯¥«', 140000, 100000, '09:00:00', 1),
-(105, N'«eºÝ¶}µo¤uµ{®v', GETDATE(), DATEADD(month, 2, GETDATE()), N'¶}µoresponsiveºô¯¸©MwebÀ³¥Î', 1, N'HTML, CSS, JavaScript, React', N'¥x¥_¥«', 110000, 80000, '09:30:00', 2);
+(101, N'ï¿½ï¿½`ï¿½nï¿½ï¿½uï¿½{ï¿½v', GETDATE(), DATEADD(month, 1, GETDATE()), N'ï¿½Mï¿½ä¦³ï¿½gï¿½çªºï¿½nï¿½ï¿½uï¿½{ï¿½vï¿½[ï¿½Jï¿½Ú­Ìªï¿½ï¿½Î¶ï¿½', 1, N'Java, Spring Boot, MySQL', N'ï¿½xï¿½_ï¿½ï¿½', 150000, 100000, '09:00:00', 2),
+(102, N'UI/UX ï¿½]ï¿½pï¿½v', DATEADD(day, -5, GETDATE()), DATEADD(month, 2, GETDATE()), N'ï¿½Ð·NUI/UXï¿½]ï¿½pï¿½vï¿½Aï¿½tï¿½dï¿½ï¿½ï¿½~ï¿½É­ï¿½ï¿½]ï¿½p', 1, N'Figma, Adobe XD, Sketch', N'ï¿½sï¿½_ï¿½ï¿½', 120000, 80000, '09:30:00', 1),
+(103, N'ï¿½Æ¾Ú¤ï¿½ï¿½Rï¿½v', DATEADD(day, -10, GETDATE()), DATEADD(month, 1, GETDATE()), N'ï¿½tï¿½dï¿½ï¿½ï¿½qï¿½Æ¾Ú¤ï¿½ï¿½Rï¿½Mï¿½ï¿½ï¿½i', 1, N'Python, R, SQL, Tableau', N'ï¿½xï¿½ï¿½ï¿½ï¿½', 130000, 90000, '09:00:00', 3),
+(104, N'ï¿½ï¿½Pï¿½gï¿½z', DATEADD(day, -3, GETDATE()), DATEADD(month, 3, GETDATE()), N'ï¿½tï¿½dï¿½ï¿½ï¿½qï¿½ï¿½ï¿½ï¿½ï¿½Pï¿½ï¿½ï¿½ï¿½', 1, N'ï¿½Æ¦ï¿½ï¿½P, SEO, ï¿½ï¿½ï¿½sï¿½Cï¿½ï¿½Þ²z', N'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½', 140000, 100000, '09:00:00', 1),
+(105, N'ï¿½eï¿½Ý¶}ï¿½oï¿½uï¿½{ï¿½v', GETDATE(), DATEADD(month, 2, GETDATE()), N'ï¿½}ï¿½oresponsiveï¿½ï¿½ï¿½ï¿½ï¿½Mwebï¿½ï¿½ï¿½ï¿½', 1, N'HTML, CSS, JavaScript, React', N'ï¿½xï¿½_ï¿½ï¿½', 110000, 80000, '09:30:00', 2);
 
--- 2. jobs_application ªí
+-- 2. jobs_application ï¿½ï¿½
 INSERT INTO jobs_application (jobs_application_posting_id, jobs_application_member_id, jobs_application_date, jobs_application_status, jobs_application_contract)
 VALUES
 (1, 101, DATEADD(day, -2, GETDATE()), 1, NULL),
@@ -40,34 +40,34 @@ VALUES
 (4, 104, DATEADD(day, -3, GETDATE()), 3, NULL),
 (5, 105, DATEADD(day, -1, GETDATE()), 1, NULL);
 
--- 3. jobs_application_project ªí
+-- 3. jobs_application_project ï¿½ï¿½
 INSERT INTO jobs_application_project (jobs_application_id, jobs_application_status, jobs_project, jobs_amount)
 VALUES
-(1, 1, N'ºô¯¸­«ºc±M®×', 50000),
-(2, 2, N'¤â¾÷APP UI³]­p', 30000),
-(3, 1, N'«È¤á¼Æ¾Ú¤ÀªR³ø§i', 40000),
-(4, 3, N'«~µP±À¼s¬¡°Ê', 60000),
-(5, 1, N'¹q°Ó¥­¥x«eºÝ¶}µo', 45000);
+(1, 1, N'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½cï¿½Mï¿½ï¿½', 50000),
+(2, 2, N'ï¿½ï¿½ï¿½APP UIï¿½]ï¿½p', 30000),
+(3, 1, N'ï¿½È¤ï¿½Æ¾Ú¤ï¿½ï¿½Rï¿½ï¿½ï¿½i', 40000),
+(4, 3, N'ï¿½~ï¿½Pï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½', 60000),
+(5, 1, N'ï¿½qï¿½Ó¥ï¿½ï¿½xï¿½eï¿½Ý¶}ï¿½o', 45000);
 
--- 4. major_category ªí
+-- 4. major_category ï¿½ï¿½
 INSERT INTO major_category (major_category_id, category_name)
 VALUES
-(100, N'³nÅé¶}µo'),
-(200, N'³]­p'),
-(300, N'¼Æ¾Ú¤ÀªR'),
-(400, N'¦æ¾P'),
-(500, N'±M®×ºÞ²z');
+(100, N'ï¿½nï¿½ï¿½}ï¿½o'),
+(200, N'ï¿½]ï¿½p'),
+(300, N'ï¿½Æ¾Ú¤ï¿½ï¿½R'),
+(400, N'ï¿½ï¿½P'),
+(500, N'ï¿½Mï¿½×ºÞ²z');
 
--- 5. major ªí
+-- 5. major ï¿½ï¿½
 INSERT INTO major (major_id, major_name, major_category_id, major_description)
 VALUES
-(100, N'Java¶}µo', 100, N'Java»y¨¥¤Î¬ÛÃö®Ø¬[¶}µo'),
-(101, N'UI/UX³]­p', 200, N'¨Ï¥ÎªÌ¤¶­±©MÅéÅç³]­p'),
-(102, N'¼Æ¾Ú¬ì¾Ç', 300, N'¤j¼Æ¾Ú¤ÀªR©M¾÷¾¹¾Ç²ß'),
-(103, N'¼Æ¦ì¦æ¾P', 400, N'½u¤WÀç¾Pµ¦²¤©M°õ¦æ'),
-(104, N'±Ó±¶±M®×ºÞ²z', 500, N'¨Ï¥Î±Ó±¶¤èªk½×ºÞ²z±M®×');
+(100, N'Javaï¿½}ï¿½o', 100, N'Javaï¿½yï¿½ï¿½ï¿½Î¬ï¿½ï¿½ï¿½ï¿½Ø¬[ï¿½}ï¿½o'),
+(101, N'UI/UXï¿½]ï¿½p', 200, N'ï¿½Ï¥ÎªÌ¤ï¿½ï¿½ï¿½ï¿½Mï¿½ï¿½ï¿½ï¿½]ï¿½p'),
+(102, N'ï¿½Æ¾Ú¬ï¿½ï¿½', 300, N'ï¿½jï¿½Æ¾Ú¤ï¿½ï¿½Rï¿½Mï¿½ï¿½ï¿½ï¿½ï¿½Ç²ï¿½'),
+(103, N'ï¿½Æ¦ï¿½ï¿½P', 400, N'ï¿½uï¿½Wï¿½ï¿½Pï¿½ï¿½ï¿½ï¿½ï¿½Mï¿½ï¿½ï¿½ï¿½'),
+(104, N'ï¿½Ó±ï¿½ï¿½Mï¿½×ºÞ²z', 500, N'ï¿½Ï¥Î±Ó±ï¿½ï¿½ï¿½kï¿½×ºÞ²zï¿½Mï¿½ï¿½');
 
--- 6. user_major ªí
+-- 6. user_major ï¿½ï¿½
 INSERT INTO user_major (user_id, major_id)
 VALUES
 (101, 100),
@@ -76,25 +76,25 @@ VALUES
 (104, 103),
 (105, 104);
 
--- 7. service ªí
+-- 7. service ï¿½ï¿½
 INSERT INTO service (user_id, major_id, service_title, service_content, service_price, service_unit_name, service_duration, service_createdate, service_updatedate, service_pictureURL_1, service_pictureURL_2, service_pictureURL_3, service_status)
 VALUES
-(101, 100, N'Java WebÀ³¥Î¶}µo', N'´£¨ÑJava WebÀ³¥Î¶}µoªA°È¡A¥]¬A«áºÝAPI©M¸ê®Æ®w³]­p', 5000, N'¤p®É', 40.0, GETDATE(), GETDATE(), 'http://example.com/java1.jpg', 'http://example.com/java2.jpg', 'http://example.com/java3.jpg', 1),
-(102, 101, N'ºô¯¸UI³]­p', N'¬°±zªººô¯¸´£¨Ñ²{¥N¤Æ¡B¥Î¤á¤Í¦nªºUI³]­p', 4000, N'±M®×', 20.0, DATEADD(day, -10, GETDATE()), DATEADD(day, -10, GETDATE()), 'http://example.com/ui1.jpg', 'http://example.com/ui2.jpg', 'http://example.com/ui3.jpg', 1),
-(103, 102, N'°Ó·~¼Æ¾Ú¤ÀªR', N'¨Ï¥Î¥ý¶iªº¼Æ¾Ú¤ÀªR§Þ³N¡A¬°±zªº·~°È´£¨Ñ¬}¹î', 6000, N'³ø§i', 30.0, DATEADD(day, -20, GETDATE()), DATEADD(day, -15, GETDATE()), 'http://example.com/data1.jpg', 'http://example.com/data2.jpg', 'http://example.com/data3.jpg', 1),
-(104, 103, N'ªÀ¸s´CÅé¦æ¾Pµ¦²¤', N'¨î©w©M°õ¦æ¦³®ÄªºªÀ¸s´CÅé¦æ¾Pµ¦²¤', 3500, N'¤ë', 30.0, DATEADD(day, -30, GETDATE()), DATEADD(day, -25, GETDATE()), 'http://example.com/marketing1.jpg', 'http://example.com/marketing2.jpg', 'http://example.com/marketing3.jpg', 1),
-(105, 104, N'±Ó±¶±M®×ºÞ²z¿Ô¸ß', N'¨ó§U±zªº¹Î¶¤¹ê¬I±Ó±¶±M®×ºÞ²z¤èªk', 7000, N'¤Ñ', 5.0, DATEADD(day, -5, GETDATE()), DATEADD(day, -5, GETDATE()), 'http://example.com/agile1.jpg', 'http://example.com/agile2.jpg', 'http://example.com/agile3.jpg', 1);
+(101, 100, N'Java Webï¿½ï¿½ï¿½Î¶}ï¿½o', N'ï¿½ï¿½ï¿½ï¿½Java Webï¿½ï¿½ï¿½Î¶}ï¿½oï¿½Aï¿½È¡Aï¿½]ï¿½Aï¿½ï¿½ï¿½APIï¿½Mï¿½ï¿½Æ®wï¿½]ï¿½p', 5000, N'ï¿½pï¿½ï¿½', 40.0, GETDATE(), GETDATE(), 'http://example.com/java1.jpg', 'http://example.com/java2.jpg', 'http://example.com/java3.jpg', 1),
+(102, 101, N'ï¿½ï¿½ï¿½ï¿½UIï¿½]ï¿½p', N'ï¿½ï¿½ï¿½zï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ²{ï¿½Nï¿½Æ¡Bï¿½Î¤ï¿½Í¦nï¿½ï¿½UIï¿½]ï¿½p', 4000, N'ï¿½Mï¿½ï¿½', 20.0, DATEADD(day, -10, GETDATE()), DATEADD(day, -10, GETDATE()), 'http://example.com/ui1.jpg', 'http://example.com/ui2.jpg', 'http://example.com/ui3.jpg', 1),
+(103, 102, N'ï¿½Ó·~ï¿½Æ¾Ú¤ï¿½ï¿½R', N'ï¿½Ï¥Î¥ï¿½ï¿½iï¿½ï¿½ï¿½Æ¾Ú¤ï¿½ï¿½Rï¿½Þ³Nï¿½Aï¿½ï¿½ï¿½zï¿½ï¿½ï¿½~ï¿½È´ï¿½ï¿½Ñ¬}ï¿½ï¿½', 6000, N'ï¿½ï¿½ï¿½i', 30.0, DATEADD(day, -20, GETDATE()), DATEADD(day, -15, GETDATE()), 'http://example.com/data1.jpg', 'http://example.com/data2.jpg', 'http://example.com/data3.jpg', 1),
+(104, 103, N'ï¿½ï¿½ï¿½sï¿½Cï¿½ï¿½ï¿½Pï¿½ï¿½ï¿½ï¿½', N'ï¿½ï¿½wï¿½Mï¿½ï¿½ï¿½æ¦³ï¿½Äªï¿½ï¿½ï¿½ï¿½sï¿½Cï¿½ï¿½ï¿½Pï¿½ï¿½ï¿½ï¿½', 3500, N'ï¿½ï¿½', 30.0, DATEADD(day, -30, GETDATE()), DATEADD(day, -25, GETDATE()), 'http://example.com/marketing1.jpg', 'http://example.com/marketing2.jpg', 'http://example.com/marketing3.jpg', 1),
+(105, 104, N'ï¿½Ó±ï¿½ï¿½Mï¿½×ºÞ²zï¿½Ô¸ï¿½', N'ï¿½ï¿½Uï¿½zï¿½ï¿½ï¿½Î¶ï¿½ï¿½ï¿½Iï¿½Ó±ï¿½ï¿½Mï¿½×ºÞ²zï¿½ï¿½k', 7000, N'ï¿½ï¿½', 5.0, DATEADD(day, -5, GETDATE()), DATEADD(day, -5, GETDATE()), 'http://example.com/agile1.jpg', 'http://example.com/agile2.jpg', 'http://example.com/agile3.jpg', 1);
 
--- 8. collection ªí
+-- 8. collection ï¿½ï¿½
 INSERT INTO collection (user_id, major_id, collection_cover_img_id, collection_name)
 VALUES
-(101, 100, NULL, N'Java±M®×§@«~¶°'),
-(102, 101, NULL, N'UI³]­p§@«~¶°'),
-(103, 102, NULL, N'¼Æ¾Ú¤ÀªR±M®×¶°'),
-(104, 103, NULL, N'¦æ¾P®×¨Ò¶°'),
-(105, 104, NULL, N'±M®×ºÞ²z¸gÅç¶°');
+(101, 100, NULL, N'Javaï¿½Mï¿½×§@ï¿½~ï¿½ï¿½'),
+(102, 101, NULL, N'UIï¿½]ï¿½pï¿½@ï¿½~ï¿½ï¿½'),
+(103, 102, NULL, N'ï¿½Æ¾Ú¤ï¿½ï¿½Rï¿½Mï¿½×¶ï¿½'),
+(104, 103, NULL, N'ï¿½ï¿½Pï¿½×¨Ò¶ï¿½'),
+(105, 104, NULL, N'ï¿½Mï¿½×ºÞ²zï¿½gï¿½ç¶°');
 
--- 9. image ªí
+-- 9. image ï¿½ï¿½
 INSERT INTO image (collection_id, image_pictureURL)
 VALUES
 (1, 'http://example.com/java_project1.jpg'),
@@ -103,87 +103,87 @@ VALUES
 (2, 'http://example.com/ui_design2.jpg'),
 (3, 'http://example.com/data_analysis1.jpg');
 
--- 10. video ªí
+-- 10. video ï¿½ï¿½
 INSERT INTO video (collection_id, video_url, video_disc)
 VALUES
-(1, 'http://example.com/java_demo.mp4', N'Java±M®×ºt¥Ü'),
-(2, 'http://example.com/ui_walkthrough.mp4', N'UI³]­p¬yµ{®i¥Ü'),
-(3, 'http://example.com/data_presentation.mp4', N'¼Æ¾Ú¤ÀªRµ²ªG³ø§i'),
-(4, 'http://example.com/marketing_case.mp4', N'¦æ¾P¬¡°Ê¦^ÅU'),
-(5, 'http://example.com/project_management.mp4', N'±M®×ºÞ²z¸gÅç¤À¨É');
+(1, 'http://example.com/java_demo.mp4', N'Javaï¿½Mï¿½×ºtï¿½ï¿½'),
+(2, 'http://example.com/ui_walkthrough.mp4', N'UIï¿½]ï¿½pï¿½yï¿½{ï¿½iï¿½ï¿½'),
+(3, 'http://example.com/data_presentation.mp4', N'ï¿½Æ¾Ú¤ï¿½ï¿½Rï¿½ï¿½ï¿½Gï¿½ï¿½ï¿½i'),
+(4, 'http://example.com/marketing_case.mp4', N'ï¿½ï¿½Pï¿½ï¿½ï¿½Ê¦^ï¿½U'),
+(5, 'http://example.com/project_management.mp4', N'ï¿½Mï¿½×ºÞ²zï¿½gï¿½ï¿½ï¿½ï¿½ï¿½');
 
--- 11. courses ªí
+-- 11. courses ï¿½ï¿½
 INSERT INTO courses (course_id, course_name, course_create_user_id, course_category, course_information, course_description, course_enrollment_date, course_start_date, course_end_date, course_price, course_status)
 VALUES
-('C0100', N'Java ¶i¶¥¶}µo', 101, 100, N'¾A¦X¦³°òÂ¦Java¸gÅçªº¶}µoªÌ', N'¾Ç²ßJava°ª¯Å¯S©Ê©M³]­p¼Ò¦¡', GETDATE(), DATEADD(month, 1, GETDATE()), DATEADD(month, 3, GETDATE()), 15000, 'Active'),
-('C0101', N'UI/UX³]­p­ì²z', 102, 101, N'¹s°òÂ¦¤JªùUI/UX³]­p', N'¾Ç²ß³]­p«äºû©M¤u¨ã¨Ï¥Î', DATEADD(day, -10, GETDATE()), DATEADD(day, 20, GETDATE()), DATEADD(month, 2, GETDATE()), 12000, 'Active'),
-('C0102', N'Python¼Æ¾Ú¤ÀªR', 103, 102, N'¾A¦X¦³°òÂ¦Python¸gÅçªº¾Ç²ßªÌ', N'¨Ï¥ÎPython¶i¦æ¼Æ¾Ú³B²z©MµøÄ±¤Æ', DATEADD(day, -20, GETDATE()), DATEADD(day, 10, GETDATE()), DATEADD(month, 2, GETDATE()), 18000, 'Active'),
-('C0103', N'¼Æ¦ì¦æ¾Pµ¦²¤', 104, 103, N'¾A¦X¦æ¾P·s¤â©M¦³¸gÅçªÌ', N'¾Ç²ß²{¥N¼Æ¦ì¦æ¾P§Þ¥©©Mµ¦²¤', DATEADD(day, -5, GETDATE()), DATEADD(month, 1, GETDATE()), DATEADD(month, 3, GETDATE()), 10000, 'Active'),
-('C0104', N'±Ó±¶Scrum¹ê°È', 105, 104, N'¾A¦X±M®×¸g²z©M¹Î¶¤»â¾É', N'¾Ç²ßScrum®Ø¬[©M¹ê¬I§Þ¥©', GETDATE(), DATEADD(month, 2, GETDATE()), DATEADD(month, 4, GETDATE()), 20000, 'Active');
+('C0100', N'Java ï¿½iï¿½ï¿½ï¿½}ï¿½o', 101, 100, N'ï¿½Aï¿½Xï¿½ï¿½ï¿½ï¿½Â¦Javaï¿½gï¿½çªºï¿½}ï¿½oï¿½ï¿½', N'ï¿½Ç²ï¿½Javaï¿½ï¿½ï¿½Å¯Sï¿½Ê©Mï¿½]ï¿½pï¿½Ò¦ï¿½', GETDATE(), DATEADD(month, 1, GETDATE()), DATEADD(month, 3, GETDATE()), 15000, 'Active'),
+('C0101', N'UI/UXï¿½]ï¿½pï¿½ï¿½z', 102, 101, N'ï¿½sï¿½ï¿½Â¦ï¿½Jï¿½ï¿½UI/UXï¿½]ï¿½p', N'ï¿½Ç²ß³]ï¿½pï¿½ï¿½ï¿½ï¿½Mï¿½uï¿½ï¿½Ï¥ï¿½', DATEADD(day, -10, GETDATE()), DATEADD(day, 20, GETDATE()), DATEADD(month, 2, GETDATE()), 12000, 'Active'),
+('C0102', N'Pythonï¿½Æ¾Ú¤ï¿½ï¿½R', 103, 102, N'ï¿½Aï¿½Xï¿½ï¿½ï¿½ï¿½Â¦Pythonï¿½gï¿½çªºï¿½Ç²ßªï¿½', N'ï¿½Ï¥ï¿½Pythonï¿½iï¿½ï¿½Æ¾Ú³Bï¿½zï¿½Mï¿½ï¿½Ä±ï¿½ï¿½', DATEADD(day, -20, GETDATE()), DATEADD(day, 10, GETDATE()), DATEADD(month, 2, GETDATE()), 18000, 'Active'),
+('C0103', N'ï¿½Æ¦ï¿½ï¿½Pï¿½ï¿½ï¿½ï¿½', 104, 103, N'ï¿½Aï¿½Xï¿½ï¿½Pï¿½sï¿½ï¿½Mï¿½ï¿½ï¿½gï¿½ï¿½ï¿½', N'ï¿½Ç²ß²{ï¿½Nï¿½Æ¦ï¿½ï¿½Pï¿½Þ¥ï¿½ï¿½Mï¿½ï¿½ï¿½ï¿½', DATEADD(day, -5, GETDATE()), DATEADD(month, 1, GETDATE()), DATEADD(month, 3, GETDATE()), 10000, 'Active'),
+('C0104', N'ï¿½Ó±ï¿½Scrumï¿½ï¿½ï¿½', 105, 104, N'ï¿½Aï¿½Xï¿½Mï¿½×¸gï¿½zï¿½Mï¿½Î¶ï¿½ï¿½ï¿½ï¿½', N'ï¿½Ç²ï¿½Scrumï¿½Ø¬[ï¿½Mï¿½ï¿½Iï¿½Þ¥ï¿½', GETDATE(), DATEADD(month, 2, GETDATE()), DATEADD(month, 4, GETDATE()), 20000, 'Active');
 
--- 12. course_order ªí
+-- 12. course_order ï¿½ï¿½
 INSERT INTO course_order (course_order_id, course_id, student_id, course_order_price, course_order_create_date, course_order_remark, course_order_status)
 VALUES
-('CR100', 'C0100', 101, 15000, GETDATE(), N'´Á«Ý¾Ç²ßJava¶i¶¥ª¾ÃÑ', 'Completed'),
-('CR101', 'C0101', 102, 12000, DATEADD(day, -1, GETDATE()), N'·Q´£¤ÉUI³]­p¯à¤O', 'Completed'),
-('CR102', 'C0102', 103, 18000, DATEADD(day, -2, GETDATE()), N'»Ý­n¾Ç²ß¼Æ¾Ú¤ÀªR§Þ¯à', 'Pending'),
-('CR103', 'C0103', 104, 10000, DATEADD(day, -3, GETDATE()), N'´£¤É¼Æ¦ì¦æ¾P¯à¤O', 'Completed'),
-('CR104', 'C0104', 105, 20000, GETDATE(), N'¾Ç²ß±Ó±¶±M®×ºÞ²z', 'Pending');
+('CR100', 'C0100', 101, 15000, GETDATE(), N'ï¿½ï¿½ï¿½Ý¾Ç²ï¿½Javaï¿½iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½', 'Completed'),
+('CR101', 'C0101', 102, 12000, DATEADD(day, -1, GETDATE()), N'ï¿½Qï¿½ï¿½ï¿½ï¿½UIï¿½]ï¿½pï¿½ï¿½O', 'Completed'),
+('CR102', 'C0102', 103, 18000, DATEADD(day, -2, GETDATE()), N'ï¿½Ý­nï¿½Ç²ß¼Æ¾Ú¤ï¿½ï¿½Rï¿½Þ¯ï¿½', 'Pending'),
+('CR103', 'C0103', 104, 10000, DATEADD(day, -3, GETDATE()), N'ï¿½ï¿½ï¿½É¼Æ¦ï¿½ï¿½Pï¿½ï¿½O', 'Completed'),
+('CR104', 'C0104', 105, 20000, GETDATE(), N'ï¿½Ç²ß±Ó±ï¿½ï¿½Mï¿½×ºÞ²z', 'Pending');
 
--- 13. course_grade_content ªí
+-- 13. course_grade_content ï¿½ï¿½
 INSERT INTO course_grade_content (course_id, student_id, course_grade_score, course_grade_comment)
 VALUES
-('C0100', '101', 90, N'ªí²{Àu¨q¡A´x´¤¤F¤j³¡¤À¶i¶¥·§©À'),
-('C0101', '102', 85, N'³]­p§@«~¦³³Ð·N¡A»Ý­n¥[±j¥Î¤áÅéÅç¦Ò¶q'),
+('C0100', '101', 90, N'ï¿½ï¿½{ï¿½uï¿½qï¿½Aï¿½xï¿½ï¿½ï¿½Fï¿½jï¿½ï¿½ï¿½ï¿½ï¿½iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'),
+('C0101', '102', 85, N'ï¿½]ï¿½pï¿½@ï¿½~ï¿½ï¿½ï¿½Ð·Nï¿½Aï¿½Ý­nï¿½[ï¿½jï¿½Î¤ï¿½ï¿½ï¿½ï¿½ï¿½Ò¶q'),
 ('C0102', '103', NULL, NULL),
-('C0103', '104', 88, N'µ¦²¤³W¹º¯à¤O±j¡A»Ý­n§ó¦h¹ê½î'),
+('C0103', '104', 88, N'ï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½ï¿½Oï¿½jï¿½Aï¿½Ý­nï¿½ï¿½hï¿½ï¿½ï¿½'),
 ('C0104', '105', NULL, NULL);
 
--- 14. course_module ªí
+-- 14. course_module ï¿½ï¿½
 INSERT INTO course_module (course_id, course_module_name)
 VALUES
-('C0100', N'Java ¦h°õ¦æºüµ{¦¡³]­p'),
-('C0100', N'³]­p¼Ò¦¡¦bJava¤¤ªºÀ³¥Î'),
-('C0101', N'¨Ï¥ÎªÌ¬ã¨s¤èªk'),
-('C0101', N'¤¶­±³]­p­ì«h'),
-('C0102', N'Python¼Æ¾Ú³B²z°òÂ¦');
+('C0100', N'Java ï¿½hï¿½ï¿½ï¿½ï¿½ï¿½ï¿½{ï¿½ï¿½ï¿½]ï¿½p'),
+('C0100', N'ï¿½]ï¿½pï¿½Ò¦ï¿½ï¿½bJavaï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'),
+('C0101', N'ï¿½Ï¥ÎªÌ¬ï¿½sï¿½ï¿½k'),
+('C0101', N'ï¿½ï¿½ï¿½ï¿½ï¿½]ï¿½pï¿½ï¿½h'),
+('C0102', N'Pythonï¿½Æ¾Ú³Bï¿½zï¿½ï¿½Â¦');
 
--- 15. course_lessons ªí
+-- 15. course_lessons ï¿½ï¿½
 INSERT INTO course_lessons (course_module_id, course_id, course_lesson_name, course_lesson_sort, lesson_media_url, lesson_media_type, lesson_media_duration)
 VALUES
-(1, 'C0100', N'²z¸ÑJava°õ¦æºü¥Í©R¶g´Á', '1', 'http://example.com/java_thread_lifecycle.mp4', 'video', 45),
-(1, 'C0100', N'¦P¨B»P¤¬¥¸', '2', 'http://example.com/java_synchronization.mp4', 'video', 50),
-(2, 'C0101', N'¥Î¤á³X½Í§Þ¥©', '1', 'http://example.com/user_interview.mp4', 'video', 40),
-(2, 'C0101', N'Ã¸»s¥Î¤á®Èµ{¦a¹Ï', '2', 'http://example.com/user','website',30);
+(1, 'C0100', N'ï¿½zï¿½ï¿½Javaï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í©Rï¿½gï¿½ï¿½', '1', 'http://example.com/java_thread_lifecycle.mp4', 'video', 45),
+(1, 'C0100', N'ï¿½Pï¿½Bï¿½Pï¿½ï¿½ï¿½ï¿½', '2', 'http://example.com/java_synchronization.mp4', 'video', 50),
+(2, 'C0101', N'ï¿½Î¤ï¿½Xï¿½Í§Þ¥ï¿½', '1', 'http://example.com/user_interview.mp4', 'video', 40),
+(2, 'C0101', N'Ã¸ï¿½sï¿½Î¤ï¿½Èµ{ï¿½aï¿½ï¿½', '2', 'http://example.com/user','website',30);
 
--- ´¡¤J events ªí®æªº´ú¸Õ¼Æ¾Ú
+-- ï¿½ï¿½ï¿½J events ï¿½ï¿½æªºï¿½ï¿½ï¿½Õ¼Æ¾ï¿½
 INSERT INTO events (event_id, event_name, is_event_active, event_major, event_start_date, event_end_date, event_part_start_date, event_part_end_date, event_amount, event_location, event_participant_maximum, event_description, event_note)
 VALUES
 ('EV100', 'Tech Conference', 1, 100, GETDATE(), DATEADD(day, 1, GETDATE()), DATEADD(day, 2, GETDATE()), DATEADD(day, 3, GETDATE()), 500, 'Taipei', 300, 'Annual technology conference', 'Registration required'),
 ('EV101', 'Finance Summit', 1, 100, GETDATE(), DATEADD(day, 1, GETDATE()), DATEADD(day, 2, GETDATE()), DATEADD(day, 3, GETDATE()), 700, 'Kaohsiung', 400, 'Leading finance summit', 'Register online');
 
--- ´¡¤J event_host ªí®æªº´ú¸Õ¼Æ¾Ú
+-- ï¿½ï¿½ï¿½J event_host ï¿½ï¿½æªºï¿½ï¿½ï¿½Õ¼Æ¾ï¿½
 INSERT INTO event_host (event_id, event_host_id)
 VALUES
 ('EV100', 100),
 ('EV101', 101);
 
--- ´¡¤J event_order ªí®æªº´ú¸Õ¼Æ¾Ú
+-- ï¿½ï¿½ï¿½J event_order ï¿½ï¿½æªºï¿½ï¿½ï¿½Õ¼Æ¾ï¿½
 INSERT INTO event_order (event_order_id, event_order_amount, is_event_order_active, event_id, event_participant_id, event_participant_date, event_participant_note)
 VALUES
 ('EO100', 500, 1, 'EV100', 100, GETDATE(), 'Confirmed'),
 ('EO101', 700, 1, 'EV101', 101, GETDATE(), 'Confirmed');
 
--- 1. job_orders ªí
+-- 1. job_orders ï¿½ï¿½
 INSERT INTO job_orders (job_orders_id, job_application_id, job_order_date, job_order_status, job_notes, job_amount)
 VALUES
-('J0100', 1, DATEADD(day, -5, GETDATE()), 'Processing', N'ºô¯¸­«ºc±M®×­q³æ', 50000),
-('J0101', 2, DATEADD(day, -4, GETDATE()), 'Completed', N'¤â¾÷APP UI³]­p­q³æ', 30000),
-('J0102', 3, DATEADD(day, -3, GETDATE()), 'Processing', N'«È¤á¼Æ¾Ú¤ÀªR³ø§i­q³æ', 40000),
-('J0103', 4, DATEADD(day, -2, GETDATE()), 'Canceled', N'«~µP±À¼s¬¡°Ê­q³æ', 60000),
-('J0104', 5, DATEADD(day, -1, GETDATE()), 'Processing', N'¹q°Ó¥­¥x«eºÝ¶}µo­q³æ', 45000);
+('J0100', 1, DATEADD(day, -5, GETDATE()), 'Processing', N'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½cï¿½Mï¿½×­qï¿½ï¿½', 50000),
+('J0101', 2, DATEADD(day, -4, GETDATE()), 'Completed', N'ï¿½ï¿½ï¿½APP UIï¿½]ï¿½pï¿½qï¿½ï¿½', 30000),
+('J0102', 3, DATEADD(day, -3, GETDATE()), 'Processing', N'ï¿½È¤ï¿½Æ¾Ú¤ï¿½ï¿½Rï¿½ï¿½ï¿½iï¿½qï¿½ï¿½', 40000),
+('J0103', 4, DATEADD(day, -2, GETDATE()), 'Canceled', N'ï¿½~ï¿½Pï¿½ï¿½ï¿½sï¿½ï¿½ï¿½Ê­qï¿½ï¿½', 60000),
+('J0104', 5, DATEADD(day, -1, GETDATE()), 'Processing', N'ï¿½qï¿½Ó¥ï¿½ï¿½xï¿½eï¿½Ý¶}ï¿½oï¿½qï¿½ï¿½', 45000);
 
--- 2. user_transactions ªí
+-- 2. user_transactions ï¿½ï¿½
 INSERT INTO user_transactions (transaction_id, user_id, transaction_type, transaction_amount, transaction_status, created_at, completion_at)
 VALUES
 ('TR001', 101, 'payment', 50000, 'completed', DATEADD(day, -5, GETDATE()), DATEADD(day, -5, GETDATE())),
@@ -192,7 +192,7 @@ VALUES
 ('TR004', 104, 'withdrawal', 20000, 'completed', DATEADD(day, -2, GETDATE()), DATEADD(day, -2, GETDATE())),
 ('TR005', 105, 'refund', 15000, 'pending', DATEADD(day, -1, GETDATE()), NULL);
 
--- 3. invoices ªí
+-- 3. invoices ï¿½ï¿½
 INSERT INTO invoices (invoice_number, transaction_id, job_order_id, course_order_id, event_order_id, invoice_amount, issued_date, invoice_status)
 VALUES
 ('INV001', 'TR001', 'J0100', NULL, NULL, 50000, DATEADD(day, -5, GETDATE()), 'open'),

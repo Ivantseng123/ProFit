@@ -1,9 +1,9 @@
 package com.ProFit.dao.jobsCRUD;
 
 
-import com.ProFit.bean.Jobs;
-
 import java.util.List;
+
+import com.ProFit.bean.jobsBean.Jobs;
 //@Repository
 public interface IHJobsDAO {
 

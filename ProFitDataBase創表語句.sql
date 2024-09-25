@@ -65,7 +65,7 @@ CREATE TABLE password_reset_tokens(
 
 CREATE TABLE jobs (
     jobs_id INT PRIMARY KEY IDENTITY(1,1), 
-    jobs_users_id INT, 
+    jobs_user_id INT,
     jobs_title NVARCHAR(100), 
     jobs_posting_date DATETIME, 
     jobs_application_deadline DATETIME, 
@@ -77,7 +77,7 @@ CREATE TABLE jobs (
     jobs_min_salary INT, 
     jobs_worktime TIME,
     jobs_number_of_openings INT,
-    FOREIGN KEY (jobs_users_id) REFERENCES users(user_id)
+    FOREIGN KEY (jobs_user_id) REFERENCES users(user_id)
 );
 
 CREATE TABLE jobs_application (

@@ -1,44 +1,43 @@
 package com.ProFit.service.jobService;
 
 import java.util.List;
-import java.util.Map;
 
-import org.hibernate.Session;
-
-import com.ProFit.bean.Jobs;
-import com.ProFit.dao.jobsCRUD.HJobsDAO;
+import com.ProFit.bean.jobsBean.Jobs;
 import com.ProFit.dao.jobsCRUD.IHJobsDAO;
-//@Service
-public class JobsService {
-	
-	private Session session;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+@Transactional
+public class JobsService implements IJobsService{
+
 	private final IHJobsDAO jobsDAO;
-	
-	
-    public JobsService(Session session) {
-		super();
-		this.session = session;
-		jobsDAO = new HJobsDAO(session);
-	}
 
-	
+    public JobsService(IHJobsDAO jobsDAO) {
+        this.jobsDAO = jobsDAO;
+    }
 
+    @Override
     public Jobs save(Jobs jobs) {
         return jobsDAO.save(jobs);
     }
 
+    @Override
     public Jobs findById(Integer jobsId) {
         return jobsDAO.findById(jobsId);
     }
 
+    @Override
     public List<Jobs> findAll() {
         return jobsDAO.findAll();
     }
 
+    @Override
     public void update(Jobs jobs) { //String是指欄位名稱,Object是指欄位值
     	jobsDAO.update(jobs);
     }
 
+    @Override
     public void delete(Integer jobsId) {
 //        if (id == 1){
 //            System.out.println("不能刪除");
