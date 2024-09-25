@@ -93,9 +93,21 @@ public class CoursesController {
         @RequestParam String coursePrice,
         @RequestParam String courseStatus
     ) {
+    	
+    	// 修剪掉額外的部分（如果有）
+    	if (courseStartDate != null && courseStartDate.length() > 19) {
+    	    courseStartDate = courseStartDate.substring(0, 19); // 保留 "yyyy-MM-dd HH:mm:ss" 對應的部分
+    	}
+
+    	if (courseEndDate != null && courseEndDate.length() > 19) {
+    	    courseEndDate = courseEndDate.substring(0, 19);
+    	}
+
+    	System.out.println(courseStartDate);
+    	System.out.println(courseEndDate);
         // 定義日期格式
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         
         // 解析日期
         LocalDate enrollmentDateParsed = (courseEnrollmentDate != null && !courseEnrollmentDate.isEmpty()) 

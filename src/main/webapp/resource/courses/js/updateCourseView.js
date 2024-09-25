@@ -6,12 +6,25 @@ $(document).ready(function() {
 
     // 如果 courseId 存在且不為空字串，則發送 AJAX 請求獲取課程信息
     if (oldCourseId) {
+		
+		
+		
         $.ajax({
             url: contextPath + '/courses/search/' + oldCourseId, // 使用 contextPath 和路徑變數
             dataType: 'json',
             type: 'GET',
             success: function(response) {
                 console.log(response);
+				
+				// 完整的日期和时间
+				let courseStartDate = `${response.courseStartDate.split('.')[0]}`;
+				let courseEndDate = `${response.courseEndDate.split('.')[0]}`;
+
+				// 拼接成完整的字符串
+				let courseStartDateTime = `${courseStartDate}`;
+				let courseEndDateTime = `${courseEndDate}`;
+
+				
                 $('.form-container').append(`
                     <form>
                         <div class="form-group">
@@ -44,11 +57,11 @@ $(document).ready(function() {
                         </div>
                         <div class="form-group">
                             <label for="courseStartDate">開始日期:</label>
-                            <input type="datetime-local" id="courseStartDate" name="courseStartDate" value="${response.courseStartDate}">
+                            <input type="datetime-local" id="courseStartDate" name="courseStartDate" value="${courseStartDateTime}">
                         </div>
                         <div class="form-group">
                             <label for="courseEndDate">結束日期:</label>
-                            <input type="datetime-local" id="courseEndDate" name="courseEndDate" value="${response.courseEndDate}">
+                            <input type="datetime-local" id="courseEndDate" name="courseEndDate" value="${courseEndDateTime}">
                         </div>
                         <div class="form-group">
                             <label for="coursePrice">課程價格:</label>
@@ -64,7 +77,7 @@ $(document).ready(function() {
                             </select>
                         </div>
                         <div class="form-group">
-                            <a href="${contextPath}/coursesVIEW/courseView.jsp"><button id='cancelBtn' type="button" style="margin-right:380px;">取消修改</button></a>
+                            <a href="${contextPath}/courses"><button id='cancelBtn' type="button" style="margin-right:380px;">取消修改</button></a>
                             <button id="editBtn" name="editBtn" type="submit">修改課程</button>
                         </div>
                     </form>
@@ -145,7 +158,7 @@ $(document).on('click', '#editBtn', function(event) {
             if (response) {
                 window.alert('課程修改成功');
                 console.log('更新成功:', response);
-                window.location.href = contextPath + '/coursesVIEW/courseView.jsp?clickButton=true';
+                window.location.href = contextPath + '/courses?clickButton=true';
             } else {
                 window.alert('課程修改失敗');
             }
