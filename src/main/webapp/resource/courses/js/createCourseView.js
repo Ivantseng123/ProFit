@@ -53,18 +53,18 @@ function convertToSQLDateTimeFormat(datetimeLocal) {
 		if ($('form')[0].checkValidity()) {
 			// Continue with your AJAX form submission
 			$.ajax({
-				url: '../controller/courses/create',
+				url: contextPath + '/courses/insert',
 				data: data,
 				dataType: 'json',
 				type: 'POST',
 				success: function(response) {
-					if (response.success) {
-						window.alert('課程新增成功');
-						console.log('新增的课程信息:', response.course);
-						window.location.href = '/ProFit/coursesVIEW/courseView.jsp?clickButton=true';
-					} else {
-						window.alert('課程新增失敗');
-					}
+				    if (response && response.courseName) { // 根據 CourseBean 的屬性進行判斷
+				        window.alert('課程新增成功');
+				        console.log('新增的课程信息:', response);
+				        window.location.href = contextPath + '/courses?clickButton=true';
+				    } else {
+				        window.alert('課程新增失敗');
+				    }
 				},
 				error: function(xhr, status, error) {
 					console.error('發生錯誤:', error);
