@@ -86,16 +86,7 @@
                             <td><fmt:formatDate value="${invoice.issuedDate}" pattern="yyyy-MM-dd" /></td>
                             <td>${invoice.invoiceStatus}</td>
                             <td>
-                                <!-- 更新按鈕 -->
-                                <button type="button" class="btn btn-primary" 
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#updateInvoiceModal" 
-                                    onclick="populateUpdateForm('${invoice.invoiceNumber}', '${invoice.invoiceAmount}', '${invoice.invoiceStatus}', '${invoice.orderType}', '${invoice.orderId}')">
-                                    更新
-                                </button>
-
-                                <!-- 刪除按鈕 -->
-                                <form method="post" action="${pageContext.request.contextPath}/invoices/delete" style="display:inline;" onsubmit="return confirm('確定要刪除這張發票嗎？');">
+                                <form method="post" action="${pageContext.request.contextPath}/invoices/delete" onsubmit="return confirm('確定要刪除這張發票嗎？');">
                                     <input type="hidden" name="invoice_number" value="${invoice.invoiceNumber}">
                                     <button type="submit" class="btn btn-danger">刪除</button>
                                 </form>
@@ -155,50 +146,8 @@
         </div>
     </div>
 
-    <!-- 更新發票的模態框 -->
-    <div class="modal fade" id="updateInvoiceModal" tabindex="-1" aria-labelledby="updateInvoiceModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form method="post" action="${pageContext.request.contextPath}/invoices/update" id="updateInvoiceForm" onsubmit="return confirm('確定要更新這張發票嗎？');">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="updateInvoiceModalLabel">更新發票</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- 發票號碼 (不可更改) -->
-                        <input type="hidden" id="updateInvoiceNumber" name="invoice_number" class="form-control" readonly>
-
-                        <!-- 發票金額 -->
-                        <label for="updateInvoiceAmount">發票金額:</label>
-                        <input type="text" id="updateInvoiceAmount" name="invoice_amount" required class="form-control"><br>
-
-                        <!-- 發票狀態 -->
-                        <label for="updateInvoiceStatus">發票狀態:</label>
-                        <select id="updateInvoiceStatus" name="invoice_status" required class="form-select">
-                            <option value="open">開立</option>
-                            <option value="canceled">取消</option>
-                        </select><br>
-
-                        <!-- 訂單類型 (不可更改) -->
-                        <label for="updateOrderType">訂單類型:</label>
-                        <input type="text" id="updateOrderType" name="order_type" class="form-control" readonly><br>
-
-                        <!-- 訂單ID (不可更改) -->
-                        <label for="updateOrderId">訂單ID:</label>
-                        <input type="text" id="updateOrderId" name="order_id" class="form-control" readonly><br>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                        <button type="submit" class="btn btn-primary">更新</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // 切換ID類型的輸入提示
         function toggleIdInputFields() {
             const idType = document.getElementById('id_type').value;
             const idValueLabel = document.getElementById('id_value_label');
@@ -227,13 +176,32 @@
             }
         }
 
-        // 填充更新表單的數據
-        function populateUpdateForm(invoiceNumber, invoiceAmount, invoiceStatus, orderType, orderId) {
-            document.getElementById('updateInvoiceNumber').value = invoiceNumber;
-            document.getElementById('updateInvoiceAmount').value = invoiceAmount;
-            document.getElementById('updateInvoiceStatus').value = invoiceStatus;
-            document.getElementById('updateOrderType').value = orderType;
-            document.getElementById('updateOrderId').value = orderId;
+        function toggleOrderInputFields() {
+            const orderType = document.getElementById('addOrderType').value;
+            const orderIdLabel = document.getElementById('orderIdLabel');
+            const orderIdInput = document.getElementById('addOrderId');
+
+            switch(orderType) {
+                case 'transaction_id':
+                    orderIdLabel.textContent = '輸入交易ID:';
+                    orderIdInput.placeholder = '輸入交易ID';
+                    break;
+                case 'job_order_id':
+                    orderIdLabel.textContent = '輸入職缺訂單ID:';
+                    orderIdInput.placeholder = '輸入職缺訂單ID';
+                    break;
+                case 'course_order_id':
+                    orderIdLabel.textContent = '輸入課程訂單ID:';
+                    orderIdInput.placeholder = '輸入課程訂單ID';
+                    break;
+                case 'event_order_id':
+                    orderIdLabel.textContent = '輸入活動訂單ID:';
+                    orderIdInput.placeholder = '輸入活動訂單ID';
+                    break;
+                default:
+                    orderIdLabel.textContent = '訂單ID:';
+                    orderIdInput.placeholder = '輸入訂單ID';
+            }
         }
     </script>
 </body>

@@ -33,8 +33,6 @@ public class UserTransactionBean {
     @OneToOne(mappedBy = "userTransactionBean", fetch = FetchType.LAZY, optional = true)
     private InvoiceBean invoiceBean;
     
-    
-
     public UserTransactionBean() {
         this.transactionId = UUID.randomUUID().toString();
     }
