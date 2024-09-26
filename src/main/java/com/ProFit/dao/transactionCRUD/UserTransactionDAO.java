@@ -1,35 +1,35 @@
 package com.ProFit.dao.transactionCRUD;
 
-import com.ProFit.bean.transactionBean.UserTransactionBean;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import com.ProFit.bean.transactionBean.UserTransactionBean;
 
 import java.sql.Timestamp;
 import java.util.List;
 
-@Repository  
-public class UserTransactionDAO {
+@Repository
+public class UserTransactionDAO implements IUserTransactionDAO {
 
     @Autowired
     private SessionFactory sessionFactory;
 
+    // 獲取當前的 Hibernate Session
     private Session getCurrentSession() {
         return sessionFactory.getCurrentSession();
     }
 
-    // 獲取所有交易記錄
+    @Override
     public List<UserTransactionBean> getAllTransactions() {
         return getCurrentSession().createQuery("from UserTransactionBean order by createdAt desc", UserTransactionBean.class).list();
     }
 
-    // 按條件篩選交易記錄
-    public List<UserTransactionBean> getTransactionsByFilters(Integer userId, String transactionType, String transactionStatus, Timestamp startDate, Timestamp endDate) {
+    @Override
+    public List<UserTransactionBean> getTransactionsByFilters(String userId, String transactionType, String transactionStatus, Timestamp startDate, Timestamp endDate) {
         StringBuilder hql = new StringBuilder("from UserTransactionBean where 1=1 ");
 
-        if (userId != null) {
+        if (userId != null && !userId.isEmpty()) {
             hql.append("and userId = :userId ");
         }
         if (transactionType != null && !transactionType.isEmpty()) {
@@ -44,12 +44,11 @@ public class UserTransactionDAO {
         if (endDate != null) {
             hql.append("and createdAt <= :endDate ");
         }
-        hql.append("order by createdAt desc");
 
         var query = getCurrentSession().createQuery(hql.toString(), UserTransactionBean.class);
 
-        if (userId != null) {
-            query.setParameter("userId", userId);
+        if (userId != null && !userId.isEmpty()) {
+            query.setParameter("userId", Integer.parseInt(userId));
         }
         if (transactionType != null && !transactionType.isEmpty()) {
             query.setParameter("transactionType", transactionType);
@@ -67,63 +66,27 @@ public class UserTransactionDAO {
         return query.list();
     }
 
-    // 插入交易
-    public boolean insertTransaction(UserTransactionBean transaction) {
-        Transaction tx = getCurrentSession().beginTransaction();
-        try {
-            getCurrentSession().save(transaction);
-            tx.commit();
-            return true;
-        } catch (Exception e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-            return false;
+    @Override
+    public void insertTransaction(UserTransactionBean transaction) {
+        if (transaction.getTransactionStatus() == null || transaction.getTransactionStatus().isEmpty()) {
+            throw new IllegalArgumentException("交易狀態不能為空");
         }
+        getCurrentSession().save(transaction);  // 插入時確保狀態存在
     }
 
-    // 更新交易
-    public boolean updateTransaction(UserTransactionBean transaction) {
-        Transaction tx = getCurrentSession().beginTransaction();
-        try {
-            if ("completed".equals(transaction.getTransactionStatus())) {
-                transaction.setCompletionAt(new Timestamp(System.currentTimeMillis()));
-            }
-            getCurrentSession().update(transaction);  // 使用 update 而不是 merge
-            tx.commit();
-            return true;
-        } catch (Exception e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-            return false;
+    @Override
+    public void updateTransaction(UserTransactionBean transaction) {
+        if (transaction.getTransactionStatus() == null || transaction.getTransactionStatus().isEmpty()) {
+            throw new IllegalArgumentException("交易狀態不能為空");
         }
+        getCurrentSession().merge(transaction);  // 更新時確保狀態存在
     }
 
-    // 刪除交易
-    public boolean deleteTransaction(String transactionId) {
-        Transaction tx = getCurrentSession().beginTransaction();
-        try {
-            UserTransactionBean transaction = getCurrentSession().get(UserTransactionBean.class, transactionId);
-            if (transaction != null) {
-                getCurrentSession().delete(transaction);
-                tx.commit();
-                return true;
-            }
-            return false;
-        } catch (Exception e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-            return false;
+    @Override
+    public void deleteTransaction(String transactionId) {
+        UserTransactionBean transaction = getCurrentSession().get(UserTransactionBean.class, transactionId);
+        if (transaction != null) {
+            getCurrentSession().delete(transaction);
         }
-    }
-
-    // 根據ID獲取交易
-    public UserTransactionBean getTransactionById(String transactionId) {
-        return getCurrentSession().get(UserTransactionBean.class, transactionId);
     }
 }

@@ -26,7 +26,7 @@
 		<!-- 查詢表單 -->
 		<div class="dashboard-header">
 			<form method="get"
-				action="${pageContext.request.contextPath}/transactions/search">
+				action="${pageContext.request.contextPath}/transactions/filter">
 				<div class="row mb-3">
 					<!-- 日期範圍查詢 -->
 					<div class="col-md-6">
@@ -211,8 +211,6 @@
 									pattern="yyyy-MM-dd HH:mm:ss" /></td>
 							<td class="text-center"><c:if
 									test="${transaction.transactionStatus == 'pending'}">
-									
-									
 									<div class="action-buttons"
 										style="display: flex; justify-content: center; align-items: center;">
 										<button type="button" class="view" data-bs-toggle="modal"

@@ -1,7 +1,7 @@
 package com.ProFit.service.transactionService;
 
 import com.ProFit.bean.transactionBean.UserTransactionBean;
-import com.ProFit.dao.transactionCRUD.UserTransactionDAO;
+import com.ProFit.dao.transactionCRUD.IUserTransactionDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,41 +11,39 @@ import java.util.List;
 
 @Service
 @Transactional
-public class UserTransactionService {
+public class UserTransactionService implements IUserTransactionService {
 
     @Autowired
-    private UserTransactionDAO transactionDAO;
+    private IUserTransactionDAO userTransactionDAO;
 
-    // 獲取所有交易記錄
+    @Override
     public List<UserTransactionBean> getAllTransactions() {
-        return transactionDAO.getAllTransactions();
+        return userTransactionDAO.getAllTransactions();
     }
 
-    // 根據條件篩選交易記錄
-    public List<UserTransactionBean> getTransactionsByFilters(Integer userId, String transactionType, String transactionStatus, Timestamp startDate, Timestamp endDate) {
-        return transactionDAO.getTransactionsByFilters(userId, transactionType, transactionStatus, startDate, endDate);
+    @Override
+    public List<UserTransactionBean> getTransactionsBySearchs(String userId, String transactionType, String transactionStatus, Timestamp startDate, Timestamp endDate) {
+        return userTransactionDAO.getTransactionsByFilters(userId, transactionType, transactionStatus, startDate, endDate);
     }
 
-    // 新增交易
+    @Override
     public void insertTransaction(UserTransactionBean transaction) {
-        transactionDAO.insertTransaction(transaction);
-    }
-
-    // 更新交易
-    public void updateTransaction(UserTransactionBean transaction) {
-        if ("completed".equals(transaction.getTransactionStatus())) {
-            transaction.setCompletionAt(new Timestamp(System.currentTimeMillis()));
+        if (transaction.getTransactionStatus() == null || transaction.getTransactionStatus().isEmpty()) {
+            throw new IllegalArgumentException("交易狀態不能為空");
         }
-        transactionDAO.updateTransaction(transaction);
+        userTransactionDAO.insertTransaction(transaction);
     }
 
-    // 刪除交易
+    @Override
+    public void updateTransaction(UserTransactionBean transaction) {
+        if (transaction.getTransactionStatus() == null || transaction.getTransactionStatus().isEmpty()) {
+            throw new IllegalArgumentException("交易狀態不能為空");
+        }
+        userTransactionDAO.updateTransaction(transaction);
+    }
+
+    @Override
     public void deleteTransaction(String transactionId) {
-        transactionDAO.deleteTransaction(transactionId);
-    }
-
-    // 根據ID獲取交易
-    public UserTransactionBean getTransactionById(String transactionId) {
-        return transactionDAO.getTransactionById(transactionId);
+        userTransactionDAO.deleteTransaction(transactionId);
     }
 }

@@ -1,7 +1,7 @@
 package com.ProFit.controller.transactions;
 
 import com.ProFit.bean.transactionBean.InvoiceBean;
-import com.ProFit.service.transactionService.InvoiceService;
+import com.ProFit.service.transactionService.IInvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,69 +14,94 @@ import java.util.List;
 @RequestMapping("/invoices")
 public class InvoiceController {
 
-    @Autowired
-    private InvoiceService invoiceService;
+	@Autowired
+	private IInvoiceService invoiceService;
 
-    // 顯示所有發票
-    @GetMapping
-    public String listInvoices(Model model) {
-        List<InvoiceBean> invoices = invoiceService.getAllInvoices();
-        model.addAttribute("invoices", invoices);
-        return "transactionVIEW/invoices";
-    }
+	// 查詢發票
+	@GetMapping("/search")
+	public String searchInvoices(@RequestParam(value = "invoice_number", required = false) String invoiceNumber,
+			@RequestParam(value = "invoice_status", required = false) String invoiceStatus,
+			@RequestParam(value = "id_type", required = false) String idType,
+			@RequestParam(value = "id_value", required = false) String idValue, Model model) {
 
-    // 根據條件篩選發票
-    @PostMapping("/filter")
-    public String filterInvoices(
-            @RequestParam(required = false) String invoice_number,
-            @RequestParam(required = false) String invoice_status,
-            @RequestParam(required = false) String id_type,
-            @RequestParam(required = false) String id_value,
-            Model model) {
+		// 打印參數以檢查值是否正確
+		System.out.println("Invoice Number: " + invoiceNumber);
+		System.out.println("Invoice Status: " + invoiceStatus);
+		System.out.println("ID Type: " + idType);
+		System.out.println("ID Value: " + idValue);
 
-        List<InvoiceBean> invoices = invoiceService.searchInvoices(invoice_number, invoice_status, id_type, id_value);  // 調用 Service 層篩選發票
-        model.addAttribute("invoices", invoices);
-        return "transactionVIEW/invoices";
-    }
+		// 呼叫服務層進行查詢
+		List<InvoiceBean> invoices = invoiceService.searchInvoices(invoiceNumber, invoiceStatus, idType, idValue);
+		model.addAttribute("invoices", invoices);
 
-    // 新增發票
-    @PostMapping("/insert")
-    public String insertInvoice(
-            @RequestParam("invoice_number") String invoiceNumber,
-            @RequestParam("invoice_amount") int invoiceAmount,
-            @RequestParam("invoice_status") String invoiceStatus,
-            @RequestParam("order_type") String orderType,
-            @RequestParam("order_id") String orderId) { 
+		if (invoices.isEmpty()) {
+			model.addAttribute("error", "沒有找到符合條件的發票");
+		}
 
-        InvoiceBean invoice = new InvoiceBean();
-        invoice.setInvoiceNumber(invoiceNumber);
-        invoice.setInvoiceAmount(invoiceAmount);
-        invoice.setInvoiceStatus(invoiceStatus);
-        invoice.setIssuedDate(new Timestamp(System.currentTimeMillis()));
+		return "transactionVIEW/invoices";
+	}
 
-        switch (orderType) {
-            case "transaction_id":
-                invoice.setTransactionId(orderId);
-                break;
-            case "job_order_id":
-                invoice.setJobOrderId(orderId);
-                break;
-            case "course_order_id":
-                invoice.setCourseOrderId(orderId);
-                break;
-            case "event_order_id":
-                invoice.setEventOrderId(orderId);
-                break;
-        }
+	// 新增發票
+	@PostMapping("/insert")
+	public String insertInvoice(@RequestParam("invoice_number") String invoiceNumber,
+			@RequestParam("invoice_amount") int invoiceAmount, @RequestParam("invoice_status") String invoiceStatus,
+			@RequestParam("order_type") String orderType, @RequestParam("order_id") String orderId, Model model) {
 
-        boolean isInserted = invoiceService.insertInvoice(invoice);
-        return isInserted ? "redirect:/invoices" : "transactionVIEW/error"; 
-    }
+		InvoiceBean invoice = new InvoiceBean();
+		invoice.setInvoiceNumber(invoiceNumber);
+		invoice.setInvoiceAmount(invoiceAmount);
+		invoice.setInvoiceStatus(invoiceStatus);
+		invoice.setIssuedDate(new Timestamp(System.currentTimeMillis()));
 
-    // 刪除發票
-    @PostMapping("/delete")
-    public String deleteInvoice(@RequestParam("invoice_number") String invoiceNumber) {
-        boolean isDeleted = invoiceService.deleteInvoice(invoiceNumber);
-        return isDeleted ? "redirect:/invoices" : "transactionVIEW/error";
-    }
+		// 設定訂單類型和ID
+		switch (orderType) {
+		case "transaction_id":
+			invoice.setTransactionId(orderId);
+			break;
+		case "job_order_id":
+			invoice.setJobOrderId(orderId);
+			break;
+		case "course_order_id":
+			invoice.setCourseOrderId(orderId);
+			break;
+		case "event_order_id":
+			invoice.setEventOrderId(orderId);
+			break;
+		}
+
+		boolean isInserted = invoiceService.insertInvoice(invoice);
+		if (isInserted) {
+			return "redirect:/invoices/search";
+		} else {
+			model.addAttribute("errorMessage", "新增發票失敗");
+			return "transactionVIEW/error";
+		}
+	}
+
+	// 更新發票
+	@PostMapping("/update")
+	public String updateInvoice(@RequestParam("invoice_number") String invoiceNumber,
+			@RequestParam("invoice_amount") int invoiceAmount, @RequestParam("invoice_status") String invoiceStatus,
+			Model model) {
+
+		// 根據發票號碼查詢發票
+		InvoiceBean invoice = invoiceService.getInvoiceById(invoiceNumber);
+
+		// 如果發票存在，則進行更新
+		if (invoice != null) {
+			invoice.setInvoiceAmount(invoiceAmount);
+			invoice.setInvoiceStatus(invoiceStatus);
+			invoiceService.updateInvoice(invoice); // 更新發票資料
+		}
+
+		return "redirect:/invoices/search"; // 更新成功後重新導向查詢頁面
+	}
+
+	// 刪除發票
+	@PostMapping("/delete")
+	public String deleteInvoice(@RequestParam("invoice_number") String invoiceNumber) {
+		invoiceService.deleteInvoice(invoiceNumber);
+		return "redirect:/invoices/search";
+	}
+
 }
