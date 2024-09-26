@@ -1,6 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.ProFit.bean.eventsBean.EventsBean" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html lang="zh-TW">
@@ -28,7 +29,7 @@
             <h2>活動列表</h2>
         </div>
         <div class="action-buttons">
-            <button class="view btn" href="events?action=new">新增</button>
+            <button class="view btn" href="events/get/">新增</button>
         </div>
         <div class="table-container">
             <table>
@@ -48,58 +49,29 @@
                     <th>備註</th>
                     <th>操作</th>
                 </tr>
-                <% List<EventsBean> events = (List<EventsBean>) request.getAttribute("events");
-                        if (events != null) {
-                        for (EventsBean event : events) {
-                        %>
+                <c:forEach var="event" items="${events}">
                         <tr>
-                            <td>
-                                <%= event.getEventId() %>
-                            </td>
-                            <td>
-                                <%= event.getEventName() %>
-                            </td>
-                            <td>
-                                <%= event.getIsEventActive() %>
-                            </td>
-                            <td>
-                                <%= event.getEventMajor() %>
-                            </td>
-                            <td>
-                                <%= event.getEventStartDate() %>
-                            </td>
-                            <td>
-                                <%= event.getEventEndDate() %>
-                            </td>
-                            <td>
-                                <%= event.getEventPartStartDate() %>
-                            </td>
-                            <td>
-                                <%= event.getEventPartEndDate() %>
-                            </td>
-                            <td>
-                                <%= event.getEventDescription() %>
-                            </td>
-                            <td>
-                                <%= event.getEventAmount() %>
-                            </td>
-                            <td>
-                                <%= event.getEventLocation() %>
-                            </td>
-                            <td>
-                                <%= event.getEventParticipantMaximum() %>
-                            </td>
-                            <td>
-                                <%= event.getEventNote() %>
-                            </td>
+                            <td>${event.eventId}</td>
+                            <td>${event.eventName}</td>
+                            <td>${event.isEventActive}</td>
+                            <td>${event.eventMajor}</td>
+                            <td>${event.eventStartDate}</td>
+                            <td>${event.eventEndDate}</td>
+                            <td>${event.eventPartStartDate}</td>
+                            <td>${event.eventPartEndDate}</td>
+                            <td>${event.eventAmount}</td>
+                            <td>${event.eventLocation}</td>
+                            <td>${event.eventParticipantMaximum}</td>
+                            <td>${event.eventDescription}</td>
+                            <td>${event.eventNote}</td>
                             <td class="action-buttons">
                                 <button class="edit btn"
-                                    href="events?action=edit&eventId=<%= event.getEventId() %>">編輯</button>
+                                    href="events/get/${event.eventId}">編輯</button>
                                 <button class="delete btn"
-                                    href="events?action=delete&eventId=<%= event.getEventId() %>">刪除</button>
+                                    href="events/delete/${event.eventId}">刪除</button>
                             </td>
                         </tr>
-                        <% } } %>
+                </c:forEach>
             </table>
         </div>
     </main>
