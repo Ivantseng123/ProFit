@@ -42,20 +42,22 @@ public class EventsDAO {
         }
     }
 
-    public void insertEvent(EventsBean event) {
+    public EventsBean insertEvent(EventsBean event) {
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
             session.persist(event);
             transaction.commit();
         } 
+        return event;
     }
 
-    public void updateEvent(EventsBean event) {
+    public EventsBean updateEvent(EventsBean event) {
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
             session.merge(event);
             transaction.commit();
         }
+        return event;
     }
 
     public void deleteEvent(String eventId) {
