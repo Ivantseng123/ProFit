@@ -1,11 +1,12 @@
 package com.ProFit.dao.jobsCRUD;
 
-import java.util.List;
 
-import com.ProFit.bean.JobsApplicationProject;
+import com.ProFit.bean.jobsBean.JobsApplicationProject;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+
+import java.util.List;
 
 public class HJobsApplicationProjectDAO implements IHJobsApplicationProjectDAO {
 

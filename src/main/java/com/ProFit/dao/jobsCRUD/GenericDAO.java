@@ -6,7 +6,6 @@ import java.util.Map;
 //創造一個介面，包含5個方法
 //只要實現這個介面的都要實作這5個方法
 
-import com.ProFit.bean.Jobs;
 
 
 public interface GenericDAO<T, ID> {

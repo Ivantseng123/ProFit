@@ -16,12 +16,12 @@
             <h2>${empty job ? '新增職缺' : '編輯職缺'}</h2>
         </div>
         <div class="form-container">
-            <form action="${pageContext.request.contextPath}/jobsServlet" method="post">
-            <!-- value="${empty job ? 'add' : 'update'}"：
+            <form action="${pageContext.request.contextPath}/jobs/${empty job ? 'add' : 'edit'}" method="post">
+            <!-- value="${empty job ? 'add' : 'edit'}"：
              job 是否為空，來設置 action 的值。
              如果 job 是空的，action 的值是 'add'（新增）；
              如果 job 有值，action 的值是 'update'（更新）。 -->
-                <input type="hidden" name="action" value="${empty job ? 'add' : 'update'}">
+<%--                <input type="hidden" name="action" value="${empty job ? 'add' : 'update'}">--%>
               <!--  not empty 不為空，所以用update-->
                 <c:if test="${not empty job}">
                     <input type="hidden" name="jobsId" value="${job.jobsId}">
@@ -67,7 +67,7 @@
                 <input type="number" id="jobsNumberOfOpenings" name="jobsNumberOfOpenings" value="${job.jobsNumberOfOpenings}" required><br>
 
                 <input type="submit" value="提交">
-                <button onclick="window.location.href='jobsList.jsp'">取消</button>
+                <button onclick="window.location.href='/jobs/all'">取消</button>
             </form>
         </div>
     </main>
