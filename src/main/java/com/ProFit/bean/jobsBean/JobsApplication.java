@@ -1,4 +1,4 @@
-package com.ProFit.bean;
+package com.ProFit.bean.jobsBean;
 
 import java.sql.Blob;
 import java.sql.Date;

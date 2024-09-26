@@ -1,8 +1,7 @@
 package com.ProFit.dao.jobsCRUD;
 
 
-import com.ProFit.bean.Jobs;
-import com.ProFit.bean.JobsApplication;
+import com.ProFit.bean.jobsBean.JobsApplication;
 
 import java.util.List;
 

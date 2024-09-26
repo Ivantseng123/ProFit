@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ page import="com.ProFit.bean.Jobs"%>
+<%@ page import="com.ProFit.bean.jobsBean.Jobs"%>
 
 
 
@@ -50,14 +50,19 @@
 	<main>
 		<div class="dashboard-header">
 			<h2>職缺表格總覽</h2>
-			<!-- <a href="${pageContext.request.contextPath}/jobsVIEW/jobsForm.jsp" class="add-button">新增職缺</a>-->
+			<!-- <a href="${pageContext.request.contextPath}/jobs/edit" class="add-button">新增職缺</a>-->
 			<button
-				onclick="window.location.href='${pageContext.request.contextPath}/jobsVIEW/jobsForm.jsp'"
+				onclick="window.location.href='${pageContext.request.contextPath}/jobs/edit'"
 				class="view">新增職缺</button>
 
 		</div>
 		<button
-			onclick="window.location.href='${pageContext.request.contextPath}/jobsServlet?action=listJobs'"
+<%--				Servlet--%>
+<%--			onclick="window.location.href='${pageContext.request.contextPath}/jobsServlet?action=listJobs'"--%>
+<%--			class="view">查看全部</button>--%>
+
+<%--				spring--%>
+			onclick="window.location.href='${pageContext.request.contextPath}/jobs/all'"
 			class="view">查看全部</button>
 		<!-- <a href="${pageContext.request.contextPath}/jobsServlet?action=listJobs" class="view">查看全部</a>-->
 
@@ -122,15 +127,23 @@
 								onclick="return confirm('確定要刪除這個職位嗎？');">刪除</a> --%>
 
 								<button
-									onclick="window.location.href='jobsServlet?action=view&id=${job.jobsId}'"
+									onclick="window.location.href='${pageContext.request.contextPath}/jobs/findOne?id=${job.jobsId}'"
 									class="view">查看</button>
 								<button
-									onclick="window.location.href='jobsServlet?action=edit&id=${job.jobsId}'"
-									class="edit">編輯</button> 
-								<button
-									onclick="if(confirm('確定要刪除這個職位嗎？')) { window.location.href='jobsServlet?action=delete&id=${job.jobsId}'; }"
-									class="delete">刪除</button>
+<%--									onclick="window.location.href='jobsServlet?action=edit&id=${job.jobsId}'"--%>
+<%--									class="edit">編輯</button> --%>
 
+										onclick="window.location.href='${pageContext.request.contextPath}/jobs/edit?id=${job.jobsId}'"
+										class="edit">編輯</button>
+								<button
+<%--										Servlet--%>
+<%--									onclick="if(confirm('確定要刪除這個職位嗎？')) { window.location.href='jobsServlet?action=delete&id=${job.jobsId}'; }"--%>
+<%--									class="delete">刪除</button>--%>
+
+<%--										spring--%>
+										onclick="if(confirm('確定要刪除這個職位嗎？')) { deleteJobs(this) }"
+										id="deleteBtn" data-value="/jobs/delete?id=${job.jobsId}"
+										class="delete">刪除</button>
 							</td>
 						</tr>
 					</c:forEach>
@@ -140,19 +153,39 @@
 	</main>
 
 	<script type="text/javascript">
-		document.getElementById("search").addEventListener(
-				"click",
-				function(e) {
-					//document.getElementById("search")這段在找html中藉著id 去search
-					//addEventListener("click", function(e)是在偵測使用者點擊事件
-					e.preventDefault();
-					//阻止默認行為
-					let contextPath = "${pageContext.request.contextPath}";
-					let value = document.getElementById("searchTerm").value
-							.trim();//trim()前後避免空格
-					location.href = contextPath
-							+ "/jobsServlet?action=view&id=" + value;//這段就是前往location.href 後面的網址 
+		document.getElementById("search").addEventListener("click", function(e) {
+			//document.getElementById("search")這段在找html中藉著id 去search
+			//addEventListener("click", function(e)是在偵測使用者點擊事件
+			e.preventDefault();
+			//阻止默認行為
+			let contextPath = "${pageContext.request.contextPath}";
+			let value = document.getElementById("searchTerm").value
+					.trim();//trim()前後避免空格
+			//Servlet
+			// location.href = contextPath
+			// 		+ "/jobsServlet?action=view&id=" + value;//這段就是前往location.href 後面的網址
+
+			//spring
+			location.href = contextPath
+					+ "/jobs/findOne?id=" + value;//這段就是前往location.href 後面的網址
+		});
+
+		function deleteJobs(button){
+			let contextPath = "${pageContext.request.contextPath}";
+			const url = contextPath + button.getAttribute('data-value');
+			const url_pre = "http://localhost:8080";
+			fetch(url_pre + url, {
+				method: 'DELETE',
+			}).then(response => {
+				return response.json(); // 解析响应数据（如果有的话）
+			})
+				.then(data => {
+					window.location.reload();
+				})
+				.catch(error => {
+					window.location.reload();
 				});
+		}
 	</script>
 </body>
 </html>
