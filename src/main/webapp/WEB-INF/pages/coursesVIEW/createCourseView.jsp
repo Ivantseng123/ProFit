@@ -106,7 +106,7 @@ div#users-contain table td, div#users-contain table th {
 							</select>
 						</div>
 						<div class="form-group" style="text-align: right;">
-							<a href="/ProFit/coursesVIEW/courseView.jsp"><button id='cancelBtn' type="button" style="margin-right:210px;" >取消新增</button></a>
+							<a href="${pageContext.request.contextPath}/courses"><button id='cancelBtn' type="button" style="margin-right:210px;" >取消新增</button></a>
 							<button id="switchBtn" name="switchBtn" type="button">新增章節</button>
 							<button id="createBtn" name="createBtn" type="button">略過，後續再新增</button>
 						</div>

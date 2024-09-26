@@ -51,8 +51,8 @@
 			<br>
 			<br>
 		<ul>
-			<li><a href="${pageContext.request.contextPath}/GetAlluser">會員管理</a></li>
-			<li><a href="/ProFit/jobsVIEW/jobsList.jsp">職缺管理</a></li>
+			<li><a href="${pageContext.request.contextPath}/alluser">會員管理</a></li>
+			<li><a href="${pageContext.request.contextPath}/jobs">職缺管理</a></li>
 			<li><a href="/ProFit/servicesVIEW/Entry.jsp">技能服務管理</a></li>
 			<li><a href="${pageContext.request.contextPath}/courses">課程管理</a></li>
 			<li><a href="${pageContext.request.contextPath}/events">活動管理</a></li>
