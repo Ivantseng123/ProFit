@@ -1,0 +1,61 @@
+
+/* 設置表單容器的樣式 */
+.container {
+    max-width: 600px; /* 最大寬度 */
+    margin: 20px auto; /* 垂直居中並在頂部和底部增加空白 */
+    padding: 20px;
+    border: 1px solid #ddd; /* 灰色邊框 */
+    border-radius: 8px; /* 圓角邊框 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 添加陰影效果 */
+    background-color: #fff; /* 背景白色 */
+}
+
+/* 設置標籤和輸入框的間距和樣式 */
+.form-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold; /* 標籤加粗 */
+}
+
+.form-control,
+.form-select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc; /* 輸入框邊框顏色 */
+    border-radius: 4px; /* 輸入框圓角 */
+    box-sizing: border-box; /* 設置盒模型 */
+    margin-bottom: 15px; /* 底部間距 */
+    transition: border-color 0.3s ease; /* 邊框顏色過渡效果 */
+}
+
+/* 當聚焦於輸入框時的樣式 */
+.form-control:focus,
+.form-select:focus,
+textarea:focus {
+    border-color: #007bff; /* 輸入框聚焦時的邊框顏色 */
+    outline: none; /* 移除默認聚焦樣式 */
+}
+
+/* 按鈕樣式 */
+.btn-primary {
+    background-color: #007bff; /* 按鈕背景顏色 */
+    color: #fff; /* 按鈕文字顏色 */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px; /* 按鈕圓角 */
+    cursor: pointer; /* 鼠標指針樣式 */
+    font-size: 16px;
+    transition: background-color 0.3s ease; /* 背景顏色過渡效果 */
+}
+
+/* 當按鈕被懸停時的樣式 */
+.btn-primary:hover {
+    background-color: #0056b3; /* 按鈕懸停時的背景顏色 */
+}
+
+/* 額外的空白和排版調整 */
+.mb-3 {
+    margin-bottom: 1rem !important;
+}
