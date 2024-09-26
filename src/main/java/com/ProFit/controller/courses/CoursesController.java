@@ -41,10 +41,6 @@ public class CoursesController {
 		return "coursesVIEW/createCourseView";
 	}
 	
-    private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-	private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-	
-	
 	// 搜尋全部的方法
 	@GetMapping("/courses/search")
 	@ResponseBody
@@ -55,8 +51,8 @@ public class CoursesController {
 	    @RequestParam(required = false) String courseCreateUserId,
 	    @RequestParam(required = false) String courseMajor
 	){
-		List<CoursesDTO> corusesDTOList = courseService.searchCourses(courseName,courseCreateUserName,courseStatus,courseCreateUserId,courseMajor);
-		
+		List<CoursesDTO> corusesDTOList = courseService.searchCourses(courseName,courseCreateUserName,
+				courseStatus,courseCreateUserId,courseMajor);
 		
 		return corusesDTOList;
 		
@@ -138,7 +134,7 @@ public class CoursesController {
     public String viewUpdateCourse(@RequestParam String courseId, Model model) {
     	CoursesDTO coursesDTO = courseService.searchOneCourseById(courseId);
         model.addAttribute("course", coursesDTO); // 使用 DTO
-        return "coursesVIEW/updateCourseView"; // 假設 view resolver 配置為 /WEB-INF/views/
+        return "coursesVIEW/updateCourseView";  
     }
 	
     // 刪除課程的方法

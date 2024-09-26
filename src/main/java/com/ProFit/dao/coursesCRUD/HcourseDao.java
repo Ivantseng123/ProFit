@@ -16,11 +16,7 @@ public class HcourseDao implements IHcourseDao {
 
 	@Autowired
 	private SessionFactory factory;
-//	private Session session;
 
-//	public HcourseDao(Session session) {
-//		this.session = session;
-//	}
 
 	// 新增課程
 	@Override
