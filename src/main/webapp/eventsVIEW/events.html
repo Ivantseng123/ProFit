@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-TW" xmlns:th="http://www.thymeleaf.org/">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>活動列表</title>
+    <link rel="stylesheet" href="./model/model.css">
+    <style>
+        .btn {
+            margin: 3px;
+        }
+
+        .view {
+            margin: 0px 10px 20px 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div th:replace="~{/model/header&sidebar.jsp}"></div>
+    <main>
+        <div class="dashboard-header">
+            <h2>活動列表</h2>
+        </div>
+        <div class="action-buttons">
+            <button class="view btn" th:href="@{/events/new}">新增</button>
+        </div>
+        <div class="table-container">
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>活動名稱</th>
+                    <th>狀態</th>
+                    <th>專業類別</th>
+                    <th>開始日期</th>
+                    <th>結束日期</th>
+                    <th>報名開始日期</th>
+                    <th>報名結束日期</th>
+                    <th>金額</th>
+                    <th>地點</th>
+                    <th>人數上限</th>
+                    <th>描述</th>
+                    <th>備註</th>
+                    <th>操作</th>
+                </tr>
+                <tr th:each="event : ${events}">
+                    <td th:text="${event.eventId}"></td>
+                    <td th:text="${event.eventName}"></td>
+                    <td th:text="${event.isEventActive}"></td>
+                    <td th:text="${event.eventMajor}"></td>
+                    <td th:text="${event.eventStartDate}"></td>
+                    <td th:text="${event.eventEndDate}"></td>
+                    <td th:text="${event.eventPartStartDate}"></td>
+                    <td th:text="${event.eventPartEndDate}"></td>
+                    <td th:text="${event.eventAmount}"></td>
+                    <td th:text="${event.eventLocation}"></td>
+                    <td th:text="${event.eventParticipantMaximum}"></td>
+                    <td th:text="${event.eventDescription}"></td>
+                    <td th:text="${event.eventNote}"></td>
+                    <td class="action-buttons">
+                        <a class="edit btn" th:href="@{/events/edit(eventId=${event.eventId})}">編輯</a>
+                        <a class="delete btn" th:href="@{/events/delete(eventId=${event.eventId})}">刪除</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </main>
+</body>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script>
+    // $(function () {
+    //     $(".btn").click(function (event) {
+    //         event.preventDefault();
+    //         var href = $(this).attr("href");
+    //         window.location.href = href;
+    //     })
+    // })
+</script>
+
+</html>

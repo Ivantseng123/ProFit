@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
+
 @Entity
 @Table(name = "events")
 public class EventsBean implements Serializable {
@@ -12,28 +13,40 @@ public class EventsBean implements Serializable {
 	
 	@Id @Column(name="event_id")
 	private String eventId;
+
 	@Column(name="event_name")
 	private String eventName;
+
 	@Column(name="is_event_active")
 	private int isEventActive;
+
 	@Column(name="event_major")
 	private int eventMajor;
+
 	@Column(name="event_start_date")
 	private LocalDateTime eventStartDate;
+
 	@Column(name="event_end_date")
 	private LocalDateTime eventEndDate;
+
 	@Column(name="event_part_start_date")
 	private LocalDateTime eventPartStartDate;
+
 	@Column(name="event_part_end_date")
 	private LocalDateTime eventPartEndDate;
+
 	@Column(name="event_amount")
 	private int eventAmount;
+
 	@Column(name="event_location")
 	private String eventLocation;
+
 	@Column(name="event_participant_maximum")
 	private int eventParticipantMaximum;
+
 	@Column(name="event_description")
 	private String eventDescription;
+	
 	@Column(name="event_note")
 	private String eventNote;
 

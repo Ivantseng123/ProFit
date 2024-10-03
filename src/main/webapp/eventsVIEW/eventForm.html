@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-TW" xmlns:th="http://www.thymeleaf.org/">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>變更表格</title>
+    <link rel="stylesheet" href="./model/model.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        /* .form-group label {
+            display: inline-block;
+            width: 30%;
+            margin-right: 10px;
+            vertical-align: top;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            display: inline-block; 
+            width: 60%;
+        } */
+    </style>
+</head>
+
+<body>
+    <div th:replace="~{/model/header&sidebar.jsp}"></div>
+    <main>
+        <div class="dashboard-header">
+            <h2 th:text="${event.eventId} != null ? '編輯活動' : '新增活動'"></h2>
+        </div>
+        <form class="form-group form-container" id="eventForm">
+            <input type="hidden" id="eventId" value="${event.eventId}">
+            <label for="eventName">活動名稱</label>
+            <input type="text" id="eventName" name="eventName" value="${event.eventName}">
+            <hr>
+            <label for="isEventActive">狀態</label>
+            <span>活動是否開始: </span>
+            <input style="width:20px;" type="checkbox" id="isEventActive" name="isEventActive" value="1" ${event.isEventActive==1 ? 'checked' : '' }>
+            <hr>
+            <label for="eventMajor">專業類別</label>
+            <input type="number" id="eventMajor" name="eventMajor" value="${event.eventMajor}">
+            <hr>
+            <label for="eventStartDate">開始日期</label>
+            <input type="datetime-local" id="eventStartDate" name="eventStartDate" value="${event.eventStartDate}">
+            <hr>
+            <label for="eventEndDate">結束日期</label>
+            <input type="datetime-local" id="eventEndDate" name="eventEndDate" value="${event.eventEndDate}">
+            <hr>
+            <label for="eventPartStartDate">報名開始日期</label>
+            <input type="datetime-local" id="eventPartStartDate" name="eventPartStartDate" value="${event.eventPartStartDate}">
+            <hr>
+            <label for="eventPartEndDate">報名結束日期</label>
+            <input type="datetime-local" id="eventPartEndDate" name="eventPartEndDate" value="${event.eventPartEndDate}">
+            <hr>
+            <label for="eventAmount">金額</label>
+            <input type="number" id="eventAmount" name="eventAmount" value="${event.eventAmount}">
+            <hr>
+            <label for="eventLocation">地點</label>
+            <input type="text" id="eventLocation" name="eventLocation" value="${event.eventLocation}">
+            <hr>
+            <label for="eventParticipantMaximum">參加人數上限</label>
+            <input type="number" id="eventParticipantMaximum" name="eventParticipantMaximum"
+            value="${event.eventParticipantMaximum}">
+            <hr>
+            <label for="eventDescription">描述</label>
+            <textarea id="eventDescription" name="eventDescription">${event.eventDescription}</textarea>
+            <hr>
+            <label for="eventNote">備註</label>
+            <textarea id="eventNote" name="eventNote">${event.eventNote}</textarea>
+            <hr>
+            <button type="button" onclick="submitForm()">保存</button>
+        </form>
+    </main>
+
+    <script>
+        function submitForm() {
+            const eventData = {
+                eventId: document.getElementById("eventId").value,
+                eventName: document.getElementById("eventName").value,
+                isEventActive: document.getElementById("isEventActive").checked ? 1 : 0,
+                eventMajor: document.getElementById("eventMajor").value,
+                eventStartDate: document.getElementById("eventStartDate").value,
+                eventEndDate: document.getElementById("eventEndDate").value,
+                eventPartStartDate: document.getElementById("eventPartStartDate").value,
+                eventPartEndDate: document.getElementById("eventPartEndDate").value,
+                eventAmount: document.getElementById("eventAmount").value,
+                eventLocation: document.getElementById("eventLocation").value,
+                eventParticipantMaximum: document.getElementById("eventParticipantMaximum").value,
+                eventDescription: document.getElementById("eventDescription").value,
+                eventNote: document.getElementById("eventNote").value
+            };
+
+            axios.post('/events', eventData)
+                .then(function (response) {
+                    window.location.href = '/events';
+                })
+                .catch(function (error) {
+                    console.error('There was an error!', error);
+                });
+        }
+    </script>
+</body>
+
+</html>
